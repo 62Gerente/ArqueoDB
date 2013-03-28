@@ -1,0 +1,120 @@
+﻿@model ArqueoDB.Models.Utilizador
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Utilizador</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NomeUtilizador)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NomeUtilizador)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataNascimento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataNascimento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sexo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sexo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Telemovel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Telemovel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Facebook)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Facebook)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Google)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Google)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Twitter)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Twitter)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Linkedin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Linkedin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Banido)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Banido)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Apagado)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Apagado)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Titulo.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Titulo.Nome)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UtilizadorID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
