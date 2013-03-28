@@ -7,10 +7,8 @@ using System.Web.Mvc;
 
 namespace ArqueoDB.Models
 {
-    [Bind(Exclude = "TituloID")]
     public class Titulo
     {
-        [ScaffoldColumn(false)]
         public int TituloID { set; get; }
         public string Nome { set; get; }
     }

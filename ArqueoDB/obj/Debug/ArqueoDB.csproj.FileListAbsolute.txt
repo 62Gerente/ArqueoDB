@@ -46,4 +46,3 @@
 \\vmware-host\shared folders\documents\visual studio 2012\Projects\ArqueoDB\ArqueoDB\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
 \\vmware-host\shared folders\documents\visual studio 2012\Projects\ArqueoDB\ArqueoDB\obj\Debug\ArqueoDB.dll
 \\vmware-host\shared folders\documents\visual studio 2012\Projects\ArqueoDB\ArqueoDB\obj\Debug\ArqueoDB.pdb
-\\vmware-host\shared folders\documents\visual studio 2012\Projects\ArqueoDB\ArqueoDB\obj\Debug\ArqueoDB.csprojResolveAssemblyReference.cache

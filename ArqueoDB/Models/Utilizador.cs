@@ -9,10 +9,8 @@ using System.Web.Mvc;
 
 namespace ArqueoDB.Models
 {
-    [Bind(Exclude = "UtilizadorID")]
     public class Utilizador
     {
-        [ScaffoldColumn(false)]
         public int UtilizadorID { get; set; }
         [DisplayName("Nome de Utilizador")]
         public string NomeUtilizador { get; set; }

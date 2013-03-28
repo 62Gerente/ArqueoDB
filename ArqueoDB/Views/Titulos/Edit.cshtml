@@ -12,6 +12,8 @@
     <fieldset>
         <legend>Titulo</legend>
 
+        @Html.HiddenFor(model => model.TituloID)
+
         <div class="editor-label">
             @Html.LabelFor(model => model.Nome)
         </div>

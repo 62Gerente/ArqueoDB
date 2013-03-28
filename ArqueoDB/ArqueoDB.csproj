@@ -164,7 +164,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
-    <Compile Include="Controllers\UtilizadoresController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -288,11 +287,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Utilizadores\Index.cshtml" />
-    <Content Include="Views\Utilizadores\Details.cshtml" />
-    <Content Include="Views\Utilizadores\Create.cshtml" />
-    <Content Include="Views\Utilizadores\Edit.cshtml" />
-    <Content Include="Views\Utilizadores\Delete.cshtml" />
     <Content Include="Views\Titulos\Index.cshtml" />
     <Content Include="Views\Titulos\Details.cshtml" />
     <Content Include="Views\Titulos\Create.cshtml" />
