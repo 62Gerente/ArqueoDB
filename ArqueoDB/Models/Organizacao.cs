@@ -19,6 +19,7 @@ namespace ArqueoDB.Models
         [Required(ErrorMessage = "Coordenadas necessárias")]
         public string Coordenadas { get; set; }
 
+        [StringLength(500, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Morada { get; set; }
 
         [DisplayName("Distrito")]
@@ -29,6 +30,8 @@ namespace ArqueoDB.Models
         public int ResponsavelID { get; set; }
         public Profissional Responsavel { get; set; }
 
+        [DisplayName("Descrição")]
+        [StringLength(1000, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Descricao { get; set; }
 
         [DisplayName("Data de Fundação")]

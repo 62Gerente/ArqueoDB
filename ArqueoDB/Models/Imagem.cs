@@ -16,6 +16,7 @@ namespace ArqueoDB.Models
         public Directoria Directoria { get; set; }
 
         [DisplayName("Descrição")]
+        [StringLength(1000, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Descricao { get; set; }
 
         [ScaffoldColumn(false)]

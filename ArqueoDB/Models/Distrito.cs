@@ -11,6 +11,7 @@ namespace ArqueoDB.Models
     {
         public int DistritoID { get; set; }
 
+        [DisplayName("Nome do Distrito")]
         [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
         [Required(ErrorMessage = "Nome do distrito necessário")]
         public string Nome { get; set; }

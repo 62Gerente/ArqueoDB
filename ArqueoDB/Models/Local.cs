@@ -33,6 +33,7 @@ namespace ArqueoDB.Models
         public DateTime DataRegisto { get; set; }
 
         [DisplayName("Descrição")]
+        [StringLength(1000, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Descricao { get; set; }
 
         [DisplayName("Distrito")]
