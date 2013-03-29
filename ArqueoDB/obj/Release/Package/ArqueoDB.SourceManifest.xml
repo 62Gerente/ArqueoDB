@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <IisApp path="\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\ArqueoDB_Azure\ArqueoDB\obj\Release\Package\PackageTmp" managedRuntimeVersion="v4.0" />
-  <setAcl path="\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\ArqueoDB_Azure\ArqueoDB\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\ArqueoDB_Azure\ArqueoDB\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
-</sitemanifest>

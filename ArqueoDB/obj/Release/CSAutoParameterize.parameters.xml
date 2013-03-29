@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-ArqueoDB-20130327032712;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-ArqueoDB-20130327032712.mdf" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="\\\\vmware-host\\Shared\ Folders\\Documents\\Visual\ Studio\ 2012\\Projects\\ArqueoDB_Azure\\ArqueoDB\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
-  </parameter>
-  <parameter name="ArqueoDB.Models.UsersContext-Web.config Connection String" description="ArqueoDB.Models.UsersContext Connection String used in web.config by the application to access the database." defaultValue="ArqueoDB.Models.UsersContext_ConnectionString" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="\\\\vmware-host\\Shared\ Folders\\Documents\\Visual\ Studio\ 2012\\Projects\\ArqueoDB_Azure\\ArqueoDB\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ArqueoDB.Models.UsersContext']/@connectionString" />
-  </parameter>
-</parameters>
