@@ -10,5 +10,9 @@ namespace ArqueoDB.Models
     {
         public DbSet<Utilizador> Utilizadores { get; set; }
         public DbSet<Titulo> Titulos { get; set; }
+        public DbSet<Distrito> Distritos { get; set; }
+        public DbSet<Directoria> Directorias { get; set; }
+        public DbSet<Imagem> Imagens { get; set; }
+        public DbSet<Pais> Paises { get; set; }
     }
 }
