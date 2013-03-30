@@ -10,7 +10,7 @@ namespace ArqueoDB.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "teste222222222222222222222222222222222.";
+            ViewBag.Message = "A funcionar!";
 
             return View();
         }

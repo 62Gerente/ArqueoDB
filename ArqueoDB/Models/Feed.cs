@@ -7,21 +7,19 @@ using System.Web;
 
 namespace ArqueoDB.Models
 {
-    public class Comentario
+    public class Feed
     {
-        public int ComentarioID { get; set; }
+        public int FeedID { get; set; }
 
-        [DisplayName("Comentário")]
+        [DisplayName("Descrição")]
         [StringLength(1000, ErrorMessage = "Número máximo de caracteres excedido")]
-        [Required(ErrorMessage = "Comentário necessário")]
-        public string Texto { get; set; }
-
-        [DisplayName("Utilizador")]
-        public int UtilizadorID { get; set; }
-        public Utilizador Utilizador { get; set; }
+        public string Descricao { get; set; }
 
         [DisplayName("Data de Publicação")]
         public DateTime DataPublicacao { get; set; }
+
+        [DisplayName("Público")]
+        public bool Publico { get; set; }
 
         [ScaffoldColumn(false)]
         public bool Apagado { get; set; }
