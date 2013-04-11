@@ -12,11 +12,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Publicação")]
         public int PublicacaoID { get; set; }
-        public Publicacao Publicacao { get; set; }
+        public virtual Publicacao Publicacao { get; set; }
 
         [DisplayName("Local")]
         public int LocalID { get; set; }
-        public Local Local { get; set; }
+        public virtual Local Local { get; set; }
 
     }
 }

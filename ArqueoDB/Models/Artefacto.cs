@@ -30,15 +30,15 @@ namespace ArqueoDB.Models
 
         [DisplayName("Local")]
         public int LocalID { get; set; }
-        public Local Local { get; set; }
+        public virtual Local Local { get; set; }
 
         [DisplayName("Organização")]
         public int OrganizacaoID { get; set; }
-        public Organizacao Organizacao { get; set; }
+        public virtual Organizacao Organizacao { get; set; }
 
         [DisplayName("Responsável pela Descoberta")]
         public int ResponsavelID { get; set; }
-        public Profissional Responsavel { get; set; }
+        public virtual Profissional Responsavel { get; set; }
 
         [ScaffoldColumn(false)]
         public bool Apagado { get; set; }

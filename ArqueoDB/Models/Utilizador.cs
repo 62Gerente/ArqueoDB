@@ -35,7 +35,7 @@ namespace ArqueoDB.Models
 
         [DisplayName("Distrito")]
         public int DistritoID { get; set; }
-        public Distrito Distrito { get; set; }
+        public virtual Distrito Distrito { get; set; }
 
         [DisplayName("Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
@@ -72,14 +72,14 @@ namespace ArqueoDB.Models
 
         [DisplayName("Título")]
         public int TituloID { get; set; }
-        public Titulo Titulo { get; set; }
+        public virtual Titulo Titulo { get; set; }
 
         [DisplayName("Imagem de Perfil")]
         public int ImagemPerfilID { get; set; }
-        public Imagem ImagemPerfil { get; set; }
+        public virtual Imagem ImagemPerfil { get; set; }
 
         [DisplayName("Imagem de Capa")]
         public int ImagemCapaID { get; set; }
-        public Imagem ImagemCapa { get; set; }
+        public virtual Imagem ImagemCapa { get; set; }
     }
 }

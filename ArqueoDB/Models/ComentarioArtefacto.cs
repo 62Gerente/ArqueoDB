@@ -12,10 +12,10 @@ namespace ArqueoDB.Models
 
         [DisplayName("Comentário")]
         public int ComentarioID { get; set; }
-        public Comentario Comentario { get; set; }
+        public virtual Comentario Comentario { get; set; }
 
         [DisplayName("Artefacto")]
         public int ArtefactoID { get; set; }
-        public Artefacto Artefacto { get; set; }
+        public virtual Artefacto Artefacto { get; set; }
     }
 }

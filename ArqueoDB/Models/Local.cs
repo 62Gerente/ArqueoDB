@@ -19,11 +19,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Organização Responsável")]
         public int OrganizacaoID { get; set; }
-        public Organizacao Organizacao { get; set; }
+        public virtual Organizacao Organizacao { get; set; }
 
         [DisplayName("Profissional Responsável")]
         public int ResponsavelID { get; set; }
-        public Profissional Responsavel { get; set; }
+        public virtual Profissional Responsavel { get; set; }
 
         [StringLength(30, ErrorMessage = "Número máximo de caracteres excedido")]
         [Required(ErrorMessage = "Coordenadas necessárias")]
@@ -38,7 +38,7 @@ namespace ArqueoDB.Models
 
         [DisplayName("Distrito")]
         public int DistritoID { get; set; }
-        public Distrito Distrito { get; set; }
+        public virtual Distrito Distrito { get; set; }
 
         [Required(ErrorMessage = "Necessário indicar nível de acesso")]
         [DisplayName("Público")]

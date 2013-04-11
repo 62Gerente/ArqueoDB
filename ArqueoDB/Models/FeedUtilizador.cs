@@ -12,11 +12,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Feed")]
         public int FeedID { get; set; }
-        public Feed Feed { get; set; }
+        public virtual Feed Feed { get; set; }
 
         [DisplayName("Utilizador")]
         public int UtilizadorID { get; set; }
-        public Utilizador Utilizador { get; set; }
+        public virtual Utilizador Utilizador { get; set; }
 
     }
 }

@@ -12,11 +12,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Imagem")]
         public int ImagemID { get; set; }
-        public Imagem Imagem { get; set; }
+        public virtual Imagem Imagem { get; set; }
 
         [DisplayName("Local")]
         public int LocalID { get; set; }
-        public Local Local { get; set; }
+        public virtual Local Local { get; set; }
 
     }
 }

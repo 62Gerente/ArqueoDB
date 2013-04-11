@@ -12,11 +12,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Profissional")]
         public int ProfissionalID { get; set; }
-        public Profissional Profissional { get; set; }
+        public virtual Profissional Profissional { get; set; }
 
         [DisplayName("Organização")]
         public int OrganizacaoID { get; set; }
-        public Organizacao Organizacao { get; set; }
+        public virtual Organizacao Organizacao { get; set; }
 
     }
 }

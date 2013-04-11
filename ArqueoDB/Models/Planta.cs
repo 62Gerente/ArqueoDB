@@ -18,19 +18,19 @@ namespace ArqueoDB.Models
 
         [DisplayName("Local")]
         public int LocalID { get; set; }
-        public Local Local { get; set; }
+        public virtual Local Local { get; set; }
 
         [DisplayName("Imagem")]
         public int ImagemID { get; set; }
-        public Imagem Imagem { get; set; }
+        public virtual Imagem Imagem { get; set; }
 
         [DisplayName("Organização")]
         public int OrganizacaoID { get; set; }
-        public Organizacao Organizacao { get; set; }
+        public virtual Organizacao Organizacao { get; set; }
 
         [DisplayName("Profissional Responsável")]
         public int ResponsavelID { get; set; }
-        public Profissional Responsavel { get; set; }
+        public virtual Profissional Responsavel { get; set; }
 
         [DisplayName("Data de Publicação")]
         public DateTime DataPublicacao { get; set; }

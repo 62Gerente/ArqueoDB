@@ -13,11 +13,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Utilizador Emissor")]
         public int EmissorID { get; set; }
-        public Utilizador Emissor { get; set; }
+        public virtual Utilizador Emissor { get; set; }
 
         [DisplayName("Utilizador Receptor")]
         public int ReceptorID { get; set; }
-        public Utilizador Receptor { get; set; }
+        public virtual Utilizador Receptor { get; set; }
 
         [DisplayName("Data de Envio")]
         public DateTime DataEnvio { get; set; }

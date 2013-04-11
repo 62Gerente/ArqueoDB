@@ -18,15 +18,15 @@ namespace ArqueoDB.Models
 
         [DisplayName("Directoria")]
         public int DirectoriaID { get; set; }
-        public Directoria Directoria { get; set; }
+        public virtual Directoria Directoria { get; set; }
 
         [DisplayName("Profissional Responsável")]
         public int ResponsavelID { get; set; }
-        public Profissional Responsavel { get; set; }
+        public virtual Profissional Responsavel { get; set; }
 
         [DisplayName("Organização")]
         public int OrganizacaoID { get; set; }
-        public Organizacao Organizacao { get; set; }
+        public virtual  Organizacao Organizacao { get; set; }
 
         [DisplayName("Data de Publicação")]
         public DateTime DataPublicacao { get; set; }

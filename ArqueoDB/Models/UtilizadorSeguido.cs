@@ -12,11 +12,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Utilizador Seguidor")]
         public int SeguidorID { get; set; }
-        public Utilizador Seguidor { get; set; }
+        public virtual Utilizador Seguidor { get; set; }
 
         [DisplayName("Utilizador Seguido")]
         public int SeguidoID { get; set; }
-        public Utilizador Seguido { get; set; }
+        public virtual Utilizador Seguido { get; set; }
 
     }
 }

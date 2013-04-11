@@ -18,7 +18,7 @@ namespace ArqueoDB.Models
 
         [DisplayName("Directoria")]
         public int DirectoriaID { get; set; }
-        public Directoria Directoria { get; set; }
+        public virtual Directoria Directoria { get; set; }
 
         [DisplayName("Descrição")]
         [StringLength(1000, ErrorMessage = "Número máximo de caracteres excedido")]

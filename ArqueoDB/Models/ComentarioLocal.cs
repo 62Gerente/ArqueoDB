@@ -12,10 +12,10 @@ namespace ArqueoDB.Models
 
         [DisplayName("Comentário")]
         public int ComentarioID { get; set; }
-        public Comentario Comentario { get; set; }
+        public virtual Comentario Comentario { get; set; }
 
         [DisplayName("Local")]
         public int LocalID { get; set; }
-        public Local Local { get; set; }
+        public virtual Local Local { get; set; }
     }
 }

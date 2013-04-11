@@ -12,10 +12,10 @@ namespace ArqueoDB.Models
 
         [DisplayName("Utilizador")]
         public int UtilizadorID { get; set; }
-        public Utilizador Utilizador { get; set; }
+        public virtual Utilizador Utilizador { get; set; }
 
         [DisplayName("Local")]
         public int LocalID { get; set; }
-        public Local Local { get; set; }
+        public virtual Local Local { get; set; }
     }
 }

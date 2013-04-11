@@ -12,11 +12,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Badge")]
         public int BadgeID { get; set; }
-        public Badge Badge { get; set; }
+        public virtual Badge Badge { get; set; }
 
         [DisplayName("Utilizador")]
         public int UtilizadorID { get; set; }
-        public Utilizador Utilizador { get; set; }
+        public virtual Utilizador Utilizador { get; set; }
 
         [DisplayName("Data da Atribuição")]
         public DateTime DataAtribuicao { get; set; }

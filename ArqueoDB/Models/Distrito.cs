@@ -18,6 +18,6 @@ namespace ArqueoDB.Models
 
         [DisplayName("País")]
         public int PaisID { get; set; }
-        public Pais Pais{ get; set; }
+        public virtual Pais Pais{ get; set; }
     }
 }

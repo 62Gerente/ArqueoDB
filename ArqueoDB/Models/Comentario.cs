@@ -18,7 +18,7 @@ namespace ArqueoDB.Models
 
         [DisplayName("Utilizador")]
         public int UtilizadorID { get; set; }
-        public Utilizador Utilizador { get; set; }
+        public virtual Utilizador Utilizador { get; set; }
 
         [DisplayName("Data de Publicação")]
         public DateTime DataPublicacao { get; set; }

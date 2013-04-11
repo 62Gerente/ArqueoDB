@@ -12,11 +12,11 @@ namespace ArqueoDB.Models
 
         [DisplayName("Publicação")]
         public int PublicacaoID { get; set; }
-        public Publicacao Publicacao { get; set; }
+        public virtual Publicacao Publicacao { get; set; }
 
         [DisplayName("Utilizador")]
         public int UtilizadorID { get; set; }
-        public Utilizador Utilizador { get; set; }
+        public virtual Utilizador Utilizador { get; set; }
 
     }
 }

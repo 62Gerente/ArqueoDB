@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -43,5 +44,9 @@ namespace ArqueoDB.Models
         public DbSet<Titulo> Titulos { get; set; }
         public DbSet<Utilizador> Utilizadores { get; set; }
         public DbSet<UtilizadorSeguido> UtilizadoresSeguidos { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder){
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }
