@@ -87,7 +87,7 @@ Na página seginte á apresentado o modelo de domínio correspondente ao nosso s
 
 \newpage
 \section{Diagrama de Use Cases}
-Um diagrama de use cases é um diagrama onde são representados todos os actores envolventes de um dado sistema, assim como todas as acções que estes podem executar. O diagrama de use cases referente ao nosso sistema é, de seguida, apresentado:\\
+Um diagrama de use cases é um diagrama onde são representados todos os actores envolventes de um dado sistema, assim como todas as acções que estes podem executar. Devido à incapacidade de colocar o diagrama de use cases, numa só página, devido ao seu tamanho, este foi dividido em três partes. Desta forma, este é apresentado de seguida:\\
 
 \begin{figure}[h!]
 \centering
@@ -96,9 +96,25 @@ Um diagrama de use cases é um diagrama onde são representados todos os actores
 \caption{Diagrama de Use Cases}
 \end{figure}
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{usecase/geral2}
+\label{usecase}
+\caption{Diagrama de Use Cases}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{usecase/geral3}
+\label{usecase}
+\caption{Diagrama de Use Cases}
+\end{figure}
+
+\clearpage
+
 Neste diagrama estão representados todos os sub-sistemas do sistema ArqueoDB, incluindo todos os actores e suas acções. Para promover uma  melhor compreensão, vão ser apresentados cada um destes sub-sistemas individualmente, juntamente com as especificações textuais de cada use case corresponde ao respecivo sub-sistema. \\
 
-\newpage
+
 \subsection{Sub-sistema Acesso ao sistema}
 Neste subsistema é possível os utilizadores efectuarem o seu registo no sistema. Contudo, tanto utilizadores como administrador podem efectuar o login no sistema, quando necessitarem de entrar no sitema.\\
 
@@ -708,21 +724,386 @@ Os diagramas seguintes descrevem o processo de consultar determinada informaçã
 \caption{Diagrama de Sequência de Consultar Artefacto} 
 \end{figure}
 
+O diagrama anterior faz referência ao diagrama de consultar locais, uma vez que para consultar um artefacto, é  necessariamente preciso o utilizador encontrar-se na página do local.
+
+\clearpage
+Os diagramas seguintes referem-se à possibilidade de o utilizador poder adicionar conteúdo a um local, nomeadamente, adicionar uma foto ou adicionar uma review.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/adicionarfoto}
+\caption{Diagrama de Sequência Adicioanr foto a um local} 
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/adicionarreview}
+\caption{Diagrama de Sequência Adicionar review a um local} 
+\end{figure}
+
+\clearpage
 Os diagramas seguintes referem-se à funcionalidade de começar a seguir uma organização ou um local.\\
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{sequencia/seguirorganizacao}
+\includegraphics[scale=0.8]{sequencia/seguirorganizacao}
 \caption{Diagrama de Sequência Seguir Organização} 
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{sequencia/seguirlocal}
+\includegraphics[scale=0.8]{sequencia/seguirlocal}
 \caption{Diagrama de Sequência de Seguir Local} 
 \end{figure}
 
+\clearpage
+
+Os diagramas que se seguem descrevem as funcionalidades de enviar uma nova mensagem, consultar a caixa de mensagens e remover mensagens já existentes, respectivamente.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/enviarmensagem}
+\caption{Diagrama de Sequência Nova mensagem} 
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sequencia/consultarmensagem}
+\caption{Diagrama de Sequência Consultar mensagens} 
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sequencia/apagarmensagem}
+\caption{Diagrama de Sequência Remover mensagem} 
+\end{figure}
+
+\clearpage
+Os diagramas seguintes dizem repeito às funcionalidades de criar uma organização, criar planos de viagem e planear rotas, tudo isto possível por parte do utilizador comum.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/planearrotas}
+\caption{Diagrama de Sequência Planear Rotas} 
+\end{figure}
 
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sequencia/criarorganizacao}
+\caption{Diagrama de Sequência Criar uma organização} 
+\end{figure}
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sequencia/criarviagem}
+\caption{Diagrama de Sequência Criar Planos de Viagem} 
+\end{figure}
+
+\clearpage
+Os diagramas que se seguem fazem referência aos vários tipos de comentários que o utilizador pode realizar, nomeadamente, comentários a um local, a um artefacto, a um edifício e a uma foto.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/comentarlocal}
+\caption{Diagrama de Sequência Comentar Local} 
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/comentarartefacto}
+\caption{Diagrama de Sequência Comentar Artefacto} 
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/comentaredificio}
+\caption{Diagrama de Sequência Comentar edifício} 
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/comentarfoto}
+\caption{Diagrama de Sequência Comentar Foto} 
+\end{figure}
+
+\clearpage
+O diagrama que se segue descreve a funcionalidade de o utilizador gerir o seu próprio perfil.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/gerirperfil}
+\caption{Diagrama de Sequência Gerir perfil de utilizador} 
+\end{figure}
+
+
+\clearpage
+Os diagramas seguintes dizem repeito à gestão do conteúdo de uma organização, sendo esta gerida por um profissional de uma organização ou um responsável. Os diagramas descrevem as funcionalidades de criar novos artefactos e artigos à sua organização, adicionar novas fotos, editar determinado conteúdo, como também troná-lo público ou até removê-lo.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/criarartefacto}
+\caption{Diagrama de Criar novo artefacto} 
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sequencia/criarartigo}
+\caption{Diagrama de Sequência Criar Artigo} 
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sequencia/removerconteudo}
+\caption{Diagrama de Sequência Remover Conteúdo} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{sequencia/editarconteudo}
+\caption{Diagrama de Sequência Editar Conteúdo} 
+\end{figure}
+
+
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/tornarpublico}
+\caption{Diagrama de Sequência Tornar Conteúdo Público} 
+\end{figure}  
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/tornarpublico}
+\caption{Diagrama de Sequência Adicionar foto a conteúdo} 
+\end{figure} 
+ 
+\clearpage
+\clearpage
+O diagrama seguinte descreve a funcionalidade de pesquisa avançada, executada por um profissional ou responsável por uma organização.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/pesquisaavancada}
+\caption{Diagrama de Sequência Pesquisa Avançada} 
+\end{figure} 
+
+Os diagramas seguintes fazem referência às funcionalidades de editar ou remover uma organização, por parte de um profisisonal ou responsável pela mesma.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/editarorganizacao}
+\caption{Diagrama de Sequência Editar Organização} 
+\end{figure}  
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/removerorganizacao}
+\caption{Diagrama de Sequência Remover Organizacao} 
+\end{figure}
+
+\clearpage
+Os diagramas seguintes dizem respeito à possibilidade de um reponsável por uma organização, adicionar ou remover utilizadores peertencentes à mesma organização e, também gerir as permissões dos mesmos.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/removerutilizador}
+\caption{Diagrama de Sequência Adicionar Utilizador a uma Organização} 
+\end{figure}  
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/removerutilizador}
+\caption{Diagrama de Sequência Remover Utilizador a uma Organização} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/R_permissoes}
+\caption{Diagrama de Sequência Gerir permissões Utilizadores da Organização} 
+\end{figure}  
+
+\clearpage
+O diagrama seguinte diz respeito à possibilidade de o responsável por uma organização poder validar informações relativas à mesma.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/validarinf}
+\caption{Diagrama de Sequência Validar Informações de uma Organização}  
+\end{figure}
+
+
+\clearpage
+O diagrama seguinte descreve a funcionaldiade de o reponsável de uma organização editar um local pertencente à organização pelo qual é responsável.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/editarlocal}
+\caption{Diagrama de Sequência Editar Local de uma Organização}  
+\end{figure}
+
+\clearpage
+Os diagramas seguintes dizem respeito à possibilidade de um reponsável por uma organização, adicionar ou remover profissionais peertencentes à mesma organização e, também gerir as permissões dos mesmos.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/adicionarprofissional}
+\caption{Diagrama de Sequência Adicionar Profissional a uma Organização} 
+\end{figure}  
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/removerutilizador}
+\caption{Diagrama de Sequência Remover Profissional a uma Organização} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/P_permissoes}
+\caption{Diagrama de Sequência Gerir permissões Profissionais da Organização} 
+\end{figure}  
+
+\clearpage
+Os diagramas seguintes dizem repeito à gestão do conteúdo dos artefactos do sistema, sendo esta gerida pelo administrador do sistema. Os diagramas descrevem as funcionalidades de criar novos artefactos, editá-los, como também  removê-los.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_criarartefacto}
+\caption{Diagrama de Sequência Adicionar novo artefacto ao sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_editarartefacto}
+\caption{Diagrama de Sequência Editar Artefacto presente no sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_removerartefacto}
+\caption{Diagrama de Sequência Remover Artefacto do sistema} 
+\end{figure}  
+  
+  
+\clearpage
+Os diagrmas seguintes dizem respeito à possibilidade de o administrador do sistema poder criar novos locais ao sistema, remover locais já existentes, como também removê-los.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_criarartefacto}
+\caption{Diagrama de Sequência Adicionar novo local ao sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_editarlocal}
+\caption{Diagrama de Sequência Editar Local presente no sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_removerlocal}
+\caption{Diagrama de Sequência Remover Local do sistema} 
+\end{figure}
+
+\clearpage
+Os diagramas seguintes fazem referência às funcionalidade que o administrador possui, de criar e remover badges ao sistema.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_criarbadge}
+\caption{Diagrama de Sequência Adicionar nova Badge ao sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_removerlocal}
+\caption{Diagrama de Sequência Remover Badge do sistema} 
+\end{figure}
+
+\clearpage
+Os diagramas seguintes dizem respeito à possibilidade de o administrador do sistema, remover utilizadores do sistema, editar utilizadores já existentes e também gerir as permissões dos mesmos.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_editarutilizador}
+\caption{Diagrama de Sequência Remover Utilizador do sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_editarutilizador}
+\caption{Diagrama de Sequência Editar Utilizador do sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_editarutilizador}
+\caption{Diagrama de Sequência Gerir Permissões utilizadores do Sistema} 
+\end{figure}   
+  
+\clearpage
+Os diagramas seguintes referem-se à possibilidade de o administardor do sistema criar novas organizações, remover organizações já existentes e também gerir todo o conteúdo pertencente à mesma.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_criarorganizacao}
+\caption{Diagrama de Sequência Adicionar nova organização ao Sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/A_removerorganizacao}
+\caption{Diagrama de Sequência Remover Organização do sistema} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{sequencia/gerirconteudo}
+\caption{Diagrama de Sequência Gerir Conteúdo das Organizações do Sistema} 
+\end{figure}  
+
+\clearpage
+
+\section{Diagramas de Estado}
+Os diagramas de estado permitem demonstrar o comportamente de determinados objectos dado um evento. Torna-se assim possível descrever o ciclo de comportamentos pelos quais um objecto passa e as suas transições de estado durante esse evento. Seguem de seguida dois exemplos relativos a este sistema.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{estado/login}
+\caption{Diagrama de Estado Efectuar Login} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{estado/registo}
+\caption{Diagrama de Estado Efectuar Registo} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{estado/novamensagem}
+\caption{Diagrama de Estado Nova Mensagem} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{estado/criarartefacto}
+\caption{Diagrama de Estado Criar Novo Artefacto} 
+\end{figure} 
+  
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{estado/removerprofissional}
+\caption{Diagrama de Estado Remover Proficcioanl de uma Organização} 
+\end{figure}   
+  
+  
 \end{document}
