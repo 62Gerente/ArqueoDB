@@ -115,7 +115,7 @@ Um diagrama de use cases é um diagrama onde são representados todos os actores
 Neste diagrama estão representados todos os sub-sistemas do sistema ArqueoDB, incluindo todos os actores e suas acções. Para promover uma  melhor compreensão, vão ser apresentados cada um destes sub-sistemas individualmente, juntamente com as especificações textuais de cada use case corresponde ao respecivo sub-sistema. \\
 
 
-\subsection{Sub-sistema Acesso ao sistema}
+\subsection{Subsistema Acesso ao sistema}
 Neste subsistema é possível os utilizadores efectuarem o seu registo no sistema. Contudo, tanto utilizadores como administrador podem efectuar o login no sistema, quando necessitarem de entrar no sitema.\\
 
 \begin{figure}[h!]
@@ -144,7 +144,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \caption{Detalhes use case efectuar login}
 \end{figure}
 
-\subsection{Sub-sistema Consultar Informação}
+\subsection{Subsistema Consultar Informação}
 Neste sub-sistema está representado o utilizador ``visitante'', além de que, como pode ser verificado no diagrama de use case geral, todos os outros tipos de utilizador podem executar todas as acções realizadas por este. Deste modo, os utilizadores têm como actividade, representada neste diagrama, a consulta de informação, nomeadamente, a consulta de locais e artefactos.\\
 
 \begin{figure}[h!]
@@ -172,7 +172,35 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \caption{Detalhes use case consultar artefacto}
 \end{figure}
 
-\subsection{Sub-sistema Seguir entidades}
+\subsection{Subsistema Adicionar Conteúdo a um Local}
+No diagrama use case deste sub-sistema estão envolvidos os tipos de conteúdo que o utilizador pode adicionar a um determinado local. Pode, no entanto, adicionar uma foto ou uma review. Estas acções podem ser executados pelo utilizador, o profissional e o responsável de uma organização.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{usecase/U_AdicionarConteudo}
+\label{usecase}
+\caption{Diagrama de Use Cases do sub-sistema Adicionar Conteúdo a um Local}
+\end{figure}
+
+De seguida, encontram-se as especificações textuais dos use cases do diagrama deste sub-sistema:\\
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{d_usecase/adicionarreview}
+\label{usecase}
+\caption{Detalhes use case Adicionar review a um local}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{d_usecase/adicionarfoto}
+\label{usecase}
+\caption{Detalhes use case Adicionar foto a um local}
+\end{figure}
+
+\newpage
+\subsection{Subsistema Seguir entidades}
 No diagrama use case deste sub-sistema estão envolvidas as duas possibilidades que o utilizador pode tomar, em relação a seguir entidades. Pode, no entanto, seguir determinado local ou determinada organização. Estas acções podem ser executados pelo utilizador, o profissional e o responsável de uma organização.\\
 
 \begin{figure}[h!]
@@ -200,7 +228,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \end{figure}
 
 \newpage
-\subsection{Sub-sistema Gerir perfil do utilizadoor}
+\subsection{Subsistema Gerir perfil do utilizadoor}
 Este sub-sistema permite ao utilizador, a qualquer momento, alterar as suas definições pessoais.\\
 
 \begin{figure}[h!]
@@ -220,7 +248,7 @@ De seguida, encontra-se a especificação textual do único use case do diagrama
 \end{figure}
 
 \newpage
-\subsection{Sub-sistema Gestão de mensagens do utilizador}
+\subsection{Subsistema Gestão de mensagens do utilizador}
 No diagrama de use case deste sub-sistema estão representadas todas as acções relativas à gestão de mensagens. É permitido aos vários tipos de utilizadores, registados no sistema, escrever, apagar mensagens e consultar a sua respectiva caixa de mensagens.\\
 
 \begin{figure}[h!]
@@ -256,7 +284,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \clearpage
 \newpage
 
-\subsection{Sub-sistema Gestão de outras funcionalidades}
+\subsection{Subsistema Gestão de outras funcionalidades}
 No diagrama de use case deste sub-sistema estão representadas todas outras funcionalidades acessíveis aos utilizadores. Estas dizem respeito à possibilidade de o utilizador criar planos de viagem, planear rotas e criar organizações. Estas funcionalidades exigem por parte do sistema uma verificação da possibilidade da concretização das mesmas, em que, caso não seja possível, o sistema devolve uma mensagem de erro, informando que a operação não pode ser realizada.\\
 
 \begin{figure}[h!]
@@ -292,7 +320,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \clearpage
 \newpage
 
-\subsection{Sub-sistema Gestão de Comentários}
+\subsection{Subsistema Gestão de Comentários}
 É neste sub-sistema que os utilizadores podem comentar determinado conteúdo. Sendo assim possível, um utilizador comentar um determinado local, um artefacto, um edifício ou uma foto. Para tal, basta o utilizador encontrar-se na página correspondente ao conteúdo que pretende comentar. Esta possibilidade de comentar determinado conteúdo é proporcionada a qualquer utilizador registado no sistema..  \\
 
 \begin{figure}[h!]
@@ -335,7 +363,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \clearpage
 
 
-\subsection{Sub-sistema Gestão de conteúdo}
+\subsection{Subsistema Gestão de conteúdo}
 No diagrama use case deste sub-sistema estão representadas acções relativas à gestão dos diversos conteúdos de uma determinada organização, podendo o responsável, como também o profissional da organização, criar artefactos, artigos, adicionar fotos, editar e remover conteúdo, como também torná-lo público.\\
 
 \begin{figure}[h!]
@@ -392,7 +420,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 
 \clearpage
 \clearpage
-\subsection{Sub-sistema Gestão da organização}
+\subsection{Subsistema Gestão da organização}
 No diagrama use case deste sub-sistema estão representadas acções relativas à gestão de uma dada organização a que o utilizador pertença, sendo estas acções apenas relativas ao responsável pela organização. O responsável pode editar as definições da organização, remover a organização, assim como também gerir os utilizadores que fazem parte da mesma.\\
 
 \begin{figure}[h!]
@@ -420,7 +448,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 
 \clearpage
 
-\subsection{Sub-sistema Gestão dos Utilizadores de uma organização}
+\subsection{Subsistema Gestão dos Utilizadores de uma organização}
 No diagrama use case deste sistema estão representadas acções relativas apenas ao responsável de uma organização. Estas acções permitem ao responsável gerir os utilizadores pertencentes à sua organização, podendo adicionar e remover utilizadores, e também gerir as permissões dos mesmos, decidindo o que estes podem ou não fazer.\\
 
 \begin{figure}[h!]
@@ -456,7 +484,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \clearpage
 \clearpage
 
-\subsection{Sub-sistema Gestão dos Locais de uma organização}
+\subsection{Subsistema Gestão dos Locais de uma organização}
 No diagrama use case deste sistema estão representadas, mais uma vez, acções relativas
 apenas ao responsável ao responsável de uma organização. Estas acções permitema ao responsável gerir todos os locais pertencentes à sua organização, como alterar as definições do local, como também gerir os profissionais responsáveis pelo respectivo local.\\
 
@@ -476,7 +504,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \caption{Detalhes use case Editar local}
 \end{figure}
 
-\subsection{Sub-sistema Gestão de profissionais de uma organização}
+\subsection{Subsistema Gestão de profissionais de uma organização}
 Este sub-sistema apenas envolve um actor, nomeadamente o responsável por uma organização. O diagrama
 use case deste subsistema é relativo à gestão dos profissionais de uma organização, onde o responsável pela mesma pode adicionar novos utilizadores, remover utilizadores já pertencentes à organização, e também gerir ar permissões de todos os profissionais.\\
 
@@ -514,7 +542,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 
 \clearpage
 
-\subsection{Sub-sistema Gestão de Locais do Sistema}
+\subsection{Subsistema Gestão de Locais do Sistema}
 No diagrama use case deste sub-sistema estão representadas acções como adicionar, editar e remover locais de todo o sistema. Estas acções dizem respeito à gestão de locais, que só podem ser efectuadas pelo administrador. Ainda neste use case, é permitido ao utilizador gerir os artefactos e as badges pertencentes ao respectivo local.\\
 
 \begin{figure}[h!]
@@ -549,7 +577,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 
 \clearpage
 
-\subsection{Sub-sistema Gestão de Artefactos do Sistema}
+\subsection{Subsistema Gestão de Artefactos do Sistema}
 
 O diagrama use case deste sub-sistema apresenta mais acções que o administrador do sistema
 pode tomar. Estas acções estão relacionadas com a gestão dos artefactos do sistema. Aqui, o
@@ -587,7 +615,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 
 \clearpage
 
-\subsection{Sub-sistema Gestão de badges}
+\subsection{Subsistema Gestão de badges}
 É neste sub-sistema que os administradores podem controlar as badges do sistema. O
 adiministrador pode ser capaz de criar novas restriçõe, como também removê-las.\\
 
@@ -616,7 +644,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 
 \clearpage
 
-\subsection{Sub-sistema Gestão dos Utilizadores do Sistema}
+\subsection{Subsistema Gestão dos Utilizadores do Sistema}
 No diagrama de use case deste sub-sistema estão representadas todas as acções relativas
 à gestão dos utilizadores do sistema. É permitido ao administrador remover um utilizador, editar as definições do mesmo, como também gerir as permissões de todos os utilizadores do sistema. \\
 
@@ -652,7 +680,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 
 \clearpage
 
-\subsection{Sub-sistema Gestão das Organizações do Sistema}
+\subsection{Subsistema Gestão das Organizações do Sistema}
 O diagrama use case deste sistema apresenta mais acções que o administrador do sistema
 pode tomar. Estas acções estão relacionadas com a gestão das organizações do sistema. Aqui, o
 administardor pode criar novas organiuzações, remover organizações já existentes e modificar qualquer organização do sistema. Neste sub-sistema, o administrador ainda pode gerir todo o conteúdo pertencente a uma organização.\\
@@ -705,7 +733,7 @@ Tendo sito em conta, os diagramas seguintes fazem referência às funcionalidade
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=1]{sequencia/registo}
-\caption{Diagrama de Sequência de Efectuar regsito no sistema} 
+\caption{Diagrama de Sequência de Efectuar registo no sistema} 
 \end{figure}
 
 \clearpage
@@ -878,7 +906,7 @@ Os diagramas seguintes dizem repeito à gestão do conteúdo de uma organizaçã
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{sequencia/tornarpublico}
+\includegraphics[scale=1]{sequencia/P_adicionarfoto}
 \caption{Diagrama de Sequência Adicionar foto a conteúdo} 
 \end{figure} 
  
@@ -908,11 +936,11 @@ Os diagramas seguintes fazem referência às funcionalidades de editar ou remove
 \end{figure}
 
 \clearpage
-Os diagramas seguintes dizem respeito à possibilidade de um reponsável por uma organização, adicionar ou remover utilizadores peertencentes à mesma organização e, também gerir as permissões dos mesmos.\\
+Os diagramas seguintes dizem respeito à possibilidade de um reponsável por uma organização, adicionar ou remover utilizadores pertencentes à mesma organização e, também gerir as permissões dos mesmos.\\
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{sequencia/removerutilizador}
+\includegraphics[scale=1]{sequencia/adicionarutilizador}
 \caption{Diagrama de Sequência Adicionar Utilizador a uma Organização} 
 \end{figure}  
 
@@ -949,7 +977,7 @@ O diagrama seguinte descreve a funcionaldiade de o reponsável de uma organizaç
 \end{figure}
 
 \clearpage
-Os diagramas seguintes dizem respeito à possibilidade de um reponsável por uma organização, adicionar ou remover profissionais peertencentes à mesma organização e, também gerir as permissões dos mesmos.\\
+Os diagramas seguintes dizem respeito à possibilidade de um reponsável por uma organização, adicionar ou remover profissionais pertencentes à mesma organização e, também gerir as permissões dos mesmos.\\
 
 \begin{figure}[h!]
 \centering
@@ -993,11 +1021,11 @@ Os diagramas seguintes dizem repeito à gestão do conteúdo dos artefactos do s
   
   
 \clearpage
-Os diagrmas seguintes dizem respeito à possibilidade de o administrador do sistema poder criar novos locais ao sistema, remover locais já existentes, como também removê-los.\\
+Os diagramas seguintes dizem respeito à possibilidade de o administrador do sistema poder criar novos locais ao sistema, remover locais já existentes, como também removê-los.\\
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{sequencia/A_criarartefacto}
+\includegraphics[scale=1]{sequencia/A_adicionarlocal}
 \caption{Diagrama de Sequência Adicionar novo local ao sistema} 
 \end{figure}  
 
@@ -1033,7 +1061,7 @@ Os diagramas seguintes dizem respeito à possibilidade de o administrador do sis
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{sequencia/A_editarutilizador}
+\includegraphics[scale=1]{sequencia/A_removerutilizador}
 \caption{Diagrama de Sequência Remover Utilizador do sistema} 
 \end{figure}  
 
