@@ -1,4 +1,4 @@
-﻿\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage{a4wide}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes}
@@ -22,7 +22,7 @@
 
 \textsc{\LARGE Universidade do Minho}\\[1.5cm] % Name of your university/college
 \textsc{\Large Licenciatura em Engenharia Informática}\\[0.5cm] % Major heading such as course name
-\textsc{\large Laboratórios de Informática V}\\[0.5cm] % Minor heading such as course title
+\textsc{\large Laboratórios de Informática IV}\\[0.5cm] % Minor heading such as course title
 \textsc{3º Ano, 2º Semestre, Ano lectivo 2012/2013}\\[0.5cm]
 
 %----------------------------------------------------------------------------------------
@@ -73,22 +73,22 @@ Braga, {\large \today}\\[1cm] % Date, change the \today to a set date if you wan
 O modelo de domínio é um esquema que captura todas as entidades do sistema e todos os relacionamentos entre estas. Neste trabalho, foi desenvolvido um sistema de partilha de conhecimento sobre locais, achados e factos arqueológicos. A plataforma destinar-se-á, por um lado, aos profissionais e especialistas da área Arqueológica que, sobre a alçada de uma organização bem identificada, serão responsáveis por toda a gestão de informação relativa aos locais, achados ou factos mencionados e, por outro lado, ao utilizador regular com interesse na área que poderá ter acesso a toda essa informaçãoo de forma bastante interactiva. Desta forma, podem ser encontrados 4 tipos de utilizador: o utilizador visitante, o utilizador normal, o responsável e o profissional de uma dada organização. Sendo que o administrador é a entidade que gere a grande parte da informação do sistema:\\
 \begin{itemize}
 \item É o responável pelo controlo dos registos dos clientes no sistema;
-\item É ele que administra, juntamente com os responsáveis de uma organização, todos os assuntos relacionados com a mesma;
+\item É ele que administra todos os locais e artefactos existentes no sistema;
 \item É o responsável por gerir grande parte das utilidades do sistema.
 \end{itemize}
 
-Na página seginte á apresentado o modelo de domínio correspondente ao nosso sistema.
+Na página seginte á apresentado o modelo de domínio correspondente ao nosso sistema. Como este diagrama ocupa demasiado espaço, e como  a sua visualização não é clara, este é enviado, como anexo, juntamente com o envio do relatório.
 \newpage
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{}
+\includegraphics[scale=0.4]{dominio}
 \label{modelo domínio}
 \caption{Modelo de Domínio}
 \end{figure}
 
 
-\newpage
+\clearpage
 \section{Diagrama de Use Cases}
 Um diagrama de use cases é um diagrama onde são representados todos os actores envolventes de um dado sistema, assim como todas as acções que estes podem executar. Devido à incapacidade de colocar o diagrama de use cases, numa só página, devido ao seu tamanho, este foi dividido em três partes. Desta forma, este é apresentado de seguida:\\
 
@@ -117,7 +117,7 @@ Um diagrama de use cases é um diagrama onde são representados todos os actores
 
 Neste diagrama estão representados todos os sub-sistemas do sistema ArqueoDB, incluindo todos os actores e suas acções. Para promover uma  melhor compreensão, vão ser apresentados cada um destes sub-sistemas individualmente, juntamente com as especificações textuais de cada use case corresponde ao respecivo sub-sistema. \\
 
-
+\clearpage
 \subsection{Subsistema Acesso ao sistema}
 Neste subsistema é possível os utilizadores efectuarem o seu registo no sistema. Contudo, tanto utilizadores como administrador podem efectuar o login no sistema, quando necessitarem de entrar no sitema.\\
 
@@ -147,33 +147,6 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \caption{Detalhes use case efectuar login}
 \end{figure}
 
-\subsection{Subsistema Consultar Informação}
-Neste sub-sistema está representado o utilizador ``visitante'', além de que, como pode ser verificado no diagrama de use case geral, todos os outros tipos de utilizador podem executar todas as acções realizadas por este. Deste modo, os utilizadores têm como actividade, representada neste diagrama, a consulta de informação, nomeadamente, a consulta de locais e artefactos.\\
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{usecase/V_ConsultarInformaccao}
-\label{usecase}
-\caption{Diagrama de Use Cases do sub-sistema Consultar Informação}
-\end{figure}
-
-De seguida, encontram-se as especificações textuais dos use cases do diagrama deste sub-sistema:\\
-
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{d_usecase/consultarlocais}
-\label{usecase}
-\caption{Detalhes use case consultar local}
-\end{figure}
-
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{d_usecase/consultarartefacto}
-\label{usecase}
-\caption{Detalhes use case consultar artefacto}
-\end{figure}
 
 \subsection{Subsistema Adicionar Conteúdo a um Local}
 No diagrama use case deste sub-sistema estão envolvidos os tipos de conteúdo que o utilizador pode adicionar a um determinado local. Pode, no entanto, adicionar uma foto ou uma review. Estas acções podem ser executados pelo utilizador, o profissional e o responsável de uma organização.\\
@@ -202,7 +175,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \caption{Detalhes use case Adicionar foto a um local}
 \end{figure}
 
-\newpage
+\clearpage
 \subsection{Subsistema Seguir entidades}
 No diagrama use case deste sub-sistema estão envolvidas as duas possibilidades que o utilizador pode tomar, em relação a seguir entidades. Pode, no entanto, seguir determinado local ou determinada organização. Estas acções podem ser executados pelo utilizador, o profissional e o responsável de uma organização.\\
 
@@ -230,7 +203,7 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \caption{Detalhes use case seguir organizacao}
 \end{figure}
 
-\newpage
+\clearpage
 \subsection{Subsistema Gerir perfil do utilizadoor}
 Este sub-sistema permite ao utilizador, a qualquer momento, alterar as suas definições pessoais.\\
 
@@ -318,49 +291,6 @@ De seguida, encontram-se as especificações textuais dos use cases do diagrama 
 \includegraphics[scale=0.7]{d_usecase/planearrota}
 \label{usecase}
 \caption{Detalhes use case Planear Rotas}
-\end{figure}
-
-\clearpage
-\newpage
-
-\subsection{Subsistema Gestão de Comentários}
-É neste sub-sistema que os utilizadores podem comentar determinado conteúdo. Sendo assim possível, um utilizador comentar um determinado local, um artefacto, um edifício ou uma foto. Para tal, basta o utilizador encontrar-se na página correspondente ao conteúdo que pretende comentar. Esta possibilidade de comentar determinado conteúdo é proporcionada a qualquer utilizador registado no sistema..  \\
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{usecase/U_FazerComentarios}
-\label{usecase}
-\caption{Diagrama Use Case sub-sistema Gestão de Comentários}
-\end{figure}
-
-De seguida, encontram-se as especificações textuais dos use cases do diagrama deste sub-sistema:\\
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{d_usecase/comentarlocal}
-\label{usecase}
-\caption{Detalhes use case Comentar um local}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{d_usecase/comentarartefacto}
-\label{usecase}
-\caption{Detalhes use case Comentar Artefacto}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{d_usecase/comentaredificio}
-\label{usecase}
-\caption{Detalhes use case Comentar edifício}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{d_usecase/comentarfoto}
-\label{usecase}
-\caption{Detalhes use case Comentar foto}
 \end{figure}
 
 \clearpage
@@ -588,7 +518,7 @@ administrador pode criar novos atefactos, modificar e remover artefactos já exi
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{usecase/A_GerirLocal}
+\includegraphics[scale=1]{usecase/A_GerarArtefactos}
 \label{usecase}
 \caption{Diagrama Use Case sub-sistema Gestão dos Locais do Sistema}
 \end{figure}
@@ -739,23 +669,6 @@ Tendo sito em conta, os diagramas seguintes fazem referência às funcionalidade
 \caption{Diagrama de Sequência de Efectuar registo no sistema} 
 \end{figure}
 
-\clearpage
-
-Os diagramas seguintes descrevem o processo de consultar determinada informação, como consultar locais e artefactos.\\
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{sequencia/consultarlocais}
-\caption{Diagrama de Sequência Consultar Locais} 
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{sequencia/consultarartefacto}
-\caption{Diagrama de Sequência de Consultar Artefacto} 
-\end{figure}
-
-O diagrama anterior faz referência ao diagrama de consultar locais, uma vez que para consultar um artefacto, é  necessariamente preciso o utilizador encontrar-se na página do local.
 
 \clearpage
 Os diagramas seguintes referem-se à possibilidade de o utilizador poder adicionar conteúdo a um local, nomeadamente, adicionar uma foto ou adicionar uma review.\\
@@ -829,34 +742,6 @@ Os diagramas seguintes dizem repeito às funcionalidades de criar uma organizaç
 \centering
 \includegraphics[scale=0.8]{sequencia/criarviagem}
 \caption{Diagrama de Sequência Criar Planos de Viagem} 
-\end{figure}
-
-\clearpage
-Os diagramas que se seguem fazem referência aos vários tipos de comentários que o utilizador pode realizar, nomeadamente, comentários a um local, a um artefacto, a um edifício e a uma foto.\\
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{sequencia/comentarlocal}
-\caption{Diagrama de Sequência Comentar Local} 
-\end{figure}
-
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{sequencia/comentarartefacto}
-\caption{Diagrama de Sequência Comentar Artefacto} 
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{sequencia/comentaredificio}
-\caption{Diagrama de Sequência Comentar edifício} 
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1]{sequencia/comentarfoto}
-\caption{Diagrama de Sequência Comentar Foto} 
 \end{figure}
 
 \clearpage
@@ -1102,6 +987,41 @@ Os diagramas seguintes referem-se à possibilidade de o administardor do sistema
 \end{figure}  
 
 \clearpage
+\section{Diagramas de Sequência com subsistemas}
+Para permitir representar melhor a sequência de interacções, ou
+seja, as mensagens passadas entre objectos, num determinado sistem, foram desenvolvidos diagrmas de sequência com subsistemas. Seguem de seguida alguns exemplos relativos a este sistema.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{sequencia/est_login}
+\caption{Diagrama de Sequência Efectuar login com subsistemas} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{sequencia/est_actualizardef}
+\caption{Diagrama de Sequência Actualizar Definições pessoais com subsistemas} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{sequencia/est_criarartefacto}
+\caption{Diagrama de Sequência Criar artefacto com subsistemas} 
+\end{figure}   
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{sequencia/est_registo}
+\caption{Diagrama de Sequência Efectuar registo com subsistemas} 
+\end{figure}  
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{sequencia/est_removerprofissional}
+\caption{Diagrama de Sequência Remover profisional da organização com subsistemas} 
+\end{figure}  
+
+\clearpage
 
 \section{Diagramas de Estado}
 Os diagramas de estado permitem demonstrar o comportamente de determinados objectos dado um evento. Torna-se assim possível descrever o ciclo de comportamentos pelos quais um objecto passa e as suas transições de estado durante esse evento. Seguem de seguida alguns exemplos relativos a este sistema.\\
@@ -1136,7 +1056,65 @@ Os diagramas de estado permitem demonstrar o comportamente de determinados objec
 \caption{Diagrama de Estado Remover Profissional de uma Organização} 
 \end{figure}   
   
+\clearpage
+\section{Diagramas de Actividade} 
+ Os diagramas de actividade representam o fluxo das informações dentro de um objeto do sistema, podendo representar as condições e as execu ̧
+ções paralelas. Deste modo, os diagramas de actividade ajudam a compreender quais as entidades que actuam no decorrer de uma
+determinada actividade, e que acções são, por elas, executadas. Seguem de seguida alguns
+exemplos relativos a este sistema.
  
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{actividade/lofin}
+\caption{Diagrama de Actividade Efectuar Login} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{actividade/registo}
+\caption{Diagrama de Actividade Efectuar Registo} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{actividade/removerprofissional}
+\caption{Diagrama de Actividade Remover Profissional} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{actividade/criarartefacto}
+\caption{Diagrama de Actividade Criar Artefacto} 
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{actividade/novamensagem}
+\caption{Diagrama de Actividade Criar Nova Mensagem} 
+\end{figure} 
+
+\clearpage
+\section{Diagrama de Classes}
+O diagrama de classes representa a estrutura do sistema, recorrendo ao conceito de classes
+e suas relaçes, onde são identificados os objectos relevantes do sistema em estudo. Os objectos do sistemas possuem comportamento e identidade, que consistem, respectivamente, ao modo como ele age e reage a est´imulos externos e aos atributos que o distingue de todos os outros.
+Deste modo, a seguir é apresentado o diagrama de classes do sistema onde são representados as respectivas classes, bem como os seus métodos e atributos. Como o diagrama de classes ocupa demasiado espaço, e como  a sua visualização não é clara, este é enviado, como anexo, juntamente com o envio do relatório.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.2]{classes}
+\caption{Diagrama de Classes} 
+\end{figure} 
+
+\clearpage
+\section{Esquema conceptual da base de dados}
+Na página seguinte está representado o esquema conceptual da base de dados relativa a este sistema. Como este esquema ocupa demasiado espaço, e como  a sua visualização não é clara, este é enviado, como anexo, juntamente com o envio do relatório.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.15]{basedados}
+\caption{Diagrama de Classes} 
+\end{figure} 
+
 \clearpage
 \section{Conclusão} 
  
