@@ -1,0 +1,84 @@
+﻿@model ArqueoDB.Models.Organizacao
+
+
+@if(String.Compare((string)ViewData["Dashboard"],"Organizacao")==0){
+    <text>
+                    <li 
+
+                    @if (String.Compare((string)ViewData["Activo"], "Dashboard") == 0){
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashOrganizacao/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <i class="micon-screen"></i>
+                            <span class="hidden-phone">Dashboard</span>
+                        </a>
+                    </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Locais") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashOrganizacao/Locais/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <i class="micon-location"></i>
+                            <span class="hidden-phone">Locais</span>
+                        </a>
+                    </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Membros") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashOrganizacao/Membros/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <i class="micon-user-2"></i>
+                            <span class="hidden-phone">Membros</span>
+                        </a>
+                    </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Publicações") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >                        
+                            <a href="/DashOrganizacao/Publicacoes/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <i class="micon-libreoffice"></i>
+                            <span class="hidden-phone">Publicações</span>
+                        </a>
+                    </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Estatísticas") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >                        
+                            <a href="/DashOrganizacao/Estatisticas/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <i class="micon-stats-up"></i>
+                            <span class="hidden-phone">Estatísticas</span>
+                        </a>
+                    </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Definicões") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashOrganizacao/Definicoes/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <i class="micon-cog"></i>
+                            <span class="hidden-phone">Definições</span>
+                        </a>
+                    </li>
+    </text>
+}

@@ -1,0 +1,22 @@
+﻿@model ArqueoDB.Models.Directoria
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Directoria</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Caminho)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Caminho)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.DirectoriaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

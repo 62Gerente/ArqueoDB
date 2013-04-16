@@ -1,0 +1,109 @@
+﻿@model ArqueoDB.Models.Organizacao
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Organizacao</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Coordenadas)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Coordenadas)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Morada)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Morada)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Distrito.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Distrito.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ResponsavelID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ResponsavelID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataFundacao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataFundacao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Telefone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Telefone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Fax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Fax)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImagemPerfilID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImagemPerfilID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImagemCapaID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImagemCapaID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Publica)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Publica)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

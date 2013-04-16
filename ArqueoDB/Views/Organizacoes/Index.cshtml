@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ArqueoDB.Models.Organizacao>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coordenadas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distrito.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponsavelID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFundacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagemPerfilID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagemCapaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publica)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coordenadas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Morada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Distrito.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResponsavelID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFundacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImagemPerfilID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImagemCapaID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publica)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrganizacaoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrganizacaoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrganizacaoID })
+        </td>
+    </tr>
+}
+
+</table>

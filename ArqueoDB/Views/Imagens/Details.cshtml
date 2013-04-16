@@ -1,0 +1,43 @@
+﻿@model ArqueoDB.Models.Imagem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Imagem</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Directoria.Caminho)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Directoria.Caminho)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UtilizadorID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UtilizadorID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Publica)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Publica)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ImagemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
