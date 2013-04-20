@@ -3,6 +3,12 @@
 
 @if(String.Compare((string)ViewData["Dashboard"],"Organizacao")==0){
     <text>
+                    <li class="avatar hidden-phone">
+                        <a href="#">
+	                        <img src="@(ViewData["Perfil"])" />
+	                        <span>@Html.DisplayFor(model => model.Nome)</span>
+                        </a>
+                    </li>
                     <li 
 
                     @if (String.Compare((string)ViewData["Activo"], "Dashboard") == 0){

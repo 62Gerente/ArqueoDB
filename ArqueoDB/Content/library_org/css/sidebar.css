@@ -62,7 +62,7 @@
 }
 #sidebar.nav-pills > li > a [class^="micon-"], 
 #sidebar.nav-pills > li > a [class^="icon-"] {
-	padding:12px 0 0px 0;
+	padding:12px 0px 0px 0px;
 	font-size:30px;
 	display:block;
 }

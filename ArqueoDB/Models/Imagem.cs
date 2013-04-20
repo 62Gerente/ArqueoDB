@@ -13,7 +13,7 @@ namespace ArqueoDB.Models
 
         [Required(ErrorMessage = "Necessário indicar nome da imagem")]
         [DisplayName("Nome da Imagem")]
-        public bool Nome { get; set; }
+        public string Nome { get; set; }
 
         [DisplayName("Directoria")]
         public int DirectoriaID { get; set; }
@@ -25,12 +25,8 @@ namespace ArqueoDB.Models
 
         [ScaffoldColumn(false)]
         public DateTime DataPublicacao { get; set; }
-
-        [DisplayName("Utilizador")]
-        public int UtilizadorID { get; set; }
-        public virtual Utilizador Utilizador { get; set; }
-
-        [Required(ErrorMessage = "Necessário indicar nível de acesso")]
+       
+	    [Required(ErrorMessage = "Necessário indicar nível de acesso")]
         [DisplayName("Pública")]
         public bool Publica { get; set; }
 

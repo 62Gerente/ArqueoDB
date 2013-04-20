@@ -20,7 +20,6 @@
 		<![endif]-->
 	</head>
 	<body>
-		 @RenderBody()
 		<!-- header -->
 		<div id="header" class="navbar">
 			<div class="navbar-inner">
@@ -63,7 +62,7 @@
 						<ul class="dropdown-menu dropdown-user-account">
 						
 							<li class="account-img-container">
-								<img class="thumb account-img" src="library/images/100/um.jpg" />
+								<img class="thumb account-img" src="@(ViewData["Perfil"])" />
 							</li>
 							
 							<li class="account-info">
@@ -174,7 +173,7 @@
 				
 				<!-- post wrapper -->				
 				<div class="row-fluid">
-
+                    @RenderBody()
 				</div>
 				<!-- ./ post wrapper -->
 			</div>
@@ -182,9 +181,6 @@
 			
 			<!-- sidebar -->
 			<ul id="sidebar" class="nav nav-pills nav-stacked">
-                <li class="avatar hidden-phone">
-                    @RenderSection("avatar",required: true)
-                </li>
                 @Html.Partial("_SidebarOrgDO")
             </ul>
             <!-- end sidebar -->

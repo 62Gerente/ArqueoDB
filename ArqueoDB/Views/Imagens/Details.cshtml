@@ -10,6 +10,13 @@
     <legend>Imagem</legend>
 
     <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
          @Html.DisplayNameFor(model => model.Directoria.Caminho)
     </div>
     <div class="display-field">
@@ -21,13 +28,6 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Descricao)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.UtilizadorID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.UtilizadorID)
     </div>
 
     <div class="display-label">

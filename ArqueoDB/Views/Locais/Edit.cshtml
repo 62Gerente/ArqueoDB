@@ -1,0 +1,93 @@
+﻿@model ArqueoDB.Models.Local
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Local</legend>
+
+        @Html.HiddenFor(model => model.LocalID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrganizacaoID, "Organizacao")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("OrganizacaoID", String.Empty)
+            @Html.ValidationMessageFor(model => model.OrganizacaoID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ResponsavelID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ResponsavelID)
+            @Html.ValidationMessageFor(model => model.ResponsavelID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Coordenadas)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Coordenadas)
+            @Html.ValidationMessageFor(model => model.Coordenadas)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataRegisto)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataRegisto)
+            @Html.ValidationMessageFor(model => model.DataRegisto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descricao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DistritoID, "Distrito")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DistritoID", String.Empty)
+            @Html.ValidationMessageFor(model => model.DistritoID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Publico)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Publico)
+            @Html.ValidationMessageFor(model => model.Publico)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

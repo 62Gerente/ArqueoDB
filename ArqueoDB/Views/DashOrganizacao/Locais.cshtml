@@ -1,0 +1,69 @@
+﻿@using ArqueoDB.Models;
+@model ArqueoDB.Models.Organizacao
+
+@{
+    EntidadesArqueoDB db = new EntidadesArqueoDB();
+    ViewBag.Title = "Locais";
+    Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
+}   
+@section breadcrumb {
+<a href="/DashOrganizacao/Locais/@Html.DisplayFor(model => model.OrganizacaoID)">Locais</a>
+}
+            <div class="span12" style="margin-bottom:20px"> 
+                <div class="pull-right" style="margin-left:10px" >  
+                        <a class="btn btn-flat btn-inverse pull-right" href="#"><i class="micon-share"></i> Requerer Organização de novo local</a>
+                </div>
+                <div class="pull-right" style="" >  
+                        <a class="btn btn-flat btn-inverse pull-right" href="#"><i class="micon-plus"></i>  Adicionar novo local</a>
+                </div>
+            </div>
+
+@foreach(var l in ViewBag.Locais){
+            <section class="content-wrapper main-content clear-fix">
+					<div class="span6">
+					
+						<!-- widget -->
+						<div class="well widget">
+							<!-- widget header -->
+							<div class="widget-header">
+								<h3 class="title"><a href="/DashLocal/Dashboard/@l.LocalID">@l.Nome</a></h3>
+								<div class="widget-nav">
+									<div class="dropdown nav-item">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="icon-cog"></i>
+										</a>
+										<ul class="dropdown-menu pull-right">
+											<li>
+												<a href="#">Entregar gestão do local</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- ./ widget header -->
+							
+							<!-- widget content -->
+							<div class="widget-content" style=" height:100px;">
+                                <div class="span4">
+                                    <a href="/DashLocal/Dashboard/@l.LocalID"><img src="/Images/Locais/mddiogo.jpg" /></a>
+                                </div>
+                                <div class="span8">
+                                    <b>Responsável:</b> <a href="/Utilizadores/Details/@l.ResponsavelID">@db.Utilizadores.Find(l.ResponsavelID).Nome</a><br>
+                                    <b>Distrito:</b> <a href="/Distritos/Details/@l.DistritoID">@l.Distrito.Nome</a><br>
+                                    <b>Cordenadas:</b> @l.Coordenadas<br>
+                                </div>
+                                <div class="span8" style="margin-top:20px">
+                                    <a class="btn btn-small btn-inverse t" href="/Locais/Details/@l.LocalID"><i class="micon-eye"></i> Ver local</a>
+                                    <a class="btn btn-small btn-inverse " href="#"><i class="micon-location"></i> Ver localização</a>
+                                    <a class="btn btn-small btn-inverse t" href="/DashLocal/Dashboard/@l.LocalID"><i class="micon-pencil-2"></i> Gerir local</a>
+                                </div>
+							</div>
+							<!-- ./ widget content -->
+							
+						</div>	
+
+					</div>
+
+
+                </section>
+}

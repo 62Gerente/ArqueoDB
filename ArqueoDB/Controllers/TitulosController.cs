@@ -9,110 +9,104 @@ using ArqueoDB.Models;
 
 namespace ArqueoDB.Controllers
 {
-    public class ImagensController : Controller
+    public class TitulosController : Controller
     {
         private EntidadesArqueoDB db = new EntidadesArqueoDB();
 
         //
-        // GET: /Imagens/
+        // GET: /Titulos/
 
         public ActionResult Index()
         {
-            var imagens = db.Imagens.Include(i => i.Directoria);
-            return View(imagens.ToList());
+            return View(db.Titulos.ToList());
         }
 
         //
-        // GET: /Imagens/Details/5
+        // GET: /Titulos/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Imagem imagem = db.Imagens.Find(id);
-            if (imagem == null)
+            Titulo titulo = db.Titulos.Find(id);
+            if (titulo == null)
             {
                 return HttpNotFound();
             }
-            return View(imagem);
+            return View(titulo);
         }
 
         //
-        // GET: /Imagens/Create
+        // GET: /Titulos/Create
 
         public ActionResult Create()
         {
-            ViewBag.DirectoriaID = new SelectList(db.Directorias, "DirectoriaID", "Caminho");
             return View();
         }
 
         //
-        // POST: /Imagens/Create
+        // POST: /Titulos/Create
 
         [HttpPost]
-        public ActionResult Create(Imagem imagem)
+        public ActionResult Create(Titulo titulo)
         {
             if (ModelState.IsValid)
             {
-                imagem.DataPublicacao = System.DateTime.Now;
-                db.Imagens.Add(imagem);
+                db.Titulos.Add(titulo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DirectoriaID = new SelectList(db.Directorias, "DirectoriaID", "Caminho", imagem.DirectoriaID);
-            return View(imagem);
+            return View(titulo);
         }
 
         //
-        // GET: /Imagens/Edit/5
+        // GET: /Titulos/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Imagem imagem = db.Imagens.Find(id);
-            if (imagem == null)
+            Titulo titulo = db.Titulos.Find(id);
+            if (titulo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DirectoriaID = new SelectList(db.Directorias, "DirectoriaID", "Caminho", imagem.DirectoriaID);
-            return View(imagem);
+            return View(titulo);
         }
 
         //
-        // POST: /Imagens/Edit/5
+        // POST: /Titulos/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Imagem imagem)
+        public ActionResult Edit(Titulo titulo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(imagem).State = EntityState.Modified;
+                db.Entry(titulo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DirectoriaID = new SelectList(db.Directorias, "DirectoriaID", "Caminho", imagem.DirectoriaID);
-            return View(imagem);
+            return View(titulo);
         }
 
         //
-        // GET: /Imagens/Delete/5
+        // GET: /Titulos/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Imagem imagem = db.Imagens.Find(id);
-            if (imagem == null)
+            Titulo titulo = db.Titulos.Find(id);
+            if (titulo == null)
             {
                 return HttpNotFound();
             }
-            return View(imagem);
+            return View(titulo);
         }
 
         //
-        // POST: /Imagens/Delete/5
+        // POST: /Titulos/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Imagem imagem = db.Imagens.Find(id);
-            db.Imagens.Remove(imagem);
+            Titulo titulo = db.Titulos.Find(id);
+            db.Titulos.Remove(titulo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
