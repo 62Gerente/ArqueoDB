@@ -21,14 +21,9 @@ namespace ArqueoDB.Controllers
                 return HttpNotFound();
             }
 
-            Imagem capa = db.Imagens.Find(organizacao.ImagemCapaID);
-            Directoria dcapa = db.Directorias.Find(capa.DirectoriaID);
 
-            Imagem perfil = db.Imagens.Find(organizacao.ImagemPerfilID);
-            Directoria dperfil = db.Directorias.Find(perfil.DirectoriaID);
-
-            ViewData["Capa"] = dcapa.Caminho + capa.Nome;
-            ViewData["Perfil"] = dperfil.Caminho + perfil.Nome;
+            ViewData["Capa"] = organizacao.ImagemCapa.Directoria.Caminho + organizacao.ImagemCapa.Nome;
+            ViewData["Perfil"] = organizacao.ImagemPerfil.Directoria.Caminho + organizacao.ImagemPerfil.Nome;
 
             ViewData["Dashboard"] = "Organizacao";            
             ViewData["Activo"] = "Dashboard";
@@ -44,14 +39,8 @@ namespace ArqueoDB.Controllers
                 return HttpNotFound();
             }
 
-            Imagem capa = db.Imagens.Find(organizacao.ImagemCapaID);
-            Directoria dcapa = db.Directorias.Find(capa.DirectoriaID);
-
-            Imagem perfil = db.Imagens.Find(organizacao.ImagemPerfilID);
-            Directoria dperfil = db.Directorias.Find(perfil.DirectoriaID);
-
-            ViewData["Capa"] = dcapa.Caminho + capa.Nome;
-            ViewData["Perfil"] = dperfil.Caminho + perfil.Nome;
+            ViewData["Capa"] = organizacao.ImagemCapa.Directoria.Caminho + organizacao.ImagemCapa.Nome;
+            ViewData["Perfil"] = organizacao.ImagemPerfil.Directoria.Caminho + organizacao.ImagemPerfil.Nome;
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Locais";

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -76,10 +77,12 @@ namespace ArqueoDB.Models
 
         [DisplayName("Imagem de Perfil")]
         public int ImagemPerfilID { get; set; }
+        [ForeignKey("ImagemPerfilID")]
         public virtual Imagem ImagemPerfil { get; set; }
 
         [DisplayName("Imagem de Capa")]
         public int ImagemCapaID { get; set; }
+        [ForeignKey("ImagemCapaID")]
         public virtual Imagem ImagemCapa { get; set; }
     }
 }

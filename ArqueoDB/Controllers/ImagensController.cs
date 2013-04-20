@@ -84,6 +84,7 @@ namespace ArqueoDB.Controllers
         {
             if (ModelState.IsValid)
             {
+                imagem.DataPublicacao = System.DateTime.Now;
                 db.Entry(imagem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

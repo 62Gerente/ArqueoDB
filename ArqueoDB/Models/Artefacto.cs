@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -38,6 +39,7 @@ namespace ArqueoDB.Models
 
         [DisplayName("Responsável pela Descoberta")]
         public int ResponsavelID { get; set; }
+        [ForeignKey("ResponsavelID")]
         public virtual Profissional Responsavel { get; set; }
 
         [ScaffoldColumn(false)]

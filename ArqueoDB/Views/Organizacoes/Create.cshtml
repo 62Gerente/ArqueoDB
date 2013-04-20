@@ -45,10 +45,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ResponsavelID)
+            @Html.LabelFor(model => model.ResponsavelID, "Responsavel")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ResponsavelID)
+            @Html.DropDownList("ResponsavelID", String.Empty)
             @Html.ValidationMessageFor(model => model.ResponsavelID)
         </div>
 
@@ -93,18 +93,18 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ImagemPerfilID)
+            @Html.LabelFor(model => model.ImagemPerfilID, "ImagemPerfil")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ImagemPerfilID)
+            @Html.DropDownList("ImagemPerfilID", String.Empty)
             @Html.ValidationMessageFor(model => model.ImagemPerfilID)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ImagemCapaID)
+            @Html.LabelFor(model => model.ImagemCapaID, "ImagemCapa")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ImagemCapaID)
+            @Html.DropDownList("ImagemCapaID", String.Empty)
             @Html.ValidationMessageFor(model => model.ImagemCapaID)
         </div>
 

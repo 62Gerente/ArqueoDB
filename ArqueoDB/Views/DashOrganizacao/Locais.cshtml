@@ -49,10 +49,21 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span4">
-                                    <a href="/DashLocal/Dashboard/@l.LocalID"><img src="/Images/Locais/mddiogo.jpg" /></a>
+                                    <a href="/DashLocal/Dashboard/@l.LocalID">
+                                        <img src="
+                                        @foreach (var i in (from image in db.ImagensLocais select image).ToList())
+                                        {
+                                            if(i.LocalID == l.LocalID){
+                                                @(i.Imagem.Directoria.Caminho + i.Imagem.Nome);
+                                                break;
+                                            }
+                                               
+                                        }
+                                            
+                                        " /></a>
                                 </div>
                                 <div class="span8">
-                                    <b>Responsável:</b> <a href="/Utilizadores/Details/@l.ResponsavelID">@db.Utilizadores.Find(l.ResponsavelID).Nome</a><br>
+                                    <b>Responsável:</b> <a href="/Utilizadores/Details/@l.Responsavel.Utilizador.UtilizadorID">@l.Responsavel.Utilizador.Nome</a><br>
                                     <b>Distrito:</b> <a href="/Distritos/Details/@l.DistritoID">@l.Distrito.Nome</a><br>
                                     <b>Cordenadas:</b> @l.Coordenadas<br>
                                 </div>

@@ -5,9 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ArqueoDB.Models;
 
-namespace ArqueoDB.Controllers
+namespace ArqueoDB.Models
 {
     public class UtilizadoresController : Controller
     {
@@ -18,7 +17,7 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Index()
         {
-            var utilizadores = db.Utilizadores.Include(u => u.Distrito).Include(u => u.Titulo);
+            var utilizadores = db.Utilizadores.Include(u => u.Distrito).Include(u => u.Titulo).Include(u => u.ImagemPerfil).Include(u => u.ImagemCapa);
             return View(utilizadores.ToList());
         }
 
@@ -42,6 +41,8 @@ namespace ArqueoDB.Controllers
         {
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome");
             ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome");
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome");
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome");
             return View();
         }
 
@@ -61,6 +62,8 @@ namespace ArqueoDB.Controllers
 
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", utilizador.DistritoID);
             ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome", utilizador.TituloID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemCapaID);
             return View(utilizador);
         }
 
@@ -76,6 +79,8 @@ namespace ArqueoDB.Controllers
             }
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", utilizador.DistritoID);
             ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome", utilizador.TituloID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemCapaID);
             return View(utilizador);
         }
 
@@ -87,12 +92,15 @@ namespace ArqueoDB.Controllers
         {
             if (ModelState.IsValid)
             {
+                utilizador.DataRegisto = System.DateTime.Now;
                 db.Entry(utilizador).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", utilizador.DistritoID);
             ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome", utilizador.TituloID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemCapaID);
             return View(utilizador);
         }
 

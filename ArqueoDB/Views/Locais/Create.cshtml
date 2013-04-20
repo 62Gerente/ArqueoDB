@@ -29,10 +29,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ResponsavelID)
+            @Html.LabelFor(model => model.ResponsavelID, "Responsavel")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ResponsavelID)
+            @Html.DropDownList("ResponsavelID", String.Empty)
             @Html.ValidationMessageFor(model => model.ResponsavelID)
         </div>
 

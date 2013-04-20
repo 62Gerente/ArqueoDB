@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,10 +14,12 @@ namespace ArqueoDB.Models
 
         [DisplayName("Utilizador Emissor")]
         public int EmissorID { get; set; }
+        [ForeignKey("EmissorID")]
         public virtual Utilizador Emissor { get; set; }
 
         [DisplayName("Utilizador Receptor")]
         public int ReceptorID { get; set; }
+        [ForeignKey("ReceptorID")]
         public virtual Utilizador Receptor { get; set; }
 
         [DisplayName("Data de Envio")]

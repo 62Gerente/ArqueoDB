@@ -18,7 +18,7 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Index()
         {
-            var organizacoes = db.Organizacoes.Include(o => o.Distrito);
+            var organizacoes = db.Organizacoes.Include(o => o.Distrito).Include(o => o.Responsavel).Include(o => o.ImagemPerfil).Include(o => o.ImagemCapa);
             return View(organizacoes.ToList());
         }
 
@@ -41,6 +41,9 @@ namespace ArqueoDB.Controllers
         public ActionResult Create()
         {
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome");
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID");
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome");
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome");
             return View();
         }
 
@@ -58,6 +61,9 @@ namespace ArqueoDB.Controllers
             }
 
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", organizacao.DistritoID);
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID", organizacao.ResponsavelID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemCapaID);
             return View(organizacao);
         }
 
@@ -72,6 +78,9 @@ namespace ArqueoDB.Controllers
                 return HttpNotFound();
             }
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", organizacao.DistritoID);
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID", organizacao.ResponsavelID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemCapaID);
             return View(organizacao);
         }
 
@@ -88,6 +97,9 @@ namespace ArqueoDB.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", organizacao.DistritoID);
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID", organizacao.ResponsavelID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemCapaID);
             return View(organizacao);
         }
 
@@ -121,6 +133,5 @@ namespace ArqueoDB.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-
     }
 }

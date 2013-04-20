@@ -18,7 +18,7 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Index()
         {
-            var locais = db.Locais.Include(l => l.Organizacao).Include(l => l.Distrito);
+            var locais = db.Locais.Include(l => l.Organizacao).Include(l => l.Responsavel).Include(l => l.Distrito);
             return View(locais.ToList());
         }
 
@@ -41,6 +41,7 @@ namespace ArqueoDB.Controllers
         public ActionResult Create()
         {
             ViewBag.OrganizacaoID = new SelectList(db.Organizacoes, "OrganizacaoID", "Nome");
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID");
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome");
             return View();
         }
@@ -59,6 +60,7 @@ namespace ArqueoDB.Controllers
             }
 
             ViewBag.OrganizacaoID = new SelectList(db.Organizacoes, "OrganizacaoID", "Nome", local.OrganizacaoID);
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID", local.ResponsavelID);
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", local.DistritoID);
             return View(local);
         }
@@ -74,6 +76,7 @@ namespace ArqueoDB.Controllers
                 return HttpNotFound();
             }
             ViewBag.OrganizacaoID = new SelectList(db.Organizacoes, "OrganizacaoID", "Nome", local.OrganizacaoID);
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID", local.ResponsavelID);
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", local.DistritoID);
             return View(local);
         }
@@ -91,6 +94,7 @@ namespace ArqueoDB.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.OrganizacaoID = new SelectList(db.Organizacoes, "OrganizacaoID", "Nome", local.OrganizacaoID);
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID", local.ResponsavelID);
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", local.DistritoID);
             return View(local);
         }
