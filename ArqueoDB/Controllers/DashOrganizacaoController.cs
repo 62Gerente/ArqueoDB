@@ -22,6 +22,7 @@ namespace ArqueoDB.Controllers
             }
 
             Session["Organizacao"] = organizacao;
+            Session["Utilizador"] = organizacao.Responsavel.Utilizador;
 
             ViewData["Dashboard"] = "Organizacao";            
             ViewData["Activo"] = "Dashboard";

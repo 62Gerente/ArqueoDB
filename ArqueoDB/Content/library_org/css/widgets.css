@@ -34,6 +34,9 @@
 	float:left;
 }
 .widget .widget-header .widget-nav {float:right;}
+.widget-header a {
+	color:#000;
+}
 .widget-nav a {
 	color:#7d7d7d;
 	text-shadow:0 1px 0 #fafafa;

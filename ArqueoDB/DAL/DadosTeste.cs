@@ -225,7 +225,8 @@ namespace ArqueoDB.DAL
                     DataRegisto = System.DateTime.Now,
                     Descricao = "O Museu de Arqueologia D. Diogo de Sousa é um organismo público, dependente da Direção Regional de Cultura do Norte definido na sua Lei orgânica como um museu regional de arqueologia.",
                     Publico = true,
-                    Imagens = new List<Imagem>()
+                    Imagens = new List<Imagem>(),
+                    Artefactos = new List<Artefacto>()
                 },
                 new Local{
                     Nome = "Teatro Romano",
@@ -237,7 +238,8 @@ namespace ArqueoDB.DAL
                     DataRegisto = System.DateTime.Now,
                     Descricao = "O Teatro romano do Alto da Cividade, em Braga, é o único teatro romano existente no noroeste da Península Ibérica (e o único também que está a ser escavado actualmente em Portugal e Espanha) fica situado junto às Termas romanas de Maximinos, em Braga.",
                     Publico = true,
-                    Imagens = new List<Imagem>()
+                    Imagens = new List<Imagem>(),
+                    Artefactos = new List<Artefacto>()
                 },
             };
             locais.ForEach(l => context.Locais.Add(l));
@@ -254,6 +256,29 @@ namespace ArqueoDB.DAL
             locais[0].Imagens.Add(imagens[2]);
             locais[1].Imagens.Add(imagens[3]);
             context.SaveChanges();
+
+            var artefactos = new List<Artefacto>
+            {
+                new Artefacto{
+                    Nome = "",
+                    Apagado = false,
+                    Cordenadas = "20-20-22",
+                    DataDescoberta = System.DateTime.Now,
+                    Descricao = "",
+                    Imagens = new List<Imagem>(),
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1
+                }
+            };
+            artefactos.ForEach(a => context.Artefactos.Add(a));
+            context.SaveChanges();
+
+            locais[0].Artefactos.Add(artefactos[0]);
+            context.SaveChanges();
+
+
         }
     }
 }

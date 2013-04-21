@@ -19,8 +19,22 @@ namespace ArqueoDB.Controllers
                 return HttpNotFound();
             }
 
-            ViewData["Locais"] = "Organizacao";
+            ViewData["Dashboard"] = "Local";
             ViewData["Activo"] = "Dashboard";
+
+            return View(local);
+        }
+
+        public ActionResult Artefactos(int id = 0)
+        {
+            Local local = db.Locais.Find(id);
+            if (local == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Artefactos";
 
             return View(local);
         }

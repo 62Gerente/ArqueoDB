@@ -1,7 +1,10 @@
 ﻿@using ArqueoDB.Models;
 
 @{
-    Organizacao org = ((Organizacao)(Session["Organizacao"]));    
+
+    Organizacao org = ((Organizacao)(Session["Organizacao"]));
+    Utilizador user = ((Utilizador)(Session["Utilizador"]));
+
 }
 
 <!DOCTYPE html>
@@ -28,7 +31,7 @@
 		<div id="header" class="navbar">
 			<div class="navbar-inner">
 				<!-- company or app name -->
-				<a class="brand hidden-phone" href="/DashOrganizacao/Dashboard/@org.OrganizacaoID"> @org.Nome</a>
+				<a class="brand hidden-phone" href="/DashOrganizacao/Dashboard/@org.OrganizacaoID"><b>@org.Nome</b></a>
 				
 				<!-- nav icons -->
 				<ul class="nav">
@@ -54,12 +57,12 @@
 					</li>
 					
 					<li>
-						<a href="#">
+						<a href="/DashOrganizacao/Definicoes/@org.OrganizacaoID)">
 							<i class="icon-large icon-cog"></i>
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-large icon-briefcase"></i>
 						</a>
 						
@@ -88,7 +91,7 @@
 										<a class="btn btn-small btn-primary btn-flat" href="/Organizacoes/Details/@org.OrganizacaoID">Perfil</a>
 									</div>
 									<div class="">
-										<a class="btn btn-small btn-warning btn-flat" href="#">/DashOrganizacao/Dasboard/@org.OrganizacaoID</a>
+										<a class="btn btn-small btn-warning btn-flat" href="/DashOrganizacao/Dashboard/@org.OrganizacaoID">Gerir Organização</a>
 									</div>
 								</div>									
 							</li>
@@ -97,29 +100,32 @@
 					</li>					
 					<!-- dropdown user account -->
 					<li class="dropdown">
-						<a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-large icon-user"></i>
 						</a>
 						
 						<ul class="dropdown-menu dropdown-user-account">
 						
 							<li class="account-img-container">
-								<img class="thumb account-img" src="library/images/100/07.png" />
+								<img class="thumb account-img" src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)" />
 							</li>
 							
 							<li class="account-info">
-								<h3>Nome Utilizador</h3>
-								<p>Descrição Utilizador.</p>
+								<h3>@user.Nome</h3>
+								<p><br><b>Nome de Utilizador:</b> @user.NomeUtilizador<br>
+                                <b>Distrito:</b> @user.Distrito.Nome
+
+								</p>
 							</li>
 							
 							<li class="account-footer">
 								<div class="row-fluid">
 								
 									<div class="">
-										<a class="btn btn-small btn-primary btn-flat" href="#">Perfil</a>
+										<a class="btn btn-small btn-primary btn-flat" href="/Utilizadores/Details/@user.UtilizadorID">Perfil</a>
 									</div>
 									<div class="">
-										<a class="btn btn-small btn-warning btn-flat" href="#">Definições</a>
+										<a class="btn btn-small btn-warning btn-flat" href="/Utilizadores/Definicoes/">Definições</a>
 									</div>
 									<div class="">
 										<a class="btn btn-small btn-danger btn-flat" href="#">Sair</a>
@@ -150,27 +156,18 @@
 				<div class="page-heading">
 				
 					<h2 class="page-title muted">
-						<i class="icon-dashboard"></i> Dashboard
+						<i class="icon-dashboard"></i> @RenderSection("dashboard", required: true)
 					</h2>
 					
 					<div class="page-info hidden-phone">
 						<ul class="stats">
-							<li>
-								<span class="large text-warning">2354</span>
-								<span class="mini muted">Publicações</span>
-							</li>
-							<li>
-								<span class="large text-info">4523</span>
-								<span class="mini muted">Membros</span>
-							</li>
-							<li>
-								<span class="large text-success">5673</span>
-								<span class="mini muted">Locais</span>
-							</li>
-							<li>
-								<span class="large text-error">15</span>
-								<span class="mini muted">Seguidores</span>
-							</li>
+                @if(String.Compare((string)ViewData["Dashboard"],"Organizacao")==0){
+                    @Html.Partial("_StatsOrgDO")
+                }
+                else if (String.Compare((string)ViewData["Dashboard"], "Local") == 0)
+                {
+                    @Html.Partial("_StatsLocalDO")
+                }
 						</ul>
 					</div>
 				</div>
@@ -192,7 +189,13 @@
 			
 			<!-- sidebar -->
 			<ul id="sidebar" class="nav nav-pills nav-stacked">
-                @Html.Partial("_SidebarOrgDO")
+                @if(String.Compare((string)ViewData["Dashboard"],"Organizacao")==0){
+                    @Html.Partial("_SidebarOrgDO")
+                }
+                else if (String.Compare((string)ViewData["Dashboard"], "Local") == 0)
+                {
+                    @Html.Partial("_SidebarLocalDO")
+                }
             </ul>
             <!-- end sidebar -->
             </div>
