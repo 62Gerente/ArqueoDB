@@ -45,9 +45,7 @@ namespace ArqueoDB.Controllers
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Locais";
-
-            ViewBag.Locais = (from l in db.Locais where l.OrganizacaoID == organizacao.OrganizacaoID select l).ToList(); 
-
+           
             return View(organizacao);
         }
 
