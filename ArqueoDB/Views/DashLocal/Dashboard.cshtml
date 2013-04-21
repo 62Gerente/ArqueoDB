@@ -1,0 +1,11 @@
+﻿@model ArqueoDB.Models.Local
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
+}   
+@section breadcrumb {
+    <li><a href="/Locais/Details/@Html.DisplayFor(model => model.LocalID)">@Html.DisplayFor(model => model.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.LocalID)">Gestão do Local</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.LocalID)">Dashboard</a></li>
+}

@@ -1,12 +1,15 @@
-﻿@model ArqueoDB.Models.Organizacao
+﻿@using ArqueoDB.Models;
 
+@{
+    Organizacao org = ((Organizacao)(Session["Organizacao"]));
+}
 
 @if(String.Compare((string)ViewData["Dashboard"],"Organizacao")==0){
     <text>
                     <li class="avatar hidden-phone">
                         <a href="#">
-	                        <img src="@(ViewData["Perfil"])" />
-	                        <span>@Html.DisplayFor(model => model.Nome)</span>
+	                        <img src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome)" />
+	                        <span>@org.Nome</span>
                         </a>
                     </li>
                     <li 
@@ -16,7 +19,7 @@
                     }
 
                         >
-                        <a href="/DashOrganizacao/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)">
+                        <a href="/DashOrganizacao/Dashboard/@org.OrganizacaoID">
                             <i class="micon-screen"></i>
                             <span class="hidden-phone">Dashboard</span>
                         </a>
@@ -29,7 +32,7 @@
                     }
 
                         >
-                        <a href="/DashOrganizacao/Locais/@Html.DisplayFor(model => model.OrganizacaoID)">
+                        <a href="/DashOrganizacao/Locais/@org.OrganizacaoID">
                             <i class="micon-location"></i>
                             <span class="hidden-phone">Locais</span>
                         </a>
@@ -42,7 +45,7 @@
                     }
 
                         >
-                        <a href="/DashOrganizacao/Membros/@Html.DisplayFor(model => model.OrganizacaoID)">
+                        <a href="/DashOrganizacao/Membros/@org.OrganizacaoID">
                             <i class="micon-user-2"></i>
                             <span class="hidden-phone">Membros</span>
                         </a>
@@ -55,7 +58,7 @@
                     }
 
                         >                        
-                            <a href="/DashOrganizacao/Publicacoes/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <a href="/DashOrganizacao/Publicacoes/@org.OrganizacaoID">
                             <i class="micon-libreoffice"></i>
                             <span class="hidden-phone">Publicações</span>
                         </a>
@@ -68,7 +71,7 @@
                     }
 
                         >                        
-                            <a href="/DashOrganizacao/Estatisticas/@Html.DisplayFor(model => model.OrganizacaoID)">
+                            <a href="/DashOrganizacao/Estatisticas/@org.OrganizacaoID">
                             <i class="micon-stats-up"></i>
                             <span class="hidden-phone">Estatísticas</span>
                         </a>
@@ -81,7 +84,7 @@
                     }
 
                         >
-                        <a href="/DashOrganizacao/Definicoes/@Html.DisplayFor(model => model.OrganizacaoID)">
+                        <a href="/DashOrganizacao/Definicoes/@org.OrganizacaoID">
                             <i class="micon-cog"></i>
                             <span class="hidden-phone">Definições</span>
                         </a>

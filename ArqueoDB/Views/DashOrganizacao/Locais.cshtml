@@ -1,14 +1,12 @@
-﻿@using ArqueoDB.Models;
-@model ArqueoDB.Models.Organizacao
+﻿@model ArqueoDB.Models.Organizacao
 
 @{
-    EntidadesArqueoDB db = new EntidadesArqueoDB();
     int nrlocais = 0;
     ViewBag.Title = "Locais";
     Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
 }   
 @section breadcrumb {
-<a href="/DashOrganizacao/Locais/@Html.DisplayFor(model => model.OrganizacaoID)">Locais</a>
+    <li><a href="/DashOrganizacao/Locais/@Html.DisplayFor(model => model.OrganizacaoID)">Locais</a></li>
 }
             <div class="span12" style="margin-bottom:20px"> 
                 <div class="pull-right" style="margin-left:10px" >  
@@ -51,12 +49,10 @@
                                 <div class="span4">
                                     <a href="/DashLocal/Dashboard/@l.LocalID">
                                         <img src="
-                                        @foreach (var i in (from image in db.ImagensLocais select image).ToList())
+                                        @foreach (var i in @l.Imagens)
                                         {
-                                            if(i.LocalID == l.LocalID){
-                                                @(i.Imagem.Directoria.Caminho + i.Imagem.Nome);
-                                                break;
-                                            }
+                                            @(i.Directoria.Caminho + i.Nome);
+                                            break;
                                                
                                         }
                                             

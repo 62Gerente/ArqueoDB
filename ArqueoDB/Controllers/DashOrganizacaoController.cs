@@ -21,9 +21,7 @@ namespace ArqueoDB.Controllers
                 return HttpNotFound();
             }
 
-
-            ViewData["Capa"] = organizacao.ImagemCapa.Directoria.Caminho + organizacao.ImagemCapa.Nome;
-            ViewData["Perfil"] = organizacao.ImagemPerfil.Directoria.Caminho + organizacao.ImagemPerfil.Nome;
+            Session["Organizacao"] = organizacao;
 
             ViewData["Dashboard"] = "Organizacao";            
             ViewData["Activo"] = "Dashboard";

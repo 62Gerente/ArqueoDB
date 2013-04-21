@@ -13,5 +13,11 @@ namespace ArqueoDB.Models
         [DisplayName("Utilizador")]
         public int UtilizadorID { get; set; }
         public virtual Utilizador Utilizador { get; set; }
+
+        public virtual ICollection<Artefacto> Artefactos { get; set; }
+        public virtual ICollection<Documento> Documentos { get; set; }
+        public virtual ICollection<Organizacao> OrganizacoesResponsavel { get; set; }
+        public virtual ICollection<Organizacao> OrganizacoesMembro { get; set; }
+        public virtual ICollection<Local> LocaisResponsavel { get; set; }
     }
 }

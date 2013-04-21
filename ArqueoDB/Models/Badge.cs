@@ -27,5 +27,7 @@ namespace ArqueoDB.Models
         [DisplayName("Activa")]
         public bool Publico { get; set; } 
 
+        public virtual ICollection<Utilizador> Utilizadores { get; set; }
+
     }
 }

@@ -84,5 +84,20 @@ namespace ArqueoDB.Models
         public int ImagemCapaID { get; set; }
         [ForeignKey("ImagemCapaID")]
         public virtual Imagem ImagemCapa { get; set; }
+
+
+        public virtual ICollection<Badge> Badges { get; set; }
+        public virtual ICollection<Comentario> Comentarios { get; set; }
+        public virtual ICollection<Feed> Feeds { get; set; }
+        public virtual ICollection<Local> LocaisSeguidos { get; set; }
+        public virtual ICollection<Mensagem> MensagensEnviadas { get; set; }
+        public virtual ICollection<Mensagem> MensagensRecebidas { get; set; }
+        public virtual ICollection<Organizacao> OrganizacoesSeguidas { get; set; }
+        public virtual ICollection<Publicacao> Publicacoes { get; set; }
+        public virtual ICollection<Utilizador> UtilizadoresSeguidos { get; set; }
+
+
+
+
     }
 }

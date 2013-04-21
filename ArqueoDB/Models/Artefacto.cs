@@ -47,5 +47,8 @@ namespace ArqueoDB.Models
 
         [DisplayName("Público")]
         public bool Publico { get; set; }
+
+        public virtual ICollection<Comentario> Comentarios { get; set; }
+        public virtual ICollection<Imagem> Imagens { get; set; }
     }
 }

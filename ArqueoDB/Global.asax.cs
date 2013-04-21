@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Data.Entity;
+using ArqueoDB.DAL;
+using ArqueoDB.Models;
 
 namespace ArqueoDB
 {
@@ -16,6 +19,7 @@ namespace ArqueoDB
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<EntidadesArqueoDB>(new DadosTeste());
 
             AreaRegistration.RegisterAllAreas();
 

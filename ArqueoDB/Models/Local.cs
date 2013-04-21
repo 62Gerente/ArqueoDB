@@ -48,5 +48,12 @@ namespace ArqueoDB.Models
 
         [ScaffoldColumn(false)]
         public bool Apagado { get; set; }
+
+        public virtual ICollection<Artefacto> Artefactos { get; set; }
+        public virtual ICollection<Comentario> Comentarios { get; set; }
+        public virtual ICollection<Feed> Feeds { get; set; }
+        public virtual ICollection<Imagem> Imagens { get; set; }
+        public virtual ICollection<Publicacao> Publicacoes { get; set; }
+        public virtual ICollection<Planta> Plantas { get; set; }
     }
 }

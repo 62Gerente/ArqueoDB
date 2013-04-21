@@ -13,5 +13,9 @@ namespace ArqueoDB.Models
         [StringLength(100, ErrorMessage = "Número máximo de caracteres excedido")]
         [Required(ErrorMessage = "Path necessário")]
         public string Caminho { get; set; }
+
+//        public virtual ICollection<Badge> Badges { get; set; }
+//        public virtual ICollection<Documento> Documentos { get; set; }
+//        public virtual ICollection<Imagem> Imagens { get; set; }
     }
 }

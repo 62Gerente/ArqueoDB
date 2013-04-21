@@ -15,5 +15,8 @@ namespace ArqueoDB.Models
         [DisplayName("Título")]
         [StringLength(30, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Nome { set; get; }
+
+//        public virtual ICollection<Utilizador> Utilizadores { get; set; }
     }
+
 }

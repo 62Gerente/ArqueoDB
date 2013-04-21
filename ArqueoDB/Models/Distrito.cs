@@ -19,5 +19,9 @@ namespace ArqueoDB.Models
         [DisplayName("País")]
         public int PaisID { get; set; }
         public virtual Pais Pais{ get; set; }
+
+        public virtual ICollection<Local> Locais { get; set; }
+        public virtual ICollection<Organizacao> Organizacoes { get; set; }
+        public virtual ICollection<Utilizador> Utilizadores { get; set; }
     }
 }

@@ -1,10 +1,14 @@
-﻿@model ArqueoDB.Models.Organizacao
+﻿@using ArqueoDB.Models;
+
+@{
+    Organizacao org = ((Organizacao)(Session["Organizacao"]));
+}
 
 <!DOCTYPE html>
 <html lang="pt">
 	<head>
 		<meta charset="utf-8">
-		<title> @Html.DisplayFor(model => model.Nome) - ArqueoDB</title>
+		<title> @org.Nome - ArqueoDB</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="Olas Navigator">
@@ -24,7 +28,7 @@
 		<div id="header" class="navbar">
 			<div class="navbar-inner">
 				<!-- company or app name -->
-				<a class="brand hidden-phone" href="/DashOrganizacao/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)"> @Html.DisplayFor(model => model.Nome)</a>
+				<a class="brand hidden-phone" href="/DashOrganizacao/Dashboard/@org.OrganizacaoID"> @org.Nome</a>
 				
 				<!-- nav icons -->
 				<ul class="nav">
@@ -62,22 +66,29 @@
 						<ul class="dropdown-menu dropdown-user-account">
 						
 							<li class="account-img-container">
-								<img class="thumb account-img" src="@(ViewData["Perfil"])" />
+								<img class="thumb account-img" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome)" />
 							</li>
 							
 							<li class="account-info">
-								<h3> @Html.DisplayFor(model => model.Nome)</h3>
-								<p>@Html.DisplayFor(model => model.Descricao).</p>
+								<h3> @org.Nome</h3>
+                                <p><br><b>Responsável:</b> <a href="/Utilizadores/Details/@org.Responsavel.UtilizadorID">@org.Responsavel.Utilizador.Nome</a><br>
+                                   <b>Estado actual:</b> 
+                                    @if(org.Activa==true){
+                                        <text>Activa</text>
+                                    }else{
+                                        <text>Inactiva</text>
+                                    }
+                                </p>
 							</li>
 							
 							<li class="account-footer">
 								<div class="row-fluid">
 								
 									<div class="">
-										<a class="btn btn-small btn-primary btn-flat" href="#">Perfil</a>
+										<a class="btn btn-small btn-primary btn-flat" href="/Organizacoes/Details/@org.OrganizacaoID">Perfil</a>
 									</div>
 									<div class="">
-										<a class="btn btn-small btn-warning btn-flat" href="#">Dashboard</a>
+										<a class="btn btn-small btn-warning btn-flat" href="#">/DashOrganizacao/Dasboard/@org.OrganizacaoID</a>
 									</div>
 								</div>									
 							</li>
@@ -166,9 +177,9 @@
 				<!-- ./ page heading -->
 				
 				<ul class="breadcrumb breadcrumb-main">
-					<li><a href="#">@Html.DisplayFor(model => model.Nome)</a> <span class="divider"><i class="icon-caret-right"></i></span></li>
-					<li><a href="/DashOrganizacao/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)">Gestão da Organização</a> <span class="divider"><i class="icon-caret-right"></i></span></li>
-					<li>@RenderSection("breadcrumb", required: true)</li>
+					<li><a href="/Organizacoes/Details/@org.OrganizacaoID">@org.Nome</a> <span class="divider"><i class="icon-caret-right"></i></span></li>
+					<li><a href="/DashOrganizacao/Dashboard/@org.OrganizacaoID">Gestão da Organização</a> <span class="divider"><i class="icon-caret-right"></i></span></li>
+					@RenderSection("breadcrumb", required: true)
 				</ul>
 				
 				<!-- post wrapper -->				

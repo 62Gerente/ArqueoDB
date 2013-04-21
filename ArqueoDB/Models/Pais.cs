@@ -15,5 +15,7 @@ namespace ArqueoDB.Models
         [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
         [Required(ErrorMessage = "Nome do país necessário")]
         public string Nome { get; set; }
+
+        public virtual ICollection<Distrito> Distritos { get; set; }
     }
 }

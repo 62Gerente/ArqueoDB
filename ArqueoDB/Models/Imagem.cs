@@ -32,5 +32,7 @@ namespace ArqueoDB.Models
 
         [ScaffoldColumn(false)]
         public bool Apagada{ get; set; }
+
+        public virtual ICollection<Comentario> Comentarios { get; set; }
     }
 }
