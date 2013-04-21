@@ -15,7 +15,7 @@ namespace ArqueoDB.Migrations
         }
 
         protected override void Seed(EntidadesArqueoDB context)
-        {
+        {            
             var titulos = new List<Titulo>
             {
                 new Titulo{Nome = "Senhor(a) Engenheiro"},
@@ -74,6 +74,22 @@ namespace ArqueoDB.Migrations
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "barney.png", 
+                    DirectoriaID = 2, 
+                    Descricao = "Barney Stinson!", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "robin.jpg", 
+                    DirectoriaID = 2, 
+                    Descricao = "A robin!", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
                 }
             };
             imagens.ForEach(i => context.Imagens.Add(i));
@@ -122,6 +138,38 @@ namespace ArqueoDB.Migrations
                     ImagemPerfilID = 5,
                     Sexo = 1,
                     TituloID = 2
+                },
+                new Utilizador{
+                    NomeUtilizador = "Barney",
+                    Nome = "Barney Stinson",
+                    Password = "playbook",
+                    Apagado = false,
+                    Banido = false,
+                    DataNascimento = System.DateTime.Now,
+                    DataRegisto = System.DateTime.Now,
+                    Descricao = "Fácil",
+                    Email = "barney@hymym.com",
+                    DistritoID = 1,
+                    ImagemCapaID = 4,
+                    ImagemPerfilID = 6,
+                    Sexo = 1,
+                    TituloID = 2
+                },
+                new Utilizador{
+                    NomeUtilizador = "Robin",
+                    Nome = "Robin Scherbatsky",
+                    Password = "single",
+                    Apagado = false,
+                    Banido = false,
+                    DataNascimento = System.DateTime.Now,
+                    DataRegisto = System.DateTime.Now,
+                    Descricao = "buthum",
+                    Email = "robin@hymym.com",
+                    DistritoID = 1,
+                    ImagemCapaID = 4,
+                    ImagemPerfilID = 7,
+                    Sexo = 2,
+                    TituloID = 2
                 }
             };
             utilizadores.ForEach(u => context.Utilizadores.Add(u));
@@ -132,7 +180,9 @@ namespace ArqueoDB.Migrations
 
             var profissionais = new List<Profissional>
             {
-                new Profissional{UtilizadorID = 1}
+                new Profissional{UtilizadorID = 1},
+                new Profissional{UtilizadorID = 2},
+                new Profissional{UtilizadorID = 3}
             };
             profissionais.ForEach(p => context.Profissionais.Add(p));
             context.SaveChanges();
@@ -164,6 +214,8 @@ namespace ArqueoDB.Migrations
             context.SaveChanges();
 
             organizacoes[0].Membros.Add(profissionais[0]);
+            organizacoes[0].Membros.Add(profissionais[1]);
+            organizacoes[0].Membros.Add(profissionais[2]);
             context.SaveChanges();
 
             var locais = new List<Local>
