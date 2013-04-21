@@ -29,7 +29,7 @@
 						<div class="well widget">
 							<!-- widget header -->
 							<div class="widget-header">
-								<h3 class="title"><a href="#">@m.Utilizador.Nome</a></h3> <!-- FALTA HIPERLIGAÇÃO  --> 
+								<h3 class="title"><a href="/Utilizadores/Details/@m.Utilizador.UtilizadorID">@m.Utilizador.Nome</a></h3> <!-- FALTA HIPERLIGAÇÃO  --> 
 								<div class="widget-nav">
 									<div class="dropdown nav-item">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -51,7 +51,7 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span6">
-                                    <a href="#"> <!-- FALTA HIPERLIGAÇÃO -->
+                                    <a href="/Utilizadores/Details/@m.Utilizador.UtilizadorID"> <!-- FALTA HIPERLIGAÇÃO -->
                                         @if(m.Utilizador.ImagemPerfil != null){
                                             <center>
                                                 <img src="@(m.Utilizador.ImagemPerfil.Directoria.Caminho+m.Utilizador.ImagemPerfil.Nome)" style="height:109px; "/>
@@ -67,7 +67,7 @@
                                     <b>Distrito:</b><br> @m.Utilizador.Distrito.Nome<br>                                    
                                 </div>
                                 <div class="span6 pull-right" style="margin-top:0px">
-                                    <a class="btn btn-mini btn-inverse t pull-right" href="#"><i class="micon-eye"></i></a> 
+                                    <a class="btn btn-mini btn-inverse t pull-right" href="/Utilizadores/Details/@m.Utilizador.UtilizadorID"><i class="micon-eye"></i></a> 
                                     <a class="btn btn-mini btn-inverse t pull-right" style="margin-right:5px" href="#"><i class="micon-mail"></i></a> 
                                 </div>
 							</div>
