@@ -13,11 +13,11 @@ namespace ArqueoDB.Controllers
 
         // GET: /DashboardOrganizacao/
 
-        public ActionResult Dashboard(int id = 0)
+        public ActionResult Dashboard(int id = 1)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
-            {
+            {               
                 return HttpNotFound();
             }
 
@@ -29,7 +29,7 @@ namespace ArqueoDB.Controllers
             return View(organizacao);
         }
 
-        public ActionResult Locais(int id = 0)
+        public ActionResult Locais(int id = 1)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
@@ -47,6 +47,5 @@ namespace ArqueoDB.Controllers
 
             return View(organizacao);
         }
-
     }
 }

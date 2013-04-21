@@ -11,7 +11,7 @@ namespace ArqueoDB.Controllers
     {
         private EntidadesArqueoDB db = new EntidadesArqueoDB();
 
-        public ActionResult Dashboard(int id = 0)
+        public ActionResult Dashboard(int id = 1)
         {
             Local local = db.Locais.Find(id);
             if (local == null)
