@@ -1,6 +1,7 @@
 ﻿@model ArqueoDB.Models.Local
 
 @{
+    int nr_artefactos = 0;
     ViewBag.Title = "Artefactos";
     Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
 }   
@@ -21,13 +22,18 @@
             </div>
             <section class="content-wrapper main-content clear-fix">
 
-    					<div class="span4" >
+@foreach(var a in Model.Artefactos){
+    					<div class="span4" 
+                            @if((nr_artefactos++)%3==0){
+                               <text> style="margin-left:0px"; </text>
+                            }
+                       >
 					
 						<!-- widget -->
 						<div class="well widget">
 							<!-- widget header -->
 							<div class="widget-header">
-								<h3 class="title"><a href="/DashLocal/Dashboard/LocalID">Nome do artefacto</a></h3>
+								<h3 class="title"><a href="/Artefactos/Details/@a.ArtefactoID">@a.Nome</a></h3>
 								<div class="widget-nav">
 									<div class="dropdown nav-item">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -35,7 +41,6 @@
 										</a>
 										<ul class="dropdown-menu pull-right">
 											<li>
-												<a href="#">Tornar artefacto privado</a>
                                                 <a href="#">Apagar artefacto</a>
 											</li>
 										</ul>
@@ -47,16 +52,16 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span6">
-                                    <a href="/DashLocal/Dashboard/LocalID">
-                                        <img src="/Images/Locais/mddiogo.jpg"/></a>
+                                    <a href="/Artefactos/Details/@a.ArtefactoID">
+                                        <img src="@(a.Imagens.ElementAt(0).Directoria.Caminho + a.Imagens.ElementAt(0).Nome)" style="height:109px"/></a>
                                 </div>
                                 <div class="span6">
-                                    <b>Responsável:</b><br>André Santos<br>
-                                    <b>Data da descoberta:</b><br>29/10/1992<br>
+                                    <b>Responsável:</b><br>@a.Responsavel.Utilizador.Nome<br>
+                                    <b>Data da descoberta:</b><br>@a.DataDescoberta<br>
                                 </div>
                                 <div class="span6">
-                                    <a class="btn btn-mini btn-danger t pull-right" href="/Locais/Details/"><i class="micon-cancel-2"></i></a>
-                                    <a class="btn btn-mini btn-inverse t pull-right" href="/Locais/Details/"><i class="micon-eye"></i></a>
+                                    <a class="btn btn-mini btn-danger t pull-right" href="#"><i class="micon-cancel-2"></i></a>
+                                    <a class="btn btn-mini btn-inverse t pull-right" href="/Artefactos/Details/@a.ArtefactoID"><i class="micon-eye"></i></a>
                                 </div>
 							</div>
 							<!-- ./ widget content -->
@@ -64,92 +69,5 @@
 						</div>	
 
 					</div>
-
-    					<div class="span4" >
-					
-						<!-- widget -->
-						<div class="well widget">
-							<!-- widget header -->
-							<div class="widget-header">
-								<h3 class="title"><a href="/DashLocal/Dashboard/LocalID">Nome do artefacto</a></h3>
-								<div class="widget-nav">
-									<div class="dropdown nav-item">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-											<i class="icon-cog"></i>
-										</a>
-										<ul class="dropdown-menu pull-right">
-											<li>
-												<a href="#">Tornar artefacto privado</a>
-                                                <a href="#">Apagar artefacto</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- ./ widget header -->
-							
-							<!-- widget content -->
-							<div class="widget-content" style=" height:100px;">
-                                <div class="span6">
-                                    <a href="/DashLocal/Dashboard/LocalID">
-                                        <img src="/Images/Locais/teatro.jpg"/></a>
-                                </div>
-                                <div class="span6">
-                                    <b>Responsável:</b><br>André Santos<br>
-                                    <b>Data da descoberta:</b><br>29/10/1992<br>
-                                </div>
-                                <div class="span6">
-                                    <a class="btn btn-mini btn-ck t pull-right" href="/Locais/Details/"><i class="micon-checkmark"></i></a>
-                                    <a class="btn btn-mini btn-inverse t pull-right" href="/Locais/Details/"><i class="micon-eye"></i></a>
-                                </div>
-							</div>
-							<!-- ./ widget content -->
-							
-						</div>	
-
-					</div>
-
-
-    					<div class="span4" >
-					
-						<!-- widget -->
-						<div class="well widget">
-							<!-- widget header -->
-							<div class="widget-header">
-								<h3 class="title"><a href="/DashLocal/Dashboard/LocalID">Nome do artefacto</a></h3>
-								<div class="widget-nav">
-									<div class="dropdown nav-item">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-											<i class="icon-cog"></i>
-										</a>
-										<ul class="dropdown-menu pull-right">
-											<li>
-												<a href="#">Tornar artefacto privado</a>
-                                                <a href="#">Apagar artefacto</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- ./ widget header -->
-							
-							<!-- widget content -->
-							<div class="widget-content" style=" height:100px;">
-                                <div class="span6">
-                                    <a href="/DashLocal/Dashboard/LocalID">
-                                        <img src="/Images/Locais/mddiogo.jpg"/></a>
-                                </div>
-                                <div class="span6">
-                                    <b>Responsável:</b><br>André Santos<br>
-                                    <b>Data da descoberta:</b><br>29/10/1992<br>
-                                </div>
-                                <div class="span6">
-                                    <a class="btn btn-mini btn-inverse t pull-right" href="/Locais/Details/"><i class="micon-eye"></i></a>
-                                </div>
-							</div>
-							<!-- ./ widget content -->
-							
-						</div>	
-
-					</div>
+}
            </section>

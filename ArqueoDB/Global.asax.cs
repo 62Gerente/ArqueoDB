@@ -19,7 +19,7 @@ namespace ArqueoDB
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<EntidadesArqueoDB>(new DadosTeste());
+//            Database.SetInitializer<EntidadesArqueoDB>(new DadosTeste());
 
             AreaRegistration.RegisterAllAreas();
 

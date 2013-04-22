@@ -28,7 +28,8 @@ namespace ArqueoDB.Migrations
             {
                 new Directoria{Caminho = "/Images/Organizacoes/"},
                 new Directoria{Caminho = "/Images/Utilizadores/"},
-                new Directoria{Caminho = "/Images/Locais/"}
+                new Directoria{Caminho = "/Images/Locais/"},
+                new Directoria{Caminho = "/Imagens/Artefactos/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
             context.SaveChanges();
@@ -87,6 +88,14 @@ namespace ArqueoDB.Migrations
                     Nome = "robin.jpg", 
                     DirectoriaID = 2, 
                     Descricao = "A robin!", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "estelafuneraria.jpg", 
+                    DirectoriaID = 4, 
+                    Descricao = "Estela", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
@@ -230,7 +239,8 @@ namespace ArqueoDB.Migrations
                     DataRegisto = System.DateTime.Now,
                     Descricao = "O Museu de Arqueologia D. Diogo de Sousa é um organismo público, dependente da Direção Regional de Cultura do Norte definido na sua Lei orgânica como um museu regional de arqueologia.",
                     Publico = true,
-                    Imagens = new List<Imagem>()
+                    Imagens = new List<Imagem>(),
+                    Artefactos = new List<Artefacto>()
                 },
                 new Local{
                     Nome = "Teatro Romano",
@@ -242,7 +252,8 @@ namespace ArqueoDB.Migrations
                     DataRegisto = System.DateTime.Now,
                     Descricao = "O Teatro romano do Alto da Cividade, em Braga, é o único teatro romano existente no noroeste da Península Ibérica (e o único também que está a ser escavado actualmente em Portugal e Espanha) fica situado junto às Termas romanas de Maximinos, em Braga.",
                     Publico = true,
-                    Imagens = new List<Imagem>()
+                    Imagens = new List<Imagem>(),
+                    Artefactos = new List<Artefacto>()
                 },
             };
             locais.ForEach(l => context.Locais.Add(l));
@@ -258,6 +269,30 @@ namespace ArqueoDB.Migrations
 
             locais[0].Imagens.Add(imagens[2]);
             locais[1].Imagens.Add(imagens[3]);
+            context.SaveChanges();
+
+            var artefactos = new List<Artefacto>
+            {
+                new Artefacto{
+                    Nome = "Estela Funerária III D.C.",
+                    Apagado = false,
+                    Cordenadas = "20-20-22",
+                    DataDescoberta = System.DateTime.Now,
+                    Descricao = "Estela de granito, truncada na parte superior e inferior e incompleta no lado esquerdo. A parte superior denota traços de uma decoração feita de uma rosácea circundada por um cordão entrançado.",
+                    Imagens = new List<Imagem>(),
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1
+                }
+            };
+            artefactos.ForEach(a => context.Artefactos.Add(a));
+            context.SaveChanges();
+
+            locais[0].Artefactos.Add(artefactos[0]);
+            context.SaveChanges();
+
+            artefactos[0].Imagens.Add(imagens[7]);
             context.SaveChanges();
         }
     }
