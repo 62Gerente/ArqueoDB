@@ -1,3 +1,10 @@
+.widgetpic {
+	height:109px; 
+	width:164px; 
+	overflow:hidden; 
+	position:relative;
+}
+
 .widget {
 	border-color:#cecece;
 	-webkit-border-radius: 0;

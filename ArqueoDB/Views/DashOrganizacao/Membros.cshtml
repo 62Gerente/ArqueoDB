@@ -51,16 +51,19 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span6">
+                                    <div class="span12 widgetpic">
                                     <a href="/Utilizadores/Details/@m.Utilizador.UtilizadorID"> <!-- FALTA HIPERLIGAÇÃO -->
                                         @if(m.Utilizador.ImagemPerfil != null){
                                             <center>
-                                                <img src="@(m.Utilizador.ImagemPerfil.Directoria.Caminho+m.Utilizador.ImagemPerfil.Nome)" style="height:109px; "/>
+                                                <img src="@(m.Utilizador.ImagemPerfil.Directoria.Caminho+m.Utilizador.ImagemPerfil.Nome)"/>
                                             </center>
                                         }
                                         else{
                                             <!-- Imagem default -->   
                                         }
                                     </a>
+
+                                </div>
                                 </div>
                                 <div class="span6">
                                     <b>Email:</b><br> @m.Utilizador.Email<br>

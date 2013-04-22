@@ -50,8 +50,12 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span4">
-                                    <a href="/DashLocal/Dashboard/@l.LocalID">
-                                        <img src="@(l.Imagens.ElementAt(0).Directoria.Caminho + l.Imagens.ElementAt(0).Nome)" style="height:109px"/></a>
+                                    <div class="span12 widgetpic">
+                                        <center>
+                                            <a href="/DashLocal/Dashboard/@l.LocalID">
+                                                <img src="@(l.Imagens.ElementAt(0).Directoria.Caminho + l.Imagens.ElementAt(0).Nome)"/></a>
+                                        </center>
+                                    </div>
                                 </div>
                                 <div class="span8">
                                     <b>Responsável:</b> <a href="/Utilizadores/Details/@l.Responsavel.Utilizador.UtilizadorID">@l.Responsavel.Utilizador.Nome</a><br>

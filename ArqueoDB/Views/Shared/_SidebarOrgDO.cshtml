@@ -45,6 +45,24 @@
                             <span class="hidden-phone">Membros</span>
                         </a>
                     </li>
+                    
+
+
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Documentos") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashLocal/Documentos/@Html.DisplayFor(m => Model.OrganizacaoID)">
+                            <i class="micon-libreoffice"></i>
+                            <span class="hidden-phone">Documentos</span>
+                        </a>
+                    </li>
+
+
                     <li
 
                     @if (String.Compare((string)ViewData["Activo"], "Publicações") == 0)
@@ -54,7 +72,7 @@
 
                         >                        
                             <a href="/DashOrganizacao/Publicacoes/@Html.DisplayFor(m => Model.OrganizacaoID)">
-                            <i class="micon-libreoffice"></i>
+                            <i class="micon-newspaper"></i>
                             <span class="hidden-phone">Publicações</span>
                         </a>
                     </li>
