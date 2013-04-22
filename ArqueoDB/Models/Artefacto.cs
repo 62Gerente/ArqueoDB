@@ -22,7 +22,7 @@ namespace ArqueoDB.Models
         public string Cordenadas { get; set; }
 
         [DisplayName("Descrição")]
-        [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
+        [StringLength(1000, ErrorMessage = "Número máximo de caracteres excedido")]
         [Required(ErrorMessage = "Descrição do artefacto necessária")]
         public string Descricao { get; set; }
 

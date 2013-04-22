@@ -24,7 +24,7 @@ namespace ArqueoDB.DAL
                 new Directoria{Caminho = "/Images/Organizacoes/"},
                 new Directoria{Caminho = "/Images/Utilizadores/"},
                 new Directoria{Caminho = "/Images/Locais/"},
-                new Directoria{Caminho = "/Imagens/Artefactos/"}
+                new Directoria{Caminho = "/Images/Artefactos/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
             context.SaveChanges();
