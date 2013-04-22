@@ -55,7 +55,7 @@ namespace ArqueoDB.Controllers
         }
 
         /* GET: Documentos */
-        public ActionResult Documentos(int id = 0)
+        public ActionResult Documentos(int id = 1)
         {
             Local local = db.Locais.Find(id);
             if (local == null)
