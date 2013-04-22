@@ -33,6 +33,34 @@
                     </li>
                     <li
 
+                    @if (String.Compare((string)ViewData["Activo"], "Publicações") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashLocal/Publicacoes/@Html.DisplayFor(m => Model.LocalID)">
+                            <i class="micon-newspaper"></i>
+                            <span class="hidden-phone">Publicações</span>
+                        </a>
+                    </li>
+
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Documentos") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashLocal/Documentos/@Html.DisplayFor(m => Model.LocalID)">
+                            <i class="micon-libreoffice"></i>
+                            <span class="hidden-phone">Documentos</span>
+                        </a>
+                    </li>
+
+                    <li
+
                     @if (String.Compare((string)ViewData["Activo"], "Plantas") == 0)
                     {
                         <text>class="active"</text> 
