@@ -10,7 +10,7 @@ namespace ArqueoDB.DAL
     public class DadosTeste : DropCreateDatabaseIfModelChanges<EntidadesArqueoDB>
     {
         protected override void Seed(EntidadesArqueoDB context)
-        {
+        {            
             var titulos = new List<Titulo>
             {
                 new Titulo{Nome = "Senhor(a) Engenheiro"},
@@ -23,7 +23,8 @@ namespace ArqueoDB.DAL
             {
                 new Directoria{Caminho = "/Images/Organizacoes/"},
                 new Directoria{Caminho = "/Images/Utilizadores/"},
-                new Directoria{Caminho = "/Images/Locais/"}
+                new Directoria{Caminho = "/Images/Locais/"},
+                new Directoria{Caminho = "/Imagens/Artefactos/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
             context.SaveChanges();
@@ -82,6 +83,14 @@ namespace ArqueoDB.DAL
                     Nome = "robin.jpg", 
                     DirectoriaID = 2, 
                     Descricao = "A robin!", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "estelafuneraria.jpg", 
+                    DirectoriaID = 4, 
+                    Descricao = "Estela", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
@@ -260,11 +269,11 @@ namespace ArqueoDB.DAL
             var artefactos = new List<Artefacto>
             {
                 new Artefacto{
-                    Nome = "",
+                    Nome = "Estela Funerária III D.C.",
                     Apagado = false,
                     Cordenadas = "20-20-22",
                     DataDescoberta = System.DateTime.Now,
-                    Descricao = "",
+                    Descricao = "Estela de granito, truncada na parte superior e inferior e incompleta no lado esquerdo. A parte superior denota traços de uma decoração feita de uma rosácea circundada por um cordão entrançado.",
                     Imagens = new List<Imagem>(),
                     LocalID = 1,
                     OrganizacaoID = 1,
@@ -278,7 +287,8 @@ namespace ArqueoDB.DAL
             locais[0].Artefactos.Add(artefactos[0]);
             context.SaveChanges();
 
-
+            artefactos[0].Imagens.Add(imagens[7]);
+            context.SaveChanges();
         }
     }
 }
