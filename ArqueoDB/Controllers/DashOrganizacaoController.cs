@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using ArqueoDB.DAL;
 
 namespace ArqueoDB.Controllers
 {
@@ -32,16 +34,62 @@ namespace ArqueoDB.Controllers
 
         // GET: /DashboardOrganizacao/Locais
 
-        public ActionResult Locais(int id = 1)
+        public ActionResult Locais(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
             if (organizacao == null)
             {
                 return HttpNotFound();
             }
 
-            ViewData["Capa"] = organizacao.ImagemCapa.Directoria.Caminho + organizacao.ImagemCapa.Nome;
-            ViewData["Perfil"] = organizacao.ImagemPerfil.Directoria.Caminho + organizacao.ImagemPerfil.Nome;
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            
+            var locais = from l in db.Locais where l.OrganizacaoID == organizacao.OrganizacaoID select l;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                locais = locais.Where(l => l.Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nome":
+                    locais = locais.OrderBy(l => l.Nome);
+                    break;
+                default:
+                    break;
+
+            }
+
+            switch (type)
+            {
+                case "Públicos":
+                    locais = locais.Where(l => l.Publico == true);
+                    break;
+                case "Ocultos":
+                    locais = locais.Where(l => l.Publico == false);
+                    break;
+                default:
+                    break;
+
+            }
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            ViewBag.Locais = locais.ToList().ToPagedList(pageNumber,pageSize);
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Locais";
@@ -58,8 +106,6 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["Capa"] = organizacao.ImagemCapa.Directoria.Caminho + organizacao.ImagemCapa.Nome;
-            ViewData["Perfil"] = organizacao.ImagemPerfil.Directoria.Caminho + organizacao.ImagemPerfil.Nome;
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Membros";

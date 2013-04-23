@@ -246,7 +246,7 @@ namespace ArqueoDB.DAL
                     Coordenadas = "50-90-10",
                     DataRegisto = System.DateTime.Now,
                     Descricao = "O Teatro romano do Alto da Cividade, em Braga, é o único teatro romano existente no noroeste da Península Ibérica (e o único também que está a ser escavado actualmente em Portugal e Espanha) fica situado junto às Termas romanas de Maximinos, em Braga.",
-                    Publico = true,
+                    Publico = false,
                     Imagens = new List<Imagem>(),
                     Artefactos = new List<Artefacto>()
                 },
