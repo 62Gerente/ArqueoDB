@@ -87,7 +87,7 @@ namespace ArqueoDB.Controllers
 
             }
 
-            int pageSize = 1;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             ViewBag.Locais = locais.ToList().ToPagedList(pageNumber,pageSize);
 

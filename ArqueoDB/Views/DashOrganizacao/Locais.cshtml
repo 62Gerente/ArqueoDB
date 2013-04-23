@@ -3,6 +3,16 @@
 
 @{
     Utilizador user = ((Utilizador)(Session["Utilizador"]));
+    string type = "Todos os Locais";
+    
+    if(String.IsNullOrEmpty(ViewBag.CurrentType)){
+        type = "Todos os Locais";
+    }else if (ViewBag.CurrentType.Equals("Públicos")){
+        type = "Locais Públicos";
+    }else if (ViewBag.CurrentType.Equals("Ocultos")){
+        type = "Locais Ocultos";
+    }
+    
     int nrlocais = 0;
     ViewBag.Title = "Locais";    
     Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
@@ -28,14 +38,15 @@
 										<button class="btn" type="submit" value="Search"> <i class="micon-search-2"></i> Procurar Locais </button>
 									</div>
                     				<input class="span6" type="text" name="searchString">
-									<div class="btn-group">
-                                        <select class="span12">
-										<option>@Html.ActionLink("Todos os Locais", "Locais", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter})</option>
-										<option>@Html.ActionLink("Locais Públicos", "Locais", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Públicos"})</option>
-										<option>@Html.ActionLink("Locais Ocultos", "Locais", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Ocultos"})</option>
-									</select>
-									</div>
-								</div>
+                        <div class="btn-group dropdown-darkBg custom">
+							<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">@type<i class="micon-menu-3"></i></button>
+							<ul class="dropdown-menu">
+								<li>@Html.ActionLink("Todos os Locais", "Locais", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter})</li>
+								<li>@Html.ActionLink("Locais Públicos", "Locais", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Públicos"})</li>
+								<li>@Html.ActionLink("Locais Ocultos", "Locais", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Ocultos"})</li>
+							</ul>
+						</div>
+					</div>
                }
             </div>
             <section class="content-wrapper main-content clear-fix">
