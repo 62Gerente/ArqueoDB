@@ -100,11 +100,11 @@
                                     <a class="btn btn-small btn-inverse t" href="/DashLocal/Dashboard/@l.LocalID"><i class="micon-pencil-2"></i> Gerir local</a>
                                     @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
                                         if(l.Publico){
-                                            <a class="btn btn-small btn-danger t pull-right" href="
+                                            <a class="btn btn-small btn-danger t pull-right" onclick="return confirm('Tem a certeza que pretende ocultar o local?');" href="
                                                 @Url.Action("Ocultar", "Locais", new { id = l.LocalID })
                                             "><i class="micon-cancel-2"> Ocultar</i></a>
                                     }else{
-                                            <a class="btn btn-small btn-cl t pull-right" href="
+                                            <a class="btn btn-small btn-cl t pull-right" onclick="return confirm('Tem a certeza que pretende publicar o local?');" href="
                                                 @Url.Action("Publicar", "Locais", new { id = l.LocalID })
                                             "><i class="micon-checkmark"> Publicar</i></a>
                                         }
