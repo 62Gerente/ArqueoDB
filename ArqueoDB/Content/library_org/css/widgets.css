@@ -1,8 +1,12 @@
 .widgetpic {
 	height:109px; 
 	width:164px; 
-	overflow:hidden; 
 	position:relative;
+	overflow:hidden; 
+	
+	background-size: 164px auto;
+	background-repeat: no-repeat;
+	background-position: left center;
 }
 
 .widget {
