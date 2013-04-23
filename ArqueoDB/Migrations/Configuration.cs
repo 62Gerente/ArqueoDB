@@ -1,13 +1,14 @@
 namespace ArqueoDB.Migrations
 {
     using ArqueoDB.Models;
+    using ArqueoDB.DAL;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ArqueoDB.Models.EntidadesArqueoDB>
+    internal sealed class Configuration : DbMigrationsConfiguration<ArqueoDB.DAL.EntidadesArqueoDB>
     {
         public Configuration()
         {
