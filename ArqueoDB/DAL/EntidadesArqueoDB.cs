@@ -4,8 +4,9 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
+using ArqueoDB.Models;
 
-namespace ArqueoDB.Models
+namespace ArqueoDB.DAL
 {
     public class EntidadesArqueoDB : DbContext
     {

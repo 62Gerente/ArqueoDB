@@ -97,7 +97,5 @@ namespace ArqueoDB.Models
         public virtual ICollection<Utilizador> UtilizadoresSeguidos { get; set; }
 
 
-
-
     }
 }
