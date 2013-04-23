@@ -83,12 +83,12 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span4">
-                                    <div class="span12 widgetpic">
-                                        <center>
-                                            <a href="/DashLocal/Dashboard/@l.LocalID">
-                                                <img src="@(Model.Locais.Where(loc => loc.LocalID == l.LocalID).ElementAt(0).Imagens.ElementAt(0).Directoria.Caminho + Model.Locais.Where(loc => loc.LocalID == l.LocalID).ElementAt(0).Imagens.ElementAt(0).Nome)"/></a>
-                                        </center>
-                                    </div>
+                                    <a href="/DashLocal/Dashboard/@l.LocalID">
+                                        <div class="span12 widgetpic" style=" background-image:url(
+                                                @(Model.Locais.Where(loc => loc.LocalID == l.LocalID).ElementAt(0).Imagens.ElementAt(0).Directoria.Caminho + Model.Locais.Where(loc => loc.LocalID == l.LocalID).ElementAt(0).Imagens.ElementAt(0).Nome)
+                                        );">
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="span8">
                                     <b>Responsável:</b> <a href="/Utilizadores/Details/@l.Responsavel.Utilizador.UtilizadorID">@l.Responsavel.Utilizador.Nome</a><br>
@@ -100,9 +100,13 @@
                                     <a class="btn btn-small btn-inverse t" href="/DashLocal/Dashboard/@l.LocalID"><i class="micon-pencil-2"></i> Gerir local</a>
                                     @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
                                         if(l.Publico){
-                                            <a class="btn btn-small btn-danger t pull-right" href="#"><i class="micon-cancel-2"> Ocultar</i></a>
-                                        }else{
-                                            <a class="btn btn-small btn-cl t pull-right" href="#"><i class="micon-checkmark"> Publicar</i></a>
+                                            <a class="btn btn-small btn-danger t pull-right" onclick="return confirm('Tem a certeza que pretende ocultar o local?');" href="
+                                                @Url.Action("Ocultar", "Locais", new { id = l.LocalID })
+                                            "><i class="micon-cancel-2"> Ocultar</i></a>
+                                    }else{
+                                            <a class="btn btn-small btn-cl t pull-right" onclick="return confirm('Tem a certeza que pretende publicar o local?');" href="
+                                                @Url.Action("Publicar", "Locais", new { id = l.LocalID })
+                                            "><i class="micon-checkmark"> Publicar</i></a>
                                         }
                                     }
                                 </div>

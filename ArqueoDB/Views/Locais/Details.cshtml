@@ -1,0 +1,71 @@
+﻿@model ArqueoDB.Models.Local
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Local</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Organizacao.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Organizacao.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Responsavel.ProfissionalID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Responsavel.ProfissionalID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Coordenadas)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Coordenadas)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataRegisto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataRegisto)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Distrito.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Distrito.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Publico)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Publico)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.LocalID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
