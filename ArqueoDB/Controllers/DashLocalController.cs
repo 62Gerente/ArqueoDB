@@ -81,10 +81,10 @@ namespace ArqueoDB.Controllers
 
             int pageSize = 9;
             int pageNumber = (page ?? 1);
-            ViewBag.Locais = artefactos.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.Artefactos = artefactos.ToList().ToPagedList(pageNumber, pageSize);
 
-            ViewData["Dashboard"] = "Organizacao";
-            ViewData["Activo"] = "Locais";
+            ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Artefactos";
 
             return View(local);
         }
