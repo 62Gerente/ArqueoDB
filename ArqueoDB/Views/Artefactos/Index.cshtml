@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ArqueoDB.Models.Artefacto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cordenadas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataDescoberta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Local.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organizacao.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Responsavel.ProfissionalID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publico)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cordenadas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataDescoberta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Local.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Organizacao.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Responsavel.ProfissionalID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publico)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ArtefactoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ArtefactoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ArtefactoID })
+        </td>
+    </tr>
+}
+
+</table>
