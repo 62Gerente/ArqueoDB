@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using PagedList;
 using ArqueoDB.DAL;
-using PagedList;
+using System.Collections.Generic;
 
 namespace ArqueoDB.Controllers
 {
