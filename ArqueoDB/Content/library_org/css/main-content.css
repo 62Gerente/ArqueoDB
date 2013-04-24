@@ -1,3 +1,8 @@
+
+.hide {
+    display: none;
+}
+
 #main_content.container-fluid {
 	position:relative;
 	background-color:#efefef;
