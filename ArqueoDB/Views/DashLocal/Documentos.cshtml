@@ -1,10 +1,30 @@
-﻿@model ArqueoDB.Models.Local
+﻿@using ArqueoDB.Models 
+@model ArqueoDB.Models.Local
 
 @{
+    string type = "Todos os Documentos";
+
+    if (String.IsNullOrEmpty(ViewBag.CurrentType))
+    {
+        type = "Todos os Documentos";
+    }
+    else if (ViewBag.CurrentType.Equals("Públicos"))
+    {
+        type = "Documentos Públicos";
+    }
+    else if (ViewBag.CurrentType.Equals("Ocultos"))
+    {
+        type = "Documentos Ocultos";
+    }
+
+    IEnumerable<ArqueoDB.Models.Documento> documentos = ViewBag.DocumentosLocal;
+    
     ViewBag.Title = "Documentos";    
     //int n_membros = 0;
     Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
-    int i = 0;  
+    int n_item = 0;
+    int pageSize = ViewBag.pageSize;
+    int page = ViewBag.page;
 }
 @section breadcrumb {
     <li><a href="/Locais/Details/@Html.DisplayFor(model => model.LocalID)">@Html.DisplayFor(model => model.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
@@ -23,10 +43,18 @@
                 @*  Barra de Pesquisa *@
                 <div class="input-prepend input-append span6" style="margin-left:0px">
                     				<div class="btn-group custom">
-										<button class="btn"> <i class="micon-search-2"></i> Procurar Documentos </button>
+										<button class="btn" type="submit" value="Search"> <i class="micon-search-2"></i> Procurar Documentos </button>
 									</div>
-                    				<input class="span6" type="text">
-			    </div>
+                    				<input class="span6" type="text" name="searchString">
+                        <div class="btn-group dropdown-darkBg custom">
+							<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">@type<i class="micon-menu-3"></i></button>
+							<ul class="dropdown-menu">
+								<li>@Html.ActionLink("Todos os Documentos", "Documentos", new { id=Model.LocalID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter})</li>
+								<li>@Html.ActionLink("Documentos Públicos", "Documentos", new { id=Model.LocalID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Públicos"})</li>
+								<li>@Html.ActionLink("Documentos Ocultos", "Documentos", new { id=Model.LocalID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Ocultos"})</li>
+							</ul>
+						</div>
+					</div>
             </div>
             
                 @* Tabela de documentos *@
@@ -41,28 +69,32 @@
                                             <th>#</th>
 											<th>Título</th>
 											<th>Autor</th>
-											<th>Ano</th>										
+											<th>Ano</th>
+                                            <th></th>										
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
 										</tr>
 									</thead>
                                     <tbody>
-                @* Processar cada documento *@
-                @foreach (var doc in ViewBag.DocumentosLocal)
+                @* Processar cada um dos documento *@
+                @foreach (ArqueoDB.Models.Documento doc in documentos)
                 {
-                    
+                    n_item++;
                     <tr>
-                        <td>@i.ToString()</td>
-					    <td>doc.Titulo</td>
-                        <td>doc.Responsavel.Utilizador.Nome</td>
-					    <td>doc.DataPublicacao.Year</td>
+                        <td>@((n_item+((page-1)*pageSize)).ToString())</td>
+					    <td>@doc.Titulo</td>                        
+                        <td>@doc.Responsavel.Utilizador.Nome</td>
+					    <td>@doc.DataPublicacao.Year</td>
                         <td><a class="btn btn-mini btn-inverse" href="#"><i class="micon-eye"></i>  Ver</a></td>
                         <td><a class="btn btn-mini btn-inverse" href="#"><i class="icon-download-alt"></i>  Transferir</a></td>
                         @if(doc.Publico == true) {
                             <td><a class="btn btn-mini btn-danger" href="#"><i class="micon-cancel-2"></i>    <i>Ocultar</i></a></td>
                         }
                         else {
-                            <td><a class="btn btn-mini btn-danger" href="#"><i class="micon-checkmark">  Publicar</i></a></td>
+                            <td><a class="btn btn-mini btn-cl" href="#"><i class="micon-checkmark">  Publicar</i></a></td>
                         }
-                        <td><a class="btn btn-mini btn-danger t pull-right" href="#"><i class="micon-cancel-2"></i> Remover</a></td>										
+                        <td><a class="btn btn-mini btn-danger" href="#"><i class="micon-cancel-2"></i> Remover</a></td>										
 					</tr>                    
                     
                 }
@@ -72,6 +104,51 @@
                             </div>
                         </div>
                     </div>
+
+            @* Rodapé de paginação *@
+            @{
+                int nrPaginas = ViewBag.DocumentosLocal.PageCount;
+
+                if (nrPaginas == 0) { nrPaginas++; };
+                
+                int pagActual = ViewBag.DocumentosLocal.PageNumber;
+                                
+                int pagi, pagf;
+                Utilitarios.paginacao(nrPaginas, pagActual, out pagi, out pagf);
+            }
+           <div class="span12">
+                    <div class="pagination pull-right" style="margin-right:30px">
+						<ul>
+							<li 
+                                @if(pagActual == 1){
+                                    <text>class="disabled"</text>
+                                }
+                            >
+                                @Html.ActionLink("«", "Documentos", new { id=Model.LocalID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type= ViewBag.CurrentType, page=1})
+                            </li>
+
+                            @for (int i = pagi; i <= pagf; i++ ){
+							<li
+                                @if (pagActual == i)
+                                {
+                                    <text>class="active"</text>
+                                }
+                            >
+                                @Html.ActionLink(string.Empty+i, "Documentos", new { id=Model.LocalID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type= ViewBag.CurrentType, page=@i})
+                            </li>
+                            }
+							<li
+                                @if (pagActual == nrPaginas || nrPaginas==0)
+                                {
+                                    <text>class="disabled"</text>
+                                }
+                            >
+                                @Html.ActionLink("»", "Documentos", new { id=Model.LocalID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type= ViewBag.CurrentType, page=nrPaginas})
+                           </li>
+						</ul>
+					</div>
+               </div>
+
             </section>
 
                 

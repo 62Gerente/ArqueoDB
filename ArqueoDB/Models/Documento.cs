@@ -17,6 +17,9 @@ namespace ArqueoDB.Models
         [Required(ErrorMessage = "Título do documento necessário")]
         public string Titulo { get; set; }
 
+        [DisplayName("Nome do Ficheiro")]
+        public string NomeFicheiro { get; set; }        
+        
         [DisplayName("Directoria")]
         public int DirectoriaID { get; set; }
         public virtual Directoria Directoria { get; set; }

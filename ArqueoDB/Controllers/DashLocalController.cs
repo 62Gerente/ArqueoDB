@@ -127,14 +127,13 @@ namespace ArqueoDB.Controllers
             }           
 
             ViewBag.CurrentFilter = searchString;
-            
+
+            IEnumerable<Documento> query = local.Documentos.Where(d => d.Apagado == false);
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                local.Documentos.Where(l => l.Titulo.ToUpper().Contains(searchString.ToUpper()));                
-            }
-
-            IEnumerable<Documento> query = local.Documentos;
+                query.Where(l => l.Titulo.ToUpper().Contains(searchString.ToUpper()));                
+            }            
             
             switch (sortOrder)
             {
@@ -166,7 +165,10 @@ namespace ArqueoDB.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            ViewBag.Locais = query.ToList().ToPagedList(pageNumber, pageSize);
+
+            ViewBag.DocumentosLocal = query.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.pageSize = pageSize;
+            ViewBag.page = pageNumber;
 
             ViewData["Dashboard"] = "Local";
             ViewData["Activo"] = "Documentos";
