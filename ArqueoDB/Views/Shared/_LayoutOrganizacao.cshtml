@@ -168,7 +168,11 @@
                 {
                     @Html.Partial("_StatsLocalDO")
                 }
-						</ul>
+                else if (String.Compare((string)ViewData["Dashboard"], "Artefacto") == 0)
+                {
+                    @Html.Partial("_StatsArtDO")
+                }       
+                       	</ul>
 					</div>
 				</div>
 				<!-- ./ page heading -->
@@ -196,6 +200,10 @@
                 {
                     @Html.Partial("_SidebarLocalDO")
                 }
+                else if (String.Compare((string)ViewData["Dashboard"], "Artefacto") == 0)
+                {
+                    @Html.Partial("_SidebarArtefactoDO")
+                }       
             </ul>
             <!-- end sidebar -->
             </div>

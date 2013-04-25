@@ -1,7 +1,7 @@
 ﻿@model ArqueoDB.Models.Local
 
                     <li class="avatar2 hidden-phone">
-                        <a href="#">
+                        <a href="/DashLocal/Dashboard/@Html.DisplayFor(m => Model.LocalID)">
 	                        <img src="@Html.DisplayFor(m => Model.Imagens.ElementAt(0).Directoria.Caminho)@Html.DisplayFor(m => Model.Imagens.ElementAt(0).Nome)" />
 	                        <span>@Html.DisplayFor(m => Model.Nome)</span>
                         </a>
