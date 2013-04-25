@@ -130,5 +130,26 @@ namespace ArqueoDB.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+
+        public ActionResult Publicar(int id)
+        {
+            Artefacto artefacto = db.Artefactos.Find(id);
+            artefacto.Publico = true;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult Ocultar(int id)
+        {
+            Artefacto artefacto = db.Artefactos.Find(id);
+            artefacto.Publico = false;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+
     }
 }
