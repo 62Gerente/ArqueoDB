@@ -132,7 +132,7 @@ namespace ArqueoDB.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                query.Where(l => l.Titulo.ToUpper().Contains(searchString.ToUpper()));                
+                query = query.Where(l => l.Titulo.ToUpper().Contains(searchString.ToUpper()));                                
             }            
             
             switch (sortOrder)

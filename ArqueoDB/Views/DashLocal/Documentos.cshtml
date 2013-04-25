@@ -2,6 +2,7 @@
 @model ArqueoDB.Models.Local
 
 @{
+    Utilizador user = ((Utilizador)(Session["Utilizador"]));
     string type = "Todos os Documentos";
 
     if (String.IsNullOrEmpty(ViewBag.CurrentType))
@@ -41,6 +42,7 @@
                 </div>
                 
                 @*  Barra de Pesquisa *@
+                @using (Html.BeginForm()){
                 <div class="input-prepend input-append span6" style="margin-left:0px">
                     				<div class="btn-group custom">
 										<button class="btn" type="submit" value="Search"> <i class="micon-search-2"></i> Procurar Documentos </button>
@@ -55,6 +57,7 @@
 							</ul>
 						</div>
 					</div>
+                }
             </div>
             
                 @* Tabela de documentos *@
@@ -69,11 +72,7 @@
                                             <th>#</th>
 											<th>Título</th>
 											<th>Autor</th>
-											<th>Ano</th>
-                                            <th></th>										
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+											<th>Ano</th>                                            
 										</tr>
 									</thead>
                                     <tbody>
@@ -83,13 +82,15 @@
                     n_item++;
                     <tr>
                         <td>@((n_item+((page-1)*pageSize)).ToString())</td>
-					    <td>@doc.Titulo</td>                        
-                        <td>@doc.Responsavel.Utilizador.Nome</td>
+					    <td>@doc.Titulo</td>                       
+                        <td><a href="#">@doc.Responsavel.Utilizador.Nome</a></td> <!-- FALTA HIPERLIGAÇÃO -->
 					    <td>@doc.DataPublicacao.Year</td>
+                        
                         <td><a class="btn btn-mini btn-inverse" href="#"><i class="micon-eye"></i>  Ver</a></td>
-                        <td><a class="btn btn-mini btn-inverse" href="#"><i class="icon-download-alt"></i>  Transferir</a></td>
-                        
-                        
+                        <td><a class="btn btn-mini btn-inverse" href="/Documentos/Transferir/@doc.DocumentoID"><i class="icon-download-alt"></i>  Transferir</a></td>
+                        @if(user.UtilizadorID == Model.Responsavel.Utilizador.UtilizadorID){
+
+@*  Confirmar a ocultação do documento *@
 <div id="modal-from-dom-ocultar" class="modal hide fade">
     <div class="modal-header">
         <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
@@ -105,6 +106,7 @@
     </div>
 </div>
 
+              @*  Confirmar a publicação do documento *@
  <div id="modal-from-dom-publicar" class="modal hide fade">
     <div class="modal-header">
         <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
@@ -118,20 +120,40 @@
         <a href="/Documentos/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
         <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
     </div>
-</div>                
+</div>              
                         
                         
                         
-                        @if(doc.Publico == true) {
+                        if(doc.Publico == true) {
                             <td><a class="btn btn-mini btn-danger confirm-ocultar" data-id="@doc.DocumentoID"><i class="micon-cancel-2">  Ocultar</i></a></td>
                         }
                         else {
                             <td><a class="btn btn-mini btn-cl confirm-publicar" data-id="@doc.DocumentoID"><i class="micon-checkmark">  Publicar</i></a></td>
                         }
-                        <td><a class="btn btn-mini btn-danger"><i class="micon-cancel-2"></i> Remover</a></td>										
-					</tr>                    
-                    
-                }
+
+@* Confirmar a remoção do documento *@
+<div id="modal-from-dom-remover" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="close">&times;</a>
+         <h3>Remover Documento</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende remover premanentemente o documento?</p><br>        
+    </div>
+    <div class="modal-footer">
+        <a href="/Documentos/Remover/ID" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+
+                        <td><a class="btn btn-mini btn-danger t confirm-remover" data-id="@doc.DocumentoID"><i class="micon-cancel-2"></i> Remover</a></td>										
+                        }
+					</tr>   
+              }                 
+                 
+                 
+                
                                      </tbody>
                         	
 								    </table>
@@ -185,4 +207,3 @@
 
             </section>
 
-                
