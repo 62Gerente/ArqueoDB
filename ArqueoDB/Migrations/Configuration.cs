@@ -215,7 +215,8 @@ namespace ArqueoDB.Migrations
                     ResponsavelID = 1,
                     Publica = true,
                     Membros = new List<Profissional>(),
-                    Locais = new List<Local>()
+                    Locais = new List<Local>(),
+                    Documentos = new List<Documento>()
                 }
             };
             organizacoes.ForEach(o => context.Organizacoes.Add(o));
@@ -349,7 +350,11 @@ namespace ArqueoDB.Migrations
 
             documentos.ForEach(d => context.Documentos.Add(d));            
             context.SaveChanges();
-            
+
+            organizacoes[0].Documentos.Add(documentos[0]);
+            organizacoes[0].Documentos.Add(documentos[1]);
+            context.SaveChanges();
+
             documentos.ForEach(d => locais[0].Documentos.Add(d));            
             context.SaveChanges();
         }

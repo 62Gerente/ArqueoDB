@@ -138,13 +138,13 @@ namespace ArqueoDB.Controllers
             switch (sortOrder)
             {
                 case "Nome":
-                     query = local.Documentos.OrderBy(doc => doc.Titulo);
+                     query = query.OrderBy(doc => doc.Titulo);
                     break;
                 case "Data":
-                    query = local.Documentos.OrderBy(doc => doc.DataPublicacao);
+                    query = query.OrderBy(doc => doc.DataPublicacao);
                     break;
                 case "Autor":
-                    query = local.Documentos.OrderBy(doc => doc.Responsavel.Utilizador.Nome);
+                    query = query.OrderBy(doc => doc.Responsavel.Utilizador.Nome);
                     break;
                 default:
                     break;

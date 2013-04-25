@@ -113,5 +113,76 @@ namespace ArqueoDB.Controllers
             return View(organizacao);
         }
 
+        // GET: /DashboardOrganizacao/Documentos
+        public ActionResult Documentos(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
+        {
+            Organizacao org = db.Organizacoes.Find(id);
+            if (org == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<Documento> query = org.Documentos.Where(d => d.Apagado == false);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(l => l.Titulo.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nome":
+                    query = query.OrderBy(doc => doc.Titulo);
+                    break;
+                case "Data":
+                    query = query.OrderBy(doc => doc.DataPublicacao);
+                    break;
+                case "Autor":
+                    query = query.OrderBy(doc => doc.Responsavel.Utilizador.Nome);
+                    break;
+                default:
+                    break;
+            }
+
+            switch (type)
+            {
+                case "Públicos":
+                    query = query.Where(doc => doc.Publico == true);
+                    break;
+                case "Ocultos":
+                    query = query.Where(doc => doc.Publico == false);
+                    break;
+                default:
+                    break;
+
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.DocumentosOrganizacao = query.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.pageSize = pageSize;
+            ViewBag.page = pageNumber;
+
+            ViewData["Dashboard"] = "Organizacao";
+            ViewData["Activo"] = "Documentos";
+
+            return View(org);
+        }
+
     }
 }
