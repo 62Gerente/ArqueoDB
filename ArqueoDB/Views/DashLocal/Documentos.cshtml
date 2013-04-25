@@ -88,13 +88,47 @@
 					    <td>@doc.DataPublicacao.Year</td>
                         <td><a class="btn btn-mini btn-inverse" href="#"><i class="micon-eye"></i>  Ver</a></td>
                         <td><a class="btn btn-mini btn-inverse" href="#"><i class="icon-download-alt"></i>  Transferir</a></td>
+                        
+                        
+<div id="modal-from-dom-ocultar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
+         <h3>Ocultar Documento</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende ocultar o documento ao público?</p><br>
+        <p>O documento passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Documentos/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+ <div id="modal-from-dom-publicar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
+         <h3>Publicar Documento</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende publicar o documento ao público?</p><br>
+        <p>O documento passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Documentos/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>                
+                        
+                        
+                        
                         @if(doc.Publico == true) {
-                            <td><a class="btn btn-mini btn-danger" href="#"><i class="micon-cancel-2"></i>    <i>Ocultar</i></a></td>
+                            <td><a class="btn btn-mini btn-danger confirm-ocultar" data-id="@doc.DocumentoID"><i class="micon-cancel-2">  Ocultar</i></a></td>
                         }
                         else {
-                            <td><a class="btn btn-mini btn-cl" href="#"><i class="micon-checkmark">  Publicar</i></a></td>
+                            <td><a class="btn btn-mini btn-cl confirm-publicar" data-id="@doc.DocumentoID"><i class="micon-checkmark">  Publicar</i></a></td>
                         }
-                        <td><a class="btn btn-mini btn-danger" href="#"><i class="micon-cancel-2"></i> Remover</a></td>										
+                        <td><a class="btn btn-mini btn-danger"><i class="micon-cancel-2"></i> Remover</a></td>										
 					</tr>                    
                     
                 }
