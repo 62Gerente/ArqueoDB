@@ -1,0 +1,59 @@
+﻿@model ArqueoDB.Models.Artefacto
+
+                    <li class="avatar3 hidden-phone">
+                        <a href="/DashArtefacto/Dashboard/@Html.DisplayFor(m => Model.ArtefactoID)">
+	                        <img src="@Html.DisplayFor(m => Model.Imagens.ElementAt(0).Directoria.Caminho)@Html.DisplayFor(m => Model.Imagens.ElementAt(0).Nome)" />
+	                        <span style="margin-top:6px">@Html.DisplayFor(m => Model.Nome)</span>
+                        </a>
+                    </li>
+                    <li 
+
+                    @if (String.Compare((string)ViewData["Activo"], "Dashboard") == 0){
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashArtefacto/Dashboard/@Html.DisplayFor(m => Model.ArtefactoID)">
+                            <i class="micon-screen"></i>
+                            <span class="hidden-phone">Dashboard</span>
+                        </a>
+                    </li>
+                    <li 
+
+                    @if (String.Compare((string)ViewData["Activo"], "Imagens") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashArtefacto/Imagens/@Html.DisplayFor(m => Model.ArtefactoID)">
+                            <i class="micon-camera"></i>
+                            <span class="hidden-phone">Imagens</span>
+                        </a>
+                    </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Estatísticas") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >                        
+                            <a href="/DashArtefacto/Estatisticas/@Html.DisplayFor(m => Model.ArtefactoID)">
+                            <i class="micon-stats-up"></i>
+                            <span class="hidden-phone">Estatísticas</span>
+                        </a>
+                    </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Definicões") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashArtefacto/Definicoes/@Html.DisplayFor(m => Model.ArtefactoID)">
+                            <i class="micon-cog"></i>
+                            <span class="hidden-phone">Definições</span>
+                        </a>
+                    </li>

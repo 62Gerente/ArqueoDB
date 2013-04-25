@@ -15,7 +15,7 @@ namespace ArqueoDB.Controllers
 
         // GET: /DashboardOrganizacao/Dashboard
 
-        public ActionResult Dashboard(int id = 1)
+        public ActionResult Dashboard(int id)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
