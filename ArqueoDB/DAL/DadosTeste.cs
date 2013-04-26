@@ -10,7 +10,7 @@ namespace ArqueoDB.DAL
     public class DadosTeste : DropCreateDatabaseIfModelChanges<EntidadesArqueoDB>
     {
         protected override void Seed(EntidadesArqueoDB context)
-        {            
+        {
             var titulos = new List<Titulo>
             {
                 new Titulo{Nome = "Senhor(a) Engenheiro"},
@@ -24,7 +24,8 @@ namespace ArqueoDB.DAL
                 new Directoria{Caminho = "/Images/Organizacoes/"},
                 new Directoria{Caminho = "/Images/Utilizadores/"},
                 new Directoria{Caminho = "/Images/Locais/"},
-                new Directoria{Caminho = "/Images/Artefactos/"}
+                new Directoria{Caminho = "/Imagens/Artefactos/"},
+                new Directoria{Caminho = "/Documentos/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
             context.SaveChanges();
@@ -235,7 +236,8 @@ namespace ArqueoDB.DAL
                     Descricao = "O Museu de Arqueologia D. Diogo de Sousa é um organismo público, dependente da Direção Regional de Cultura do Norte definido na sua Lei orgânica como um museu regional de arqueologia.",
                     Publico = true,
                     Imagens = new List<Imagem>(),
-                    Artefactos = new List<Artefacto>()
+                    Artefactos = new List<Artefacto>(),
+                    Documentos = new List<Documento>()
                 },
                 new Local{
                     Nome = "Teatro Romano",
@@ -246,9 +248,10 @@ namespace ArqueoDB.DAL
                     Coordenadas = "50-90-10",
                     DataRegisto = System.DateTime.Now,
                     Descricao = "O Teatro romano do Alto da Cividade, em Braga, é o único teatro romano existente no noroeste da Península Ibérica (e o único também que está a ser escavado actualmente em Portugal e Espanha) fica situado junto às Termas romanas de Maximinos, em Braga.",
-                    Publico = false,
+                    Publico = true,
                     Imagens = new List<Imagem>(),
-                    Artefactos = new List<Artefacto>()
+                    Artefactos = new List<Artefacto>(),
+                    Documentos = new List<Documento>()
                 },
             };
             locais.ForEach(l => context.Locais.Add(l));
@@ -288,6 +291,60 @@ namespace ArqueoDB.DAL
             context.SaveChanges();
 
             artefactos[0].Imagens.Add(imagens[7]);
+            context.SaveChanges();
+
+            var documentos = new List<Documento>
+            {
+                new Documento{
+                    Titulo = "The Playbook",                
+                    NomeFicheiro = "playbook.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 2,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "Peace and love!",                    
+                    Publico = true,        
+                    Apagado = false
+                },
+                new Documento{
+                    Titulo = "A obra do mestre André",                
+                    NomeFicheiro = "mestre_andre.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 3,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "Fantástico!",                    
+                    Publico = false,        
+                    Apagado = false
+                },
+                new Documento{
+                    Titulo = "Harry Poter",                
+                    NomeFicheiro = "documento.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 3,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "A versão de hp da robin",                    
+                    Publico = true,        
+                    Apagado = false
+                },
+                new Documento{
+                    Titulo = "Jonas, Quando for grande quero ser como tu!",                
+                    NomeFicheiro = "documento.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 1,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "Não há palavras",                    
+                    Publico = false,        
+                    Apagado = false
+                }
+            };
+
+            documentos.ForEach(d => context.Documentos.Add(d));
+            context.SaveChanges();
+
+            documentos.ForEach(d => locais[0].Documentos.Add(d));
             context.SaveChanges();
         }
     }
