@@ -2,7 +2,7 @@ $('#modal-from-dom-ocultar').on('show', function() {
     var id = $(this).data('id'),
         removeBtn = $(this).find('.btn-danger');
 
-    removeBtn.attr('href', removeBtn.attr('href').replace(/IDLOCAL/, id));
+    removeBtn.attr('href', removeBtn.attr('href').replace(/Ocultar\/(.*|\d)/, "Ocultar/" + id));
 })
 
 $('.confirm-ocultar').on('click', function(e) {
@@ -16,7 +16,7 @@ $('#modal-from-dom-publicar').on('show', function() {
     var id = $(this).data('id'),
         removeBtn = $(this).find('.btn-danger');
 
-    removeBtn.attr('href', removeBtn.attr('href').replace(/IDLOCAL/, id));
+    removeBtn.attr('href', removeBtn.attr('href').replace(/Publicar\/(.*|\d*)/, "Publicar/" + id, id));
 })
 
 $('.confirm-publicar').on('click', function(e) {
