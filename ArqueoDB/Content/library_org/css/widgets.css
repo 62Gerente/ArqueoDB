@@ -9,6 +9,27 @@
 	background-position: left center;
 }
 
+.imagecont {
+	height:170px; 
+	width:265px; 
+	position:relative;
+	overflow:hidden; 
+	
+	background-size: 265px auto;
+	background-repeat: no-repeat;
+	background-position: left center;
+	margin-bottom: 15px;
+	border: 1px solid;
+	opacity: 0.65;
+}
+
+.imagecont:hover{
+	opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
 .widget {
 	border-color:#cecece;
 	-webkit-border-radius: 0;

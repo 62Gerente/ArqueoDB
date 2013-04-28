@@ -30,7 +30,7 @@ namespace ArqueoDB.Migrations
                 new Directoria{Caminho = "/Images/Organizacoes/"},
                 new Directoria{Caminho = "/Images/Utilizadores/"},
                 new Directoria{Caminho = "/Images/Locais/"},
-                new Directoria{Caminho = "/Imagens/Artefactos/"},
+                new Directoria{Caminho = "/Images/Artefactos/"},
                 new Directoria{Caminho = "/Documentos/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
@@ -57,7 +57,7 @@ namespace ArqueoDB.Migrations
                 new Imagem{
                     Nome = "mddiogo.jpg", 
                     DirectoriaID = 3, 
-                    Descricao = "Imagem Museu", 
+                    Descricao = "Imagem Entrada Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
@@ -101,7 +101,55 @@ namespace ArqueoDB.Migrations
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
-                }
+                },
+                new Imagem{
+                    Nome = "mddiogo1.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Terraço Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo2.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Interior Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo3.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Museu D. Diogo de Sousa", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo4.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Artefactos Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo5.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Placa da entrada do Museu D. Diogo de Sousa em Braga", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo6.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Imagem do Jardim do Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
             };
             imagens.ForEach(i => context.Imagens.Add(i));
             context.SaveChanges();
@@ -273,6 +321,12 @@ namespace ArqueoDB.Migrations
             context.SaveChanges();
 
             locais[0].Imagens.Add(imagens[2]);
+            locais[0].Imagens.Add(imagens[8]);
+            locais[0].Imagens.Add(imagens[9]);
+            locais[0].Imagens.Add(imagens[10]);
+            locais[0].Imagens.Add(imagens[11]);
+            locais[0].Imagens.Add(imagens[12]);
+            locais[0].Imagens.Add(imagens[13]); 
             locais[1].Imagens.Add(imagens[3]);
             context.SaveChanges();
 
