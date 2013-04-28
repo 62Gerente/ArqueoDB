@@ -49,7 +49,8 @@ namespace ArqueoDB.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var artefactos = from a in db.Artefactos where a.LocalID == local.LocalID select a;
+            var artefactos = local.Artefactos.AsEnumerable<Artefacto>();
+            artefactos = artefactos.Where(a => a.Apagado == false);
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -200,6 +201,7 @@ namespace ArqueoDB.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var imagens = local.Imagens.AsEnumerable<Imagem>();
+            imagens = imagens.Where(i => i.Apagada == false);
 
             if (!String.IsNullOrEmpty(searchString))
             {

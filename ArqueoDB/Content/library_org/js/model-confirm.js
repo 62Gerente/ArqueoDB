@@ -16,7 +16,7 @@ $('#modal-from-dom-publicar').on('show', function() {
     var id = $(this).data('id'),
         removeBtn = $(this).find('.btn-danger');
 
-    removeBtn.attr('href', removeBtn.attr('href').replace(/Publicar\/(.*|\d*)/, "Publicar/" + id, id));
+    removeBtn.attr('href', removeBtn.attr('href').replace(/Publicar\/(.*|\d*)/, "Publicar/" + id));
 })
 
 $('.confirm-publicar').on('click', function(e) {
@@ -30,8 +30,7 @@ $('#modal-from-dom-remover').on('show', function() {
     var id = $(this).data('id'),
         removeBtn = $(this).find('.btn-danger');
 
-    removeBtn.attr('href', removeBtn.attr('href').replace(/ID/, id));
-})
+    removeBtn.attr('href', removeBtn.attr('href').replace(/Remover\/(.*|\d*)/, "Remover/" + id));
 
 $('.confirm-remover').on('click', function(e) {
     e.preventDefault();

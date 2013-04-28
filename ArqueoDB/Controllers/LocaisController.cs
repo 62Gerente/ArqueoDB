@@ -148,5 +148,14 @@ namespace ArqueoDB.Controllers
 
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult Remover(int id)
+        {
+            Local local = db.Locais.Find(id);
+            local.Apagado = true;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
     }
 }

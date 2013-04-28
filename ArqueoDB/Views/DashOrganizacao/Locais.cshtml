@@ -84,8 +84,20 @@
     </div>
 </div>
                                     
-                             
-
+<div id="modal-from-dom-remover" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="close">&times;</a>
+         <h3>Remover Local</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende remover premanentemente o local?</p><br>   
+        <p>O local pode não voltar a ser recuperado, contacte o administrador do sistema para verificar a possibilidade de recuperar um local removido.</p>     
+    </div>
+    <div class="modal-footer">
+        <a href="/Locais/Remover/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
 
             <section class="content-wrapper main-content clear-fix">
 @foreach(var l in ViewBag.Locais){
@@ -109,7 +121,7 @@
 										<ul class="dropdown-menu pull-right">
 											<li>
 												<a href="#">Entregar gestão do local</a>
-                                                <a href="#">Apagar local</a>
+                                                <a class="confirm-remover" data-id="@l.LocalID">Remover local</a>
 											</li>
 										</ul>
 									</div>

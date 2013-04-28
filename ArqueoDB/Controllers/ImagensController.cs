@@ -141,5 +141,14 @@ namespace ArqueoDB.Controllers
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult Remover(int id)
+        {
+            Imagem imagem = db.Imagens.Find(id);
+            imagem.Apagada = true;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
     }
 }

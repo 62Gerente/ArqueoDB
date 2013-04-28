@@ -93,6 +93,20 @@
     </div>
 </div>
 
+<div id="modal-from-dom-remover" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="close">&times;</a>
+         <h3>Remover Imagem</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende remover premanentemente a imagem?</p><br>   
+        <p>A imagem pode não voltar a ser recuperada, contacte o administrador do sistema para verificar a possibilidade de recuperar uma imagem removido.</p>     
+    </div>
+    <div class="modal-footer">
+        <a href="/Imagens/Remover/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
 
             <section class="content-wrapper main-content clear-fix">
 
@@ -119,7 +133,7 @@
                                     }            
                                     @if (Model.Responsavel.UtilizadorID == user.UtilizadorID)
                                     {
-                                        <li><a class="" data-id="@i.ImagemID"><i class="micon-cancel-2"></i> Remover Imagem</a></li>
+                                        <li><a class="confirm-remover" data-id="@i.ImagemID"><i class="micon-cancel-2"></i> Remover Imagem</a></li>
                                     }
                                                        
    							</ul>

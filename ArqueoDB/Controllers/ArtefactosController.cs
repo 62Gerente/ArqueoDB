@@ -150,6 +150,13 @@ namespace ArqueoDB.Controllers
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult Remover(int id)
+        {
+            Artefacto artefacto = db.Artefactos.Find(id);
+            artefacto.Apagado = true;
+            db.SaveChanges();
 
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
     }
 }

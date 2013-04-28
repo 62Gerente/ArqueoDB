@@ -60,7 +60,7 @@
         <p>O artefacto passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
     </div>
     <div class="modal-footer">
-        <a href="/Artefactos/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="/Artefactos/Ocultar/IDARTEFACTO" class="btn btn-danger">Sim</a>
         <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
     </div>
 </div>
@@ -68,18 +68,32 @@
  <div id="modal-from-dom-publicar" class="modal hide fade">
     <div class="modal-header">
         <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
-         <h3>Publicar Local</h3>
+         <h3>Publicar Artefacto</h3>
     </div>
     <div class="modal-body">
         <p>Tem a certeza que pretende publicar o artefacto ao público?</p><br>
         <p>O artefacto passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
     </div>
     <div class="modal-footer">
-        <a href="/Artefactos/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="/Artefactos/Publicar/IDARTEFACTO" class="btn btn-danger">Sim</a>
         <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
     </div>
 </div>
 
+<div id="modal-from-dom-remover" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="close">&times;</a>
+         <h3>Remover Artefacto</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende remover premanentemente o artefacto?</p><br>   
+        <p>O artefacto pode não voltar a ser recuperado, contacte o administrador do sistema para verificar a possibilidade de recuperar um artefacto removido.</p>     
+    </div>
+    <div class="modal-footer">
+        <a href="/Artefactos/Remover/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
 
 
             <section class="content-wrapper main-content clear-fix">
@@ -103,7 +117,7 @@
 										</a>
 										<ul class="dropdown-menu pull-right">
 											<li>
-                                                <a href="#">Apagar artefacto</a>
+                                                <a class="confirm-remover" data-id="@a.ArtefactoID">Remover artefacto</a>
 											</li>
 										</ul>
 									</div>

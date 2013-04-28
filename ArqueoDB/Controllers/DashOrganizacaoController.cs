@@ -57,7 +57,8 @@ namespace ArqueoDB.Controllers
 
             ViewBag.CurrentFilter = searchString;
             
-            var locais = from l in db.Locais where l.OrganizacaoID == organizacao.OrganizacaoID select l;
+            var locais = organizacao.Locais.AsEnumerable<Local>();
+            locais = locais.Where(l => l.Apagado == false);
 
             if (!String.IsNullOrEmpty(searchString))
             {

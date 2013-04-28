@@ -53,6 +53,7 @@ namespace ArqueoDB.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var imagens = artefacto.Imagens.AsEnumerable<Imagem>();
+            imagens = imagens.Where(i => i.Apagada == false);
 
             if (!String.IsNullOrEmpty(searchString))
             {
