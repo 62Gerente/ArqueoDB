@@ -23,6 +23,7 @@
 @section dashboard{
     Locais    
 }
+
             <div class="span12" style="margin-bottom:20px"> 
                 @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){
                     <div class="pull-right" style="margin-left:10px" >  
@@ -49,6 +50,43 @@
 					</div>
                }
             </div>
+
+
+
+                                    
+ <div id="modal-from-dom-ocultar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
+         <h3>Ocultar Local</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende ocultar o local ao público?</p><br>
+        <p>O local passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Locais/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+ <div id="modal-from-dom-publicar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
+         <h3>Publicar Local</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende publicar o local ao público?</p><br>
+        <p>O local passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Locais/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+                                    
+                             
+
+
             <section class="content-wrapper main-content clear-fix">
 @foreach(var l in ViewBag.Locais){
     					<div class="span6" 
@@ -97,40 +135,7 @@
                                 </div>
                                 <div class="span8" style="margin-top:20px">
                                     <a class="btn btn-small btn-inverse t" href="/Locais/Details/@l.LocalID"><i class="micon-eye"></i> Ver local</a>
-                                    <a class="btn btn-small btn-inverse t" href="/DashLocal/Dashboard/@l.LocalID"><i class="micon-pencil-2"></i> Gerir local</a>
-                                    
-                                    
- <div id="modal-from-dom-ocultar" class="modal hide fade">
-    <div class="modal-header">
-        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
-         <h3>Ocultar Local</h3>
-    </div>
-    <div class="modal-body">
-        <p>Tem a certeza que pretende ocultar o local ao público?</p><br>
-        <p>O local passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
-    </div>
-    <div class="modal-footer">
-        <a href="/Locais/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
-        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
-    </div>
-</div>
-
- <div id="modal-from-dom-publicar" class="modal hide fade">
-    <div class="modal-header">
-        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
-         <h3>Publicar Local</h3>
-    </div>
-    <div class="modal-body">
-        <p>Tem a certeza que pretende publicar o local ao público?</p><br>
-        <p>O local passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
-    </div>
-    <div class="modal-footer">
-        <a href="/Locais/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
-        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
-    </div>
-</div>
-                                    
-                                    
+                                    <a class="btn btn-small btn-inverse t" href="/DashLocal/Dashboard/@l.LocalID"><i class="micon-pencil-2"></i> Gerir local</a>       
                                     
                                     @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
                                         if(l.Publico){

@@ -23,6 +23,7 @@
 @section dashboard{
     Locais    
 }
+
             <div class="span12" style="margin-bottom:20px"> 
                 <div class="pull-right" style="" >  
                         <a class="btn btn-inverse pull-right" href="#"><i class="micon-plus"></i>  Adicionar novo artefacto</a>
@@ -44,6 +45,43 @@
 					</div>
                }
             </div>
+
+
+
+                                    
+                                    
+ <div id="modal-from-dom-ocultar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
+         <h3>Ocultar Artefacto</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende ocultar o artefacto ao público?</p><br>
+        <p>O artefacto passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Artefactos/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+ <div id="modal-from-dom-publicar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
+         <h3>Publicar Local</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende publicar o artefacto ao público?</p><br>
+        <p>O artefacto passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Artefactos/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+
+
             <section class="content-wrapper main-content clear-fix">
 @foreach(var a in ViewBag.Artefactos){
     					<div class="span4" 
@@ -89,41 +127,7 @@
                                     <b>Data da descoberta:</b><br> @a.DataDescoberta.ToShortDateString()<br>
                                 </div>
                                 <div class="span6" style="margin-top:7px">
-
-                                    
-                                    
- <div id="modal-from-dom-ocultar" class="modal hide fade">
-    <div class="modal-header">
-        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
-         <h3>Ocultar Artefacto</h3>
-    </div>
-    <div class="modal-body">
-        <p>Tem a certeza que pretende ocultar o artefacto ao público?</p><br>
-        <p>O artefacto passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
-    </div>
-    <div class="modal-footer">
-        <a href="/Artefactos/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
-        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
-    </div>
-</div>
-
- <div id="modal-from-dom-publicar" class="modal hide fade">
-    <div class="modal-header">
-        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
-         <h3>Publicar Local</h3>
-    </div>
-    <div class="modal-body">
-        <p>Tem a certeza que pretende publicar o artefacto ao público?</p><br>
-        <p>O artefacto passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
-    </div>
-    <div class="modal-footer">
-        <a href="/Artefactos/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
-        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
-    </div>
-</div>
-                                    
-                                    
-                                    
+                                             
                                     @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
                                         if(a.Publico){
                                             <a class="btn btn-mini btn-danger t pull-right confirm-ocultar pull-right" style="margin-left:4px" data-id="@a.ArtefactoID"><i class="micon-cancel-2"></i></a>

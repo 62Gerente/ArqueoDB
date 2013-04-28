@@ -24,10 +24,6 @@
     Locais    
 }
 
-
-
-
-
             <div class="span12" style="margin-bottom:20px"> 
                 <div class="pull-right" style="" >  
                         <a class="btn btn-inverse pull-right" href="#"><i class="micon-plus"></i>  Adicionar nova imagem</a>
@@ -49,13 +45,8 @@
 					</div>
                }
             </div>
-            <section class="content-wrapper main-content clear-fix">
 
 
-            <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item">
-@foreach (var i in ViewBag.Imagens)
-{
-    
 <!-- modal-gallery is the modal dialog used for the image gallery -->
 <div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
     <div class="modal-header">
@@ -64,10 +55,10 @@
     </div>
     <div class="modal-body"><div class="modal-image"></div></div>
     <div class="modal-footer">
-        <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i></a>
-        <a class="btn btn-primary modal-next"><i class="icon-arrow-right icon-white"></i></a>
-        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="3000"><i class="icon-play icon-white"></i></a>
-        <a class="btn modal-download" target="_blank"><i class="icon-download"></i></a>
+        <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> Anterior</a>
+        <a class="btn btn-primary modal-next"><i class="icon-arrow-right icon-white"></i> Próxima</a>
+        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="4000"><i class="icon-play icon-white"></i> Apresentação</a>
+        <a class="btn modal-download" target="_blank"><i class="icon-download"></i> Download</a>
 
     </div>
 </div>
@@ -101,14 +92,40 @@
         <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
     </div>
 </div>
-    
- 
-                    <div class="gallery-item span3 imagecont" data-href="@(i.Directoria.Caminho + i.Nome)" title="@i.Descricao" style="background-image:url(@(i.Directoria.Caminho + i.Nome)); 
+
+
+            <section class="content-wrapper main-content clear-fix">
+
+
+            <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item">
+@foreach (var i in ViewBag.Imagens)
+{                   <div class="span3 "
                             @if((nrimagens++)%4==0){
-                               <text> margin-left:0px; </text>
+                               <text> style="margin-left:0px"; </text>
                             }
-                    ">
+    
+                    >
+                    <div class="gallery-item imagecont" data-href="@(i.Directoria.Caminho + i.Nome)" title="@i.Descricao" style="background-image:url(@(i.Directoria.Caminho + i.Nome));">
                     </div>
+                    <div class="btn-group dropdown-darkBg custom pull-right" style="margin-top:-39px">
+                        <button class="btn btn-mini dropdown-togglem" data-toggle="dropdown"><i class="icon-cog"></i></button>
+							<ul class="dropdown-menu">
+                                    @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
+                                        if(i.Publica){
+                                            <li><a class="confirm-ocultar" data-id="@i.ImagemID"><i class="micon-cancel-2"></i> Ocultar Imagem</a></li>
+                                    }else{
+                                            <li><a class="confirm-publicar" data-id="@i.ImagemID"><i class="micon-checkmark"></i> Publicar Imagem</a></li>
+                                        }
+                                    }            
+                                    @if (Model.Responsavel.UtilizadorID == user.UtilizadorID)
+                                    {
+                                        <li><a class="" data-id="@i.ImagemID"><i class="micon-cancel-2"></i> Remover Imagem</a></li>
+                                    }
+                                                       
+   							</ul>
+                    </div>
+                    </div>
+
 }
            </div>
            @{
