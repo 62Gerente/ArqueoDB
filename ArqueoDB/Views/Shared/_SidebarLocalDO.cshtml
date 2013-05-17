@@ -1,7 +1,7 @@
 ﻿@model ArqueoDB.Models.Local
 
                     <li class="avatar2 hidden-phone">
-                        <a href="#">
+                        <a href="/DashLocal/Dashboard/@Html.DisplayFor(m => Model.LocalID)">
 	                        <img src="@Html.DisplayFor(m => Model.Imagens.ElementAt(0).Directoria.Caminho)@Html.DisplayFor(m => Model.Imagens.ElementAt(0).Nome)" />
 	                        <span>@Html.DisplayFor(m => Model.Nome)</span>
                         </a>
@@ -31,6 +31,20 @@
                             <span class="hidden-phone">Artefactos</span>
                         </a>
                     </li>
+                    <li
+
+                    @if (String.Compare((string)ViewData["Activo"], "Documentos") == 0)
+                    {
+                        <text>class="active"</text> 
+                    }
+
+                        >
+                        <a href="/DashLocal/Documentos/@Html.DisplayFor(m => Model.LocalID)">
+                            <i class="micon-libreoffice"></i>
+                            <span class="hidden-phone">Documentos</span>
+                        </a>
+                    </li>
+
                     <li
 
                     @if (String.Compare((string)ViewData["Activo"], "Publicações") == 0)

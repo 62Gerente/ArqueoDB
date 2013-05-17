@@ -1,13 +1,14 @@
 namespace ArqueoDB.Migrations
 {
     using ArqueoDB.Models;
+    using ArqueoDB.DAL;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ArqueoDB.Models.EntidadesArqueoDB>
+    internal sealed class Configuration : DbMigrationsConfiguration<ArqueoDB.DAL.EntidadesArqueoDB>
     {
         public Configuration()
         {
@@ -29,7 +30,8 @@ namespace ArqueoDB.Migrations
                 new Directoria{Caminho = "/Images/Organizacoes/"},
                 new Directoria{Caminho = "/Images/Utilizadores/"},
                 new Directoria{Caminho = "/Images/Locais/"},
-                new Directoria{Caminho = "/Imagens/Artefactos/"}
+                new Directoria{Caminho = "/Images/Artefactos/"},
+                new Directoria{Caminho = "/Documentos/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
             context.SaveChanges();
@@ -55,7 +57,7 @@ namespace ArqueoDB.Migrations
                 new Imagem{
                     Nome = "mddiogo.jpg", 
                     DirectoriaID = 3, 
-                    Descricao = "Imagem Museu", 
+                    Descricao = "Imagem Entrada Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
@@ -99,7 +101,55 @@ namespace ArqueoDB.Migrations
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
-                }
+                },
+                new Imagem{
+                    Nome = "mddiogo1.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Terraço Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo2.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Interior Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo3.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Museu D. Diogo de Sousa", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo4.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Artefactos Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo5.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Placa da entrada do Museu D. Diogo de Sousa em Braga", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "mddiogo6.jpg", 
+                    DirectoriaID = 3, 
+                    Descricao = "Imagem do Jardim do Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
             };
             imagens.ForEach(i => context.Imagens.Add(i));
             context.SaveChanges();
@@ -213,7 +263,8 @@ namespace ArqueoDB.Migrations
                     ResponsavelID = 1,
                     Publica = true,
                     Membros = new List<Profissional>(),
-                    Locais = new List<Local>()
+                    Locais = new List<Local>(),
+                    Documentos = new List<Documento>()
                 }
             };
             organizacoes.ForEach(o => context.Organizacoes.Add(o));
@@ -240,7 +291,8 @@ namespace ArqueoDB.Migrations
                     Descricao = "O Museu de Arqueologia D. Diogo de Sousa é um organismo público, dependente da Direção Regional de Cultura do Norte definido na sua Lei orgânica como um museu regional de arqueologia.",
                     Publico = true,
                     Imagens = new List<Imagem>(),
-                    Artefactos = new List<Artefacto>()
+                    Artefactos = new List<Artefacto>(),
+                    Documentos = new List<Documento>()
                 },
                 new Local{
                     Nome = "Teatro Romano",
@@ -253,7 +305,8 @@ namespace ArqueoDB.Migrations
                     Descricao = "O Teatro romano do Alto da Cividade, em Braga, é o único teatro romano existente no noroeste da Península Ibérica (e o único também que está a ser escavado actualmente em Portugal e Espanha) fica situado junto às Termas romanas de Maximinos, em Braga.",
                     Publico = true,
                     Imagens = new List<Imagem>(),
-                    Artefactos = new List<Artefacto>()
+                    Artefactos = new List<Artefacto>(),
+                    Documentos = new List<Documento>()
                 },
             };
             locais.ForEach(l => context.Locais.Add(l));
@@ -268,6 +321,12 @@ namespace ArqueoDB.Migrations
             context.SaveChanges();
 
             locais[0].Imagens.Add(imagens[2]);
+            locais[0].Imagens.Add(imagens[8]);
+            locais[0].Imagens.Add(imagens[9]);
+            locais[0].Imagens.Add(imagens[10]);
+            locais[0].Imagens.Add(imagens[11]);
+            locais[0].Imagens.Add(imagens[12]);
+            locais[0].Imagens.Add(imagens[13]); 
             locais[1].Imagens.Add(imagens[3]);
             context.SaveChanges();
 
@@ -294,6 +353,65 @@ namespace ArqueoDB.Migrations
 
             artefactos[0].Imagens.Add(imagens[7]);
             context.SaveChanges();
+
+            var documentos = new List<Documento>
+            {
+                new Documento{
+                    Titulo = "The Playbook",                
+                    NomeFicheiro = "playbook.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 2,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "Peace and love!",                    
+                    Publico = true,        
+                    Apagado = false
+                },
+                new Documento{
+                    Titulo = "A obra do mestre André",                
+                    NomeFicheiro = "mestre_andre.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 3,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "Fantástico!",                    
+                    Publico = false,        
+                    Apagado = false
+                },
+                new Documento{
+                    Titulo = "Harry Poter",                
+                    NomeFicheiro = "documento.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 3,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "A versão de hp da robin",                    
+                    Publico = true,        
+                    Apagado = false
+                },
+                new Documento{
+                    Titulo = "Jonas, Quando for grande quero ser como tu!",                
+                    NomeFicheiro = "documento.pdf",
+                    DirectoriaID = 5,       
+                    ResponsavelID = 1,            
+                    OrganizacaoID = 1,        
+                    DataPublicacao = System.DateTime.Now,        
+                    Descricao = "Não há palavras",                    
+                    Publico = false,        
+                    Apagado = false
+                }
+            };         
+
+            documentos.ForEach(d => context.Documentos.Add(d));            
+            context.SaveChanges();
+
+            organizacoes[0].Documentos.Add(documentos[0]);
+            organizacoes[0].Documentos.Add(documentos[1]);
+            context.SaveChanges();
+
+            documentos.ForEach(d => locais[0].Documentos.Add(d));            
+            context.SaveChanges();
         }
     }
 }
+

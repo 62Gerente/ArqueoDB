@@ -11,3 +11,5 @@ ArqueoDB/ArqueoDB.csproj.user
 ArqueoDB/ArqueoDB.csproj
 
 ArqueoDB.sln
+
+*.swp

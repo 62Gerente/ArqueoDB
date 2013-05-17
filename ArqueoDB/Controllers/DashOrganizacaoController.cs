@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Data;
+using PagedList;
+using ArqueoDB.DAL;
 
 namespace ArqueoDB.Controllers
 {
@@ -15,7 +17,7 @@ namespace ArqueoDB.Controllers
 
         // GET: /DashboardOrganizacao/Dashboard
 
-        public ActionResult Dashboard(int id = 1)
+        public ActionResult Dashboard(int id)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
@@ -34,16 +36,63 @@ namespace ArqueoDB.Controllers
 
         // GET: /DashboardOrganizacao/Locais
 
-        public ActionResult Locais(int id = 1)
+        public ActionResult Locais(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
             if (organizacao == null)
             {
                 return HttpNotFound();
             }
 
-            ViewData["Capa"] = organizacao.ImagemCapa.Directoria.Caminho + organizacao.ImagemCapa.Nome;
-            ViewData["Perfil"] = organizacao.ImagemPerfil.Directoria.Caminho + organizacao.ImagemPerfil.Nome;
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            
+            var locais = organizacao.Locais.AsEnumerable<Local>();
+            locais = locais.Where(l => l.Apagado == false);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                locais = locais.Where(l => l.Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nome":
+                    locais = locais.OrderBy(l => l.Nome);
+                    break;
+                default:
+                    break;
+
+            }
+
+            switch (type)
+            {
+                case "Públicos":
+                    locais = locais.Where(l => l.Publico == true);
+                    break;
+                case "Ocultos":
+                    locais = locais.Where(l => l.Publico == false);
+                    break;
+                default:
+                    break;
+
+            }
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            ViewBag.Locais = locais.ToList().ToPagedList(pageNumber,pageSize);
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Locais";
@@ -60,8 +109,6 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["Capa"] = organizacao.ImagemCapa.Directoria.Caminho + organizacao.ImagemCapa.Nome;
-            ViewData["Perfil"] = organizacao.ImagemPerfil.Directoria.Caminho + organizacao.ImagemPerfil.Nome;
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Membros";
@@ -76,7 +123,6 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
-
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Definições";
 
@@ -94,6 +140,77 @@ namespace ArqueoDB.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Dashboard");
             }
+
+            return View(org);
+        }
+        // GET: /DashboardOrganizacao/Documentos
+        public ActionResult Documentos(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
+        {
+            Organizacao org = db.Organizacoes.Find(id);
+            if (org == null)
+            {
+                return HttpNotFound();
+            }
+            
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<Documento> query = org.Documentos.Where(d => d.Apagado == false);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(l => l.Titulo.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nome":
+                    query = query.OrderBy(doc => doc.Titulo);
+                    break;
+                case "Data":
+                    query = query.OrderBy(doc => doc.DataPublicacao);
+                    break;
+                case "Autor":
+                    query = query.OrderBy(doc => doc.Responsavel.Utilizador.Nome);
+                    break;
+                default:
+                    break;
+            }
+
+            switch (type)
+            {
+                case "Públicos":
+                    query = query.Where(doc => doc.Publico == true);
+                    break;
+                case "Ocultos":
+                    query = query.Where(doc => doc.Publico == false);
+                    break;
+                default:
+                    break;
+
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.DocumentosOrganizacao = query.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.pageSize = pageSize;
+            ViewBag.page = pageNumber;
+
+            ViewData["Dashboard"] = "Organizacao";
+            ViewData["Activo"] = "Documentos";
+
             return View(org);
         }
 

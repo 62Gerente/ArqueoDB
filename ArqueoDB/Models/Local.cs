@@ -55,5 +55,6 @@ namespace ArqueoDB.Models
         public virtual ICollection<Imagem> Imagens { get; set; }
         public virtual ICollection<Publicacao> Publicacoes { get; set; }
         public virtual ICollection<Planta> Plantas { get; set; }
+        public virtual ICollection<Documento> Documentos { get; set; }
     }
 }
