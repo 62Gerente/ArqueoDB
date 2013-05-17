@@ -68,5 +68,19 @@ namespace ArqueoDB.Controllers
 
             return View(local);
         }
+
+        public ActionResult Definicoes(int id = 0)
+        {
+            Local local = db.Locais.Find(id);
+            if (local == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Definições";
+
+            return View(local);
+        }
     }
 }

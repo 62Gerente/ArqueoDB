@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using System.Data;
 
 namespace ArqueoDB.Controllers
 {
@@ -65,6 +67,34 @@ namespace ArqueoDB.Controllers
             ViewData["Activo"] = "Membros";
 
             return View(organizacao);
+        }
+
+        public ActionResult Definicoes(int id = 1)
+        {
+            Organizacao organizacao = db.Organizacoes.Find(id);
+            if (organizacao == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["Dashboard"] = "Organizacao";
+            ViewData["Activo"] = "Definições";
+
+            return View(organizacao);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Definicoes(Organizacao  org)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(org).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+            return View(org);
         }
 
     }
