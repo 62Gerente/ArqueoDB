@@ -1,0 +1,199 @@
+﻿@model ArqueoDB.Models.Utilizador
+@using ArqueoDB.Models
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
+}
+@section breadcrumb {
+				<div class="breadcrumb-button">
+				   <a href="#">
+                    <span class="breadcrumb-label">
+					<i class="icon-group"></i> Utilizadores </span>
+					<span class="breadcrumb-arrow"><span></span></span>
+                   </a>
+				</div>
+				<div class="breadcrumb-button">
+                   <a href="#">
+					<span class="breadcrumb-label">
+					<i class="icon-user"></i> @Model.Nome </span>
+					<span class="breadcrumb-arrow"><span></span></span>
+                   </a>
+				</div> 
+}
+		<div class="container-fluid padded">
+			<div class="row-fluid">
+				<div class="span10">
+					<!-- find me in partials/big_chart -->
+					<div class="box">
+						<div class="box-header">
+							<div class="title">
+								<span>Perfil de @Model.Nome (@Model.NomeUtilizador)</span>
+							</div>
+							<ul class="box-toolbar">
+								<li><span class="label label-red">Trabalhador em Organização</span></li>
+							</ul>
+						</div>
+						<div class="box-content padded">
+							<div class="row-fluid">
+								<div class="span2">
+									<div id="thumbs" style="margin: 0px auto 0px; text-align: left;">
+										<a href="http://farm8.staticflickr.com/7013/6754656011_3de2cc73a2_z.jpg" style="background-image:url(http://farm8.staticflickr.com/7013/6754656011_3de2cc73a2_m.jpg);margin: 0px 0px 0px;" title="Lion Rock"></a>
+									</div>
+								</div>
+								<div class="span4" style="padding-left:20px;">
+									<h4>Dr. John Smith dos Santos</h4>
+									<h5><b> Arqueólogo </b></h5>
+									<p>
+										 Morador em Cidade
+									</p>
+									<p>
+										 Nascido a 10 de Maio de 1922.
+									</p>
+								</div>
+								<div class="span4" style="padding-left:20px;">
+									<p style="margin: 10px 0;line-height:23px;">
+										<b>Contactos</b>
+									</p>
+									<p>
+										 Email: johnsmith@mail.com
+									</p>
+									<p>
+										 Telefone: 910 000 000
+									</p>
+									<p>
+										 Homem, 34 anos
+									</p>
+								</div>
+								<div class=" offset1 span1">
+									<a href="#" class="btn btn-facebook btn-block"><i class="icon-facebook-sign"></i></a>
+									<a href="#" class="btn btn-twitter btn-block"><i class="icon-twitter-sign"></i></a>
+									<a href="#" class="btn btn-red btn-block"><i class=" icon-google-plus-sign"></i></a>
+									<a href="#" class="btn btn-facebook btn-block"><i class="icon-linkedin-sign"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+
+<fieldset>
+    <legend>Utilizador</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NomeUtilizador)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NomeUtilizador)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Distrito.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Distrito.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataNascimento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataNascimento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sexo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sexo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Telemovel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Telemovel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Facebook)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Facebook)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Google)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Google)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Twitter)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Twitter)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Linkedin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Linkedin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Titulo.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Titulo.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImagemPerfil.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImagemPerfil.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImagemCapa.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImagemCapa.Nome)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UtilizadorID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -4,9 +4,9 @@
 	position:relative;
 	overflow:hidden; 
 	
-	background-size: 164px auto;
+	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: left center;
+	background-position: center;
 }
 
 .imagecont {
@@ -15,7 +15,7 @@
 	position:relative;
 	overflow:hidden; 
 	
-	background-size: 306px auto;
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: left center;
 	margin-bottom: 15px;
