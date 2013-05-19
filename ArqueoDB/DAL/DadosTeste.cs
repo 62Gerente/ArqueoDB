@@ -192,7 +192,9 @@ namespace ArqueoDB.DAL
                     Sexo = 1,
                     TituloID = 2,
                     UtilizadoresSeguidos = new List<Utilizador>(),
-                    Seguidores = new List<Utilizador>()
+                    Seguidores = new List<Utilizador>(),
+                    Comentarios = new List<Comentario>(),
+                    Publicacoes = new List<Publicacao>()
                 },
                 new Utilizador{
                     NomeUtilizador = "Barney",
@@ -210,7 +212,9 @@ namespace ArqueoDB.DAL
                     Sexo = 1,
                     TituloID = 2,
                     UtilizadoresSeguidos = new List<Utilizador>(),
-                    Seguidores = new List<Utilizador>()
+                    Seguidores = new List<Utilizador>(),
+                    Comentarios = new List<Comentario>(),
+                    Publicacoes = new List<Publicacao>()
                 },
                 new Utilizador{
                     NomeUtilizador = "Robin",
@@ -228,7 +232,9 @@ namespace ArqueoDB.DAL
                     Sexo = 2,
                     TituloID = 2,
                     UtilizadoresSeguidos = new List<Utilizador>(),
-                    Seguidores = new List<Utilizador>()
+                    Seguidores = new List<Utilizador>(),
+                    Comentarios = new List<Comentario>(),
+                    Publicacoes = new List<Publicacao>()
                 }
             };
             utilizadores.ForEach(u => context.Utilizadores.Add(u));
@@ -344,6 +350,15 @@ namespace ArqueoDB.DAL
             locais[1].Imagens.Add(imagens[3]);
             context.SaveChanges();
 
+            imagens[7].AutorID = 1;
+            imagens[8].AutorID = 1;
+            imagens[9].AutorID = 1;
+            imagens[10].AutorID = 1;
+            imagens[11].AutorID = 1;
+            imagens[12].AutorID = 1;
+            imagens[13].AutorID = 1;
+            context.SaveChanges();
+
             var artefactos = new List<Artefacto>
             {
                 new Artefacto{
@@ -424,6 +439,56 @@ namespace ArqueoDB.DAL
             context.SaveChanges();
 
             documentos.ForEach(d => locais[0].Documentos.Add(d));
+            context.SaveChanges();
+
+            var comentarios = new List<Comentario>()
+            {
+                new Comentario{
+                    Texto="Excelentes fotografias do Museu D. Diogo, Obrigado",
+                    AutorID = 3,
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Comentario{
+                    Texto="Obrigado pelas fotografias",
+                    AutorID = 2,
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Comentario{
+                    Texto="Para quando as novas fotografias dos artefactos do museu?",
+                    AutorID = 3,
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Comentario{
+                    Texto="Jonas te saluto!",
+                    AutorID = 2,
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now
+                },
+            };
+            comentarios.ForEach(c => utilizadores[0].Comentarios.Add(c));
+            context.SaveChanges();
+
+            var publicacoes = new List<Publicacao>()
+            {
+                new Publicacao{
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now,
+                    Publico = true,
+                    Titulo = "Bracara Augusta - Espaço Urbano",
+                    Descricao = "As intervenções arqueológicas realizadas em Braga, desde meados da década de setenta, proporcionam um melhor conhecimento da organização da cidade romana de Bracara Augusta. Alguns desses vestígios da ocupação romana foram integrados na malha urbana actual sendo visitáveis."
+                },
+                new Publicacao{
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now,
+                    Publico = true,
+                    Titulo = "Mosaico in Situ",
+                    Descricao = "Durante as escavações arqueológicas, que precederam a construção do edifício do Museu, foram encontrados vestígios de uma habitação do século I, com a particularidade de ter um mosaico. Dada a elevada acidez do solo em Braga, este tipo de achado raramente se preserva, pelo que se procedeu à sua integração nas instalações do Museu, no espaço-cripta do bloco de serviços. O mosaico é constituído por motivos geométricos bicromos (branco e preto). Um dos painéis musivos é constituído por um tabuleiro, em que as casas apresentam cruzeta ao centro, em oposição de cores e o outro é decorado com quadrícula de linhas de ampulhetas, com tesselas de granito e de calcário. Estão em curso trabalhos de restauro."
+                }
+            };
+            publicacoes.ForEach(c => utilizadores[0].Publicacoes.Add(c));
             context.SaveChanges();
         }
     }

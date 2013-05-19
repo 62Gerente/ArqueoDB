@@ -33,7 +33,7 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
-            List<Imagem> imagens = db.Imagens.Where(i => (
+            List<Imagem> imagens = db.Imagens.Where(i => (((i.AutorID != null) && (i.AutorID == utilizador.UtilizadorID)  ) && 
                                                                         (i.ImagemID != utilizador.ImagemCapaID) &&
                                                                         (i.ImagemID != utilizador.ImagemPerfilID) &&
                                                                         (i.Apagada == false) && (i.Publica == true))).ToList();
