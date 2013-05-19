@@ -31,6 +31,25 @@ namespace ArqueoDB.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder){
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+        modelBuilder.Entity<Profissional>()
+            .HasMany<Organizacao>(x => x.Organizacoes)
+            .WithMany(x => x.Membros)
+            .Map(x =>
+            {
+                x.MapLeftKey("ProfissionalID");
+                x.MapRightKey("OrganizacaoID");
+            });
+
+        modelBuilder.Entity<Utilizador>()
+            .HasMany<Utilizador>(x => x.UtilizadoresSeguidos)
+            .WithMany(x => x.Seguidores)
+            .Map(x =>
+            {
+                x.MapLeftKey("SeguidorID");
+                x.MapRightKey("SeguidoID");
+            });
+        
         }
     }
 }

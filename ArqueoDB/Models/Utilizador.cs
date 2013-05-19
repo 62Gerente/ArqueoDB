@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArqueoDB.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArqueoDB.Models;
 
 namespace ArqueoDB.Models
 {
@@ -95,7 +97,26 @@ namespace ArqueoDB.Models
         public virtual ICollection<Organizacao> OrganizacoesSeguidas { get; set; }
         public virtual ICollection<Publicacao> Publicacoes { get; set; }
         public virtual ICollection<Utilizador> UtilizadoresSeguidos { get; set; }
+        public virtual ICollection<Utilizador> Seguidores { get; set; }
 
+        public Profissional getProfessional()
+        {
+            EntidadesArqueoDB db = new EntidadesArqueoDB();
+            Profissional professional = db.Profissionais.AsEnumerable<Profissional>().Where(p => p.UtilizadorID == UtilizadorID).ElementAt(0);
+
+            return professional;
+        }
+
+        public Boolean isProfessional()
+        {
+            EntidadesArqueoDB db = new EntidadesArqueoDB();
+            Profissional professional = db.Profissionais.First(p => p.UtilizadorID == UtilizadorID);
+
+            if (professional == null)
+                return false;
+            else
+                return true;
+        }
 
     }
 }

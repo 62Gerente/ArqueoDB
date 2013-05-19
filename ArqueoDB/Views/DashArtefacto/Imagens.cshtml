@@ -127,17 +127,17 @@
                     >
                     <div class="gallery-item imagecont" data-href="@(i.Directoria.Caminho + i.Nome)" title="@i.Descricao" style="background-image:url(@(i.Directoria.Caminho + i.Nome));">
                     </div>
-                    <div class="btn-group dropdown-darkBg custom pull-right" style="margin:-76px 0px 0px 1px">
+                    <div class="btn-group dropdown-darkBg custom" style="margin:-76px 0px 0px 1px">
                         <button class="btn btn-mini dropdown-togglem" data-toggle="dropdown"><i class="icon-cog"></i></button>
 							<ul class="dropdown-menu">
-                                    @if(Model.Organizacao.Responsavel.UtilizadorID == user.UtilizadorID){    
+                                    @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
                                         if(i.Publica){
                                             <li><a class="confirm-ocultar" data-id="@i.ImagemID"><i class="micon-cancel-2"></i> Ocultar Imagem</a></li>
                                     }else{
                                             <li><a class="confirm-publicar" data-id="@i.ImagemID"><i class="micon-checkmark"></i> Publicar Imagem</a></li>
                                         }
                                     }            
-                                    @if (Model.Organizacao.Responsavel.UtilizadorID == user.UtilizadorID)
+                                    @if (Model.Responsavel.UtilizadorID == user.UtilizadorID)
                                     {
                                         <li><a class="confirm-remover" data-id="@i.ImagemID"><i class="micon-cancel-2"></i> Remover Imagem</a></li>
                                     }

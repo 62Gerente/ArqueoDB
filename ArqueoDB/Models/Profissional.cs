@@ -16,8 +16,6 @@ namespace ArqueoDB.Models
 
         public virtual ICollection<Artefacto> Artefactos { get; set; }
         public virtual ICollection<Documento> Documentos { get; set; }
-        public virtual ICollection<Organizacao> OrganizacoesResponsavel { get; set; }
-        public virtual ICollection<Organizacao> OrganizacoesMembro { get; set; }
-        public virtual ICollection<Local> LocaisResponsavel { get; set; }
+        public virtual ICollection<Organizacao> Organizacoes { get; set; }
     }
 }

@@ -184,13 +184,15 @@ namespace ArqueoDB.DAL
                     Banido = false,
                     DataNascimento = System.DateTime.Now,
                     DataRegisto = System.DateTime.Now,
-                    Descricao = "Admite lá esse cansaço",
+                    Descricao = "... o Cabido tem por importante função a de zelar por uma correcta interpretação deste Tratado, por forma a que a Praxe seja sempre respeitada, e as suas noções compreendidas e cumpridas. Em todos os casos duvidosos quanto à correcta aplicação da justiça, em qualquer falta cometida pelo Papa, ou em qualquer outra falta de suma importância, será ao Cabido que competirá ajuizar e dar sentença ou conselho...",
                     Email = "jonas@cabidocardeais.com",
                     DistritoID = 1,
                     ImagemCapaID = 4,
                     ImagemPerfilID = 5,
                     Sexo = 1,
-                    TituloID = 2
+                    TituloID = 2,
+                    UtilizadoresSeguidos = new List<Utilizador>(),
+                    Seguidores = new List<Utilizador>()
                 },
                 new Utilizador{
                     NomeUtilizador = "Barney",
@@ -206,7 +208,9 @@ namespace ArqueoDB.DAL
                     ImagemCapaID = 4,
                     ImagemPerfilID = 6,
                     Sexo = 1,
-                    TituloID = 2
+                    TituloID = 2,
+                    UtilizadoresSeguidos = new List<Utilizador>(),
+                    Seguidores = new List<Utilizador>()
                 },
                 new Utilizador{
                     NomeUtilizador = "Robin",
@@ -222,7 +226,9 @@ namespace ArqueoDB.DAL
                     ImagemCapaID = 4,
                     ImagemPerfilID = 7,
                     Sexo = 2,
-                    TituloID = 2
+                    TituloID = 2,
+                    UtilizadoresSeguidos = new List<Utilizador>(),
+                    Seguidores = new List<Utilizador>()
                 }
             };
             utilizadores.ForEach(u => context.Utilizadores.Add(u));
@@ -233,9 +239,18 @@ namespace ArqueoDB.DAL
 
             var profissionais = new List<Profissional>
             {
-                new Profissional{UtilizadorID = 1},
-                new Profissional{UtilizadorID = 2},
-                new Profissional{UtilizadorID = 3}
+                new Profissional{
+                    UtilizadorID = 1,
+                    Organizacoes = new List<Organizacao>()
+                },
+                new Profissional{
+                    UtilizadorID = 2,
+                    Organizacoes = new List<Organizacao>()
+                },
+                new Profissional{
+                    UtilizadorID = 3,
+                    Organizacoes = new List<Organizacao>()
+                }
             };
             profissionais.ForEach(p => context.Profissionais.Add(p));
             context.SaveChanges();
@@ -270,6 +285,11 @@ namespace ArqueoDB.DAL
             organizacoes[0].Membros.Add(profissionais[0]);
             organizacoes[0].Membros.Add(profissionais[1]);
             organizacoes[0].Membros.Add(profissionais[2]);
+            context.SaveChanges();
+
+            profissionais[0].Organizacoes.Add(organizacoes[0]);
+            profissionais[1].Organizacoes.Add(organizacoes[0]);
+            profissionais[2].Organizacoes.Add(organizacoes[0]);
             context.SaveChanges();
 
             var locais = new List<Local>

@@ -33,6 +33,12 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
+            List<Imagem> imagens = db.Imagens.Where(i => (
+                                                                        (i.ImagemID != utilizador.ImagemCapaID) &&
+                                                                        (i.ImagemID != utilizador.ImagemPerfilID) &&
+                                                                        (i.Apagada == false) && (i.Publica == true))).ToList();
+            ViewBag.Imagens = imagens;
+
             return View(utilizador);
         }
 
@@ -134,5 +140,33 @@ namespace ArqueoDB.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult Seguir(int id, int seguir){
+
+            System.Diagnostics.Debug.WriteLine(id + " " + seguir);
+
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Utilizador utilizadorSeguir = db.Utilizadores.Find(seguir);
+
+            utilizador.UtilizadoresSeguidos.Add(utilizadorSeguir);
+
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult DeixarSeguir(int id, int seguir)
+        {
+
+
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Utilizador utilizadorSeguir = db.Utilizadores.Find(seguir);
+
+            utilizador.UtilizadoresSeguidos.Remove(utilizadorSeguir);
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
     }
 }
