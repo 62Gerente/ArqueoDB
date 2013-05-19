@@ -20,11 +20,10 @@
         @using (Html.BeginForm()) {
         @Html.ValidationSummary(true)
             <fieldset>
-            <legend class="muted" style="font-size: 20.5px">Editar Perfil</legend>
                 <div class="well widget">
                   <div class="row-fluid">
                  
-                    @Html.HiddenFor(model => model.OrganizacaoID)
+                    @Html.HiddenFor(model => model.LocalID)
                    
                       <div class="span4">
                          <form>
@@ -36,7 +35,7 @@
                                   @Html.TextBoxFor(model => model.Nome, new {@class="input-xlarge" })
                             </div>
                             <div class="span12" style="margin-left:0px">
-                                  @Html.ValidationMessageFor(model => model.Nome)
+                                  @Html.ValidationMessageFor(model => model.Nome, "Nome do local necessário")
                             </div>
                         </div>
                        <div class="editor-field span12" style="margin-left:0px">
@@ -48,7 +47,7 @@
                                   @Html.TextBoxFor(model => model.DataRegisto, new {@class="input-xlarge" })
                             </div>
                             <div class="span12">
-                                  @Html.ValidationMessageFor(model => model.DataRegisto)
+                                  @Html.ValidationMessageFor(model => model.DataRegisto, "Data de registo necessária")
                             </div>
                         </div>
 
@@ -77,7 +76,7 @@
                                        @Html.TextBoxFor(model => model.Coordenadas, new {@class="input-xlarge" })
                                   </div>
                                   <div class="span12">
-                                       @Html.ValidationMessageFor(model => model.Coordenadas)
+                                       @Html.ValidationMessageFor(model => model.Coordenadas, "Coordenadas necessárias")
                                   </div>
                              </div>
                              </form>
@@ -147,7 +146,7 @@
                        <div class="span7">
                           <div class="pull-right">
                             <input class="btn btn-inverse" type="submit" value="Guardar"> 
-                            <a class="btn btn-danger" href="#"  style="padding:4px 23px"> Voltar</a>
+                            <a class="btn btn-danger" href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.LocalID)"  style="padding:4px 23px"> Voltar</a>
                         </div>
                       </div>
               </div>
