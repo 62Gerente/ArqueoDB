@@ -26,6 +26,11 @@ namespace ArqueoDB.Models
 
         [ScaffoldColumn(false)]
         public DateTime DataPublicacao { get; set; }
+
+        [DisplayName("Autor")]
+        public int? AutorID { get; set; }
+        [ForeignKey("AutorID")]
+        public virtual Utilizador Autor { get; set; }
        
 	    [Required(ErrorMessage = "Necessário indicar nível de acesso")]
         [DisplayName("Pública")]

@@ -46,7 +46,7 @@
 									</div>
 								</div>
 								<div class="span4" style="padding-left:20px;">
-									<h4>@Model.Nome</h4>
+									<h4>@(Model.Titulo.Nome + " " +  Model.Nome)</h4>
 									<h5><b> 
                                     @if(Model.isProfessional()){
                                         <text>Arqueólogo</text>
@@ -146,6 +146,23 @@
 					</div>
 				</div>
 			</div>
+
+ <!-- modal-gallery is the modal dialog used for the image gallery -->
+<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body"><div class="modal-image"></div></div>
+    <div class="modal-footer">
+        <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> Anterior</a>
+        <a class="btn btn-primary modal-next"><i class="icon-arrow-right icon-white"></i> Próxima</a>
+        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="4000"><i class="icon-play icon-white"></i> Apresentação</a>
+        <a class="btn modal-download" target="_blank"><i class="icon-download"></i> Download</a>
+
+    </div>
+</div>
+
 			<div class="span4">
 				<!-- find me in partials/big_chart -->
 				<div class="box">
@@ -156,12 +173,12 @@
 						</div>
 					<div class="box-content"  style="height:150px; padding:10px">
 						<div class="row-fluid" style="height:150px; overflow-y:scroll;">
-							<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" style="text-align:center">
+							 <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item" style="text-align:center">
 								@if (imagens.Count() == 0) {
                                     <text>Nenhuma imagem adicionada até ao momento</text>
                                 }else{
                                     foreach (Imagem im in imagens) { 
-                                       <a data-gallery="gallery" href="@(im.Directoria.Caminho + im.Nome)" title="@im.Nome"><img src="@(im.Directoria.Caminho + im.Nome)"></a> 
+                                       <div class="gallery-item gallerypic" data-href="@(im.Directoria.Caminho + im.Nome)" title="@im.Descricao" style="background-image:url(@(im.Directoria.Caminho + im.Nome));"></div> 
                                     }
                                 }
 							</div>
@@ -169,6 +186,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="span4">
 				<!-- find me in partials/big_chart -->
 				<div class="box">
@@ -179,12 +197,12 @@
 						</div>
 					<div class="box-content"  style="height:150px; padding:10px">
 						<div class="row-fluid" style="height:150px; overflow-y:scroll;">
-							<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" style="text-align:center">
+							 <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item" style="text-align:center">
 								@if (Model.Badges.Count == 0) {
                                     <text>Nenhuma medalha ganha até ao momento</text>
                                 }else{
                                     foreach (Badge bad in Model.Badges) { 
-                                       <a data-gallery="gallery" href="@(bad.Directoria.Caminho + bad.Nome)" title="@bad.Nome"><img src="@(bad.Directoria.Caminho + bad.Nome)"></a> 
+                                       <div class="gallery-item gallerypic" data-href="@(bad.Directoria.Caminho + bad.Nome)" title="@bad.Descricao" style="background-image:url(@(bad.Directoria.Caminho + bad.Nome));"></div> 
                                     }
                                 }							</div>
 						</div>
@@ -193,122 +211,108 @@
 				</div>
 			</div>
 		</div>
-<fieldset>
-    <legend>Utilizador</legend>
+		<div class="container-fluid padded">
+			<div class="row-fluid">
+				<div class="span6">
+					<!-- find me in partials/big_chart -->
+					<div class="box">
+						<div class="box-header">
+							<div class="title">
+								<span><i class="icon-edit"></i> Publicações</span>
+							</div>
+						</div>
+						<div class="box-content padded" style="padding:10px;">
+							<div class="row-fluid">
+								<div class="span12">
+                                    <ul class="chat-box timeline" style="height:300px; overflow-y:scroll;">
+                                      @foreach(Publicacao publ in Model.Publicacoes.Where(p => p.Publico && !p.Apagado)){
+                                      <li class="arrow-box-left gray">
+                                        <div class="avatar"><img class="avatar-small" src="@(Model.ImagemPerfil.Directoria.Caminho + Model.ImagemPerfil.Nome)"></div>
+                                        <div class="info">
+                                          <span class="name">
+                                            <span class="label label-blue">Publicação</span> <strong class="indent">@publ.Titulo</strong>
+                                          </span>
+                                          <span class="time"><i class="icon-time"></i> @publ.DataPublicacao.ToShortDateString()</span>
+                                        </div>
+                                        <div class="content">
+                                          <blockquote>
+                                            @publ.Descricao
+                                          </blockquote>
+                                        </div>
+                                      </li>
+                                      }
+                                    </ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span6">
+					<!-- find me in partials/big_chart -->
+					<div class="box">
+						<div class="box-header">
+							<div class="title">
+								<span><i class="icon-comment"></i> Comentários</span>
+							</div>
+						</div>
+						<div class="box-content padded"  style="padding:10px;">
+							<div class="row-fluid">
+								<div class="span12">
+                                    <ul class="chat-box timeline" style="height:300px; overflow-y:scroll;">
+                                      @foreach(Comentario comm in Model.Comentarios.Where(c => !c.Apagado)){
+                                      <li class="arrow-box-left gray">
+                                        <div class="avatar"><img class="avatar-small" src="@(comm.Autor.ImagemPerfil.Directoria.Caminho + comm.Autor.ImagemPerfil.Nome)"></div>
+                                        <div class="info">
+                                          <span class="name">
+                                            <span class="label label-green">Comentário </span> por <strong class="indent">@comm.Autor.Nome</strong>
+                                          </span>
+                                          <span class="time"><i class="icon-time"></i> @comm.DataPublicacao.ToShortDateString()</span>
+                                        </div>
+                                        <div class="content">
+                                          <blockquote>
+                                            @comm.Texto
+                                          </blockquote>
+                                        </div>
+                                      </li>
+                                      }
+                                    </ul>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.NomeUtilizador)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.NomeUtilizador)
-    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+							<div class="row-fluid">
+								<div class="span12">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
+                                     <div class="box closable-chat-box open">
+                                      <div class="box-content padded">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Password)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Password)
-    </div>
+                                        <div class="fields">
+                                          <div class="avatar"><img class="avatar-small" src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)"></div>
+                                          <ul>
+                                            <li><b>Novo comentário</b></li>
+                                            <li>Comenta o perfil de @Model.Nome</li>
+                                            <br>
+                                          </ul>
+                                        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nome)
-    </div>
+                                        <form class="fill-up" action="/">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Distrito.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Distrito.Nome)
-    </div>
+                                          <div class="chat-message-box">
+                                                <textarea placeholder="comentário aqui..." rows="3"></textarea>
+                                          </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataNascimento)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataNascimento)
-    </div>
+                                          <div class="clearfix actions">
+                                            <div class="pull-right faded-toolbar">
+                                      
+                                              <a href="#" class="btn btn-blue btn-mini">Comentar</a>
+                                            </div>
+                                          </div>
+                                        </form>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Sexo)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Sexo)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Descricao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Descricao)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Telemovel)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Telemovel)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Facebook)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Facebook)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Google)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Google)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Twitter)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Twitter)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Linkedin)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Linkedin)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Titulo.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Titulo.Nome)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ImagemPerfil.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ImagemPerfil.Nome)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ImagemCapa.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ImagemCapa.Nome)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.UtilizadorID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                                      </div>
+                                    </div>
+                        				</div>
+			</div>

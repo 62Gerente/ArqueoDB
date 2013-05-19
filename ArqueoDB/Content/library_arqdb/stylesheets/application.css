@@ -11244,7 +11244,7 @@ button.btn {
 	-o-border-radius:2px;
 	border-radius:2px;
 	min-height:auto;
-	margin-right:0
+	margin-right:10px;
 }
 .chat-box.timeline .info,.chat-box.timeline .content {
 	background:#fafafa;
@@ -13806,4 +13806,18 @@ a.editable-click.editable-disabled:hover {
 	.chat-box.timeline+.closable-chat-box {
 		margin-left: 0
 	}
+}
+
+
+.gallerypic {
+	height:75px; 
+	width:95px; 
+	position:relative;
+	overflow:hidden; 
+	
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	float: left;
 }
