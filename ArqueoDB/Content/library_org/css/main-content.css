@@ -1,7 +1,7 @@
 
 /* styles for validation helpers */
 .field-validation-error {
-    color: #e80c4d;
+    color: rgb(207, 33, 9);
     font-weight: bold;
 }
 
