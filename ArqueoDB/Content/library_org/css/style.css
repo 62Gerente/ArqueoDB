@@ -1,3 +1,32 @@
+
+/* =======================================
+
+		Main Stylesheet
+		
+		Building on Twitter Bootstrap
+		http://twitter.github.com/bootstrap/
+		
+========================================== */
+
+@import url('assets/css/bootstrap.min.css');
+@import url('assets/css/bootstrap-responsive.min.css');
+
+/* New styles below */
+
+		label.valid {
+		  width: 24px;
+		  height: 24px;
+		  background: url(../assets/img/valid.png) center center no-repeat;
+		  display: inline-block;
+		  text-indent: -9999px;
+		}
+		label.error {
+			font-weight: bold;
+			color: red;
+			padding: 2px 8px;
+			margin-top: 2px;
+		}
+
 @charset 'UTF-8';
 /*
  * Bootstrap Image Gallery CSS Example 1.0
@@ -13,7 +42,7 @@
 body {
     padding-top: 60px;
     background: #222;
-    color: #fff;
+    color: #000;
 }
 header {
     margin-bottom: 30px;
@@ -29,3 +58,4 @@ header a {
 .modal {
     color: #333;
 }
+

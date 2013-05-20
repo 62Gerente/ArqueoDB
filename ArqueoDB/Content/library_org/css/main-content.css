@@ -1,4 +1,30 @@
 
+/* styles for validation helpers */
+.field-validation-error {
+    color: rgb(207, 33, 9);
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+
+
 .hide {
     display: none;
 }

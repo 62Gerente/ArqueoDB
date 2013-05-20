@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using PagedList;
 using ArqueoDB.DAL;
 using System.Collections.Generic;
+using System.Data;
 
 namespace ArqueoDB.Controllers
 {
@@ -177,6 +178,34 @@ namespace ArqueoDB.Controllers
             return View(local);
         }
 
+
+        public ActionResult Definicoes(int id = 0)
+        {
+            Local local = db.Locais.Find(id);
+            if (local == null)
+            {
+                return HttpNotFound();
+            }
+
+             ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Definições";
+
+            return View(local);
+        }
+
+        [HttpPost]
+        public ActionResult Definicoes(Local local)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(local).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+
+            return View(local);
+        }
+
         public ActionResult Imagens(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
         {
             Local local = db.Locais.Find(id);
@@ -188,6 +217,7 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
+
 
             if (Request.HttpMethod == "GET")
             {

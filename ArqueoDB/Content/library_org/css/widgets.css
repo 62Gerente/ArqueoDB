@@ -4,18 +4,18 @@
 	position:relative;
 	overflow:hidden; 
 	
-	background-size: 164px auto;
+	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: left center;
+	background-position: center;
 }
 
 .imagecont {
 	height:170px; 
-	width:265px; 
+
 	position:relative;
 	overflow:hidden; 
 	
-	background-size: 265px auto;
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: left center;
 	margin-bottom: 15px;

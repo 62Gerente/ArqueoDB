@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using ArqueoDB.DAL;
+using System.Data;
 
 namespace ArqueoDB.Controllers
 {
@@ -93,6 +94,34 @@ namespace ArqueoDB.Controllers
             ViewData["Activo"] = "Imagens";
 
             return View(artefacto);
+        }
+
+        public ActionResult Definicoes(int id = 1)
+        {
+            Artefacto artefacto = db.Artefactos.Find(id);
+            if (artefacto == null)
+            {
+                return HttpNotFound();
+            }
+            ViewData["Dashboard"] = "Artefacto";
+            ViewData["Activo"] = "Definições";
+
+            return View(artefacto);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Definicoes(Artefacto art)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+
+            return View(art);
         }
     }
 }

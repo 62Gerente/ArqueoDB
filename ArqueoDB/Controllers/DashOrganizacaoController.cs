@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using System.Data;
 using PagedList;
 using ArqueoDB.DAL;
 
@@ -163,6 +165,33 @@ namespace ArqueoDB.Controllers
             return View(org);
         }        
 
+        public ActionResult Definicoes(int id = 1)
+        {
+            Organizacao organizacao = db.Organizacoes.Find(id);
+            if (organizacao == null)
+            {
+                return HttpNotFound();
+            }
+            ViewData["Dashboard"] = "Organizacao";
+            ViewData["Activo"] = "Definições";
+
+            return View(organizacao);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Definicoes(Organizacao  org)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(org).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+
+            return View(org);
+        }
         // GET: /DashboardOrganizacao/Documentos
         public ActionResult Documentos(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
         {
@@ -171,7 +200,7 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
-
+            
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CurrentType = type;
 
