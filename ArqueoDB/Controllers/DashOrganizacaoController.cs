@@ -99,20 +99,69 @@ namespace ArqueoDB.Controllers
         }
 
         // GET: /DashboardOrganizacao/Membros
-
-        public ActionResult Membros(int id = 1)
+        
+        public ActionResult Membros(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
         {
-            Organizacao organizacao = db.Organizacoes.Find(id);
-            if (organizacao == null)
+            Organizacao org = db.Organizacoes.Find(id);
+            if (org == null)
             {
                 return HttpNotFound();
             }
 
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<Profissional> query = org.Membros ;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p => p.Utilizador.Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nome":
+                    query = query.OrderBy(m => m.Utilizador.NomeUtilizador);
+                    break;                
+                case "Email":
+                    query = query.OrderBy(m => m.Utilizador.Email);
+                    break;
+                case "Distrito":
+                    query = query.OrderBy(m => m.Utilizador.Distrito);
+                    break;
+                default:
+                    break;
+            }
+
+            switch (type)
+            {
+                default:
+                    break;
+            }
+
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.MembrosOrganizacao = query.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.pageSize = pageSize;
+            ViewBag.page = pageNumber;
+
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Membros";
 
-            return View(organizacao);
-        }
+            return View(org);
+        }        
 
         // GET: /DashboardOrganizacao/Documentos
         public ActionResult Documentos(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
@@ -184,6 +233,19 @@ namespace ArqueoDB.Controllers
 
             return View(org);
         }
+
+        //
+        // GET: /DashOrganizacao/RemoverMembro
+        /*
+        public ActionResult Remover(int id, int membro_id)
+        {
+            Organizacao org = db.Organizacoes.Find(id);            
+            org.Membros.Remove(
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+         */
 
     }
 }
