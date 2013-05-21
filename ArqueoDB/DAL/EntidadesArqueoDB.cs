@@ -59,6 +59,15 @@ namespace ArqueoDB.DAL
                 x.MapRightKey("SeguidaID");
             });
 
+        modelBuilder.Entity<Utilizador>()
+            .HasMany<Local>(x => x.LocaisSeguidos)
+            .WithMany(x => x.Seguidores)
+            .Map(x =>
+            {
+                x.MapLeftKey("SeguidorID");
+                x.MapRightKey("SeguidoID");
+            });
+
         }
     }
 }

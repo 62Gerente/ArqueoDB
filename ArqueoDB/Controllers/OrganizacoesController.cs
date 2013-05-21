@@ -138,8 +138,6 @@ namespace ArqueoDB.Controllers
         public ActionResult Seguir(int id, int seguir)
         {
 
-            System.Diagnostics.Debug.WriteLine(id + " " + seguir);
-
             Utilizador utilizador = db.Utilizadores.Find(id);
             Organizacao orgSeguir = db.Organizacoes.Find(seguir);
 

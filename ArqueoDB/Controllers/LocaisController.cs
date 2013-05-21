@@ -157,5 +157,30 @@ namespace ArqueoDB.Controllers
 
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult Seguir(int id, int seguir)
+        {
+
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Local locSeguir = db.Locais.Find(seguir);
+
+            utilizador.LocaisSeguidos.Add(locSeguir);
+
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult DeixarSeguir(int id, int seguir)
+        {
+
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Local locSeguir = db.Locais.Find(seguir);
+
+            utilizador.LocaisSeguidos.Remove(locSeguir);
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
     }
 }
