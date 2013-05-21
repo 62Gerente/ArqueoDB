@@ -122,10 +122,5 @@ namespace ArqueoDB.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-
-        public ActionResult Perfil()
-        {
-            return View();
-        }
     }
 }

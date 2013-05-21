@@ -30,7 +30,7 @@
 					<div class="box">
 						<div class="box-header">
 							<div class="title">
-								<span>Perfil de @Model.Nome (@Model.NomeUtilizador)</span>
+								<span><i class="icon-desktop"> </i></span> <span> Perfil de @Model.Nome (@Model.NomeUtilizador)</span>
 							</div>
                         @if(Model.isProfessional() && Model.getProfessional().Organizacoes.Count > 0){
 							<ul class="box-toolbar">
@@ -41,7 +41,7 @@
 						<div class="box-content padded">
 							<div class="row-fluid">
 								<div class="span2">
-									<div id="thumbs" style="margin: 0px auto 0px; text-align: left;">
+									<div id="avatarpic" style="margin: 0px auto 0px; text-align: left;">
 										<a href="@(Model.ImagemPerfil.Directoria.Caminho + Model.ImagemPerfil.Nome)" style="background-image:url(@(Model.ImagemPerfil.Directoria.Caminho + Model.ImagemPerfil.Nome));margin: 0px 0px 0px;" title="Lion Rock"></a>
 									</div>
 								</div>
@@ -62,9 +62,9 @@
 									</p>
 								</div>
 								<div class="span4" style="padding-left:20px;">
-									<p style="margin: 10px 0;line-height:23px;">
-										<h5><b>Contactos</b></h5>
-									</p>
+									<h5 style="margin: 10px 0;line-height:23px;">
+										<b>Contactos</b>
+									</h5>
 									<p>
 										 Email: @Model.Email
 									</p>
@@ -134,11 +134,11 @@
 				<div class="box">
                     	<div class="box-header">
 							<div class="title">
-								<span>Sobre</span>
+								<span><i class="icon-info-sign"> </i></span> <span> Sobre</span>
 							</div>
 						</div>
-					<div class="box-content" style="height:150px; padding:10px">
-						<div class="row-fluid" style="height:150px; overflow-y:scroll;">
+					<div class="box-content" style="padding:10px; height:150px;">
+						<div class="row-fluid scrollable" style="height:150px; overflow-y:auto;">
 							<p>
                                 @Model.Descricao
                             </p>
@@ -168,11 +168,11 @@
 				<div class="box">
                     	<div class="box-header">
 							<div class="title">
-								<span>Galeria</span>
+								<span><i class="icon-picture"> </i></span> <span> Galeria</span>
 							</div>
 						</div>
-					<div class="box-content"  style="height:150px; padding:10px">
-						<div class="row-fluid" style="height:150px; overflow-y:scroll;">
+					<div class="box-content"  style="padding:10px; height:150px;">
+						<div class="row-fluid scrollable" style="height:150px; overflow-y:auto;">
 							 <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item" style="text-align:center">
 								@if (imagens.Count() == 0) {
                                     <text>Nenhuma imagem adicionada até ao momento</text>
@@ -192,11 +192,11 @@
 				<div class="box">
                     	<div class="box-header">
 							<div class="title">
-								<span>Medalhas</span>
+								<span><i class="icon-certificate"> </i></span> <span> Medalahas</span>
 							</div>
 						</div>
-					<div class="box-content"  style="height:150px; padding:10px">
-						<div class="row-fluid" style="height:150px; overflow-y:scroll;">
+					<div class="box-content"  style="padding:10px; height:150px;">
+						<div class="row-fluid scrollable" style="height:150px; overflow-y:auto;">
 							 <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item" style="text-align:center">
 								@if (Model.Badges.Count == 0) {
                                     <text>Nenhuma medalha ganha até ao momento</text>
@@ -214,51 +214,48 @@
 		<div class="container-fluid padded">
 			<div class="row-fluid">
 				<div class="span6">
-					<!-- find me in partials/big_chart -->
-					<div class="box">
-						<div class="box-header">
-							<div class="title">
-								<span><i class="icon-edit"></i> Publicações</span>
-							</div>
-						</div>
-						<div class="box-content padded" style="padding:10px;">
-							<div class="row-fluid">
-								<div class="span12">
-                                    <ul class="chat-box timeline" style="height:300px; overflow-y:scroll;">
-                                      @foreach(Publicacao publ in Model.Publicacoes.Where(p => p.Publico && !p.Apagado)){
-                                      <li class="arrow-box-left gray">
-                                        <div class="avatar"><img class="avatar-small" src="@(Model.ImagemPerfil.Directoria.Caminho + Model.ImagemPerfil.Nome)"></div>
-                                        <div class="info">
-                                          <span class="name">
-                                            <span class="label label-blue">Publicação</span> <strong class="indent">@publ.Titulo</strong>
-                                          </span>
-                                          <span class="time"><i class="icon-time"></i> @publ.DataPublicacao.ToShortDateString()</span>
-                                        </div>
-                                        <div class="content">
-                                          <blockquote>
-                                            @publ.Descricao
-                                          </blockquote>
-                                        </div>
-                                      </li>
-                                      }
-                                    </ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+
+<div class="box">
+      <div class="box-header">
+        <span class="title"><i class="icon-edit"> </i> Publicaçõoes</span>
+        <ul class="box-toolbar">
+          <li><span class="label label-blue">@Model.Publicacoes.Count</span></li>
+        </ul>
+      </div>
+      <div class="box-content scrollable" style="height: 300px; overflow-y: auto">
+        <!-- find me in partials/news_with_icons -->
+        @foreach(Publicacao publ in Model.Publicacoes.Where(p => p.Publico && !p.Apagado)){
+
+        <div class="box-section news with-icons">
+          <div class="avatar blue"><i class="icon-lightbulb icon-2x"></i></div>
+          <div class="news-time">
+            <span>@publ.DataPublicacao.Day</span> @publ.DataPublicacao.ToShortDateString()
+          </div>
+          <div class="news-content">
+            <div class="news-title"><a href="#">@publ.Titulo</a></div>
+            <div class="news-text">
+                @publ.Descricao
+            </div>
+          </div>
+        </div>
+        }
+            </div>
+            </div>
+            </div>
+             
 				<div class="span6">
 					<!-- find me in partials/big_chart -->
 					<div class="box">
 						<div class="box-header">
-							<div class="title">
-								<span><i class="icon-comment"></i> Comentários</span>
-							</div>
+                        <span class="title"><i class="icon-comments-alt"> </i> Cometários</span>
+                        <ul class="box-toolbar">
+                          <li><span class="label label-blue">@Model.Comentarios.Count</span></li>
+                        </ul>
 						</div>
-						<div class="box-content padded"  style="padding:10px;">
+						<div class="box-content">
 							<div class="row-fluid">
 								<div class="span12">
-                                    <ul class="chat-box timeline" style="height:300px; overflow-y:scroll;">
+                                    <ul class="chat-box timeline scrollable" style="height:300px; overflow-y:auto;">
                                       @foreach(Comentario comm in Model.Comentarios.Where(c => !c.Apagado)){
                                       <li class="arrow-box-left gray">
                                         <div class="avatar"><img class="avatar-small" src="@(comm.Autor.ImagemPerfil.Directoria.Caminho + comm.Autor.ImagemPerfil.Nome)"></div>
@@ -294,8 +291,9 @@
                                           <ul>
                                             <li><b>Novo comentário</b></li>
                                             <li>Comenta o perfil de @Model.Nome</li>
-                                            <br>
+                                          <br/>
                                           </ul>
+                                          <br/>
                                         </div>
 
                                         <form class="fill-up" action="/">
@@ -316,3 +314,4 @@
                                     </div>
                         				</div>
 			</div>
+            </div>

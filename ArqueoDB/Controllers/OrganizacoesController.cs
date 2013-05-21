@@ -133,6 +133,19 @@ namespace ArqueoDB.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
-        }
+        }	
+
+        //
+        // GET: /Organizacoes/Create
+
+        public ActionResult Create()
+        {
+            ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome");
+            ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID");
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome");
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome");
+            return View();
+        }                       
+        
     }
 }
