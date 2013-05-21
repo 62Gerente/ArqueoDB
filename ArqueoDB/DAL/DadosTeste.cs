@@ -279,7 +279,8 @@ namespace ArqueoDB.DAL
                     Publica = true,
                     Membros = new List<Profissional>(),
                     Locais = new List<Local>(),
-                    Documentos = new List<Documento>()
+                    Documentos = new List<Documento>(),
+                    Publicacoes = new List<Publicacao>()
                 }
             };
             organizacoes.ForEach(o => context.Organizacoes.Add(o));
@@ -489,6 +490,9 @@ namespace ArqueoDB.DAL
                 }
             };
             publicacoes.ForEach(c => utilizadores[0].Publicacoes.Add(c));
+            context.SaveChanges();
+
+            publicacoes.ForEach(c => organizacoes[0].Publicacoes.Add(c));
             context.SaveChanges();
         }
     }

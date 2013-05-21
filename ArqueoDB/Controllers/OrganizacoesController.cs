@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ArqueoDB.Models;
+using ArqueoDB.DAL;
 
 namespace ArqueoDB.Controllers
 {
@@ -132,6 +133,34 @@ namespace ArqueoDB.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public ActionResult Seguir(int id, int seguir)
+        {
+
+            System.Diagnostics.Debug.WriteLine(id + " " + seguir);
+
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Organizacao orgSeguir = db.Organizacoes.Find(seguir);
+
+            utilizador.OrganizacoesSeguidas.Add(orgSeguir);
+
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult DeixarSeguir(int id, int seguir)
+        {
+
+
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Organizacao orgSeguir = db.Organizacoes.Find(seguir);
+
+            utilizador.OrganizacoesSeguidas.Remove(orgSeguir);
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
     }
 }
