@@ -30,7 +30,7 @@
 					<div class="box">
 						<div class="box-header">
 							<div class="title">
-								<span>Perfil de @Model.Nome (@Model.NomeUtilizador)</span>
+								<span><i class="icon-desktop"> </i></span> <span> Perfil de @Model.Nome (@Model.NomeUtilizador)</span>
 							</div>
                         @if(Model.isProfessional() && Model.getProfessional().Organizacoes.Count > 0){
 							<ul class="box-toolbar">
@@ -134,7 +134,7 @@
 				<div class="box">
                     	<div class="box-header">
 							<div class="title">
-								<span>Sobre</span>
+								<span><i class="icon-info-sign"> </i></span> <span> Sobre</span>
 							</div>
 						</div>
 					<div class="box-content" style="padding:10px; height:150px;">
@@ -168,7 +168,7 @@
 				<div class="box">
                     	<div class="box-header">
 							<div class="title">
-								<span>Galeria</span>
+								<span><i class="icon-picture"> </i></span> <span> Galeria</span>
 							</div>
 						</div>
 					<div class="box-content"  style="padding:10px; height:150px;">
@@ -192,7 +192,7 @@
 				<div class="box">
                     	<div class="box-header">
 							<div class="title">
-								<span>Medalhas</span>
+								<span><i class="icon-certificate"> </i></span> <span> Medalahas</span>
 							</div>
 						</div>
 					<div class="box-content"  style="padding:10px; height:150px;">
@@ -247,7 +247,7 @@
 					<!-- find me in partials/big_chart -->
 					<div class="box">
 						<div class="box-header">
-                        <span class="title"><i class="icon-edit"> </i> Cometários</span>
+                        <span class="title"><i class="icon-comments-alt"> </i> Cometários</span>
                         <ul class="box-toolbar">
                           <li><span class="label label-blue">@Model.Comentarios.Count</span></li>
                         </ul>
