@@ -163,6 +163,72 @@ namespace ArqueoDB.Controllers
             ViewData["Activo"] = "Membros";
 
             return View(org);
+        }
+
+        // GET
+        // Controlador para publicações
+
+        public ActionResult Publicacoes(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
+        {
+            Organizacao org = db.Organizacoes.Find(id);
+            if (org == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<Profissional> query = org.Membros;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p => p.Utilizador.Nome.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nome":
+                    query = query.OrderBy(m => m.Utilizador.NomeUtilizador);
+                    break;
+                case "Email":
+                    query = query.OrderBy(m => m.Utilizador.Email);
+                    break;
+                case "Distrito":
+                    query = query.OrderBy(m => m.Utilizador.Distrito);
+                    break;
+                default:
+                    break;
+            }
+
+            switch (type)
+            {
+                default:
+                    break;
+            }
+
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.MembrosOrganizacao = query.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.pageSize = pageSize;
+            ViewBag.page = pageNumber;
+
+            ViewData["Dashboard"] = "Organizacao";
+            ViewData["Activo"] = "Membros";
+
+            return View(org);
         }        
 
         public ActionResult Definicoes(int id = 1)
