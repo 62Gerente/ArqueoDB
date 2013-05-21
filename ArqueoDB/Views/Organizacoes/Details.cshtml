@@ -174,7 +174,7 @@
                         </ul>
                       </div>
 
-                      <div class="box-content scrollable" style="height:254px;">
+                      <div class="box-content scrollable" style="height:254px; overflow-y:scroll;">
 
                            @foreach(Local loc in Model.Locais.Where(l => l.Publico && !l.Apagado)){
                             <div class="box-section news">
@@ -208,7 +208,7 @@
                         </ul>
                       </div>
 
-                      <div class="box-content scrollable" style="height:254px;">
+                      <div class="box-content scrollable" style="height:254px; overflow-y:scroll;">
                            @foreach(Profissional ut in Model.Membros.Where(m => !m.Utilizador.Apagado)){
                             <div class="box-section news">
                                 <div class="span2">
