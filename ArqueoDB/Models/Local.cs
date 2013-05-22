@@ -28,7 +28,7 @@ namespace ArqueoDB.Models
         public virtual Profissional Responsavel { get; set; }
 
         [StringLength(30, ErrorMessage = "Número máximo de caracteres excedido")]
-        [Required(ErrorMessage = "Coordenadas necessárias")]
+   
         public string Coordenadas { get; set; }
 
         [DisplayName("Data de Registo")]

@@ -116,13 +116,18 @@ namespace ArqueoDB.Controllers
             return View(organizacao);
         }
 
-        public ActionResult Definicoes(int id = 1)
+        public ActionResult Definicoes(int id)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.ResponsavelID = new SelectList(organizacao.Membros, "ProfissionalID", "Utilizador.Nome", organizacao.ResponsavelID);
+            ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", organizacao.DistritoID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemCapaID);
+
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Definições";
 
@@ -134,13 +139,21 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult Definicoes(Organizacao  org)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(org).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", new { id = org.OrganizacaoID });
             }
+            Organizacao organizacao = db.Organizacoes.Find(org.OrganizacaoID);
+            ViewBag.ResponsavelID = new SelectList(organizacao.Membros, "ProfissionalID", "Utilizador.Nome", organizacao.ResponsavelID);
+            ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", organizacao.DistritoID);
+            ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemPerfilID);
+            ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", organizacao.ImagemCapaID);
 
+            ViewData["Dashboard"] = "Organizacao";
+            ViewData["Activo"] = "Definições";
             return View(org);
         }
         // GET: /DashboardOrganizacao/Documentos

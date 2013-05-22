@@ -1,11 +1,13 @@
-﻿using System;
+﻿using ArqueoDB.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ArqueoDB.Models;
+using System.Data.Entity;
+using System.Data;
+using PagedList;
+using ArqueoDB.DAL;
 
 namespace ArqueoDB.Controllers
 {

@@ -96,13 +96,17 @@ namespace ArqueoDB.Controllers
             return View(artefacto);
         }
 
-        public ActionResult Definicoes(int id = 1)
+        public ActionResult Definicoes(int id)
         {
             Artefacto artefacto = db.Artefactos.Find(id);
             if (artefacto == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ResponsavelID = new SelectList(artefacto.Organizacao.Membros, "ProfissionalID", "Utilizador.Nome", artefacto.ResponsavelID);
+            ViewBag.LocalID = new SelectList(db.Distritos, "DistritoID", "Nome", artefacto.LocalID);
+
             ViewData["Dashboard"] = "Artefacto";
             ViewData["Activo"] = "Definições";
 
@@ -112,14 +116,21 @@ namespace ArqueoDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Definicoes(Artefacto art)
+        public ActionResult Definicoes(Artefacto artefacto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(art).State = EntityState.Modified;
+                db.Entry(artefacto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Dashboard");
             }
+
+            Artefacto art = db.Artefactos.Find(artefacto.ArtefactoID);
+            ViewBag.ResponsavelID = new SelectList(artefacto.Organizacao.Membros, "ProfissionalID", "Utilizador.Nome", artefacto.ResponsavelID);
+            ViewBag.LocalID = new SelectList(db.Locais, "LocalID", "Nome", artefacto.LocalID);
+
+            ViewData["Dashboard"] = "Artefacto";
+            ViewData["Activo"] = "Definições";
 
             return View(art);
         }

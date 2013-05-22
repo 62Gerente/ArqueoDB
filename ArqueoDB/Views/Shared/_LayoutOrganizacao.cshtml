@@ -235,8 +235,6 @@
 		<script src="../../Content/library_org/plugins/bootstrap-datepicker.js"></script>
 		<script src="../../Content/library_org/plugins/jquery.timePicker.min.js"></script>
         		
-		<!-- plugins loader -->
-		<script src="../../Content/library_org/js/loader.js"></script>
 
         <script src="../../Content/library_org/js/bootbox.js"></script>
         <script src="../../Content/library_org/js/model-confirm.js"></script>
@@ -246,5 +244,11 @@
         <script src="../../Content/library_org/js/bootstrap-image-gallery.min.js"></script>
 
         @Scripts.Render("~/bundles/jqueryval")
+
+                <script>
+                    $('.datepicker').datepicker({
+                        format: 'dd-mm-yyyy'
+                    });
+        </script>
 	</body>
 </html>

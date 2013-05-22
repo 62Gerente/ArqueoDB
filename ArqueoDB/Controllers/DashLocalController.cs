@@ -179,7 +179,7 @@ namespace ArqueoDB.Controllers
         }
 
 
-        public ActionResult Definicoes(int id = 0)
+        public ActionResult Definicoes(int id)
         {
             Local local = db.Locais.Find(id);
             if (local == null)
@@ -187,7 +187,10 @@ namespace ArqueoDB.Controllers
                 return HttpNotFound();
             }
 
-             ViewData["Dashboard"] = "Local";
+            ViewBag.ResponsavelID = new SelectList(local.Organizacao.Membros, "ProfissionalID", "Utilizador.Nome", local.ResponsavelID);
+            ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", local.DistritoID);
+
+            ViewData["Dashboard"] = "Local";
             ViewData["Activo"] = "Definições";
 
             return View(local);
@@ -200,8 +203,14 @@ namespace ArqueoDB.Controllers
             {
                 db.Entry(local).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", new { id = local.LocalID });
             }
+            Local loc = db.Locais.Find(local.LocalID);
+            ViewBag.ResponsavelID = new SelectList(local.Organizacao.Membros, "ProfissionalID", "Utilizador.Nome", local.ResponsavelID);
+            ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", local.DistritoID);
+
+            ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Definições";
 
             return View(local);
         }
