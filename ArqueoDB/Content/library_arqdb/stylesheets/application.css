@@ -5235,6 +5235,10 @@ h1,h2,h3,h4,h5,h6,th {
 	max-width:32px;
 	max-height:32px
 }
+.avatar-medium {
+	max-width:55px;
+	max-height:55px
+}
 .twitter-color {
 	color:#4099ff
 }
@@ -12036,11 +12040,51 @@ table.dataTable th:active {
 #nextArrow {
 	right:40px
 }
-#thumbs {
+#avatarpic-planta {
 	margin:60px auto 35px;
 	text-align:center
 }
-#thumbs a {
+#avatarpic-planta a {
+	width:100%;
+	height:100%;
+	display:inline-block;
+	border:1px solid #303030;
+	box-shadow:0 1px 3px rgba(0,0,0,0.5);
+	border-radius:4px;
+	margin:6px 6px 40px;
+	position:relative;
+	text-decoration:none;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	-moz-background-size:cover;
+	-webkit-background-size:cover
+}
+#avatarpic-small {
+	margin:60px auto 35px;
+	text-align:center
+}
+#avatarpic-small a {
+	width:65px;
+	height:52px;
+	display:inline-block;
+	border:1px solid #303030;
+	box-shadow:0 1px 3px rgba(0,0,0,0.5);
+	border-radius:4px;
+	margin:6px 6px 40px;
+	position:relative;
+	text-decoration:none;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	-moz-background-size:cover;
+	-webkit-background-size:cover
+}
+#avatarpic {
+	margin:60px auto 35px;
+	text-align:center
+}
+#avatarpic a {
 	width:120px;
 	height:120px;
 	display:inline-block;
@@ -12055,15 +12099,35 @@ table.dataTable th:active {
 	background-size:cover;
 	-moz-background-size:cover;
 	-webkit-background-size:cover
-}/*
+}
+#thumbs {
+	margin:60px auto 35px;
+	text-align:center
+}
+#thumbs a {
+	width:170px;
+	height:120px;
+	display:inline-block; 
+	border:1px solid #303030;
+	box-shadow:0 1px 3px rgba(0,0,0,0.5);
+	border-radius:4px;
+	margin:6px 6px 40px;
+	position:relative;
+	text-decoration:none;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	-moz-background-size:cover;
+	-webkit-background-size:cover
+}
 #thumbs a:after {
-	background-color:#303030;
-	border-radius:7px;
-	bottom:-136px;
-	box-shadow:0 1px 2px rgba(0,0,0,0.3);
-	color:#FFFFFF;
+/*	background-color:#303030; 
+	border-radius:7px; */
+	bottom:-130px;
+/*	box-shadow:0 1px 2px rgba(0,0,0,0.3); */
+	color:#000;
 	content:attr(title);
-	display:inline-block;
+/*	display:inline-block; */
 	font-size:10px;
 	max-width:90px;
 	overflow:hidden;
@@ -12071,7 +12135,7 @@ table.dataTable th:active {
 	position:relative;
 	text-align:center;
 	white-space:nowrap
-}*/
+}
 #credit {
 	background-color:rgba(255,255,255,0.2);
 	border-radius:8px;
@@ -13811,7 +13875,7 @@ a.editable-click.editable-disabled:hover {
 
 .gallerypic {
 	height:75px; 
-	width:95px; 
+	width:86px; 
 	position:relative;
 	overflow:hidden; 
 	

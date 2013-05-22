@@ -1,106 +1,287 @@
 ﻿@model ArqueoDB.Models.Organizacao
+@using ArqueoDB.Models
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
+    Utilizador user = ((Utilizador)(Session["Utilizador"]));
 }
 
-<h2>Details</h2>
+@section breadcrumb {
+				<div class="breadcrumb-button">
+				   <a href="/Organizacoes/Index">
+                    <span class="breadcrumb-label">
+					<i class="icon-group"></i> Organizações </span>
+					<span class="breadcrumb-arrow"><span></span></span>
+                   </a>
+				</div>
+				<div class="breadcrumb-button">
+                   <a href="#">
+					<span class="breadcrumb-label">
+					<i class="icon-briefcase"></i> @Model.Nome </span>
+					<span class="breadcrumb-arrow"><span></span></span>
+                   </a>
+				</div> 
+}
 
-<fieldset>
-    <legend>Organizacao</legend>
+		<div class="container-fluid padded">
+			<div class="row-fluid">
+				<div class="span10">
+					<!-- find me in partials/big_chart -->
+					<div class="box">
+						<div class="box-header">
+							<div class="title">
+								<span><i class="icon-desktop"> </i></span> <span> Perfil da @Model.Nome</span>
+							</div>
+                        @if(Model.Activa){
+							<ul class="box-toolbar">
+								<li><span class="label label-red">Organização em actividade</span></li>
+							</ul>
+                            }
+						</div>
+						<div class="box-content padded">
+							<div class="row-fluid">
+								<div class="span2">
+									<div id="avatarpic" style="margin: 0px auto 0px; text-align: left;">
+										<a href="@(Model.ImagemPerfil.Directoria.Caminho + Model.ImagemPerfil.Nome)" style="background-image:url(@(Model.ImagemPerfil.Directoria.Caminho + Model.ImagemPerfil.Nome));margin: 10px 0px 0px;" title="Lion Rock"></a>
+									</div>
+								</div>
+								<div class="span4" style="padding-left:20px;">
+									<h4>@Model.Nome</h4>
+									<h5><b>Organização</b></h5>
+									<p>
+										 <b>Localização:</b> @Model.Distrito.Nome
+									</p>
+									<p>
+										 <b>Data fundação:</b> @Model.DataFundacao.ToShortDateString()
+									</p>
+									<p>
+										 <b>Responsável:</b> <a href="/Utilizadores/Details/@Model.Responsavel.UtilizadorID">@Model.Responsavel.Utilizador.Nome</a>
+									</p>
+								</div>
+								<div class="span4" style="padding-left:20px;">
+									<h5 style="margin: 10px 0;line-height:23px;">
+										<b>Contactos</b>
+									</h5>
+									<p>
+										 <b>Email:</b> @Model.Email
+									</p>
+									<p>
+										 <b>Morada:</b> @Model.Morada
+									</p>
+									<p>
+										 <b>Telefone:</b> @Model.Telefone
+									</p>
+									<p>
+									     <b>Fax:</b> @Model.Fax
+									</p>
+								</div>
+                                @if(Model.Membros.FirstOrDefault(m => m.UtilizadorID == user.UtilizadorID) != null){
+                                <div class="span2" style="margin-top: 32px;">
+					                <div class="action-nav-normal rounded">
+                                        <li class="action-nav-button btn-small">
+                                            <a href="/DashOrganizacao/Dashboard/@Model.OrganizacaoID" title="Gerir Organização" class="tip" title="" data-original-title="Gerir Organização">
+                                                <i class="icon-cogs"></i>
+                                            </a>
+                                         </li>
+					                </div>
+                                </div>
+                                }
+							</div>
+						</div>
+					</div>
+                    </div>
+                    <div class="span2" style="padding-top:25px;">
+					<!-- find me in partials/action_nav_normal -->
+					<!--big normal buttons-->
+					<div class="action-nav-normal">
+						<div class="row-fluid">
+							<div class="span12 action-nav-button">
+								<a href="#" title="Enviar Email">
+								<i class="icon-envelope"></i>
+								<span>Enviar Email</span>
+								</a>
+								<span class="triangle-button red"><i class="icon-plus"></i></span>
+							</div>
+						</div>
+                        @if(Model.Seguidores.FirstOrDefault(u => u.UtilizadorID == user.UtilizadorID) == null){
+						<div class="row-fluid">
+							<div class="span12 action-nav-button">
+								<a href="/Organizacoes/Seguir?id=@user.UtilizadorID&seguir=@Model.OrganizacaoID" title="Seguir organizacao">
+								<i class="icon-rss"></i>
+								<span>Seguir organizacao</span>
+								</a>
+							</div>
+						</div>
+                        }else{
+						<div class="row-fluid">
+							<div class="span12 action-nav-button">
+								<a href="/Organizacoes/DeixarSeguir?id=@user.UtilizadorID&seguir=@Model.OrganizacaoID" title="Deixar de seguir organizacão">
+								<i class="icon-rss"></i>
+								<span>Deixar de seguir</span>
+								</a>
+							</div>
+						</div>
+                        }
+					</div>
+				</div>
+            </div>
+        </div>
+	<div class="container-fluid padded">
+		<div class="row-fluid">
+			<div class="span4">
+				<!-- find me in partials/big_chart -->
+				<div class="box">
+                    	<div class="box-header">
+							<div class="title">
+								<span><i class="icon-info-sign"> </i></span> <span> Sobre</span>
+							</div>
+						</div>
+					<div class="box-content" style="padding:10px; height:180px;">
+						<div class="row-fluid scrollable" style="height:180px; overflow-y:auto;">
+							<p>
+                                @Model.Descricao
+                            </p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nome)
-    </div>
+			<div class="span8">
+				<!-- find me in partials/big_chart -->
+				<div class="box">
+                    	<div class="box-header">
+							<div class="title">
+								<span><i class="icon-map-marker"> </i></span> <span> Localização</span>
+							</div>
+						</div>
+					<div class="box-content"  style="padding:10px; height:180px;">
+                        <div id="map-canvas" style="height:180px"></div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="container-fluid padded">
+			<div class="row-fluid">
+				<div class="span6">
+                    <div class="box">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Coordenadas)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Coordenadas)
-    </div>
+                      <div class="box-header">
+                        <span class="title"><i class="icon-map-marker"> </i> Locais</span>
+                        <ul class="box-toolbar">
+                          <li><span class="label label-blue">@Model.Locais.Count</span></li>
+                        </ul>
+                      </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Morada)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Morada)
-    </div>
+                      <div class="box-content scrollable" style="height:254px; overflow-y:scroll;">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Distrito.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Distrito.Nome)
-    </div>
+                           @foreach(Local loc in Model.Locais.Where(l => l.Publico && !l.Apagado)){
+                            <div class="box-section news">
+                                <div class="span2">
+									<div id="avatarpic-small" style="margin: 0px auto 0px; text-align: left;">
+										<a href="/Locais/Details/@loc.LocalID" style="background-image:url(@(loc.Imagens.FirstOrDefault().Directoria.Caminho + loc.Imagens.FirstOrDefault().Nome));margin: 0px 0px 0px;"></a>
+									</div>
+								</div>
+                                <div class="news-content span8" style="margin-left: 15px">
+                                <div class="news-title"><a href="/Locais/Details/@loc.LocalID">@loc.Nome</a></div>
+                                <div class="news-text">
+                                    <b>Data de fundação:</b> @loc.DataRegisto.ToShortDateString()
+                                </div>
+                                <div class="news-text">
+                                    <b>Responsável:</b> <a href="/Utilizadores/Details/@loc.Responsavel.UtilizadorID">@loc.Responsavel.Utilizador.Nome</a>
+                                </div>
+                              </div>
+                            </div>
+                            }
+                      </div>
+                   </div>
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Responsavel.ProfissionalID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Responsavel.ProfissionalID)
-    </div>
+				<div class="span6">
+                    <div class="box">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Descricao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Descricao)
-    </div>
+                      <div class="box-header">
+                        <span class="title"><i class="icon-group"> </i> Utilizadores</span>
+                        <ul class="box-toolbar">
+                          <li><span class="label label-blue">@Model.Membros.Count</span></li>
+                        </ul>
+                      </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataFundacao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataFundacao)
-    </div>
+                      <div class="box-content scrollable" style="height:254px; overflow-y:scroll;">
+                           @foreach(Profissional ut in Model.Membros.Where(m => !m.Utilizador.Apagado)){
+                            <div class="box-section news">
+                                <div class="span2">
+									<div id="avatarpic-small" style="margin: 0px auto 0px; text-align: left;">
+										<a href="/Utilizadores/Details/@ut.UtilizadorID" style="background-image:url(@(ut.Utilizador.ImagemPerfil.Directoria.Caminho + ut.Utilizador.ImagemPerfil.Nome));margin: 0px 0px 0px;"></a>
+									</div>
+								</div>
+                                <div class="news-content span6" style="margin-left: 15px">
+                                <div class="news-title"><a href="/Utilizadores/Details/@ut.UtilizadorID">@ut.Utilizador.Nome</a></div>
+                                <div class="news-text">
+                                    <b>Nome de Utilizador:</b> @ut.Utilizador.NomeUtilizador
+                                </div>
+                                <div class="news-text">
+                                    <b>Email:</b> @ut.Utilizador.Email
+                                </div>
+                              </div>
+                                @if(ut.UtilizadorID == Model.Responsavel.UtilizadorID){
+                                <div class="span2 pull-right" style="margin-top: 5px;">
+					                <div class="action-nav-normal rounded">
+                                    <div class="avatar cyan"><i class="icon-legal icon-2x"></i></div>
+					                </div>
+                                </div>
+                                }
+                            </div>
+                            }
+                      </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+		<div class="container-fluid padded">
+			<div class="row-fluid">
+				<div class="span12">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Telefone)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Telefone)
-    </div>
+    <div class="box">
+      <div class="box-header">
+        <span class="title"><i class="icon-edit"> </i> Publicaçõoes</span>
+        <ul class="box-toolbar">
+          <li><span class="label label-blue">@Model.Publicacoes.Count</span></li>
+        </ul>
+      </div>
+      <div class="box-content scrollable" style="height: 254px; overflow-y: auto">
+        <!-- find me in partials/news_with_icons -->
+        @foreach(Publicacao publ in Model.Publicacoes.Where(p => p.Publico && !p.Apagado)){
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
+        <div class="box-section news with-icons">
+          <div class="avatar blue"><i class="icon-lightbulb icon-2x"></i></div>
+          <div class="news-time">
+            <span>@publ.DataPublicacao.Day</span> @publ.DataPublicacao.ToShortDateString()
+          </div>
+          <div class="news-content">
+            <div class="news-title"><a href="#">@publ.Titulo</a></div>
+            <div class="news-text">
+                @publ.Descricao
+            </div>
+          </div>
+        </div>
+        }
+            </div>
+            </div>
+            </div>
+            </div>
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Fax)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Fax)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ImagemPerfil.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ImagemPerfil.Nome)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ImagemCapa.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ImagemCapa.Nome)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Publica)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Publica)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.OrganizacaoID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <script type="text/javascript">
+        function initialize() {
+            var mapOptions = {
+                center: new google.maps.LatLng(@Model.Coordenadas),
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            };
+            var map = new google.maps.Map(document.getElementById("map-canvas"),
+                mapOptions);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>

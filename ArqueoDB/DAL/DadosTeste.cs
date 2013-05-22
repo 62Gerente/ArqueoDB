@@ -25,7 +25,8 @@ namespace ArqueoDB.DAL
                 new Directoria{Caminho = "/Images/Utilizadores/"},
                 new Directoria{Caminho = "/Images/Locais/"},
                 new Directoria{Caminho = "/Images/Artefactos/"},
-                new Directoria{Caminho = "/Documentos/"}
+                new Directoria{Caminho = "/Documentos/"},
+                new Directoria{Caminho = "/Images/Plantas/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
             context.SaveChanges();
@@ -144,6 +145,40 @@ namespace ArqueoDB.DAL
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
                 },
+                new Imagem{
+                    Nome = "plantamdds1.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "plantamdds2.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "plantamdds3.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+                new Imagem{
+                    Nome = "plantamdds4.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
+                    Apagada = false, 
+                    Publica = true,
+                    DataPublicacao = System.DateTime.Now
+                },
+
+
             };
             imagens.ForEach(i => context.Imagens.Add(i));
             context.SaveChanges();
@@ -267,9 +302,9 @@ namespace ArqueoDB.DAL
                     Nome = "Universidade do Minho",
                     Activa = true, 
                     Apagada = false,
-                    Coordenadas = "30-60-20",
+                    Coordenadas = "41.558985,-8.397591",
                     DataFundacao = System.DateTime.Now,
-                    Descricao = "A Universidade do Minho (UM) foi fundada em Braga em 1973 e integrou-se no chamado grupo das Novas Universidades que vieram alterar o panorama do ensino superior em Portugal. Iniciou as suas actividades académicas em 1975/76.",
+                    Descricao = "A Universidade do Minho (UM) foi fundada em Braga em 1973 e integrou-se no chamado grupo das Novas Universidades que vieram alterar o panorama do ensino superior em Portugal. Iniciou as suas actividades académicas em 1975/76. A universidade é governada por uma reitoria, composta por um reitor e um conselho geral, e cinco unidades internas que agrupam por áreas de intervenção as várias entidades internas. Apesar de ser uma Universidade recente, desde o inicio, foi incutida à universidade toda a tradição académica milenar, de origem religiosa, da cidade de Braga, desde os trajes académicos, as festividades do enterro da Gata e o primeiro de Dezembro, e as bibliotecas da cidade.",
                     DistritoID = 1,
                     Email = "um@um.pt",
                     ImagemCapaID = 2,
@@ -279,7 +314,8 @@ namespace ArqueoDB.DAL
                     Publica = true,
                     Membros = new List<Profissional>(),
                     Locais = new List<Local>(),
-                    Documentos = new List<Documento>()
+                    Documentos = new List<Documento>(),
+                    Publicacoes = new List<Publicacao>()
                 }
             };
             organizacoes.ForEach(o => context.Organizacoes.Add(o));
@@ -306,13 +342,17 @@ namespace ArqueoDB.DAL
                     ResponsavelID = 1,
                     OrganizacaoID = 1,
                     Apagado = false,
-                    Coordenadas = "30-30-50",
+                    Coordenadas = "41.546283, -8.427632",
                     DataRegisto = System.DateTime.Now,
-                    Descricao = "O Museu de Arqueologia D. Diogo de Sousa é um organismo público, dependente da Direção Regional de Cultura do Norte definido na sua Lei orgânica como um museu regional de arqueologia.",
+                    Descricao = "O Museu de Arqueologia D. Diogo de Sousa é um organismo público, dependente da Direção Regional de Cultura do Norte definido na sua Lei orgânica como um museu regional de arqueologia. O Museu foi criado em 1918, como museu de arqueologia e arte geral, como o objectivo de obstar à dispersão do património local até então na posse de particulares e outras instituições. Em 1980, com a sua revitalização a missão do Museu foi redefinida como um organismo científico-cultural no âmbito disciplinar de arqueologia, passando a exercer as suas actividades básicas nos domínios do apoio à investigação, da museologia, da divulgação cultural, do apoio ao ensino e à defesa e preservação do património arqueológico regional.",
                     Publico = true,
                     Imagens = new List<Imagem>(),
                     Artefactos = new List<Artefacto>(),
-                    Documentos = new List<Documento>()
+                    Documentos = new List<Documento>(),
+                    Seguidores = new List<Utilizador>(),
+                    Comentarios = new List<Comentario>(),
+                    Publicacoes = new List<Publicacao>(),
+                    Plantas = new List<Planta>()
                 },
                 new Local{
                     Nome = "Teatro Romano",
@@ -320,13 +360,16 @@ namespace ArqueoDB.DAL
                     ResponsavelID = 1,
                     OrganizacaoID = 1,
                     Apagado = false,
-                    Coordenadas = "50-90-10",
+                    Coordenadas = "41.546711, -8.430314",
                     DataRegisto = System.DateTime.Now,
-                    Descricao = "O Teatro romano do Alto da Cividade, em Braga, é o único teatro romano existente no noroeste da Península Ibérica (e o único também que está a ser escavado actualmente em Portugal e Espanha) fica situado junto às Termas romanas de Maximinos, em Braga.",
+                    Descricao = "O Teatro romano do Alto da Cividade, em Braga, é o único teatro romano existente no noroeste da Península Ibérica (e o único também que está a ser escavado actualmente em Portugal e Espanha) fica situado junto às Termas romanas de Maximinos, em Braga. A sua descoberta acidental em 1999, quando se procedia a escavações nas termas, levou à descoberta de estruturas que revelaram a existência de um teatro, cujo estado de conservação acabou por exceder todas as expectativas. A área que foi possível escavar até ao momento, com cerca de 80 metros de diâmetro e o número elevado de elementos arquitectónicos e decorativos encontrados, permitiram identificar as diferentes partes orgânicas do teatro. Entre os investigadores é considerada uma descoberta extraordinária, que coloca a cidade de Braga ao mais alto nível europeu em termos de arquitectura romana.",
                     Publico = true,
                     Imagens = new List<Imagem>(),
                     Artefactos = new List<Artefacto>(),
-                    Documentos = new List<Documento>()
+                    Documentos = new List<Documento>(),
+                    Seguidores = new List<Utilizador>(),
+                    Comentarios = new List<Comentario>(),
+                    Publicacoes = new List<Publicacao>()
                 },
             };
             locais.ForEach(l => context.Locais.Add(l));
@@ -357,6 +400,48 @@ namespace ArqueoDB.DAL
             imagens[11].AutorID = 1;
             imagens[12].AutorID = 1;
             imagens[13].AutorID = 1;
+            context.SaveChanges();
+
+            var plantas = new List<Planta>
+            {
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 15
+                },
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 16
+                },
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 17
+                },
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 18
+                },
+            };
+            plantas.ForEach(l => locais[0].Plantas.Add(l));
             context.SaveChanges();
 
             var artefactos = new List<Artefacto>
@@ -471,6 +556,9 @@ namespace ArqueoDB.DAL
             comentarios.ForEach(c => utilizadores[0].Comentarios.Add(c));
             context.SaveChanges();
 
+            comentarios.ForEach(c => locais[0].Comentarios.Add(c));
+            context.SaveChanges();
+
             var publicacoes = new List<Publicacao>()
             {
                 new Publicacao{
@@ -489,6 +577,12 @@ namespace ArqueoDB.DAL
                 }
             };
             publicacoes.ForEach(c => utilizadores[0].Publicacoes.Add(c));
+            context.SaveChanges();
+
+            publicacoes.ForEach(c => organizacoes[0].Publicacoes.Add(c));
+            context.SaveChanges();
+
+            publicacoes.ForEach(c => locais[0].Publicacoes.Add(c));
             context.SaveChanges();
         }
     }
