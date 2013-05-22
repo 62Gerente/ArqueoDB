@@ -190,30 +190,31 @@ namespace ArqueoDB.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IEnumerable<Profissional> query = org.Membros;
+            IEnumerable<Publicacao> query = org.Publicacoes;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                query = query.Where(p => p.Utilizador.Nome.ToUpper().Contains(searchString.ToUpper()));
+                // Procurar no título
+                query = query.Where(p => p.Descricao.ToUpper().Contains(searchString.ToUpper()));
             }
 
             switch (sortOrder)
             {
-                case "Nome":
-                    query = query.OrderBy(m => m.Utilizador.NomeUtilizador);
-                    break;
-                case "Email":
-                    query = query.OrderBy(m => m.Utilizador.Email);
-                    break;
-                case "Distrito":
-                    query = query.OrderBy(m => m.Utilizador.Distrito);
-                    break;
+                case "DataPublicacao":
+                    query = query.OrderBy(m => m.DataPublicacao);
+                    break;                
                 default:
                     break;
             }
 
             switch (type)
             {
+                case "Públicos":
+                    query = query.Where(p => p.Publico == true);
+                    break;
+                case "Ocultos":
+                    query = query.Where(p => p.Publico == false);
+                    break;
                 default:
                     break;
             }
@@ -221,12 +222,12 @@ namespace ArqueoDB.Controllers
             int pageSize = 12;
             int pageNumber = (page ?? 1);
 
-            ViewBag.MembrosOrganizacao = query.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.PublicacoesOrganizacao = query.ToList().ToPagedList(pageNumber, pageSize);
             ViewBag.pageSize = pageSize;
             ViewBag.page = pageNumber;
 
             ViewData["Dashboard"] = "Organizacao";
-            ViewData["Activo"] = "Membros";
+            ViewData["Activo"] = "Publicações";
 
             return View(org);
         }        

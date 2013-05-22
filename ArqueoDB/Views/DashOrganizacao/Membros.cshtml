@@ -4,11 +4,11 @@
 @{
     Utilizador user = ((Utilizador)(Session["Utilizador"]));
 
-    string type = "Todos os Documentos";
+    string type = "Todos os Membros";
 
     if (String.IsNullOrEmpty(ViewBag.CurrentType))
     {
-        type = "Todos os Documentos";
+        type = "Todos os Membros";
     }
 
     IEnumerable<Profissional> membros = ViewBag.MembrosOrganizacao;
@@ -71,7 +71,7 @@
 												<a href="#">Alterar permissões</a> <!-- FALTA HIPERLIGAÇÃO -->
 											</li>
                                             <li>
-												<a class="btn btn-mini btn-danger confirm-remover" data-id="@m.UtilizadorID">Remover membro</a> <!-- FALTA HIPERLIGAÇÃO -->
+												<a class="confirm-remover" data-id="@m.UtilizadorID">Remover membro</a> <!-- FALTA HIPERLIGAÇÃO -->
 											</li>
 										</ul>
 									</div>
