@@ -12,14 +12,9 @@ namespace ArqueoDB.Models
     {
         public int PlantaID { get; set; }
 
-        [DisplayName("Nome da Planta")]
-        [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
-        [Required(ErrorMessage = "Nome da planta necessário")]
-        public string Nome { get; set; }
-
-        //[DisplayName("Local")]
-        //public int LocalID { get; set; }
-        //public virtual Local Local { get; set; }
+        [DisplayName("Local")]
+        public int LocalID { get; set; }
+        public virtual Local Local { get; set; }
 
         [DisplayName("Imagem")]
         public int ImagemID { get; set; }
@@ -36,10 +31,6 @@ namespace ArqueoDB.Models
 
         [DisplayName("Data de Publicação")]
         public DateTime DataPublicacao { get; set; }
-
-        [DisplayName("Descrição")]
-        [StringLength(1000, ErrorMessage = "Número máximo de caracteres excedido")]
-        public string Descricao { get; set; }
 
         [DisplayName("Público")]
         public bool Publico { get; set; }

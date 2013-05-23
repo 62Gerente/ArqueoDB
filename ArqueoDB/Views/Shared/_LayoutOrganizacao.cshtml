@@ -228,12 +228,20 @@
 		<script src="../../Content/library_org/plugins/chosen.jquery.min.js"></script>
 		<script src="../../Content/library_org/plugins/bootstrap-datepicker.js"></script>
 		<script src="../../Content/library_org/plugins/jquery.timePicker.min.js"></script>
-        		
+
         <script src="../../Content/library_org/js/bootbox.js"></script>
         <script src="../../Content/library_org/js/model-confirm.js"></script>
 
         <!-- Image Galery -->
         <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
         <script src="../../Content/library_org/js/bootstrap-image-gallery.min.js"></script>
+
+        @Scripts.Render("~/bundles/jqueryval")
+
+                <script>
+                    $('.datepicker').datepicker({
+                        format: 'dd-mm-yyyy'
+                    });
+        </script>
 	</body>
 </html>

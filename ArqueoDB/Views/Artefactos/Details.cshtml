@@ -1,71 +1,271 @@
 ﻿@model ArqueoDB.Models.Artefacto
+@using ArqueoDB.Models
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
+    Utilizador user = ((Utilizador)(Session["Utilizador"]));
+
+    int nr = 0;
+
+}
+@section breadcrumb {
+				<div class="breadcrumb-button">
+				   <a href="#">
+                    <span class="breadcrumb-label">
+					<i class="icon-camera-retro"></i> Artefactos </span>
+					<span class="breadcrumb-arrow"><span></span></span>
+                   </a>
+				</div>
+				<div class="breadcrumb-button">
+                   <a href="#">
+					<span class="breadcrumb-label">
+					<i class="icon-camera-retro"></i> @Model.Nome </span>
+					<span class="breadcrumb-arrow"><span></span></span>
+                   </a>
+				</div> 
 }
 
-<h2>Details</h2>
+		<div class="container-fluid padded">
+			<div class="row-fluid">
+				<div class="span8">
+					<!-- find me in partials/big_chart -->
+					<div class="box">
+						<div class="box-header">
+							<div class="title">
+								<span><i class="icon-desktop"> </i></span> <span> Perfil do @Model.Nome</span>
+							</div>
+						</div>
+						<div class="box-content padded">
+							<div class="row-fluid">
+								<div class="span2">
+									<div id="avatarpic" style="margin: 0px auto 0px; text-align: left;">
+										<a href="@(Model.Imagens.First().Directoria.Caminho + Model.Imagens.First().Nome)" style="background-image:url(@(Model.Imagens.First().Directoria.Caminho + Model.Imagens.First().Nome));margin: 10px 0px 0px;"></a>
+									</div>
+								</div>
+								<div class="span5" style="margin-left:55px;">
+									<h4>@Model.Nome</h4>
+									<h5><b>Artefacto</b></h5>
+									<p>
+										 <b>Organização responsável:</b> <br /><a href="/Organizacoes/Details/@Model.Organizacao.OrganizacaoID">@Model.Organizacao.Nome</a>
+									</p>
+									<p>
+										 <b>Profissional responsável:</b> <br /><a href="/Utilizadores/Details/@Model.Responsavel.UtilizadorID">@Model.Responsavel.Utilizador.Nome</a>
+									</p>
+								</div>
+								<div class="span4" style="">
+									<h5 style="margin: 10px 0;line-height:23px;">
+										<b>Informações</b>
+									</h5>
+									<p>
+										 <b>Data descoberta:</b> @Model.DataDescoberta.ToShortDateString()
+									</p>
+                                    <p>
+                                        <b>Localização:</b> @Model.Organizacao.Distrito.Nome
+                                    </p>
+									<p>
+										 <b>Cordenadas:</b> @Model.Cordenadas
+									</p>
+									<p>
+										 <b>Local:</b><a href="/Locais/Details/@Model.Local.LocalID"> @Model.Local.Nome</a>
+									</p>
+								</div>
 
-<fieldset>
-    <legend>Artefacto</legend>
+							</div>
+						</div>
+					</div>
+                    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nome)
-    </div>
+    			<div class="span4">
+				<!-- find me in partials/big_chart -->
+				<div class="box">
+                    	<div class="box-header">
+							<div class="title">
+								<span><i class="icon-info-sign"> </i></span> <span> Sobre</span>
+							</div>
+						</div>
+					<div class="box-content" style="padding:10px; height:166px;">
+						<div class="row-fluid scrollable" style="height:166px; overflow-y:auto;">
+							<p>
+                                @Model.Descricao
+                            </p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Cordenadas)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Cordenadas)
-    </div>
+            </div>
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Descricao)
+<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title"></h3>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Descricao)
-    </div>
+    <div class="modal-body"><div class="modal-image"></div></div>
+    <div class="modal-footer">
+        <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> Anterior</a>
+        <a class="btn btn-primary modal-next"><i class="icon-arrow-right icon-white"></i> Próxima</a>
+        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="4000"><i class="icon-play icon-white"></i> Apresentação</a>
+        <a class="btn modal-download" target="_blank"><i class="icon-download"></i> Download</a>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataDescoberta)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataDescoberta)
-    </div>
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Local.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Local.Nome)
-    </div>
+		<div class="container-fluid padded">
+			<div class="row-fluid">
+				<div class="span6">
+                    <div class="box">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Organizacao.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Organizacao.Nome)
-    </div>
+                      <div class="box-header">
+                          	<div class="title">
+								<span><i class="icon-camera-retro"> </i></span> <span> Imagens</span>
+							</div>
+                        <ul class="box-toolbar">
+                          <li><span class="label label-blue">@Model.Imagens.Count</span></li>
+                        </ul>
+                      </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Responsavel.ProfissionalID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Responsavel.ProfissionalID)
-    </div>
+                      <div class="box-content scrollable" style="height:345px; overflow-y:scroll;">
+                          <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item">
+                            @{
+                                nr = 0;
+                            }
+                            @foreach(Imagem img in Model.Imagens.Where(i => !i.Apagada)){
+                            <div class="span6"
+                            @if(nr%3==0){
+                                <text> style="margin-left:0px;"</text>
+                             
+                            } 
+                            @{
+                                nr++;
+                            } 
+                            >
+                            <div class="box-section news">
+                                <div class="">
+									<div class="gallery-item" id="avatarpic-planta" data-href="@(img.Directoria.Caminho + img.Nome)" style="margin: 0px auto 0px; text-align: left; height: 140px;">
+										<a href="#" style="background-image:url(@(img.Directoria.Caminho + img.Nome));margin: 0px 0px 0px;"></a>
+									</div>
+								</div>
+                            </div>
+                            </div>
+                            }
+                           </div>
+                       </div>
+                   </div>
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Publico)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Publico)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ArtefactoID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+				<div class="span6">
+					<!-- find me in partials/big_chart -->
+					<div class="box">
+						<div class="box-header">
+                        <span class="title"><i class="icon-comments-alt"> </i> Comentários</span>
+                        <ul class="box-toolbar">
+                          <li><span class="label label-blue">@Model.Comentarios.Count</span></li>
+                        </ul>
+						</div>
+						<div class="box-content">
+							<div class="row-fluid">
+								<div class="span12">
+                                    <ul class="chat-box timeline scrollable" style="height:345px; overflow-y:auto;">
+                                      @foreach(Comentario comm in Model.Comentarios.Where(c => !c.Apagado)){
+                                      <li class="arrow-box-left gray">
+                                        <div class="avatar"><img class="avatar-small" src="@(comm.Autor.ImagemPerfil.Directoria.Caminho + comm.Autor.ImagemPerfil.Nome)"></div>
+                                        <div class="info">
+                                          <span class="name">
+                                            <span class="label label-green">Comentário </span> por <strong class="indent">@comm.Autor.Nome</strong>
+                                          </span>
+                                          <span class="time"><i class="icon-time"></i> @comm.DataPublicacao.ToShortDateString()</span>
+                                        </div>
+                                        <div class="content">
+                                          <blockquote>
+                                            @comm.Texto
+                                          </blockquote>
+                                        </div>
+                                      </li>
+                                      }
+                                    </ul>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+           </div>
+
+
+							<div class="row-fluid">
+
+								<div class="span3">
+
+                                     <div class="box closable-chat-box open" style="height:192px">
+                                      <div class="box-content padded">
+
+                                        <div class="fields">
+                                          <div class="avatar"><img class="avatar-small" src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)"></div>
+                                          <ul>
+                                            <li><b>Nova imagem</b></li>
+                                            <li>Adiciona nova imagem</li>
+                                          <br/>
+                                          </ul>
+                                          <br/>
+                                        </div>
+
+                                        <form class="fill-up" action="/">
+                                          <div class="uploader"><input type="file" name="img"><span class="filename" style="-webkit-user-select: none;">No file selected</span><span class="action" style="-webkit-user-select: none;">+</span></div>
+
+                                          <div class="" style="margin-top:10px">
+                                                <textarea placeholder="descrição..." rows="2"></textarea>
+
+                                          </div>
+
+                                          <div class= "actions">
+                                            <div class="pull-right">
+                                      
+                                              <a href="#" class="btn btn-blue btn-mini" style="">Adicionar</a>
+                                            </div>
+                                          </div>
+                                        </form>
+
+                                      </div>
+                                    </div>
+                        				</div>
+
+								<div class="span9">
+
+                                     <div class="box closable-chat-box open">
+                                      <div class="box-content padded">
+
+                                        <div class="fields">
+                                          <div class="avatar"><img class="avatar-small" src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)"></div>
+                                          <ul>
+                                            <li><b>Novo comentário</b></li>
+                                            <li>Comenta o @Model.Nome</li>
+                                          <br/>
+                                          </ul>
+                                          <br/>
+                                        </div>
+
+                                        <form class="fill-up" action="/">
+
+                                          <div class="chat-message-box">
+                                                <textarea placeholder="comentário aqui..." rows="3"></textarea>
+                                          </div>
+
+                                          <div class="clearfix actions">
+                                            <div class="pull-right faded-toolbar">
+                                      
+                                              <a href="#" class="btn btn-blue btn-mini">Comentar</a>
+                                            </div>
+                                          </div>
+                                        </form>
+
+                                      </div>
+                                    </div>
+                        				</div>
+
+			</div>
+
+
+       </div>

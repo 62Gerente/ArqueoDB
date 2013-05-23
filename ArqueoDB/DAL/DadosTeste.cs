@@ -26,7 +26,8 @@ namespace ArqueoDB.DAL
                 new Directoria{Caminho = "/Images/Locais/"},
                 new Directoria{Caminho = "/Images/Artefactos/"},
                 new Directoria{Caminho = "/Images/Plantas/"},
-                new Directoria{Caminho = "/Documentos/"}
+                new Directoria{Caminho = "/Documentos/"},                
+                new Directoria{Caminho = "/Images/Plantas/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
             context.SaveChanges();
@@ -146,37 +147,37 @@ namespace ArqueoDB.DAL
                     DataPublicacao = System.DateTime.Now
                 },
                 new Imagem{
-                    Nome = "ruinas_troia.jpg", 
-                    DirectoriaID = 4, 
-                    Descricao = "Planta das ruínas de troia", 
+                    Nome = "plantamdds1.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
                 },
                 new Imagem{
-                    Nome = "ruinas_troia_2.jpg", 
-                    DirectoriaID = 4, 
-                    Descricao = "Planta das ruínas de troia", 
+                    Nome = "plantamdds2.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
                 },
                 new Imagem{
-                    Nome = "ruinas_paricatuba.jpg", 
-                    DirectoriaID = 4, 
-                    Descricao = "Planta das ruínas de paricatuba", 
+                    Nome = "plantamdds3.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
                 },
                 new Imagem{
-                    Nome = "vila_romana.jpg", 
-                    DirectoriaID = 4, 
-                    Descricao = "Planta da vila romana da Quinta de Fórnea", 
+                    Nome = "plantamdds4.jpg", 
+                    DirectoriaID = 6, 
+                    Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
-                },
+                }
             };
             imagens.ForEach(i => context.Imagens.Add(i));
             context.SaveChanges();
@@ -349,7 +350,8 @@ namespace ArqueoDB.DAL
                     Documentos = new List<Documento>(),
                     Seguidores = new List<Utilizador>(),
                     Comentarios = new List<Comentario>(),
-                    Publicacoes = new List<Publicacao>()
+                    Publicacoes = new List<Publicacao>(),
+                    Plantas = new List<Planta>()
                 },
                 new Local{
                     Nome = "Teatro Romano",
@@ -399,6 +401,48 @@ namespace ArqueoDB.DAL
             imagens[13].AutorID = 1;
             context.SaveChanges();
 
+            var plantas = new List<Planta>
+            {
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 15
+                },
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 16
+                },
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 17
+                },
+                new Planta{
+                    Apagado = false,
+                    DataPublicacao = DateTime.Now,
+                    LocalID = 1,
+                    OrganizacaoID = 1,
+                    Publico = true,
+                    ResponsavelID = 1,
+                    ImagemID = 18
+                },
+            };
+            plantas.ForEach(l => locais[0].Plantas.Add(l));
+            context.SaveChanges();
+
             var artefactos = new List<Artefacto>
             {
                 new Artefacto{
@@ -411,7 +455,8 @@ namespace ArqueoDB.DAL
                     LocalID = 1,
                     OrganizacaoID = 1,
                     Publico = true,
-                    ResponsavelID = 1
+                    ResponsavelID = 1,
+                    Comentarios = new List<Comentario>()
                 }
             };
             artefactos.ForEach(a => context.Artefactos.Add(a));
@@ -509,6 +554,12 @@ namespace ArqueoDB.DAL
                 },
             };
             comentarios.ForEach(c => utilizadores[0].Comentarios.Add(c));
+            context.SaveChanges();
+
+            comentarios.ForEach(c => locais[0].Comentarios.Add(c));
+            context.SaveChanges();
+
+            comentarios.ForEach(c => artefactos[0].Comentarios.Add(c));
             context.SaveChanges();
 
             var publicacoes = new List<Publicacao>()

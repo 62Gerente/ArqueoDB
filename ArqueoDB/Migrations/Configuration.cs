@@ -575,57 +575,57 @@ namespace ArqueoDB.Migrations
             locais[0].Publicacoes.Add(publicacoes[5]);
             context.SaveChanges();
 
-            var plantas = new List<Planta>() {
+            //var plantas = new List<Planta>() {
                 
-                new Planta{
-                    Nome = "Ruínas de troia",        
-                    //LocalID = 0,
-                    //Local = locais[0],
-                    ImagemID = 14,  
-                    //Imagem = imagens[0],
-                    OrganizacaoID = 0,  
-                    //Organizacao = organizacoes[0],
-                    ResponsavelID = 0, 
-                    //Responsavel = profissionais[0],
-                    DataPublicacao = System.DateTime.Now,
-                    Descricao = "Planta das ruínas de troia",        
-                    Publico = true,        
-                    Apagado = false
-                }
-                //new Planta{
-                //    Nome = "Segunda planta das Ruínas de troia",        
-                //    LocalID = 0, 
-                //    ImagemID = 15,        
-                //    OrganizacaoID = 0,        
-                //    ResponsavelID = 0, 
-                //    DataPublicacao = System.DateTime.Now,
-                //    Descricao = "Planta das ruínas de troia",        
-                //    Publico = true,        
-                //    Apagado = false
-                //},
-                //new Planta{
-                //    Nome = "Ruínas de Paricatuba",        
-                //    LocalID = 0, 
-                //    ImagemID = 16,        
-                //    OrganizacaoID = 0,        
-                //    ResponsavelID = 0, 
-                //    DataPublicacao = System.DateTime.Now,
-                //    Descricao = "Planta das ruínas de Paricatuba",        
-                //    Publico = true,        
-                //    Apagado = false
-                //},
-                //new Planta{
-                //    Nome = "Vila Romana",        
-                //    LocalID = 0, 
-                //    ImagemID = 17,        
-                //    OrganizacaoID = 0,        
-                //    ResponsavelID = 0, 
-                //    DataPublicacao = System.DateTime.Now,
-                //    Descricao = "Vila Romana de Quinta de Fórnea",        
-                //    Publico = true,        
-                //    Apagado = false
-                //}
-            };
+            //    new Planta{
+            //        Nome = "Ruínas de troia",        
+            //        //LocalID = 0,
+            //        //Local = locais[0],
+            //        ImagemID = 14,  
+            //        //Imagem = imagens[0],
+            //        OrganizacaoID = 0,  
+            //        //Organizacao = organizacoes[0],
+            //        ResponsavelID = 0, 
+            //        //Responsavel = profissionais[0],
+            //        DataPublicacao = System.DateTime.Now,
+            //        Descricao = "Planta das ruínas de troia",        
+            //        Publico = true,        
+            //        Apagado = false
+            //    }
+            //    //new Planta{
+            //    //    Nome = "Segunda planta das Ruínas de troia",        
+            //    //    LocalID = 0, 
+            //    //    ImagemID = 15,        
+            //    //    OrganizacaoID = 0,        
+            //    //    ResponsavelID = 0, 
+            //    //    DataPublicacao = System.DateTime.Now,
+            //    //    Descricao = "Planta das ruínas de troia",        
+            //    //    Publico = true,        
+            //    //    Apagado = false
+            //    //},
+            //    //new Planta{
+            //    //    Nome = "Ruínas de Paricatuba",        
+            //    //    LocalID = 0, 
+            //    //    ImagemID = 16,        
+            //    //    OrganizacaoID = 0,        
+            //    //    ResponsavelID = 0, 
+            //    //    DataPublicacao = System.DateTime.Now,
+            //    //    Descricao = "Planta das ruínas de Paricatuba",        
+            //    //    Publico = true,        
+            //    //    Apagado = false
+            //    //},
+            //    //new Planta{
+            //    //    Nome = "Vila Romana",        
+            //    //    LocalID = 0, 
+            //    //    ImagemID = 17,        
+            //    //    OrganizacaoID = 0,        
+            //    //    ResponsavelID = 0, 
+            //    //    DataPublicacao = System.DateTime.Now,
+            //    //    Descricao = "Vila Romana de Quinta de Fórnea",        
+            //    //    Publico = true,        
+            //    //    Apagado = false
+            //    //}
+            //};
 
             //plantas.ForEach(p => context.Plantas.Add(p));
             //plantas.ForEach(p => locais[0].Plantas.Add(p));

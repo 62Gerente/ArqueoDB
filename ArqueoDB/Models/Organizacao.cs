@@ -57,7 +57,7 @@ namespace ArqueoDB.Models
         [ForeignKey("ImagemPerfilID")]
         public virtual Imagem ImagemPerfil { get; set; }
 
-        [DisplayName("Imagem de Capa")]
+       
         public int ImagemCapaID { get; set; }
         [ForeignKey("ImagemCapaID")]
         public virtual Imagem ImagemCapa { get; set; }
