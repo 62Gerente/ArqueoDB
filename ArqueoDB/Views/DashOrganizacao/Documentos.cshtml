@@ -84,8 +84,8 @@
                         <td><a href="#">@doc.Responsavel.Utilizador.Nome</a></td> <!-- FALTA HIPERLIGAÇÃO -->
 					    <td>@doc.DataPublicacao.Year</td>
                         
-                        <td><a class="btn btn-mini btn-inverse" href="#"><i class="micon-eye"></i>  Ver</a></td>
-                        <td><a class="btn btn-mini btn-inverse" href="/Documentos/Transferir/@doc.DocumentoID"><i class="icon-download-alt"></i>  Transferir</a></td>
+                        <td style="width:30px"><a class="btn btn-mini btn-inverse" style="width:100px" href="#"><i class="micon-eye"></i>  Ver</a></td>
+                        <td style="width:30px"><a class="btn btn-mini btn-inverse" style="width:100px" href="/Documentos/Transferir/@doc.DocumentoID"><i class="icon-download-alt"></i>  Transferir</a></td>
                         @if(user.UtilizadorID == Model.Responsavel.Utilizador.UtilizadorID){
 
 @*  Confirmar a ocultação do documento *@
@@ -104,7 +104,7 @@
     </div>
 </div>
 
-              @*  Confirmar a publicação do documento *@
+@*  Confirmar a publicação do documento *@
  <div id="modal-from-dom-publicar" class="modal hide fade">
     <div class="modal-header">
         <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>

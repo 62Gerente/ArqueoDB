@@ -156,11 +156,27 @@ namespace ArqueoDB.Controllers
         public ActionResult DeixarSeguir(int id, int seguir)
         {
 
-
             Utilizador utilizador = db.Utilizadores.Find(id);
             Utilizador utilizadorSeguir = db.Utilizadores.Find(seguir);
 
             utilizador.UtilizadoresSeguidos.Remove(utilizadorSeguir);
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult Comentar(int id, int user, string comentario) {
+            Utilizador utilizador = db.Utilizadores.Find(id);
+
+            Comentario comm = new Comentario
+            {
+                Apagado = false,
+                AutorID = user, 
+                DataPublicacao = System.DateTime.Now,
+                Texto = comentario
+            };
+
+            utilizador.Comentarios.Add(comm);
             db.SaveChanges();
 
             return Redirect(Request.UrlReferrer.AbsoluteUri);
