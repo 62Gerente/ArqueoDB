@@ -162,7 +162,7 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Comentar(int id, int user, string comentario)
         {
-            Local local = db.Locais.Find(id);
+            Artefacto artefacto = db.Artefactos.Find(id);
 
             Comentario comm = new Comentario
             {
@@ -172,7 +172,7 @@ namespace ArqueoDB.Controllers
                 Texto = comentario
             };
 
-            local.Comentarios.Add(comm);
+            artefacto.Comentarios.Add(comm);
             db.SaveChanges();
 
             return Redirect(Request.UrlReferrer.AbsoluteUri);
@@ -187,7 +187,7 @@ namespace ArqueoDB.Controllers
 
             if (file != null && file.ContentLength > 0 && comentario != null && !comentario.Equals(""))
             {
-                Local local = db.Locais.Find(id);
+                Artefacto artefacto = db.Artefactos.Find(id);
 
                 var fileName = Path.GetFileName(file.FileName);
                 var path = Path.Combine(Server.MapPath("~/Images/Locais/"), fileName);
@@ -205,11 +205,13 @@ namespace ArqueoDB.Controllers
                     Publica = true
                 };
 
-                local.Imagens.Add(imagem);
+                artefacto.Imagens.Add(imagem);
                 db.SaveChanges();
             }
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
+
+
 
     }
 }
