@@ -1,0 +1,15 @@
+ArqueoDB/bin/*
+ArqueoDB/obj/*
+packages/*
+ArqueoDB/App_Data/*
+ArqueoDB.v11.suo
+
+ArqueoDB/packages.config
+
+ArqueoDB/ArqueoDB.csproj.user
+
+ArqueoDB/ArqueoDB.csproj
+
+ArqueoDB.sln
+
+*.swp
