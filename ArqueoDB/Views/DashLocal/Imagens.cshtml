@@ -18,7 +18,9 @@
     Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
 }   
 @section breadcrumb {
-    <li><a href="/DashLocais/Artefactos/@Html.DisplayFor(model => model.OrganizacaoID)">Artefactos</a></li>
+    <li><a href="/Locais/Details/@Html.DisplayFor(model => model.LocalID)">@Html.DisplayFor(model => model.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.LocalID)">Gestão do Local</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashLocal/Imagens/@Html.DisplayFor(model => model.LocalID)">Imagens</a></li>
 }
 @section dashboard{
     Locais    
@@ -70,7 +72,7 @@
     </div>
     <div class="modal-body">
         <p>Tem a certeza que pretende ocultar a imagem ao público?</p><br>
-        <p>Aimagem passará a estar apenas disponível para os profissionais da organização, ficando assim oculta para consulta aos utilizadores comuns.</p>
+        <p>A imagem passará a estar apenas disponível para os profissionais da organização, ficando assim oculta para consulta aos utilizadores comuns.</p>
     </div>
     <div class="modal-footer">
         <a href="/Imagens/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
@@ -100,7 +102,7 @@
     </div>
     <div class="modal-body">
         <p>Tem a certeza que pretende remover premanentemente a imagem?</p><br>   
-        <p>A imagem pode não voltar a ser recuperada, contacte o administrador do sistema para verificar a possibilidade de recuperar uma imagem removido.</p>     
+        <p>A imagem pode não voltar a ser recuperada, contacte o administrador do sistema para verificar a possibilidade de recuperar uma imagem removida.</p>     
     </div>
     <div class="modal-footer">
         <a href="/Imagens/Remover/IDLOCAL" class="btn btn-danger">Sim</a>

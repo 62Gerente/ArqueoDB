@@ -1,0 +1,71 @@
+﻿@model ArqueoDB.Models.Planta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Planta</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Local.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Local.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Imagem.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Imagem.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Organizacao.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Organizacao.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Responsavel.ProfissionalID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Responsavel.ProfissionalID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataPublicacao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataPublicacao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Publico)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Publico)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PlantaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -4,11 +4,11 @@
 @{
     Utilizador user = ((Utilizador)(Session["Utilizador"]));
 
-    string type = "Todos os Documentos";
+    string type = "Todos os Membros";
 
     if (String.IsNullOrEmpty(ViewBag.CurrentType))
     {
-        type = "Todos os Documentos";
+        type = "Todos os Membros";
     }
 
     IEnumerable<Profissional> membros = ViewBag.MembrosOrganizacao;
@@ -71,7 +71,7 @@
 												<a href="#">Alterar permissões</a> <!-- FALTA HIPERLIGAÇÃO -->
 											</li>
                                             <li>
-												<a class="btn btn-mini btn-danger confirm-remover" data-id="@m.UtilizadorID">Remover membro</a> <!-- FALTA HIPERLIGAÇÃO -->
+												<a class="confirm-remover" data-id="@m.UtilizadorID">Remover membro</a> <!-- FALTA HIPERLIGAÇÃO -->
 											</li>
 										</ul>
 									</div>
@@ -100,14 +100,12 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span6">
-                                    <div class="span12 widgetpic">
-                                    <a href="/Utilizadores/Details/@m.Utilizador.UtilizadorID"> <!-- FALTA HIPERLIGAÇÃO -->
-                                            <center>
-                                                <img src="@(m.Utilizador.ImagemPerfil.Directoria.Caminho+m.Utilizador.ImagemPerfil.Nome)"/>
-                                            </center>
-                                    </a>
-
-                                </div>
+                                    <a href="/Utilizadores/Details/@m.Utilizador.UtilizadorID">
+                                        <div class="span12 widgetpic" style=" background-image:url(
+                                                @(m.Utilizador.ImagemPerfil.Directoria.Caminho+m.Utilizador.ImagemPerfil.Nome)
+                                        );">
+                                        </div>
+                                    </a> 
                                 </div>
                                 <div class="span6">
                                     <b>Email:</b><br> @m.Utilizador.Email<br>

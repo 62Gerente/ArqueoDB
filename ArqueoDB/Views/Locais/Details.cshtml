@@ -45,7 +45,7 @@
 								</div>
 								<div class="span4" style="padding-left:20px;">
 									<h4>@Model.Nome</h4>
-									<h5><b>Organização</b></h5>
+									<h5><b>Local</b></h5>
 									<p>
 										 <b>Organização responsável:</b> <br /><a href="/Organizacoes/Details/@Model.Organizacao.OrganizacaoID">@Model.Organizacao.Nome</a>
 									</p>
@@ -119,6 +119,8 @@
             </div>
         </div>
 
+
+
 	<div class="container-fluid padded">
 		<div class="row-fluid">
 			<div class="span4">
@@ -154,7 +156,22 @@
 			</div>
 			</div>
 		</div>
- 
+
+<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body"><div class="modal-image"></div></div>
+    <div class="modal-footer">
+        <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> Anterior</a>
+        <a class="btn btn-primary modal-next"><i class="icon-arrow-right icon-white"></i> Próxima</a>
+        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="4000"><i class="icon-play icon-white"></i> Apresentação</a>
+        <a class="btn modal-download" target="_blank"><i class="icon-download"></i> Download</a>
+
+    </div>
+</div>
+
 		<div class="container-fluid padded">
 			<div class="row-fluid">
 				<div class="span12">
@@ -180,7 +197,7 @@
                                 nr = 0;
                             }
                             @foreach(Artefacto art in Model.Artefactos.Where(a => a.Publico && !a.Apagado)){
-                            <div class="span6"
+                            <div class="span6" 
                             @if(nr%2 ==0){
                                 <text> style="margin-left:0px;"</text>
                             }    
@@ -210,11 +227,12 @@
 
 
                            <div class="tab-pane" id="plantas">
+							 <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item" style="text-align:center">
                             @{
                                 nr = 0;
                             }
                             @foreach(Planta planta in Model.Plantas.Where(p => p.Publico && !p.Apagado)){
-                            <div class="span4"
+                            <div class="span4" 
                             @if(nr%3==0){
                                 <text> style="margin-left:0px;"</text>
                              
@@ -225,7 +243,7 @@
                             >
                             <div class="box-section news">
                                 <div class="">
-									<div id="avatarpic-planta" style="margin: 0px auto 0px; text-align: left; height: 140px;">
+									<div class="gallery-item" id="avatarpic-planta" data-href="@(planta.Imagem.Directoria.Caminho + planta.Imagem.Nome)" style="margin: 0px auto 0px; text-align: left; height: 140px;">
 										<a href="#" style="background-image:url(@(planta.Imagem.Directoria.Caminho + planta.Imagem.Nome));margin: 0px 0px 0px;"></a>
 									</div>
 								</div>
@@ -233,7 +251,7 @@
                             </div>
                             }
                            </div>
-
+                           </div>
 
                            <div class="tab-pane" id="documentos">
                                 <table class="table table-normal">
@@ -259,6 +277,7 @@
                            </div>
 
                            <div class="tab-pane" id="imagens">
+                            <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item">
                             @{
                                 nr = 0;
                             }
@@ -274,7 +293,7 @@
                             >
                             <div class="box-section news">
                                 <div class="">
-									<div id="avatarpic-planta" style="margin: 0px auto 0px; text-align: left; height: 140px;">
+									<div class="gallery-item" id="avatarpic-planta" data-href="@(img.Directoria.Caminho + img.Nome)" style="margin: 0px auto 0px; text-align: left; height: 140px;">
 										<a href="#" style="background-image:url(@(img.Directoria.Caminho + img.Nome));margin: 0px 0px 0px;"></a>
 									</div>
 								</div>
@@ -282,7 +301,7 @@
                             </div>
                             }
                            </div>
-
+                            </div>
                             </div>
                       </div>
                    </div>
@@ -412,17 +431,17 @@
                                         </div>
 
                                         <form class="fill-up" action="/">
+                                          <div class="uploader"><input type="file" name="img"><span class="filename" style="-webkit-user-select: none;">No file selected</span><span class="action" style="-webkit-user-select: none;">+</span></div>
 
-                                          <div class="">
+                                          <div class="" style="margin-top:10px">
                                                 <textarea placeholder="descrição..." rows="2"></textarea>
 
                                           </div>
-                                          <div class="uploader"><input type="file" name="img"><span class="filename" style="-webkit-user-select: none;">No file selected</span><span class="action" style="-webkit-user-select: none;">+</span></div>
 
                                           <div class= "actions">
                                             <div class="pull-right">
                                       
-                                              <a href="#" class="btn btn-blue btn-mini" style="margin-bottom:-20px">Adicionar</a>
+                                              <a href="#" class="btn btn-blue btn-mini" style="">Adicionar</a>
                                             </div>
                                           </div>
                                         </form>
@@ -439,7 +458,7 @@
         function initialize() {
             var mapOptions = {
                 center: new google.maps.LatLng(@Model.Coordenadas),
-                zoom: 16,
+                zoom: 17,
                 mapTypeId: google.maps.MapTypeId.HYBRID
             };
             var map = new google.maps.Map(document.getElementById("map-canvas"),

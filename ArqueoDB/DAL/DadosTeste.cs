@@ -25,7 +25,8 @@ namespace ArqueoDB.DAL
                 new Directoria{Caminho = "/Images/Utilizadores/"},
                 new Directoria{Caminho = "/Images/Locais/"},
                 new Directoria{Caminho = "/Images/Artefactos/"},
-                new Directoria{Caminho = "/Documentos/"},
+                new Directoria{Caminho = "/Images/Plantas/"},
+                new Directoria{Caminho = "/Documentos/"},                
                 new Directoria{Caminho = "/Images/Plantas/"}
             };
             directorias.ForEach(d => context.Directorias.Add(d));
@@ -176,9 +177,7 @@ namespace ArqueoDB.DAL
                     Apagada = false, 
                     Publica = true,
                     DataPublicacao = System.DateTime.Now
-                },
-
-
+                }
             };
             imagens.ForEach(i => context.Imagens.Add(i));
             context.SaveChanges();
@@ -456,7 +455,8 @@ namespace ArqueoDB.DAL
                     LocalID = 1,
                     OrganizacaoID = 1,
                     Publico = true,
-                    ResponsavelID = 1
+                    ResponsavelID = 1,
+                    Comentarios = new List<Comentario>()
                 }
             };
             artefactos.ForEach(a => context.Artefactos.Add(a));
@@ -559,31 +559,115 @@ namespace ArqueoDB.DAL
             comentarios.ForEach(c => locais[0].Comentarios.Add(c));
             context.SaveChanges();
 
+            comentarios.ForEach(c => artefactos[0].Comentarios.Add(c));
+            context.SaveChanges();
+
             var publicacoes = new List<Publicacao>()
             {
                 new Publicacao{
                     Apagado = false,
-                    DataPublicacao = System.DateTime.Now,
+                    DataPublicacao = System.DateTime.Now.AddHours(-2),
                     Publico = true,
-                    Titulo = "Bracara Augusta - Espaço Urbano",
+                    Titulo = "Bracara Augusta",
                     Descricao = "As intervenções arqueológicas realizadas em Braga, desde meados da década de setenta, proporcionam um melhor conhecimento da organização da cidade romana de Bracara Augusta. Alguns desses vestígios da ocupação romana foram integrados na malha urbana actual sendo visitáveis."
+                },
+                new Publicacao{
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now.AddDays(-10),
+                    Publico = true,
+                    Titulo = "Mosaico in Situ",
+                    Descricao = "Durante as escavações arqueológicas, que precederam a construção do edifício do Museu, foram encontrados vestígios de uma habitação do século I, com a particularidade de ter um mosaico. Dada a elevada acidez do solo em Braga, este tipo de achado raramente se preserva, pelo que se procedeu à sua integração nas instalações do Museu, no espaço-cripta do bloco de serviços. O mosaico é constituído por motivos geométricos bicromos (branco e preto). Um dos painéis musivos é constituído por um tabuleiro, em que as casas apresentam cruzeta ao centro, em oposição de cores e o outro é decorado com quadrícula de linhas de ampulhetas, com tesselas de granito e de calcário. Estão em curso trabalhos de restauro."
                 },
                 new Publicacao{
                     Apagado = false,
                     DataPublicacao = System.DateTime.Now,
                     Publico = true,
-                    Titulo = "Mosaico in Situ",
-                    Descricao = "Durante as escavações arqueológicas, que precederam a construção do edifício do Museu, foram encontrados vestígios de uma habitação do século I, com a particularidade de ter um mosaico. Dada a elevada acidez do solo em Braga, este tipo de achado raramente se preserva, pelo que se procedeu à sua integração nas instalações do Museu, no espaço-cripta do bloco de serviços. O mosaico é constituído por motivos geométricos bicromos (branco e preto). Um dos painéis musivos é constituído por um tabuleiro, em que as casas apresentam cruzeta ao centro, em oposição de cores e o outro é decorado com quadrícula de linhas de ampulhetas, com tesselas de granito e de calcário. Estão em curso trabalhos de restauro."
+                    Titulo = "A primeira publicação",
+                    Descricao = "É com agrado que vimos anunciar a criação da organização da Universidade do Minho na plataforma ArqueoDB. Juntem-se a nós!"
+                },
+                new Publicacao{
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now.AddMinutes(-15),
+                    Publico = true,
+                    Titulo = "O Museu",
+                    Descricao = "De passagem, venha ver o novo futuro que demos ao passado."
+                },
+                new Publicacao{
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now,
+                    Publico = true,
+                    Titulo = "Serviço Educativo",
+                    Descricao = "O Serviço Educativo do Museu D. Diogo de Sousa criou um conjunto de Fichas Informativas que podem ser utilizadas pelo público geral e pelo público escolar, em particular, na preparação, durante a realização ou após a sua visita ao Museu, como complemento da mesma."
+
+                },
+                new Publicacao{
+                    Apagado = false,
+                    DataPublicacao = System.DateTime.Now,
+                    Publico = true,
+                    Titulo = "Actividade do Museu (1980-2006)",
+                    Descricao = "A planificação da actividade do Museu, entre 1980-2006 foi naturalmente condicionada pela inexistência de espaços expositivos abertos ao público, pelo facto do seu quadro de pessoal se ter vindo progressivamente a concentrar e a especializar no sector técnico-laboratorial e ainda, por enquadrar um projecto de arqueologia urbana."
+
                 }
             };
             publicacoes.ForEach(c => utilizadores[0].Publicacoes.Add(c));
             context.SaveChanges();
 
             publicacoes.ForEach(c => organizacoes[0].Publicacoes.Add(c));
+            locais[0].Publicacoes.Add(publicacoes[3]);
+            locais[0].Publicacoes.Add(publicacoes[4]);
+            locais[0].Publicacoes.Add(publicacoes[5]);
             context.SaveChanges();
 
-            publicacoes.ForEach(c => locais[0].Publicacoes.Add(c));
-            context.SaveChanges();
+            //var plantas = new List<Planta>() {
+                
+            //    new Planta{
+            //        Nome = "Ruínas de troia",        
+            //        //LocalID = 0, 
+            //        ImagemID = 14,        
+            //        OrganizacaoID = 0,        
+            //        ResponsavelID = 0, 
+            //        DataPublicacao = System.DateTime.Now,
+            //        Descricao = "Planta das ruínas de troia",        
+            //        Publico = true,        
+            //        Apagado = false
+            //    },
+            //    new Planta{
+            //        Nome = "Segunda planta das Ruínas de troia",        
+            //        //LocalID = 0, 
+            //        ImagemID = 15,        
+            //        OrganizacaoID = 0,        
+            //        ResponsavelID = 0, 
+            //        DataPublicacao = System.DateTime.Now,
+            //        Descricao = "Planta das ruínas de troia",        
+            //        Publico = true,        
+            //        Apagado = false
+            //    },
+            //    new Planta{
+            //        Nome = "Ruínas de Paricatuba",        
+            //        //LocalID = 0, 
+            //        ImagemID = 16,        
+            //        OrganizacaoID = 0,        
+            //        ResponsavelID = 0, 
+            //        DataPublicacao = System.DateTime.Now,
+            //        Descricao = "Planta das ruínas de Paricatuba",        
+            //        Publico = true,        
+            //        Apagado = false
+            //    },
+            //    new Planta{
+            //        Nome = "Vila Romana",        
+            //        //LocalID = 0, 
+            //        ImagemID = 17,        
+            //        OrganizacaoID = 0,        
+            //        ResponsavelID = 0, 
+            //        DataPublicacao = System.DateTime.Now,
+            //        Descricao = "Vila Romana de Quinta de Fórnea",        
+            //        Publico = true,        
+            //        Apagado = false
+            //    }
+            //};
+
+            //plantas.ForEach(p => locais[0].Plantas.Add(p));
+            //context.SaveChanges();
         }
     }
 }
