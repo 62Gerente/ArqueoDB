@@ -198,7 +198,6 @@
 							<div class="row-fluid">
 
 								<div class="span3">
-
                                      <div class="box closable-chat-box open" style="height:192px">
                                       <div class="box-content padded">
 
@@ -212,21 +211,25 @@
                                           <br/>
                                         </div>
 
-                                        <form class="fill-up" action="/">
-                                          <div class="uploader"><input type="file" name="img"><span class="filename" style="-webkit-user-select: none;">No file selected</span><span class="action" style="-webkit-user-select: none;">+</span></div>
+                                        @using (Html.BeginForm("AddImagem", "Artefactos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                        {
+                                          <div class="uploader"><input type="file" name="file">
+                                          <span class="filename" style="-webkit-user-select: none;">Nenhum ficheiro seleccionado</span>
+                                          <span class="action" style="-webkit-user-select: none;">+</span></div>
+
+                                          <input type="hidden" value="@Model.ArtefactoID" name="id" id="id" />
+                                          <input type="hidden" value="@user.UtilizadorID" name="user" id="user" />
 
                                           <div class="" style="margin-top:10px">
-                                                <textarea placeholder="descrição..." rows="2"></textarea>
-
+                                                <textarea id="comentario" name="comentario" placeholder="descrição..." rows="2"></textarea>
                                           </div>
 
                                           <div class= "actions">
                                             <div class="pull-right">
-                                      
-                                              <a href="#" class="btn btn-blue btn-mini" style="">Adicionar</a>
+                                              <button type="submit" value="AddImagem" class="btn btn-blue btn-mini" style="">Adicionar</button>
                                             </div>
                                           </div>
-                                        </form>
+                                        }
 
                                       </div>
                                     </div>
@@ -250,13 +253,13 @@
                                         <form class="fill-up" action="/">
 
                                           <div class="chat-message-box">
-                                                <textarea placeholder="comentário aqui..." rows="3"></textarea>
+                                                <textarea id="comm" name="comentario" placeholder="comentário aqui..." rows="3"></textarea>
                                           </div>
 
                                           <div class="clearfix actions">
                                             <div class="pull-right faded-toolbar">
                                       
-                                              <a href="#" class="btn btn-blue btn-mini">Comentar</a>
+                                              <a href="#"  onclick="comentar();"  class="btn btn-blue btn-mini">Comentar</a>
                                             </div>
                                           </div>
                                         </form>
@@ -269,3 +272,11 @@
 
 
        </div>
+
+<script>
+    var comment = document.getElementById('comm');
+    function comentar() {
+        if (comment.value !== "")
+            window.location.href = "/Artefactos/Comentar?id=@Model.ArtefactoID&user=@user.UtilizadorID&comentario=" + comment.value
+    }
+</script>

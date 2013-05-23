@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using ArqueoDB.Models;
 using ArqueoDB.DAL;
+using System.IO;
 
 namespace ArqueoDB.Controllers
 {
@@ -182,5 +183,57 @@ namespace ArqueoDB.Controllers
 
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
+
+        public ActionResult Comentar(int id, int user, string comentario)
+        {
+            Local local = db.Locais.Find(id);
+
+            Comentario comm = new Comentario
+            {
+                Apagado = false,
+                AutorID = user,
+                DataPublicacao = System.DateTime.Now,
+                Texto = comentario
+            };
+
+            local.Comentarios.Add(comm);
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        public ActionResult AddImagem(HttpPostedFileBase file)
+        {
+            int id = Convert.ToInt32(Request["id"]);
+            int user = Convert.ToInt32(Request["user"]);
+            var comentario = Request["comentario"];
+
+            if (file != null && file.ContentLength > 0 && comentario !=null && !comentario.Equals(""))
+            {
+                 Local local = db.Locais.Find(id);
+
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Locais/"), fileName);
+                file.SaveAs(path);
+
+                Imagem imagem = new Imagem
+                {
+                    Apagada = false,
+                    AutorID = user,
+                    Comentarios = new List<Comentario>(),
+                    DataPublicacao = System.DateTime.Now,
+                    Descricao = comentario,
+                    DirectoriaID = 3,
+                    Nome = fileName,
+                    Publica = true
+                };
+
+                local.Imagens.Add(imagem);
+                db.SaveChanges();
+            }
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
     }
 }
