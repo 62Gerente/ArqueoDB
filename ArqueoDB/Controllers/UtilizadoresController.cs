@@ -182,5 +182,21 @@ namespace ArqueoDB.Controllers
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult Perfil(int id)
+        {
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            if (utilizador == null)
+            {
+                return HttpNotFound();
+            }
+            List<Imagem> imagens = db.Imagens.Where(i => (((i.AutorID != null) && (i.AutorID == utilizador.UtilizadorID)) &&
+                                                                        (i.ImagemID != utilizador.ImagemCapaID) &&
+                                                                        (i.ImagemID != utilizador.ImagemPerfilID) &&
+                                                                        (i.Apagada == false) && (i.Publica == true))).ToList();
+            ViewBag.Imagens = imagens;
+
+            return View(utilizador);
+        }
+
     }
 }
