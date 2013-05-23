@@ -456,7 +456,8 @@ namespace ArqueoDB.DAL
                     LocalID = 1,
                     OrganizacaoID = 1,
                     Publico = true,
-                    ResponsavelID = 1
+                    ResponsavelID = 1,
+                    Comentarios = new List<Comentario>()
                 }
             };
             artefactos.ForEach(a => context.Artefactos.Add(a));
@@ -557,6 +558,9 @@ namespace ArqueoDB.DAL
             context.SaveChanges();
 
             comentarios.ForEach(c => locais[0].Comentarios.Add(c));
+            context.SaveChanges();
+
+            comentarios.ForEach(c => artefactos[0].Comentarios.Add(c));
             context.SaveChanges();
 
             var publicacoes = new List<Publicacao>()
