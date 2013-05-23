@@ -190,12 +190,11 @@ namespace ArqueoDB.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IEnumerable<Publicacao> query = org.Publicacoes;
+            IEnumerable<Publicacao> query = org.Publicacoes.Where(p => p.Apagado == false).OrderBy(p => p.DataPublicacao).Reverse();
 
             if (!String.IsNullOrEmpty(searchString))
-            {
-                // Procurar no título
-                query = query.Where(p => p.Descricao.ToUpper().Contains(searchString.ToUpper()));
+            {                
+                query = query.Where(p => (p.Descricao.ToUpper().Contains(searchString.ToUpper()) || p.Titulo.ToUpper().Contains(searchString.ToUpper())));
             }
 
             switch (sortOrder)
@@ -209,10 +208,10 @@ namespace ArqueoDB.Controllers
 
             switch (type)
             {
-                case "Públicos":
+                case "Públicas":
                     query = query.Where(p => p.Publico == true);
                     break;
-                case "Ocultos":
+                case "Ocultas":
                     query = query.Where(p => p.Publico == false);
                     break;
                 default:

@@ -17,9 +17,9 @@ namespace ArqueoDB.Models
         [Required(ErrorMessage = "Nome da planta necessário")]
         public string Nome { get; set; }
 
-        [DisplayName("Local")]
-        public int LocalID { get; set; }
-        public virtual Local Local { get; set; }
+        //[DisplayName("Local")]
+        //public int LocalID { get; set; }
+        //public virtual Local Local { get; set; }
 
         [DisplayName("Imagem")]
         public int ImagemID { get; set; }

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ArqueoDB.Models.Publicacao>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataPublicacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publico)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataPublicacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publico)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PublicacaoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PublicacaoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PublicacaoID })
+        </td>
+    </tr>
+}
+
+</table>

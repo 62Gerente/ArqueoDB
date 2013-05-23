@@ -89,23 +89,7 @@ namespace ArqueoDB.Controllers
             ViewData["Activo"] = "Artefactos";
 
             return View(local);
-        }
-
-
-        /* GET: Publicações */
-        public ActionResult Publicacoes(int id = 0)
-        {
-            Local local = db.Locais.Find(id);
-            if (local == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewData["Dashboard"] = "Local";
-            ViewData["Activo"] = "Publicacoes";
-
-            return View(local);
-        }
+        }      
 
         /* GET: Documentos */
         public ActionResult Documentos(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
@@ -206,6 +190,73 @@ namespace ArqueoDB.Controllers
             return View(local);
         }
 
+        public ActionResult Plantas(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
+        {
+            Local local = db.Locais.Find(id);
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
+            if (local == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var plantas = local.Plantas.AsEnumerable<Planta>();
+            plantas = plantas.Where(i => i.Apagado == false);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                plantas = plantas.Where(i => i.Nome.ToUpper().Contains(searchString.ToUpper()) ||
+                                             i.Descricao.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Data":
+                    plantas = plantas.OrderBy(i => i.DataPublicacao);
+                    break;
+                default:
+                    plantas = plantas.OrderBy(i => i.DataPublicacao);
+                    break;
+
+            }
+
+            switch (type)
+            {
+                case "Públicas":
+                    plantas = plantas.Where(i => i.Publico == true);
+                    break;
+                case "Ocultas":
+                    plantas = plantas.Where(i => i.Publico == false);
+                    break;
+                default:
+                    break;
+
+            }
+
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            ViewBag.Plantas = plantas.ToList().ToPagedList(pageNumber, pageSize);
+
+            ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Plantas";
+
+            return View(local);
+        }
+
         public ActionResult Imagens(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
         {
             Local local = db.Locais.Find(id);
@@ -272,6 +323,72 @@ namespace ArqueoDB.Controllers
 
             return View(local);
         }
+
+        // GET
+        // Controlador para publicações
+
+        public ActionResult Publicacoes(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
+        {
+            Local loc = db.Locais.Find(id);
+            if (loc == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CurrentType = type;
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<Publicacao> query = loc.Publicacoes.Where(p => p.Apagado == false).OrderBy(p => p.DataPublicacao).Reverse();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p => (p.Descricao.ToUpper().Contains(searchString.ToUpper()) || p.Titulo.ToUpper().Contains(searchString.ToUpper())));
+            }
+
+            switch (sortOrder)
+            {
+                case "DataPublicacao":
+                    query = query.OrderBy(m => m.DataPublicacao);
+                    break;
+                default:
+                    break;
+            }
+
+            switch (type)
+            {
+                case "Públicas":
+                    query = query.Where(p => p.Publico == true);
+                    break;
+                case "Ocultas":
+                    query = query.Where(p => p.Publico == false);
+                    break;
+                default:
+                    break;
+            }
+
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.PublicacoesLocal = query.ToList().ToPagedList(pageNumber, pageSize);
+            ViewBag.pageSize = pageSize;
+            ViewBag.page = pageNumber;
+
+            ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Publicações";
+
+            return View(loc);
+        }        
 
     }
 }

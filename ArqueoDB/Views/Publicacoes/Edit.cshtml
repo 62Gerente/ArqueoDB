@@ -1,0 +1,61 @@
+﻿@model ArqueoDB.Models.Publicacao
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Publicacao</legend>
+
+        @Html.HiddenFor(model => model.PublicacaoID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Titulo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Titulo)
+            @Html.ValidationMessageFor(model => model.Titulo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataPublicacao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataPublicacao)
+            @Html.ValidationMessageFor(model => model.DataPublicacao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descricao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Publico)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Publico)
+            @Html.ValidationMessageFor(model => model.Publico)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

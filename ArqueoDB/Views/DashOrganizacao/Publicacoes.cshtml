@@ -19,141 +19,190 @@
         type = "Publicações Ocultas";
     }
 
-    IEnumerable<Profissional> membros = ViewBag.MembrosOrganizacao;
+    IEnumerable<Publicacao> publicacoes = ViewBag.PublicacoesOrganizacao;
     
-    ViewBag.Title = "Membros";    
-    int n_membros = 0;
+    ViewBag.Title = "Publicações";    
+    int n_publicacoes = 1;
     Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";    
 }
 @section breadcrumb {
-    <li><a href="/DashOrganizacao/Membros/@Html.DisplayFor(model => model.OrganizacaoID)">Membros</a></li>
+    <li><a href="/DashOrganizacao/Publicacoes/@Html.DisplayFor(model => model.OrganizacaoID)">Publicações</a></li>
 }
 @section dashboard{
-    Membros    
+    Publicações    
 }
-            
+            <div class="span12" style="margin-bottom:20px">                   
+                @* Adicionar nova publicação *@ 
+                @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){             
+                    <div class="pull-right" style="" >  
+                         <a class="btn btn-inverse pull-right" href="#"><i class="micon-plus"></i>  Adicionar nova publicação</a>
+                    </div>
+                }
+                @* Barra de pesquisa *@
+                @using (Html.BeginForm()){
+                <div class="input-prepend input-append span6" style="margin-left:0px">
+                    	<div class="btn-group custom">
+							<button class="btn" type="submit" value="Search"> <i class="micon-search-2"></i> Procurar Publicações </button>
+						</div>
+                    	<input class="span6" type="text" name="searchString">
+                        <div class="btn-group dropdown-darkBg custom">
+							<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">@type<i class="micon-menu-3"></i></button>
+							<ul class="dropdown-menu">
+								<li>@Html.ActionLink("Todas as Publicações", "Publicacoes", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter})</li>
+								<li>@Html.ActionLink("Publicações Públicas", "Publicacoes", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Públicas"})</li>
+								<li>@Html.ActionLink("Publicações Ocultas", "Publicacoes", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type="Ocultas"})</li>
+							</ul>
+						</div>
+					</div>
+                }
+            </div>
+           
             <section class="content-wrapper main-content clear-fix">
-    					
-                
-                
-                       <div class="span6" style="margin-left:0px"; >               
- 
-						<!-- widget -->
-						<div class="well widget">
+    	        @foreach(var p in publicacoes){
+                       <div class="span6" @if(n_publicacoes%2 == 1){ <text> style="margin-left:0px"; </text>} >
+    				<!-- widget -->
+						 <div class="well widget">
 							<!-- widget header -->
-							<div class="widget-header padded">
+							<div class="widget-header">
 								<h3 class="title"> <i class="icon-comment"></i> 
-                                    Título abc abc
-                                    Título abc abc
-                                    Título abc abc
-                                    Título abc abc
-								</h3> <!-- FALTA HIPERLIGAÇÃO  --> 
-								
-                                <div class="widget-nav" style="margin-right: 10px;">
-									à 10 minutos atrás
-								</div>                                
+                                    @{string tit = p.Titulo ;
+                                      if (tit != null && tit.Length >= 30)
+                                      {
+                                          tit = p.Titulo.Substring(0, 30);
+                                          string[] array = { tit, "(...)" };
+                                          tit = String.Concat(array);
+                                      }
+                                     }
+                                     @tit
+								</h3>  
+                                    <div class="widget-nav" style="margin-right: 10px;">
+									    @{TimeSpan diff = (DateTime.Now - p.DataPublicacao) ;
+                                          String data ;
+                                          if (diff.TotalDays >= 1) {
+                                              data = "à " + (int)Math.Round(diff.TotalDays, 0) + " dia" + ((int)Math.Round(diff.TotalDays, 0) > 1 ? "s" : "") + " atrás";
+                                          }
+                                          else if (diff.TotalHours >= 1) {
+                                              data = "à " + (int)Math.Round(diff.TotalHours, 0) + " hora" + ((int)Math.Round(diff.TotalHours, 0) > 1 ? "s" : "") + " atrás";
+                                          }
+                                          else if (diff.TotalMinutes >= 1) {
+                                              data = "à " + (int)Math.Round(diff.TotalMinutes, 0) + " minuto" + ((int)Math.Round(diff.TotalMinutes, 0) > 1 ? "s" : "") + " atrás";
+                                          }
+                                          else {
+                                              data = "à " + (int)Math.Round(diff.TotalSeconds, 0) + " segundo" + ((int)Math.Round(diff.TotalSeconds, 0) > 1 ? "s" : "") + " atrás";
+                                          }
+									    }
+                                        @data
+								    </div>                                
 							</div>
-							<!-- ./ widget header -->
-
-@* <td><a class="btn btn-mini btn-danger confirm-ocultar" data-id="@doc.DocumentoID"><i class="micon-cancel-2">  Ocultar</i></a></td> *@
-							
+							<!-- ./ widget header -->						
 							<!-- widget content -->
-							<div class="widget-content padded" style="padding-bottom: 40px;" >
+							<div class="widget-content padded" style="padding-bottom: 40px" >
+                                @p.Descricao
 
-                                    Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-                                 Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-                                 Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-
-							
-                            <div class="span12 pull-right" style="padding-top: 20px; text-align: right;">
-                                    <a class="btn btn-small btn-inverse t" href="/Locais/Details/1"><i class="micon-eye"></i> Ocultar</a>
-                                    <a class="btn btn-small btn-danger t" href="/DashLocal/Dashboard/1"><i class="micon-pencil-2"></i> Remover</a>                                                                          
-                            </div>
+                             @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
+                                 <div class="span12 pull-right" style="padding-top: 20px; text-align: right;">       
+                                 @if(p.Publico){
+                                            <a class="btn btn-small btn-danger t confirm-ocultar" data-id="@p.PublicacaoID"><i class="micon-cancel-2"> Ocultar</i></a>
+                                        }else{
+                                            <a class="btn btn-small btn-cl t confirm-publicar" data-id="@p.PublicacaoID"><i class="micon-checkmark"> Publicar</i></a>
+                                 }
+                                 <a class="btn btn-small btn-danger t confirm-remover" data-id="@p.PublicacaoID"><i class="micon-cancel-2"></i> Remover</a>   
+                                 </div>    
+                              }
 							<!-- ./ widget content -->
 							
 						</div>	
 
 					</div> 
                   </div>  
+             } 
+             
+            @*  Confirmar a ocultação da publicação *@
+            <div id="modal-from-dom-ocultar" class="modal hide fade">
+                <div class="modal-header">
+                    <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
+                     <h3>Ocultar Publicação</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Tem a certeza que pretende ocultar a publicação ao público?</p><br>
+                    <p>A publicação passará a estar apenas disponível para os profissionais da organização, ficando assim oculta para consulta aos utilizadores comuns.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/Publicacoes/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
+                    <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
+                </div>
+            </div>
 
-                <div class="span6" >               
- 
-						<!-- widget -->
-						<div class="well widget">
-							<!-- widget header -->
-							<div class="widget-header">
-								<h3 class="title"> <i class="icon-comment"></i>     </h3> <!-- FALTA HIPERLIGAÇÃO  --> 
-								
-                                <div class="widget-nav" style="margin-right: 10px;">
-									à 10 minutos atrás
-								</div>                                
-							</div>
-							<!-- ./ widget header -->
+            @*  Confirmar a publicação da publicação *@
+             <div id="modal-from-dom-publicar" class="modal hide fade">
+                <div class="modal-header">
+                    <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
+                     <h3>Publicar Publicação</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Tem a certeza que pretende publicar a publicação ao público?</p><br>
+                    <p>A publicação passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="/Publicacoes/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
+                    <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
+                </div>
+            </div>   
+            @* Confirmar a remoção do documento *@
+            <div id="modal-from-dom-remover" class="modal hide fade">
+                <div class="modal-header">
+                    <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="close">&times;</a>
+                     <h3>Remover Publicação</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Tem a certeza que pretende remover premanentemente a publicação?</p><br>        
+                </div>
+                <div class="modal-footer">
+                    <a href="/Publicacoes/Remover/IDLOCAL" class="btn btn-danger">Sim</a>
+                    <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="btn btn-inverse">Não</a>
+                </div>
+            </div>
+            @* Rodapé de paginação *@
+            @{
+                int nrPaginas = ViewBag.PublicacoesOrganizacao.PageCount;
 
-@* <td><a class="btn btn-mini btn-danger confirm-ocultar" data-id="@doc.DocumentoID"><i class="micon-cancel-2">  Ocultar</i></a></td> *@
-							
-							<!-- widget content -->
-							<div class="widget-content padded" style="padding-bottom: 40px;" >
-
-                                    Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-                                 Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-                                 Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-
-							
-                            <div class="span12 pull-right" style="padding-top: 20px; text-align: right;">
-                                    <a class="btn btn-small btn-inverse t" href="/Locais/Details/1"><i class="micon-eye"></i> Ocultar</a>
-                                    <a class="btn btn-small btn-danger t" href="/DashLocal/Dashboard/1"><i class="micon-pencil-2"></i> Remover</a>                                                                          
-                            </div>
-							<!-- ./ widget content -->
-							
-						</div>	
-
-					</div> 
-                  </div>  
-
-                <div class="span6" style="margin-left:0px"; >               
- 
-						<!-- widget -->
-						<div class="well widget">
-							<!-- widget header -->
-							<div class="widget-header">
-								<h3 class="title"> <i class="icon-comment"></i>     </h3> <!-- FALTA HIPERLIGAÇÃO  --> 
-								
-                                <div class="widget-nav" style="margin-right: 10px;">
-									à 10 minutos atrás
-								</div>                                
-							</div>
-							<!-- ./ widget header -->
-
-@* <td><a class="btn btn-mini btn-danger confirm-ocultar" data-id="@doc.DocumentoID"><i class="micon-cancel-2">  Ocultar</i></a></td> *@
-							
-							<!-- widget content -->
-							<div class="widget-content padded" style="padding-bottom: 40px;" >
-
-                                    Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-                                 Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-                                 Olá organização! Como estamos hoje? Aqui está a primeira linha longa desta publicação. Nada de especial, portanto. Continuando, blablablabla...
-                                    Yeee!
-
-							
-                            <div class="span12 pull-right" style="padding-top: 20px; text-align: right;">
-                                    <a class="btn btn-small btn-inverse t" href="/Locais/Details/1"><i class="micon-eye"></i> Ocultar</a>
-                                    <a class="btn btn-small btn-danger t" href="/DashLocal/Dashboard/1"><i class="micon-pencil-2"></i> Remover</a>                                                                          
-                            </div>
-							<!-- ./ widget content -->
-							
-						</div>	
-
-					</div> 
-                  </div> 
+                if (nrPaginas == 0) { nrPaginas++; };
                 
-                
+                int pagActual = ViewBag.PublicacoesOrganizacao.PageNumber;
+                                
+                int pagi, pagf;
+                Utilitarios.paginacao(nrPaginas, pagActual, out pagi, out pagf);
+            }
+           <div class="span12">
+                    <div class="pagination pull-right" style="margin-right:30px">
+						<ul>
+							<li 
+                                @if(pagActual == 1){
+                                    <text>class="disabled"</text>
+                                }
+                            >
+                                @Html.ActionLink("«", "Publicacoes", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type= ViewBag.CurrentType, page=1})
+                            </li>
+
+                            @for (int i = pagi; i <= pagf; i++ ){
+							<li
+                                @if (pagActual == i)
+                                {
+                                    <text>class="active"</text>
+                                }
+                            >
+                                @Html.ActionLink(string.Empty+i, "Publicacoes", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type= ViewBag.CurrentType, page=@i})
+                            </li>
+                            }
+							<li
+                                @if (pagActual == nrPaginas || nrPaginas==0)
+                                {
+                                    <text>class="disabled"</text>
+                                }
+                            >
+                                @Html.ActionLink("»", "Publicacoes", new { id=Model.OrganizacaoID, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter, type= ViewBag.CurrentType, page=nrPaginas})
+                           </li>
+						</ul>
+					</div>
+               </div>              
            </section>

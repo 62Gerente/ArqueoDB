@@ -100,14 +100,12 @@
 							<!-- widget content -->
 							<div class="widget-content" style=" height:100px;">
                                 <div class="span6">
-                                    <div class="span12 widgetpic">
-                                    <a href="/Utilizadores/Details/@m.Utilizador.UtilizadorID"> <!-- FALTA HIPERLIGAÇÃO -->
-                                            <center>
-                                                <img src="@(m.Utilizador.ImagemPerfil.Directoria.Caminho+m.Utilizador.ImagemPerfil.Nome)"/>
-                                            </center>
-                                    </a>
-
-                                </div>
+                                    <a href="/Utilizadores/Details/@m.Utilizador.UtilizadorID">
+                                        <div class="span12 widgetpic" style=" background-image:url(
+                                                @(m.Utilizador.ImagemPerfil.Directoria.Caminho+m.Utilizador.ImagemPerfil.Nome)
+                                        );">
+                                        </div>
+                                    </a> 
                                 </div>
                                 <div class="span6">
                                     <b>Email:</b><br> @m.Utilizador.Email<br>
