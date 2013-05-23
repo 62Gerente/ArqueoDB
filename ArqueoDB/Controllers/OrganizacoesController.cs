@@ -276,7 +276,43 @@ namespace ArqueoDB.Controllers
             db.Dispose();
             base.Dispose(disposing);
 
-        }     
+        }
+
+        public ActionResult Publicar(int id)
+        {
+            Organizacao organizacao = db.Organizacoes.Find(id);
+            organizacao.Publica = true;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult Ocultar(int id)
+        {
+            Organizacao organizacao = db.Organizacoes.Find(id);
+            organizacao.Publica = false;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult Activar(int id)
+        {
+            Organizacao organizacao = db.Organizacoes.Find(id);
+            organizacao.Activa = true;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        public ActionResult Desactivar(int id)
+        {
+            Organizacao organizacao = db.Organizacoes.Find(id);
+            organizacao.Activa = false;
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
         
     }
 }

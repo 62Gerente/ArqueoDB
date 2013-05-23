@@ -6,6 +6,11 @@
 }
 
 @section breadcrumb {
+    <li><a href="/Locais/Details/@Html.DisplayFor(model => model.LocalID)">@Html.DisplayFor(model => model.Local.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.LocalID)">Gestão do Local</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashLocal/Artefactos/@Html.DisplayFor(model => model.LocalID)">Artefactos</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/Artefactos/Details/@Html.DisplayFor(model => model.ArtefactoID)">@Html.DisplayFor(model => model.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashArtefacto/Dashboard/@Html.DisplayFor(model => model.ArtefactoID)">Gestão do Artefacto</a><span class="divider"><i class="icon-caret-right"></i></span></li>
     <li><a href="/DashArtefacto/Definicoes/@Html.DisplayFor(model => model.ArtefactoID)">Definições</a></li>
 }
 @section dashboard{
@@ -40,7 +45,7 @@
                     </div>
                     <div class="editor-field span12" style="margin-left:0px"> 
                           <div class="span12 input-xlarge"> 
-                               @Html.TextBoxFor(model => model.DataDescoberta, new { @Class="datepicker span9" } )
+                               <input class="datepicker span9"  id="DataRegisto" name="DataRegisto" type="text" value="@Model.DataDescoberta">
                           </div>
                     </div>
               </div>
@@ -95,10 +100,25 @@
                    </div>
                </div>
             <div class="row-fluid">
-                  <div class="span12">
+
+                <div class="span6">
+                                  @if(Model.Publico){
+                                            <a class="btn btn-small btn-danger t confirm-ocultar" data-id="@Model.ArtefactoID"><i class="micon-cancel-2"> Ocultar</i></a>
+                                    }else{
+                                            <a class="btn btn-small btn-cl t confirm-publicar" data-id="@Model.ArtefactoID"><i class="micon-checkmark"> Publicar</i></a>
+                                        }
+
+                                  
+                                 <a class="btn btn-small btn-danger t confirm-remover" data-id="@Model.OrganizacaoID"><i class="micon-cancel-2"> Remover</i></a>
+                                   
+
+                </div>
+
+
+                <div class="span6">
                           <div class="pull-right">
-                            <input class="btn btn-inverse" type="submit" value="Guardar"> 
-                            <a class="btn btn-danger" href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)"  style="padding:4px 23px"> Voltar</a>
+                            <input class="btn btn-small btn-inverse" type="submit" value="Guardar"> 
+                            <a class="btn btn-small btn-danger" href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)"> Voltar</a>
                         </div>
                       </div>
             </div>
@@ -108,6 +128,51 @@
 
     </div>
     </fieldset>
+        
+          <div id="modal-from-dom-ocultar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
+         <h3>Ocultar Artefacto</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende ocultar o artefacto ao público?</p><br>
+        <p>O artefacto passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Artefactos/Ocultar/IDARTEFACTO" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+ <div id="modal-from-dom-publicar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
+         <h3>Publicar Artefacto</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende publicar o artefacto ao público?</p><br>
+        <p>O artefacto passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Artefactos/Publicar/IDARTEFACTO" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+<div id="modal-from-dom-remover" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="close">&times;</a>
+         <h3>Remover Artefacto</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende remover premanentemente o artefacto?</p><br>   
+        <p>O artefacto pode não voltar a ser recuperado, contacte o administrador do sistema para verificar a possibilidade de recuperar um artefacto removido.</p>     
+    </div>
+    <div class="modal-footer">
+        <a href="/Artefactos/Remover/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-remover').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
 }
 
 					

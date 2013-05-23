@@ -39,3 +39,31 @@ $('.confirm-remover').on('click', function(e) {
     var id = $(this).data('id');
     $('#modal-from-dom-remover').data('id', id).modal('show');
 });
+
+$('#modal-from-dom-activar').on('show', function() {
+    var id = $(this).data('id'),
+        removeBtn = $(this).find('.btn-danger');
+
+    removeBtn.attr('href', removeBtn.attr('href').replace(/Activar\/(.*|\d*)/, "Activar/" + id));
+});
+
+$('.confirm-activar').on('click', function(e) {
+    e.preventDefault();
+
+    var id = $(this).data('id');
+    $('#modal-from-dom-activar').data('id', id).modal('show');
+});
+
+$('#modal-from-dom-desactivar').on('show', function() {
+    var id = $(this).data('id'),
+        removeBtn = $(this).find('.btn-danger');
+
+    removeBtn.attr('href', removeBtn.attr('href').replace(/Desactivar\/(.*|\d*)/, "Desactivar/" + id));
+});
+
+$('.confirm-desactivar').on('click', function(e) {
+    e.preventDefault();
+
+    var id = $(this).data('id');
+    $('#modal-from-dom-desactivar').data('id', id).modal('show');
+});

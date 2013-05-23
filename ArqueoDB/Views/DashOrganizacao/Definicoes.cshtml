@@ -1,6 +1,9 @@
-﻿@model ArqueoDB.Models.Organizacao
+﻿@using ArqueoDB.Models;
+@model ArqueoDB.Models.Organizacao
+
 
 @{
+    Utilizador user = ((Utilizador)(Session["Utilizador"]));
     ViewBag.Title = "Definicoes";
     Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";  
 }
@@ -124,7 +127,7 @@
                     </div>
                     <div class="editor-field span12" style="margin-left:0px"> 
                           <div class="span12 input-xlarge"> 
-                               @Html.TextBoxFor(model => model.DataFundacao, new { @Class="datepicker span12" } )
+                              <input class="datepicker span12"  id="DataRegisto" name="DataRegisto" type="text" value="@Model.DataFundacao">
                           </div>
                     </div> 
                 </div>
@@ -170,10 +173,25 @@
 
 
             <div class="row-fluid">
-                  <div class="span12">
+                  <div class="span6">  
+                                    @if(Model.Publica){
+                                            <a class="btn btn-small btn-danger t confirm-ocultar" data-id="@Model.OrganizacaoID"><i class="micon-cancel-2"> Ocultar</i></a>
+                                    }else{
+                                            <a class="btn btn-small btn-cl t confirm-publicar" data-id="@Model.OrganizacaoID"><i class="micon-checkmark"> Publicar</i></a>
+                                        }
+
+                                    @if(Model.Activa){
+                                            <a class="btn btn-small btn-danger t confirm-desactivar" data-id="@Model.OrganizacaoID"><i class="micon-cancel-2"> Desactivar</i></a>
+                                    }else{
+                                            <a class="btn btn-small btn-cl t confirm-activar" data-id="@Model.OrganizacaoID"><i class="micon-checkmark"> Activar</i></a>
+                                        }
+
+
+                  </div>
+                  <div class="span6">
                           <div class="pull-right">
-                            <input class="btn btn-inverse" type="submit" value="Guardar"> 
-                            <a class="btn btn-danger" href="/DashOrganizacao/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)"  style="padding:4px 23px"> Voltar</a>
+                            <input class="btn btn-small btn-inverse" type="submit" value="Guardar"> 
+                            <a class="btn btn-small btn-danger" href="/DashOrganizacao/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)"> Voltar</a>
                         </div>
                       </div>
             </div>
@@ -185,6 +203,71 @@
         
         </div>
     </fieldset>
+        
+        <div id="modal-from-dom-ocultar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>
+         <h3>Ocultar Organização</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende ocultar a organização ao público?</p><br>
+        <p>A organização passará a estar apenas disponível para os profissionais da organização, ficando assim oculto para consulta aos utilizadores comuns.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Organizacoes/Ocultar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+              @*  Confirmar a publicação do documento *@
+ <div id="modal-from-dom-publicar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="close">&times;</a>
+         <h3>Publicar Organização</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende publicar a organização ao público?</p><br>
+        <p>A organização passará a estar disponível para consulta a todos os utilizadores do sistema.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Organizacoes/Publicar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-publicar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+        
+        
+               <div id="modal-from-dom-desactivar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-desactivar').modal('hide')" class="close">&times;</a>
+         <h3>Desactivar Organização</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende desactivar a organização?</p><br>
+        <p>A organização deixará de estar activa. </p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Organizacoes/Desactivar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-desactivar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+
+              
+ <div id="modal-from-dom-activar" class="modal hide fade">
+    <div class="modal-header">
+        <a href="javascript:$('#modal-from-dom-activar').modal('hide')" class="close">&times;</a>
+         <h3>Activar Organização</h3>
+    </div>
+    <div class="modal-body">
+        <p>Tem a certeza que pretende activar a organização?</p><br>
+        <p>A organização passará a estar activa.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="/Organizacoes/Activar/IDLOCAL" class="btn btn-danger">Sim</a>
+        <a href="javascript:$('#modal-from-dom-activar').modal('hide')" class="btn btn-inverse">Não</a>
+    </div>
+</div>
+        
+        
 }
        
 
