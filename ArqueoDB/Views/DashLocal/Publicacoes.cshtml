@@ -60,14 +60,16 @@
             </div>
            
             <section class="content-wrapper main-content clear-fix">
-    	        @foreach(var p in publicacoes){
-                       <div class="span6" @if(n_publicacoes%2 == 1){ <text> style="margin-left:0px"; </text>} >
+    	        @foreach (var p in publicacoes)
+             {
+                       <div class="span6" @if (n_publicacoes % 2 == 1)
+                                          { <text> style="margin-left:0px"; </text>} >
     				<!-- widget -->
 						 <div class="well widget">
 							<!-- widget header -->
 							<div class="widget-header">
 								<h3 class="title"> <i class="icon-comment"></i> 
-                                    @{string tit = p.Titulo ;
+                                    @{string tit = p.Titulo;
                                       if (tit != null && tit.Length >= 30)
                                       {
                                           tit = p.Titulo.Substring(0, 30);
@@ -77,47 +79,55 @@
                                      }
                                      @tit
 								</h3>  
-                                    <div class="widget-nav" style="margin-right: 10px;">
-									    @{TimeSpan diff = (DateTime.Now - p.DataPublicacao) ;
-                                          String data ;
-                                          if (diff.TotalDays >= 1) {
-                                              data = "à " + (int)Math.Round(diff.TotalDays, 0) + " dia" + ((int)Math.Round(diff.TotalDays, 0) > 1 ? "s" : "") + " atrás";
-                                          }
-                                          else if (diff.TotalHours >= 1) {
-                                              data = "à " + (int)Math.Round(diff.TotalHours, 0) + " hora" + ((int)Math.Round(diff.TotalHours, 0) > 1 ? "s" : "") + " atrás";
-                                          }
-                                          else if (diff.TotalMinutes >= 1) {
-                                              data = "à " + (int)Math.Round(diff.TotalMinutes, 0) + " minuto" + ((int)Math.Round(diff.TotalMinutes, 0) > 1 ? "s" : "") + " atrás";
-                                          }
-                                          else {
-                                              data = "à " + (int)Math.Round(diff.TotalSeconds, 0) + " segundo" + ((int)Math.Round(diff.TotalSeconds, 0) > 1 ? "s" : "") + " atrás";
-                                          }
-									    }
-                                        @data
+                                    <div class="widget-nav data-pequena" style="margin-right: 10px;">
+
+									    @{TimeSpan diff = (DateTime.Now - p.DataPublicacao);
+               String data;
+               if (diff.TotalDays >= 1)
+               {
+                   data = "à " + (int)Math.Round(diff.TotalDays, 0) + " dia" + ((int)Math.Round(diff.TotalDays, 0) > 1 ? "s" : "") + " atrás";
+               }
+               else if (diff.TotalHours >= 1)
+               {
+                   data = "à " + (int)Math.Round(diff.TotalHours, 0) + " hora" + ((int)Math.Round(diff.TotalHours, 0) > 1 ? "s" : "") + " atrás";
+               }
+               else if (diff.TotalMinutes >= 1)
+               {
+                   data = "à " + (int)Math.Round(diff.TotalMinutes, 0) + " minuto" + ((int)Math.Round(diff.TotalMinutes, 0) > 1 ? "s" : "") + " atrás";
+               }
+
+               else
+               {
+                   data = "à " + (int)Math.Round(diff.TotalSeconds, 0) + " segundo" + ((int)Math.Round(diff.TotalSeconds, 0) > 1 ? "s" : "") + " atrás";
+               }
+               }
+                <b> @data </b>
 								    </div>                                
 							</div>
 							<!-- ./ widget header -->						
 							<!-- widget content -->
-							<div class="widget-content padded" style="padding-bottom: 40px" >
-                                @p.Descricao
-
-                             @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){    
-                                 <div class="span12 pull-right" style="padding-top: 20px; text-align: right;">       
-                                 @if(p.Publico){
+							<div class="widget-content" @*padded style="padding-bottom: 40px"*@ style=" height:140px;" >
+                                <div style=" height:105px; overflow-y : scroll">
+                                    @p.Descricao
+                                </div>
+                             @if (Model.Responsavel.UtilizadorID == user.UtilizadorID){    
+                                 <div class="span12 pull-right" style="margin-top:17px; text-align: right;">       
+                                 @if (p.Publico) {
                                             <a class="btn btn-small btn-danger t confirm-ocultar" data-id="@p.PublicacaoID"><i class="micon-cancel-2"> Ocultar</i></a>
-                                        }else{
+                                 }else {
                                             <a class="btn btn-small btn-cl t confirm-publicar" data-id="@p.PublicacaoID"><i class="micon-checkmark"> Publicar</i></a>
                                  }
                                  <a class="btn btn-small btn-danger t confirm-remover" data-id="@p.PublicacaoID"><i class="micon-cancel-2"></i> Remover</a>   
-                                 </div>    
-                              }
+                                 </div>
+                             }
 							<!-- ./ widget content -->
 							
 						</div>	
 
 					</div> 
-                  </div>  
-             } 
+                  </div>   
+                 n_publicacoes++; 
+                 } 
              
             @*  Confirmar a ocultação da publicação *@
             <div id="modal-from-dom-ocultar" class="modal hide fade">

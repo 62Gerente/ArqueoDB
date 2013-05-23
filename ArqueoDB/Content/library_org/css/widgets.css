@@ -77,7 +77,9 @@
 	padding:0;
 	float:left;
 }
-.widget .widget-header .widget-nav {float:right;}
+.widget .widget-header .widget-nav {
+	float:right;	
+}
 .widget-header a {
 	color:#000;
 }
@@ -347,3 +349,10 @@ p.map-info-content .avatar {margin:5px 5px 5px 0;}
 	margin-top:3px;
 	padding-bottom:0;
 }
+.data-pequena {
+	font-size: 13px ;
+}
+/*.widget .widget-header .widget-nav .data-pequena {
+	float:right;	
+	font-size: 14px ;
+}*/
