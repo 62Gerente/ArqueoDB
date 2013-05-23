@@ -299,13 +299,13 @@
                                         <form class="fill-up" action="/">
 
                                           <div class="chat-message-box">
-                                                <textarea placeholder="comentário aqui..." rows="3"></textarea>
+                                                <textarea id="comm" name="comentario" placeholder="comentário aqui..." rows="3"></textarea>
                                           </div>
 
                                           <div class="clearfix actions">
                                             <div class="pull-right faded-toolbar">
                                       
-                                              <a href="#" class="btn btn-blue btn-mini">Comentar</a>
+                                              <a href="#" onclick="comentar();" class="btn btn-blue btn-mini">Comentar</a>
                                             </div>
                                           </div>
                                         </form>
@@ -315,3 +315,11 @@
                         				</div>
 			</div>
             </div>
+
+<script>
+    var comment = document.getElementById('comm');
+    function comentar() {
+        if(comment.value !== "")
+            window.location.href = "/Utilizadores/Comentar?id=@Model.UtilizadorID&user=@user.UtilizadorID&comentario=" + comment.value
+    }
+</script>
