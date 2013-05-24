@@ -228,7 +228,9 @@ namespace ArqueoDB.DAL
                     UtilizadoresSeguidos = new List<Utilizador>(),
                     Seguidores = new List<Utilizador>(),
                     Comentarios = new List<Comentario>(),
-                    Publicacoes = new List<Publicacao>()
+                    Publicacoes = new List<Publicacao>(),
+                    MensagensEnviadas = new List<Mensagem>(),
+                    MensagensRecebidas = new List<Mensagem>()
                 },
                 new Utilizador{
                     NomeUtilizador = "Barney",
@@ -248,7 +250,9 @@ namespace ArqueoDB.DAL
                     UtilizadoresSeguidos = new List<Utilizador>(),
                     Seguidores = new List<Utilizador>(),
                     Comentarios = new List<Comentario>(),
-                    Publicacoes = new List<Publicacao>()
+                    Publicacoes = new List<Publicacao>(),
+                    MensagensEnviadas = new List<Mensagem>(),
+                    MensagensRecebidas = new List<Mensagem>()
                 },
                 new Utilizador{
                     NomeUtilizador = "Robin",
@@ -268,7 +272,9 @@ namespace ArqueoDB.DAL
                     UtilizadoresSeguidos = new List<Utilizador>(),
                     Seguidores = new List<Utilizador>(),
                     Comentarios = new List<Comentario>(),
-                    Publicacoes = new List<Publicacao>()
+                    Publicacoes = new List<Publicacao>(),
+                    MensagensEnviadas = new List<Mensagem>(),
+                    MensagensRecebidas = new List<Mensagem>()
                 }
             };
             utilizadores.ForEach(u => context.Utilizadores.Add(u));
