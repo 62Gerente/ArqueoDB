@@ -122,7 +122,7 @@ namespace ArqueoDB.Controllers
             {
                 db.Entry(artefacto).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard", new { id = artefacto.ArtefactoID });
             }
 
             Artefacto art = db.Artefactos.Find(artefacto.ArtefactoID);

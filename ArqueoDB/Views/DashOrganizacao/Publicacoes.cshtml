@@ -65,15 +65,15 @@
 							<!-- widget header -->
 							<div class="widget-header">
 								<h3 class="title"> <i class="icon-comment"></i> 
-                                    @{string tit = p.Titulo ;
+                                   @* @{string tit = p.Titulo ;
                                       if (tit != null && tit.Length >= 30)
                                       {
                                           tit = p.Titulo.Substring(0, 30);
                                           string[] array = { tit, "(...)" };
                                           tit = String.Concat(array);
                                       }
-                                     }
-                                     @tit
+                                     }*@
+                                     @p.Titulo
 								</h3>  
                                     <div class="widget-nav data-pequena" style="margin-right: 10px;">
 									    @{TimeSpan diff = (DateTime.Now - p.DataPublicacao) ;

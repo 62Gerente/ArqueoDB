@@ -148,7 +148,7 @@ namespace ArqueoDB.DAL
                 },
                 new Imagem{
                     Nome = "plantamdds1.jpg", 
-                    DirectoriaID = 6, 
+                    DirectoriaID = 7, 
                     Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
@@ -156,7 +156,7 @@ namespace ArqueoDB.DAL
                 },
                 new Imagem{
                     Nome = "plantamdds2.jpg", 
-                    DirectoriaID = 6, 
+                    DirectoriaID = 7, 
                     Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
@@ -164,7 +164,7 @@ namespace ArqueoDB.DAL
                 },
                 new Imagem{
                     Nome = "plantamdds3.jpg", 
-                    DirectoriaID = 6, 
+                    DirectoriaID = 7, 
                     Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,
@@ -172,7 +172,7 @@ namespace ArqueoDB.DAL
                 },
                 new Imagem{
                     Nome = "plantamdds4.jpg", 
-                    DirectoriaID = 6, 
+                    DirectoriaID = 7, 
                     Descricao = "Planta do Museu D. Diogo", 
                     Apagada = false, 
                     Publica = true,

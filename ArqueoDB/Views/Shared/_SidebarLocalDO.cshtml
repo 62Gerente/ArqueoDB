@@ -1,4 +1,8 @@
-﻿@model ArqueoDB.Models.Local
+﻿@using ArqueoDB.Models 
+@model ArqueoDB.Models.Local
+
+
+@{Utilizador user = ((Utilizador)(Session["Utilizador"]));}
 
                     <li class="avatar2 hidden-phone">
                         <a href="/DashLocal/Dashboard/@Html.DisplayFor(m => Model.LocalID)">
@@ -99,6 +103,9 @@
                             <span class="hidden-phone">Estatísticas</span>
                         </a>
                     </li>
+
+
+                    @if (user.UtilizadorID == Model.Responsavel.UtilizadorID){
                     <li
 
                     @if (String.Compare((string)ViewData["Activo"], "Definicões") == 0)
@@ -112,3 +119,4 @@
                             <span class="hidden-phone">Definições</span>
                         </a>
                     </li>
+                    }

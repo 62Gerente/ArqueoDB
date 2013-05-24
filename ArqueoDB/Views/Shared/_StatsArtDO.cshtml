@@ -2,10 +2,10 @@
 
 
 							<li>
-								<span class="large text-info">@Html.DisplayFor(m => Model.Imagens.Count)</span>
+								<span class="large text-info">@Model.Imagens.Where(i => !i.Apagada ).Count()</span>
 								<span class="mini muted">Imagens</span>
 							</li>
 							<li>
-								<span class="large text-success">@Html.DisplayFor(m => Model.Comentarios.Count)</span>
+								<span class="large text-success">@Model.Comentarios.Where(c => !c.Apagado).Count()</span>
 								<span class="mini muted">Comentários</span>
 							</li>

@@ -1,22 +1,22 @@
 ﻿@model ArqueoDB.Models.Local
 
 							<li>
-								<span class="large text-warning">@Html.DisplayFor(m => Model.Artefactos.Count)</span>
+								<span class="large text-warning">@Model.Artefactos.Where(a => !a.Apagado).Count()</span>
 								<span class="mini muted">Artefactos</span>
 							</li>
 							<li>
-								<span class="large text-info">@Html.DisplayFor(m => Model.Imagens.Count)</span>
+								<span class="large text-info">@Model.Imagens.Where(i => !i.Apagada).Count()</span>
 								<span class="mini muted">Imagens</span>
 							</li>
 							<li>
-								<span class="large text-success">@Html.DisplayFor(m => Model.Plantas.Count)</span>
+								<span class="large text-success">@Model.Plantas.Where(p => !p.Apagado).Count()</span>
 								<span class="mini muted">Plantas</span>
 							</li>
 							<li>
-								<span class="large text-error">@Html.DisplayFor(m => Model.Publicacoes.Count)</span>
+								<span class="large text-error">@Model.Publicacoes.Where(p => !p.Apagado).Count()</span>
 								<span class="mini muted">Publicações</span>
 							</li>
 							<li>
-								<span class="large text-inverse">@Html.DisplayFor(m => Model.Documentos.Count)</span>
+								<span class="large text-inverse">@Model.Documentos.Where(d => !d.Apagado).Count()</span>
 								<span class="mini muted">Documentos</span>
 							</li>

@@ -8,7 +8,6 @@
 @section breadcrumb {
     <li><a href="/Locais/Details/@Html.DisplayFor(model => model.LocalID)">@Html.DisplayFor(model => model.Local.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
     <li><a href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.LocalID)">Gestão do Local</a><span class="divider"><i class="icon-caret-right"></i></span></li>
-    <li><a href="/DashLocal/Artefactos/@Html.DisplayFor(model => model.LocalID)">Artefactos</a><span class="divider"><i class="icon-caret-right"></i></span></li>
     <li><a href="/Artefactos/Details/@Html.DisplayFor(model => model.ArtefactoID)">@Html.DisplayFor(model => model.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
     <li><a href="/DashArtefacto/Dashboard/@Html.DisplayFor(model => model.ArtefactoID)">Gestão do Artefacto</a><span class="divider"><i class="icon-caret-right"></i></span></li>
     <li><a href="/DashArtefacto/Definicoes/@Html.DisplayFor(model => model.ArtefactoID)">Definições</a></li>
@@ -17,16 +16,13 @@
     Definições    
 }
      
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
                     
     @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
         <div class="well widget">
-        @Html.HiddenFor(model => model.LocalID)
+        @Html.HiddenFor(model => model.ArtefactoID)
             <div class="row-fluid">
               <div class="span4">
                     <div class="editor-label span12">
@@ -45,7 +41,7 @@
                     </div>
                     <div class="editor-field span12" style="margin-left:0px"> 
                           <div class="span12 input-xlarge"> 
-                               <input class="datepicker span9"  id="DataRegisto" name="DataRegisto" type="text" value="@Model.DataDescoberta">
+                               <input class="datepicker span12" id="DataRegisto" name="DataRegisto" type="text" value="@Model.DataDescoberta">
                           </div>
                     </div>
               </div>
@@ -118,17 +114,16 @@
                 <div class="span6">
                           <div class="pull-right">
                             <input class="btn btn-small btn-inverse" type="submit" value="Guardar"> 
-                            <a class="btn btn-small btn-danger" href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.OrganizacaoID)"> Voltar</a>
+                            <a class="btn btn-small btn-danger" href="/DashArtefacto/Dashboard/@Html.DisplayFor(model => model.ArtefactoID)"> Voltar</a>
                         </div>
                       </div>
             </div>
                
            @Html.HiddenFor(model => model.OrganizacaoID)
            @Html.HiddenFor(model => model.DataDescoberta)
-
     </div>
     </fieldset>
-        
+    }       
           <div id="modal-from-dom-ocultar" class="modal hide fade">
     <div class="modal-header">
         <a href="javascript:$('#modal-from-dom-ocultar').modal('hide')" class="close">&times;</a>

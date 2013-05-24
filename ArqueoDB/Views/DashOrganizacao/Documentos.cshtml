@@ -84,8 +84,9 @@
                         <td><a href="#">@doc.Responsavel.Utilizador.Nome</a></td> <!-- FALTA HIPERLIGAÇÃO -->
 					    <td>@doc.DataPublicacao.Year</td>
                         
-                        <td style="width:30px"><a class="btn btn-mini btn-inverse" style="width:100px" href="#"><i class="micon-eye"></i>  Ver</a></td>
-                        <td style="width:30px"><a class="btn btn-mini btn-inverse" style="width:100px" href="/Documentos/Transferir/@doc.DocumentoID"><i class="icon-download-alt"></i>  Transferir</a></td>
+                         <td style="width:100px"><a href="#"><button class="btn btn-black btn-mini" style="width:100%"><span><i class="icon-eye-open"></i></span><span style="font-size:small"> Ver</span></button></a></td>
+                         <td style="width:100px"><a href="/Documentos/Transferir/@doc.DocumentoID"><button class="btn btn-black btn-mini" style="width:100%"><span><i class="icon-download-alt"></i></span><span style="font-size:small"> Transferir</span></button></a></td>
+                       
                         @if(user.UtilizadorID == Model.Responsavel.Utilizador.UtilizadorID){
 
 @*  Confirmar a ocultação do documento *@
@@ -122,11 +123,14 @@
                         
                         
                         
+                        
                         if(doc.Publico == true) {
-                            <td><a class="btn btn-mini btn-danger confirm-ocultar" data-id="@doc.DocumentoID"><i class="micon-cancel-2">  Ocultar</i></a></td>
+                            <td style="width:100px"><a class="confirm-ocultar" data-id="@doc.DocumentoID"><button class="btn btn-mini btn-danger" style="width:100%"><span><i class="icon-remove"></i></span><span style="font-size:small"> Ocultar</span></button></a></td>
+                           
                         }
                         else {
-                            <td><a class="btn btn-mini btn-cl confirm-publicar" data-id="@doc.DocumentoID"><i class="micon-checkmark">  Publicar</i></a></td>
+                            <td style="width:100px"><a class="confirm-publicar" data-id="@doc.DocumentoID"><button class="btn btn-mini btn-cl" style="width:100%"><span><i class="icon-ok"></i></span><span style="font-size:small"> Publicar</span></button></a></td>
+                           
                         }
 
 @* Confirmar a remoção do documento *@
@@ -144,8 +148,8 @@
     </div>
 </div>
 
-
-                        <td><a class="btn btn-mini btn-danger t confirm-remover" data-id="@doc.DocumentoID"><i class="micon-cancel-2"></i> Remover</a></td>										
+                        <td style="width:100px"><a class="confirm-remover" data-id="@doc.DocumentoID"><button class="btn btn-mini btn-danger" style="width:100%"><span><i class="icon-remove"></i></span><span style="font-size:small"> Remover</span></button></a></td>
+                        
                         }
 					</tr>   
               }                 

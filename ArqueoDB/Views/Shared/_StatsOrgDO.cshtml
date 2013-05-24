@@ -1,18 +1,18 @@
 ﻿@model ArqueoDB.Models.Organizacao
 
 							<li>
-								<span class="large text-warning">@Html.DisplayFor(m => Model.Publicacoes.Count)</span>
+								<span class="large text-warning">@Model.Publicacoes.Where(p => !p.Apagado).Count()</span>
 								<span class="mini muted">Publicações</span>
 							</li>
 							<li>
-								<span class="large text-info">@Html.DisplayFor(m => Model.Membros.Count)</span>
+								<span class="large text-info">@Model.Membros.Count()</span>
 								<span class="mini muted">Membros</span>
 							</li>
 							<li>
-								<span class="large text-success">@Html.DisplayFor(m => Model.Locais.Count)</span>
+								<span class="large text-success">@Model.Locais.Where(l => !l.Apagado).Count()</span>
 								<span class="mini muted">Locais</span>
 							</li>
 							<li>
-								<span class="large text-error">@Html.DisplayFor(m => Model.Documentos.Count)</span>
+								<span class="large text-error">@Model.Documentos.Where(d => !d.Apagado).Count()</span>
 								<span class="mini muted">Documentos</span>
 							</li>
