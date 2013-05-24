@@ -204,7 +204,7 @@
                       <div class="box-header">
                         <span class="title"><i class="icon-group"> </i> Utilizadores</span>
                         <ul class="box-toolbar">
-                          <li><span class="label label-blue">@Model.Membros.Count</span></li>
+                          <li><span class="label label-blue">@Model.Membros.Where(m => !m.Utilizador.Apagado).Count()</span></li>
                         </ul>
                       </div>
 
@@ -247,7 +247,7 @@
       <div class="box-header">
         <span class="title"><i class="icon-edit"> </i> Publicaçõoes</span>
         <ul class="box-toolbar">
-          <li><span class="label label-blue">@Model.Publicacoes.Count</span></li>
+          <li><span class="label label-blue">@Model.Publicacoes.Where(p => p.Publico && !p.Apagado).Count()</span></li>
         </ul>
       </div>
       <div class="box-content scrollable" style="height: 254px; overflow-y: auto">

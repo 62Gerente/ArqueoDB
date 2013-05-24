@@ -355,5 +355,19 @@ namespace ArqueoDB.Controllers
         }
          */
 
+        public ActionResult Estatisticas(int id)
+        {
+            Organizacao organizacao = db.Organizacoes.Find(id);
+            if (organizacao == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["Dashboard"] = "Organizacao";
+            ViewData["Activo"] = "Estatisticas";
+
+            return View(organizacao);
+        }
+
     }
 }

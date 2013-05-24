@@ -317,7 +317,7 @@
       <div class="box-header">
         <span class="title"><i class="icon-edit"> </i> Publicações</span>
         <ul class="box-toolbar">
-          <li><span class="label label-blue">@Model.Publicacoes.Count</span></li>
+          <li><span class="label label-blue">@Model.Publicacoes.Where(p => p.Publico && !p.Apagado).Count()</span></li>
         </ul>
       </div>
       <div class="box-content scrollable" style="height: 300px; overflow-y: auto">
@@ -347,7 +347,7 @@
 						<div class="box-header">
                         <span class="title"><i class="icon-comments-alt"> </i> Comentários</span>
                         <ul class="box-toolbar">
-                          <li><span class="label label-blue">@Model.Comentarios.Count</span></li>
+                          <li><span class="label label-blue">@Model.Comentarios.Where(c => !c.Apagado).Count()</span></li>
                         </ul>
 						</div>
 						<div class="box-content">

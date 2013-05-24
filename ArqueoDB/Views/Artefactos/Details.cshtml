@@ -122,7 +122,7 @@
 								<span><i class="icon-camera-retro"> </i></span> <span> Imagens</span>
 							</div>
                         <ul class="box-toolbar">
-                          <li><span class="label label-blue">@Model.Imagens.Count</span></li>
+                          <li><span class="label label-blue">@Model.Imagens.Where(i => !i.Apagada).Count()</span></li>
                         </ul>
                       </div>
 
@@ -161,7 +161,7 @@
 						<div class="box-header">
                         <span class="title"><i class="icon-comments-alt"> </i> Comentários</span>
                         <ul class="box-toolbar">
-                          <li><span class="label label-blue">@Model.Comentarios.Count</span></li>
+                          <li><span class="label label-blue">@Model.Comentarios.Where(c => !c.Apagado).Count()</span></li>
                         </ul>
 						</div>
 						<div class="box-content">

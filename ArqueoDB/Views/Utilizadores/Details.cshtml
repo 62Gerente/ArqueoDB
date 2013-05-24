@@ -219,7 +219,7 @@
       <div class="box-header">
         <span class="title"><i class="icon-edit"> </i> Publicações</span>
         <ul class="box-toolbar">
-          <li><span class="label label-blue">@Model.Publicacoes.Count</span></li>
+          <li><span class="label label-blue">@Model.Publicacoes.Where(p => p.Publico && !p.Apagado).Count()</span></li>
         </ul>
       </div>
       <div class="box-content scrollable" style="height: 300px; overflow-y: auto">
@@ -249,14 +249,15 @@
 						<div class="box-header">
                         <span class="title"><i class="icon-comments-alt"> </i> Comentários</span>
                         <ul class="box-toolbar">
-                          <li><span class="label label-blue">@Model.Comentarios.Count</span></li>
+                          <li><span class="label label-blue">Model.Comentarios.Where(c => !c.Apagado).Count()</span></li>
                         </ul>
 						</div>
 						<div class="box-content">
 							<div class="row-fluid">
 								<div class="span12">
                                     <ul class="chat-box timeline scrollable" style="height:300px; overflow-y:auto;">
-                                      @foreach(Comentario comm in Model.Comentarios.Where(c => !c.Apagado)){
+                                      @foreach (Comentario comm in Model.Comentarios.Where(c => !c.Apagado))
+                                      {
                                       <li class="arrow-box-left gray">
                                         <div class="avatar"><img class="avatar-small" src="@(comm.Autor.ImagemPerfil.Directoria.Caminho + comm.Autor.ImagemPerfil.Nome)"></div>
                                         <div class="info">

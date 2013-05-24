@@ -1,0 +1,169 @@
+﻿@model ArqueoDB.Models.Organizacao
+@using ArqueoDB.Models
+
+@{
+    ViewBag.Title = "Estatisticas";
+    ViewBag.Organizacao = Model;
+    Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
+}   
+@section breadcrumb {
+    <li><a href="/DashOrganizacao/Estatísticas/@Html.DisplayFor(model => model.OrganizacaoID)">Estatísticas</a></li>
+}
+@section dashboard{
+    Estatísticas
+}
+                <div class="row-fluid">
+                    <div class="btn-rounded-panel large">
+						<ul class="btn-rounded">
+							<li class="success"><span><a href="#" class="bottom_tooltip" data-original-title="Locais"><i class="micon-location text-success" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Locais.Where(l => !l.Apagado).Count()</span></li>
+							<li class="info"><span><a href="#" class="bottom_tooltip" data-original-title="Utilizadores"><i class="micon-user-2 text-info" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Membros.Count()</span></li>
+							<li class="danger"><span><a href="#" class="bottom_tooltip" data-original-title="Documentos"><i class="micon-libreoffice text-error" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Documentos.Where(d => !d.Apagado).Count()</span></li>
+							<li class="warning"><span><a href="#" class="bottom_tooltip" data-original-title="Publicações"><i class="micon-newspaper text-warning" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Publicacoes.Where(d => !d.Apagado).Count()</span></li>
+                            @{
+                                int artefactos = 0;
+                                foreach(Local loc in Model.Locais.Where(l => !l.Apagado)){
+                                    artefactos += loc.Artefactos.Where(a => !a.Apagado).Count();
+                                }
+                            }
+							<li class="important"><span><a href="#" class="bottom_tooltip" data-original-title="Artefactos"><i class="micon-diamond text-info" style="font-size:65px"></i></a></span><span class="badge badge-important">@artefactos</span></li>
+							<li><span><a href="#" class="bottom_tooltip" data-original-title="Seguidores"><i class="micon-feed" style="color:black;font-size:65px"></i></a></span><span class="badge badge-important">@Model.Seguidores.Count()</span></li>
+
+						</ul>
+					</div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6 ">
+						<div class="well widget">
+							<div class="widget-header">
+								<h3 class="title">Artefactos por Local</h3>
+							</div>
+                            <div id="chart_div_art" height: 400px;"></div>
+					    </div>
+                   </div>
+                    <div class="span6">
+						<div class="well widget">
+							<div class="widget-header">
+								<h3 class="title">Documentos por Local</h3>
+							</div>
+                            <div id="chart_div_doc" height: 400px;"></div>
+					    </div>
+                   </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6">
+						<div class="well widget">
+							<div class="widget-header">
+								<h3 class="title">Publicações por Local</h3>
+							</div>
+                            <div id="chart_div_pub" height: 400px;"></div>
+					    </div>
+                    </div>
+                    <div class="span6 pull-right">
+						<div class="well widget">
+							<div class="widget-header">
+								<h3 class="title">Imagens por Local</h3>
+							</div>
+                            <div id="chart_div_img" height: 400px;"></div>
+					    </div>
+                   </div>
+                </div>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Local', 'Número Imagens'],
+          @{
+           foreach(Local loc in Model.Locais.Where(l => !l.Apagado))
+           {
+            <text>['</text>@loc.Nome<text>', </text>@loc.Imagens.Where(p => !p.Apagada).Count()<text>],</text>
+           }
+           }
+        ]);
+
+        var options = {
+            title: '',
+            backgroundColor: '#f5f5f5',
+            chartArea: { width: "160%", height: "140%" }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div_img'));
+        chart.draw(data, options);
+    }
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Local', 'Número Publicações'],
+          @{
+           foreach(Local loc in Model.Locais.Where(l => !l.Apagado))
+           {
+            <text>['</text>@loc.Nome<text>', </text>@loc.Publicacoes.Where(p => !p.Apagado).Count()<text>],</text>
+           }
+           }
+            ]);
+
+            var options = {
+                title: '',
+                backgroundColor: '#f5f5f5',
+                chartArea: { width: "160%", height: "140%" }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div_pub'));
+        chart.draw(data, options);
+    }
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Local', 'Número Publicações'],
+          @{
+           foreach(Local loc in Model.Locais.Where(l => !l.Apagado))
+           {
+            <text>['</text>@loc.Nome<text>', </text>@loc.Documentos.Where(d => !d.Apagado).Count()<text>],</text>
+           }
+           }
+            ]);
+
+            var options = {
+                title: '',
+                backgroundColor: '#f5f5f5',
+                chartArea: { width: "160%", height: "140%" }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div_doc'));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Local', 'Número Publicações'],
+          @{
+           foreach(Local loc in Model.Locais.Where(l => !l.Apagado))
+           {
+            <text>['</text>@loc.Nome<text>', </text>@loc.Artefactos.Where(d => !d.Apagado).Count()<text>],</text>
+           }
+           }
+            ]);
+
+            var options = {
+                title: '',
+                backgroundColor: '#f5f5f5',
+                chartArea: { width: "160%", height: "140%" }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div_art'));
+            chart.draw(data, options);
+        }
+    </script>
