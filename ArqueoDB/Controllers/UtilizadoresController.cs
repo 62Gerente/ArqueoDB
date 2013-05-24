@@ -194,7 +194,44 @@ namespace ArqueoDB.Controllers
                                                                         (i.ImagemID != utilizador.ImagemPerfilID) &&
                                                                         (i.Apagada == false) && (i.Publica == true))).ToList();
             ViewBag.Imagens = imagens;
+            Dictionary<Publicacao, String> pubdetails = new Dictionary<Publicacao, String>();
+            Dictionary<Publicacao,String> publicacoes = new Dictionary<Publicacao, String>();
+            List<Publicacao> listapub = new List<Publicacao>();
+            foreach (Organizacao org in utilizador.OrganizacoesSeguidas.Where(o => o.Publica && !o.Apagada ))
+            {
+                listapub.AddRange(org.Publicacoes);
+                foreach (Publicacao pbl in org.Publicacoes.Where(p => p.Publico && !p.Apagado))
+                {
+                    publicacoes.Add(pbl, org.Nome);
+                    pubdetails.Add(pbl, org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome);
 
+                }
+            
+            }
+            foreach (Utilizador user in utilizador.UtilizadoresSeguidos.Where(u => !u.Apagado))
+            {
+                listapub.AddRange(user.Publicacoes);
+                foreach (Publicacao pbl in user.Publicacoes.Where(p => p.Publico && !p.Apagado))
+                {
+                    publicacoes.Add( pbl, user.Nome);
+                    pubdetails.Add(pbl, user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome);
+                }
+
+            }
+            foreach (Local loc in utilizador.LocaisSeguidos.Where(l => l.Publico && !l.Apagado))
+            {
+                listapub.AddRange(loc.Publicacoes);
+                foreach (Publicacao pbl in loc.Publicacoes.Where(p => p.Publico && !p.Apagado))
+                {
+                    publicacoes.Add(pbl, loc.Nome);
+                    pubdetails.Add(pbl, loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome);
+                }
+
+            }
+            listapub = listapub.OrderByDescending(p => p.DataPublicacao.ToShortDateString()).ThenByDescending(p => p.DataPublicacao.ToShortTimeString()).ToList();
+            ViewBag.publicacoes = publicacoes;
+            ViewBag.pubdetails = pubdetails;
+            ViewBag.listapub = listapub;
             return View(utilizador);
         }
 

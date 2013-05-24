@@ -612,11 +612,6 @@ namespace ArqueoDB.DAL
             publicacoes.ForEach(c => utilizadores[0].Publicacoes.Add(c));
             context.SaveChanges();
 
-            publicacoes.ForEach(c => organizacoes[0].Publicacoes.Add(c));
-            locais[0].Publicacoes.Add(publicacoes[3]);
-            locais[0].Publicacoes.Add(publicacoes[4]);
-            locais[0].Publicacoes.Add(publicacoes[5]);
-            context.SaveChanges();
 
             //var plantas = new List<Planta>() {
                 
