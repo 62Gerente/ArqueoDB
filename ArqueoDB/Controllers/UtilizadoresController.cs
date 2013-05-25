@@ -182,6 +182,26 @@ namespace ArqueoDB.Controllers
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult Publicar(int id, string titulo, string descr) {
+            Utilizador user = db.Utilizadores.Find(id);
+
+            Publicacao pub = new Publicacao
+            {
+                Apagado = false,
+                Publico = true,
+                DataPublicacao = System.DateTime.Now,
+                Titulo = titulo,
+                Descricao = descr
+            };
+
+            user.Publicacoes.Add(pub);
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
+
+        
+        }
+
         public ActionResult Perfil(int id)
         {
             Utilizador utilizador = db.Utilizadores.Find(id);
