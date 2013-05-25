@@ -17,14 +17,14 @@
 				<div class="breadcrumb-button">
 				   <a href="#">
                     <span class="breadcrumb-label">
-					<i class="icon-globe"></i> Feeds </span>
+					<i class="icon-group"></i> Utilizadores </span>
 					<span class="breadcrumb-arrow"><span></span></span>
                    </a>
 				</div>
 				<div class="breadcrumb-button">
                    <a href="#">
 					<span class="breadcrumb-label">
-					<i class="icon-user"></i> Perfil </span>
+					<i class="icon-globe"></i> Feeds </span>
 					<span class="breadcrumb-arrow"><span></span></span>
                    </a>
 				</div> 
@@ -91,7 +91,7 @@ height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nom
     <div class="fields">
       <div class="avatar"><img class="avatar-small" src="@(Model.ImagemPerfil.Directoria.Caminho + Model.ImagemPerfil.Nome)"></div>
       <ul>
-        <li><b>Criar nova publicação</b> <textarea class="chat-message-box" name="tit" id="tit" rows="1" placeholder="Titulo"></textarea></li>
+        <li><b>Criar nova publicação</b> <textarea class="chat-message-box" name="titulo" id="tit" rows="1" placeholder="Titulo"></textarea></li>
           <br/>
       </ul>
     </div>
@@ -99,14 +99,14 @@ height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nom
   
 
       <div class="chat-message-box">
-        <textarea name="publ" id="publ" rows="5" placeholder=""></textarea>
+        <textarea name="descr" id="pub" rows="5" placeholder=""></textarea>
       </div>
 
       <div class="clearfix actions">
        
         <div class="pull-right faded-toolbar">
           <a href="#" class="tip" title="" data-original-title="Attach files"><i class="icon-paper-clip"></i></a>
-          <button onclick="publicar();" class="btn btn-blue btn-mini">Enviar</button>
+          <a href="#" onclick="publicar();" class="btn btn-blue btn-mini">Enviar</a>
         </div>
       </div>
     </form>
@@ -155,11 +155,11 @@ height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nom
 							
 							<div class="span9" >
 								
-									<a href="@link"><h5>
+									<h5><a href="@link">
                                         
-                                        @aux
+                                        @aux</a> publicou "@pbl.Titulo" 
 
-									 </h5></a>
+									 </h5>
 								
 								
 									 <p>@pbl.Descricao</p>
@@ -195,10 +195,10 @@ height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nom
 
 
 <script>
-    var pub = document.getElementById('publ');
-    var tit = document.getElementsById('tit');
+    var descrarg = document.getElementById('pub');
+    var tituloarg = document.getElementById('tit');
     function publicar() {
-        if(pub.value !== "" && tit.value != "")
-            window.location.href = "/Utilizadores/Publicar?id=" + @Model.UtilizadorID + "&titulo=" + tit.value + "&descr=" + pub.value
+            if(descrarg.value !== "" && tituloarg.value !== "" )
+            window.location.href = "/Utilizadores/Publicar?id=@Model.UtilizadorID&titulo="+tituloarg.value+"&descr="+descrarg.value
     }
 </script>
