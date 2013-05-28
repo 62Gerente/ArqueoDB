@@ -369,5 +369,9 @@ namespace ArqueoDB.Controllers
             return View(organizacao);
         }
 
+        public ActionResult RequererOrgLocal() {
+
+            return View();
+        }
     }
 }

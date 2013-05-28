@@ -27,7 +27,7 @@
             <div class="span12" style="margin-bottom:20px"> 
                 @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){
                     <div class="pull-right" style="margin-left:10px" >  
-                            <a class="btn btn-inverse pull-right" href="#"><i class="micon-share"></i> Requerer Organização de novo local</a>
+                            <a class="btn btn-inverse pull-right" href="#requererGestaoModal" data-toggle="modal"><i class="micon-share"></i> Requerer Organização de novo local</a>
                     </div>
                 }
                 <div class="pull-right" style="" >  
@@ -211,3 +211,33 @@
 
 
            </section>
+
+            <div id="requererGestaoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	            <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
+		            <h3 id="myModalLabel">Requerer Organização de novo local</h3>
+	            </div>
+	        <div class="modal-body">
+				@using (Html.BeginForm("RequererOrgLocal", "DashOrganizacao", FormMethod.Post)){
+					<fieldset>
+						<div class="row-fluid">
+							<label><h4>Organização</h4></label>
+									<select class="cselect span12 chzn-done" data-placeholder="Select category..." id="sel8NX" name="local">
+								    @foreach(Local l in Model.Locais ){
+                                        if(!l.Apagado){
+                                        <option> @l.Nome </option>
+                                        }
+                                    }   
+                                    </select>                                    
+							<hr>
+							<label><h4>Mensagem</h4></label>
+							<textarea class="span12 input-block-level" rows="3" placeholder="Escreva uma pequeno texto a explicar o porquê da requisição" name="mensagem"></textarea>
+							<hr>
+					</fieldset>
+				}
+	        </div>
+	        <div class="modal-footer">
+		           <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+		            <button class="btn btn-primary">Requerer</button>
+	        </div>
+            </div>
