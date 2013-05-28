@@ -202,17 +202,24 @@ namespace ArqueoDB.Controllers
         
         }
 
-        public ActionResult Perfil(int id)
+        public ActionResult Perfil()
         {
-            //Utilizador utilizador = db.Utilizadores.Find(id);
-            Utilizador utilizadorAux = (Utilizador)(Session["Utilizador"]);
-            Utilizador utilizador = db.Utilizadores.Find(utilizadorAux.UtilizadorID);
+            Utilizador sessao = (Utilizador) Session["Utilizador"];
 
+            if (sessao == null)
+            {
+                return HttpNotFound();
+            }
+
+            Utilizador utilizador = db.Utilizadores.Find(sessao.UtilizadorID);
+            
             if (utilizador == null)
             {
                 return HttpNotFound();
             }
-            //Session["Utilizador"] = utilizador;
+
+            Session["Login"] = true;
+            Session["Utilizador"] = utilizador;
 
             List<Imagem> imagens = db.Imagens.Where(i => (((i.AutorID != null) && (i.AutorID == utilizador.UtilizadorID)) &&
                                                                         (i.ImagemID != utilizador.ImagemCapaID) &&
@@ -266,18 +273,24 @@ namespace ArqueoDB.Controllers
         {
             string username = Request["name"];
             string password = Request["password"];
-            Utilizador user = db.Utilizadores.Where(u => (u.NomeUtilizador == username)).FirstOrDefault();
-            if (user != null)
+
+            Utilizador user = db.Utilizadores.Where(u => u.NomeUtilizador.Equals(username)).FirstOrDefault();
+
+            if (user != null && user.Password.Equals(password))
             {
-                Utilizador user2 = db.Utilizadores.Where(u => (u.Password == password)).FirstOrDefault();
-                if (user.Password == password && user.UtilizadorID == user2.UtilizadorID)
-                {
-                    Session["Utilizador"] = db.Utilizadores.Find(user.UtilizadorID);
-                    return RedirectToAction("Perfil", "Utilizadores", new {id = user.UtilizadorID});
-                }
-                return RedirectToAction("Home", "Index");
+                Session["Utilizador"] = user;
+                return RedirectToAction("Perfil", "Utilizadores");
             }
-            return RedirectToAction("Home", "Index");
+            Session["Login"] = false;
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult Logout()
+        {
+            Session["Utilizador"] = null;
+            Session["Login"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 }
