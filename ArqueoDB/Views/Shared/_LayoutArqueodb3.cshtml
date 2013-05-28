@@ -2,8 +2,7 @@
 
 @{
     
-    Utilizador user = null;
-    user = ((Utilizador)(Session["Utilizador"]));
+    Utilizador user = ((Utilizador)(Session["Utilizador"]));
 
 }
 
@@ -66,19 +65,18 @@
           
 
           <div class="nav-collapse nav-collapse-top">
-            @if (user != null){
+
             <ul class="nav full pull-right">
               <li class="dropdown user-avatar">
-              
+
                 <!-- the dropdown has a custom user-avatar class, this is the small avatar with the badge -->
-                
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span>
-                      <img class="menu-avatar" src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)" /> 
-                      <span>@user.Nome<i class="icon-caret-down"></i></span>
-                      <span class="badge badge-dark-red">5</span>
-                    </span>
-                  </a>
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span>
+                    <img class="menu-avatar" src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)" /> <span>@user.Nome<i class="icon-caret-down"></i></span>
+                    <span class="badge badge-dark-red">5</span>
+                  </span>
+                </a>
 
                 <ul class="dropdown-menu">
 
@@ -98,94 +96,14 @@
                   <li><a href="#"><i class="icon-envelope"></i> <span>Mensagens</span> <span class="label label-dark-red pull-right">5</span></a></li>
                   <li><a href="#"><i class="icon-off"></i> <span>Sair</span></a></li>
                 </ul>
-         
               </li>
             </ul>
-            }
 
             <form class="navbar-search pull-right">
               <input type="text" class="search-query animated" placeholder="Procurar">
               <i class="icon-search"></i>
             </form>
-            
-            @if (user != null)
-            {
-            <ul class="nav full pull-right">
-              <li class="dropdown user-avatar">
-              
-                <!-- the dropdown has a custom user-avatar class, this is the small avatar with the badge -->
-                
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <span>@user.Nome<i class="icon-user"></i></span>
-                  </a>
 
-                <ul class="dropdown-menu">
-
-                  <!-- the first element is the one with the big avatar, add a with-image class to it -->
-
-                  <li class="with-image">
-                    <div class="avatar">
-                      <img src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)" />
-                    </div>
-                    <span>@user.Nome</span>
-                  </li>
-
-                  <li class="divider"></li>
-
-                  <li><a href="/Utilizadores/Perfil/@user.UtilizadorID"><i class="icon-user"></i> <span>Perfil</span></a></li>
-                  <li><a href="/Utilizadores/Edit/@user.UtilizadorID"><i class="icon-cog"></i> <span>Definições</span></a></li>
-                  <li><a href="#"><i class="icon-envelope"></i> <span>Mensagens</span> <span class="label label-dark-red pull-right">5</span></a></li>
-                  <li><a href="#"><i class="icon-off"></i> <span>Sair</span></a></li>
-                </ul>
-         
-              </li>
-            </ul>
-            }
-
-            @if (user == null)
-            {
-            <ul class="nav pull-right">
-              <li class="active"><a href="/" title="Página Inicical"><i class="icon-home"></i> Página Inicial</a></li>  
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Login <b class="caret"></b></a>
-                <ul class="dropdown-menu padded">
-                  <!-- the first element is the one with the big avatar, add a with-image class to it -->
-                 @using (Html.BeginForm("Login", "Utilizadores", FormMethod.Post))
-                 {
-                  <li>
-                      <div class="input-prepend">
-                        <span class="add-on" href="#">
-                          <i class="icon-user"></i>
-                        </span>
-                        <input type="text" placeholder="Nome de Utlilzador" name="name">
-                      </div>
-
-                  </li>
-                  <li>
-                      <div class="input-prepend">
-                        <span class="add-on" href="#">
-                          <i class="icon-key"></i>
-                        </span>
-                      <input type="password" placeholder="Password" name="password">
-                      </div>
-                  </li>
-
-                  <li><div>
-                    <button class="btn btn-blue btn-block" type="submit" href="">
-                      Login <i class="icon-signin"></i>
-                    </button>
-                  </div></li>
-                 }
-                </ul>
-              </li>
-
-            </ul>
-            }
-            
-
-
-            @if (user != null)
-            {
             <ul class="nav pull-right">
               <li class="active"><a href="/" title="Página Inicical"><i class="icon-home"></i> Página Inicial</a></li>
               <li><a href="/Utilizadores/Perfil/@user.UtilizadorID" title="Perfil de Utilizador"><i class="icon-user"></i> Perfil</a></li>
@@ -201,7 +119,6 @@
 
 
             </ul>
-            }
 
           </div>
       
@@ -211,8 +128,6 @@
 </div>
 
 <div class="main-content">
-  @if (user != null)
-  {
   <div class="container-fluid padded">
       <div class="row-fluid">
 			<!-- Breadcrumb line -->
@@ -226,9 +141,8 @@
                 @RenderSection("breadcrumb", required: false)
         </div>
       </div>
+    @RenderBody()
   </div>
-  }
-  @RenderBody()
 </div>
 
 <script type="text/javascript">

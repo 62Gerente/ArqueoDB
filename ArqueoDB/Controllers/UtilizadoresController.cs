@@ -204,11 +204,16 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Perfil(int id)
         {
-            Utilizador utilizador = db.Utilizadores.Find(id);
+            //Utilizador utilizador = db.Utilizadores.Find(id);
+            Utilizador utilizadorAux = (Utilizador)(Session["Utilizador"]);
+            Utilizador utilizador = db.Utilizadores.Find(utilizadorAux.UtilizadorID);
+
             if (utilizador == null)
             {
                 return HttpNotFound();
             }
+            //Session["Utilizador"] = utilizador;
+
             List<Imagem> imagens = db.Imagens.Where(i => (((i.AutorID != null) && (i.AutorID == utilizador.UtilizadorID)) &&
                                                                         (i.ImagemID != utilizador.ImagemCapaID) &&
                                                                         (i.ImagemID != utilizador.ImagemPerfilID) &&
@@ -255,5 +260,24 @@ namespace ArqueoDB.Controllers
             return View(utilizador);
         }
 
+
+        [HttpPost]
+        public ActionResult Login()
+        {
+            string username = Request["name"];
+            string password = Request["password"];
+            Utilizador user = db.Utilizadores.Where(u => (u.NomeUtilizador == username)).FirstOrDefault();
+            if (user != null)
+            {
+                Utilizador user2 = db.Utilizadores.Where(u => (u.Password == password)).FirstOrDefault();
+                if (user.Password == password && user.UtilizadorID == user2.UtilizadorID)
+                {
+                    Session["Utilizador"] = db.Utilizadores.Find(user.UtilizadorID);
+                    return RedirectToAction("Perfil", "Utilizadores", new {id = user.UtilizadorID});
+                }
+                return RedirectToAction("Home", "Index");
+            }
+            return RedirectToAction("Home", "Index");
+        }
     }
 }
