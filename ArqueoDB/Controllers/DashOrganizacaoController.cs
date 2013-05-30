@@ -370,20 +370,32 @@ namespace ArqueoDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult RequererOrgLocal(int idOrg)
+        public ActionResult AdicionarLocal(int idOrg)
         {
-            string local = Request["local"];
-            string comentario = Request["mensagem"];
+            string nome = Request["name"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
             Utilizador u = (Utilizador) (Session["Utilizador"]);
             //Mandar mensagem ao responsavel
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
         }
 
         [HttpPost]
-        public ActionResult AdicionarLocal(int idOrg)
+        public ActionResult RequererOrgLocal(int idOrg)
         {
             string local = Request["local"];
             string comentario = Request["mensagem"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarPublicacao(int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
             Utilizador u = (Utilizador)(Session["Utilizador"]);
             //Mandar mensagem ao responsavel
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
