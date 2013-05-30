@@ -369,9 +369,24 @@ namespace ArqueoDB.Controllers
             return View(organizacao);
         }
 
-        public ActionResult RequererOrgLocal() {
+        [HttpPost]
+        public ActionResult RequererOrgLocal(int idOrg)
+        {
+            string local = Request["local"];
+            string comentario = Request["mensagem"];
+            Utilizador u = (Utilizador) (Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult AdicionarLocal(int idOrg)
+        {
+            string local = Request["local"];
+            string comentario = Request["mensagem"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
         }
     }
 }
