@@ -38,7 +38,7 @@
               </div>
               <div class="row-fluid padded">
                 <div class="span11 action-nav-button">
-                  <a href="#" title="New Project">
+                  <a href="~/Utilizadores/MarkAllRead/@Model.UtilizadorID">
                   <i class=" icon-check"></i>
                   <span>Marcar tudo como lido</span>
                   </a>
@@ -47,7 +47,7 @@
               </div>
               <div class="row-fluid padded">
                 <div class="span11 action-nav-button">
-                  <a href="#" title="New Project">
+                  <a href="~/Utilizadores/DeleteAllMsgR/@Model.UtilizadorID" >
                   <i class="icon-trash"></i>
                   <span>Apagar todas</span>
                   </a>
@@ -93,10 +93,10 @@
                 <text>
               <tr>
                
-                  @if (m.Lida == false) { <td><a href="~/Mensagens/Details/@m.MensagemID"><span style="margin-right: 10px" class="label label-dark-red">nova</span> <b>@m.Assunto</b></a></td> } else{<td><a href="~/Mensagens/Details/@m.MensagemID"> @m.Assunto</a></td>}
+                  @if (m.Lida == false) { <td><a href="~/Utilizadores/Mensagem/@m.MensagemID"><span style="margin-right: 10px" class="label label-dark-red">nova</span> <b>@m.Assunto</b></a></td> } else{<td><a href="~/Mensagens/Details/@m.MensagemID"> @m.Assunto</a></td>}
                   <td>@m.Emissor.Nome </td>
                   <td>@m.DataEnvio</td>
-                  <td></td>
+                  <td><a href="~/Utilizadores/DeleteMsgR/@Model.UtilizadorID?msgid=@m.MensagemID" class="btn btn-mini btn-red" style="width:95%"><i class="icon-remove"></i> Apagar</a></td>
                   
                
               </tr></text> }

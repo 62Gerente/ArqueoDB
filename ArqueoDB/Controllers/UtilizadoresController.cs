@@ -399,6 +399,52 @@ namespace ArqueoDB.Controllers
             return View(s);
         }
 
+        public ActionResult MarkAllRead(int id) {
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+            foreach (Mensagem m in u.MensagensRecebidas) {
+                m.Lida = true;
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Inbox", "Utilizadores", new { id });
+        }
+
+
+        public ActionResult DeleteAllMsgR(int id)
+        {
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+            foreach (Mensagem m in u.MensagensRecebidas)
+            {
+                m.ApagadoR = true;
+                m.Lida = true;
+
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Inbox", "Utilizadores", new { id });
+        }
+
+
+        public ActionResult DeleteMsgR(int id, int msgid)
+        {
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+
+            foreach (Mensagem m in u.MensagensRecebidas.Where(p => p.MensagemID == msgid)) {
+                m.ApagadoR = true;
+                m.Lida = true;
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Inbox", "Utilizadores", new { id });
+        }
+
+
         [HttpPost]
         public ActionResult Login()
         {
