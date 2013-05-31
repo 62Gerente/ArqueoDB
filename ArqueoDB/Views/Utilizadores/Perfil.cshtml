@@ -180,13 +180,15 @@ height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nom
 					<div class="box-content " style="height: 100%; overflow-y: auto">
 						<!-- find me in partials/news_with_icons -->
 						<div class="box-section">
-
-                            @foreach(Organizacao org in Model.getProfessional().Organizacoes) { 
+                        @if(Model.isProfessional() == true){
+                            foreach(Organizacao org in Model.getProfessional().Organizacoes) { 
 						 <center>	<a href="/Organizacoes/Details/@(org.OrganizacaoID)" class="thumbnail" style="max-width:100px;max-height:100px;">
 				               <img src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome)" alt="" > 
 				            </a></center>
 				            <a href="/DashOrganizacao/Dashboard/@(org.OrganizacaoID)" class="btn btn-green" style="width:85%;margin-top:10px;margin-bottom:20px;">Entrar no dashboard</a>	
                             }
+                        }else{
+                        <text>Nao esta registado como Profissional! para criar uma organizacao ou requerer pertencer a uma faca cenas. Tenho de fazer isto.</text>}
 						</div>
 					</div>
 				</div>
