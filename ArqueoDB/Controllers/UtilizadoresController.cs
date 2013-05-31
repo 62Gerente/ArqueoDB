@@ -493,8 +493,6 @@ namespace ArqueoDB.Controllers
                 Session["Login"] = true;
 
                 return RedirectToAction("Perfil", "Utilizadores");
-                }
-
             }
 
             ViewBag.Erro = true;
