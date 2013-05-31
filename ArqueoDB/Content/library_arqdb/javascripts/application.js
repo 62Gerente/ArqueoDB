@@ -37111,3 +37111,8 @@ function () {
         })
     })
 }.call(this);
+
+
+ $('.dropdown-menu').find('form').click(function (e) {
+    e.stopPropagation();
+  });

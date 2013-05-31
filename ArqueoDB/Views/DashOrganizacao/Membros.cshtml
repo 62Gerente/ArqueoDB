@@ -28,7 +28,7 @@
                 @* Adicionar novo membro *@ 
                 @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){             
                     <div class="pull-right" style="" >  
-                         <a class="btn btn-inverse pull-right" href="#"><i class="micon-plus"></i>  Adicionar novo membro</a>
+                         <a class="btn btn-inverse pull-right" href="#addUtilizadorModal" data-toggle="modal"><i class="micon-plus"></i>  Adicionar novo membro</a>
                     </div>
                 }
 
@@ -168,3 +168,29 @@
                </div>
 
            </section>
+
+            <div id="addUtilizadorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
+					<h3 id="myModalLabel">Adicionar Utilizador a Organização</h3>
+				</div>
+                @using (Html.BeginForm("AdicionarMembro", "DashOrganizacao", new { idOrg = Model.OrganizacaoID }, FormMethod.Post))
+                {
+				<div class="modal-body">
+							
+								<fieldset>
+									<div class="row-fluid">
+												<label><h4>Nome</h4></label>
+												<input type="text" class="input-xlarge" style="width: 97%;" name="nome">									
+												<hr>
+												
+									</div>														
+								</fieldset>
+							
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+					<button class="btn btn-primary" type="submit">Criar</button>
+				</div>
+                }
+			</div>

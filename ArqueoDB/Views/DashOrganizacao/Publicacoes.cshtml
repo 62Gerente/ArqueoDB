@@ -35,7 +35,7 @@
                 @* Adicionar nova publicação *@ 
                 @if(Model.Responsavel.UtilizadorID == user.UtilizadorID){             
                     <div class="pull-right" style="" >  
-                         <a class="btn btn-inverse pull-right" href="#"><i class="micon-plus"></i>  Adicionar nova publicação</a>
+                         <a class="btn btn-inverse pull-right" href="#novaPublicacaoModal" data-toggle="modal"><i class="micon-plus"></i>  Adicionar nova publicação</a>
                     </div>
                 }
                 @* Barra de pesquisa *@
@@ -208,3 +208,37 @@
 					</div>
                </div>              
            </section>
+
+            <div id="novaPublicacaoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
+					<h3 id="myModalLabel">Nova Publicação</h3>
+				</div>
+                @using (Html.BeginForm("AdicionarPublicacao", "DashOrganizacao", new { idOrg = Model.OrganizacaoID }, FormMethod.Post))
+                {
+				<div class="modal-body">
+							
+								<fieldset>
+									<div class="row-fluid">
+												<label><h4>Título</h4></label>
+												<input type="text" class="input-large" name="titulo">									
+												<hr>
+												<label><h4>Descrição</h4></label>
+												<textarea class="span12 input-block-level" rows="3" placeholder="Escreva uma pequena descrição" name="descricao"></textarea>
+												<hr>
+												<label class="checkbox">
+												<div class="checker" id="uniform-undefined"><span><input type="checkbox" class="fancy" style="opacity: 0;" name="isPublico"></span></div> Tornar público
+												</label>
+												<hr>
+									</div>
+									
+								</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+					<button class="btn btn-primary" type="submit">Criar</button>
+				</div>
+                }
+			</div>
+
+

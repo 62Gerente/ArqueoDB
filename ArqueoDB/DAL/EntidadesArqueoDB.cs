@@ -31,6 +31,7 @@ namespace ArqueoDB.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder){
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            base.Configuration.LazyLoadingEnabled = false;
 
         modelBuilder.Entity<Profissional>()
             .HasMany<Organizacao>(x => x.Organizacoes)

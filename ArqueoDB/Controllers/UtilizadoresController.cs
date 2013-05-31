@@ -222,13 +222,25 @@ namespace ArqueoDB.Controllers
         
         }
 
-        public ActionResult Perfil(int id)
+        public ActionResult Perfil()
         {
-            Utilizador utilizador = db.Utilizadores.Find(id);
+            Utilizador sessao = (Utilizador) Session["Utilizador"];
+
+            if (sessao == null)
+            {
+                return HttpNotFound();
+            }
+
+            Utilizador utilizador = db.Utilizadores.Find(sessao.UtilizadorID);
+            
             if (utilizador == null)
             {
                 return HttpNotFound();
             }
+
+            Session["Login"] = true;
+            Session["Utilizador"] = utilizador;
+
             List<Imagem> imagens = db.Imagens.Where(i => (((i.AutorID != null) && (i.AutorID == utilizador.UtilizadorID)) &&
                                                                         (i.ImagemID != utilizador.ImagemCapaID) &&
                                                                         (i.ImagemID != utilizador.ImagemPerfilID) &&
@@ -274,6 +286,7 @@ namespace ArqueoDB.Controllers
             ViewBag.listapub = listapub;
             return View(utilizador);
         }
+
 
 
         public ActionResult DeleteOrg(int id,int idorg)
@@ -350,7 +363,8 @@ namespace ArqueoDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Inbox(int id, int recept, String assunto, String corpo){
+        public ActionResult Inbox(int id, int recept, String assunto, String corpo)
+        {
 
             Utilizador s = db.Utilizadores.Find(id);
             Utilizador r = db.Utilizadores.Find(id);
@@ -382,7 +396,32 @@ namespace ArqueoDB.Controllers
             ViewBag.listausers = listusers;
 
             return View(s);
-        
+        }
+
+        [HttpPost]
+        public ActionResult Login()
+        {
+            string username = Request["name"];
+            string password = Request["password"];
+
+            Utilizador user = db.Utilizadores.Where(u => u.NomeUtilizador.Equals(username)).FirstOrDefault();
+
+            if (user != null && user.Password.Equals(password))
+            {
+                Session["Utilizador"] = user;
+                return RedirectToAction("Perfil", "Utilizadores");
+            }
+            Session["Login"] = false;
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult Logout()
+        {
+            Session["Utilizador"] = null;
+            Session["Login"] = null;
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }
