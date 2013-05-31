@@ -15,7 +15,9 @@
     
     ViewBag.Title = "Membros";    
     int n_membros = 0;
-    Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";    
+    Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";
+    List<Utilizador> lista = ViewBag.users;  
+    
 }
 @section breadcrumb {
     <li><a href="/DashOrganizacao/Membros/@Html.DisplayFor(model => model.OrganizacaoID)">Membros</a></li>
@@ -113,7 +115,7 @@
                                 </div>
                                 <div class="span6 pull-right" style="margin-top:0px">
                                     <a class="btn btn-mini btn-inverse t pull-right" href="/Utilizadores/Details/@m.Utilizador.UtilizadorID"><i class="micon-eye"></i></a> 
-                                    <a class="btn btn-mini btn-inverse t pull-right" style="margin-right:5px" href="#"><i class="micon-mail"></i></a> 
+                                    <a class="btn btn-mini btn-inverse t pull-right" style="margin-right:5px" href="#novaMensagemModal" data-toggle="modal"><i class="micon-mail"></i> Mensagem</a> 
                                 </div>
 							</div>
 							<!-- ./ widget content -->
@@ -191,6 +193,35 @@
 				<div class="modal-footer">
 					<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
 					<button class="btn btn-primary" type="submit">Criar</button>
+				</div>
+                }
+			</div>
+
+            <div id="novaMensagemModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
+					<h3 id="myModalLabel">Nova Mensagem</h3>
+				</div>
+                @using (Html.BeginForm("NovaMensagem", "DashOrganizacao" , FormMethod.Post))
+                {
+				<div class="modal-body">
+								<fieldset>
+                                        <label><h4>Utilizador</h4></label>
+                                        <select class="chzn-select" name="recept">
+                                            @foreach (Utilizador usr in lista) { 
+                                            <text><option value="@usr.UtilizadorID">@usr.Nome</option></text>
+                                            }
+                                        </select>
+                                     
+                                        <hr>
+										<label><h4>Mensagem</h4></label>
+										    <textarea class="span12 input-block-level" rows="5" placeholder="Escreva a sua mensagem" name="mensagem"></textarea>
+										<hr>
+								</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+					<button class="btn btn-primary" type="submit">Enviar</button>
 				</div>
                 }
 			</div>

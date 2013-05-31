@@ -159,6 +159,14 @@ namespace ArqueoDB.Controllers
             ViewBag.pageSize = pageSize;
             ViewBag.page = pageNumber;
 
+            List<Utilizador> listusers = new List<Utilizador>(); 
+            foreach (Utilizador user in db.Utilizadores.Where(usr => !usr.Apagado))
+            {
+                listusers.Add(user);
+
+            }
+            ViewBag.users = listusers;
+  
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Membros";
 
@@ -415,12 +423,12 @@ namespace ArqueoDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult NovaMensagem(int idOrg)
+        public ActionResult NovaMensagem()
         {
-            string titulo = Request["titulo"];
-            string descricao = Request["descricao"];
-            string isPublico = Request["isPublico"];
+            string mensagem = Request["mensagem"];
+            int idDest = Convert.ToInt32(Request["recept"]);
             Utilizador u = (Utilizador)(Session["Utilizador"]);
+            
             //Mandar mensagem ao responsavel
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
         }
