@@ -21,14 +21,14 @@ namespace ArqueoDB.Controllers
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
-            {               
+            {
                 return HttpNotFound();
             }
 
             Session["Organizacao"] = organizacao;
             Session["Utilizador"] = organizacao.Responsavel.Utilizador;
 
-            ViewData["Dashboard"] = "Organizacao";            
+            ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Dashboard";
 
             return View(organizacao);
@@ -58,7 +58,7 @@ namespace ArqueoDB.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            
+
             var locais = organizacao.Locais.AsEnumerable<Local>();
             locais = locais.Where(l => l.Apagado == false);
 
@@ -92,16 +92,16 @@ namespace ArqueoDB.Controllers
 
             int pageSize = 6;
             int pageNumber = (page ?? 1);
-            ViewBag.Locais = locais.ToList().ToPagedList(pageNumber,pageSize);
+            ViewBag.Locais = locais.ToList().ToPagedList(pageNumber, pageSize);
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Locais";
-           
+
             return View(organizacao);
         }
 
         // GET: /DashboardOrganizacao/Membros
-        
+
         public ActionResult Membros(int id, string sortOrder, string currentFilter, string searchString, string type, int? page)
         {
             Organizacao org = db.Organizacoes.Find(id);
@@ -124,7 +124,7 @@ namespace ArqueoDB.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IEnumerable<Profissional> query = org.Membros ;
+            IEnumerable<Profissional> query = org.Membros;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -135,7 +135,7 @@ namespace ArqueoDB.Controllers
             {
                 case "Nome":
                     query = query.OrderBy(m => m.Utilizador.NomeUtilizador);
-                    break;                
+                    break;
                 case "Email":
                     query = query.OrderBy(m => m.Utilizador.Email);
                     break;
@@ -193,7 +193,7 @@ namespace ArqueoDB.Controllers
             IEnumerable<Publicacao> query = org.Publicacoes.Where(p => p.Apagado == false).OrderBy(p => p.DataPublicacao).Reverse();
 
             if (!String.IsNullOrEmpty(searchString))
-            {                
+            {
                 query = query.Where(p => (p.Descricao.ToUpper().Contains(searchString.ToUpper()) || p.Titulo.ToUpper().Contains(searchString.ToUpper())));
             }
 
@@ -201,7 +201,7 @@ namespace ArqueoDB.Controllers
             {
                 case "DataPublicacao":
                     query = query.OrderBy(m => m.DataPublicacao);
-                    break;                
+                    break;
                 default:
                     break;
             }
@@ -229,9 +229,9 @@ namespace ArqueoDB.Controllers
             ViewData["Activo"] = "Publicações";
 
             return View(org);
-        }        
+        }
 
-         public ActionResult Definicoes(int id)
+        public ActionResult Definicoes(int id)
         {
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
@@ -252,7 +252,7 @@ namespace ArqueoDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Definicoes(Organizacao  org)
+        public ActionResult Definicoes(Organizacao org)
         {
 
             if (ModelState.IsValid)
@@ -279,7 +279,7 @@ namespace ArqueoDB.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CurrentType = type;
 
@@ -377,7 +377,7 @@ namespace ArqueoDB.Controllers
             string nome = Request["name"];
             string descricao = Request["descricao"];
             string isPublico = Request["isPublico"];
-            Utilizador u = (Utilizador) (Session["Utilizador"]);
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
             //Mandar mensagem ao responsavel
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
         }
