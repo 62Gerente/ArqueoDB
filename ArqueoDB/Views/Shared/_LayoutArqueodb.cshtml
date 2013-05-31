@@ -94,7 +94,7 @@
 
                   <li class="divider"></li>
 
-                  <li><a href="/Utilizadores/Perfil/@user.UtilizadorID"><i class="icon-user"></i> <span>Perfil</span></a></li>
+                  <li><a href="/Utilizadores/Perfil"><i class="icon-user"></i> <span>Perfil</span></a></li>
                   <li><a href="/Utilizadores/Edit/@user.UtilizadorID"><i class="icon-cog"></i> <span>Definições</span></a></li>
 
                   <li><a href="#"><i class="icon-envelope"></i> <span>Mensagens</span> <span class="label label-dark-red pull-right">@user.MensagensRecebidas.Where(m => m.Lida==false).Count() </span></a></li>
@@ -115,7 +115,7 @@
                 }
                   
                   ">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Login <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-signin"></i> Login <b class="caret"></b></a>
                 <ul class="dropdown-menu padded">
                   <!-- the first element is the one with the big avatar, add a with-image class to it -->
                  @using (Html.BeginForm("Login", "Utilizadores", FormMethod.Post))
@@ -138,6 +138,7 @@
                       </div>
                   </li>
                   if(Session["Login"] != null && !((bool)Session["Login"])){
+                  Session["Login"] = null;
                   <li>
                       <div class="alert alert-error">
                       <button type="button" class="close" data-dismiss="alert">×</button>
@@ -153,6 +154,9 @@
                  }
                 </ul>
               </li>
+              <li>
+                  <a href="/Utilizadores/Registo"><span><i class="icon-edit"></i> <span> Registo</span></span></a>
+              </li>
 
             </ul>
             }
@@ -166,7 +170,7 @@
             {
             <ul class="nav pull-right">
               <li class="active"><a href="/" title="Página Inicical"><i class="icon-home"></i> Página Inicial</a></li>
-              <li><a href="/Utilizadores/Perfil/@user.UtilizadorID" title="Perfil de Utilizador"><i class="icon-user"></i> Perfil</a></li>
+              <li><a href="/Utilizadores/Perfil" title="Perfil de Utilizador"><i class="icon-user"></i> Perfil</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-star-empty"></i> Favoritos <b class="caret"></b></a>
                 <ul class="dropdown-menu">

@@ -1,0 +1,139 @@
+﻿@model ArqueoDB.Models.Utilizador
+@using ArqueoDB.Models
+
+@{
+    ViewBag.Title = "Registo";
+    Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
+
+
+    bool erro;
+    if(ViewBag.Erro != null){
+        erro = ViewBag.Erro;
+    }else{
+        erro = false;
+    }
+}
+
+<div class="span6 offset3">
+
+  <div class="padded">
+
+    <div class="login box" style="margin-top: 80px;">
+
+      <div class="box-header">
+        <span class="title">Registo</span>
+      </div>
+
+      <div class="box-content padded">
+    @using (Html.BeginForm("Registo", "Utilizadores", FormMethod.Post, new { enctype = "multipart/form-data", @class="separate-sections"}))
+        {
+    @Html.ValidationSummary(true)
+        <div style="padding-bottom:15px">
+            @Html.DropDownList("TituloID", null, new { @class="select2-container chzn-select" })
+        </div>
+        <div>
+            <span class="note pull-right">  @Html.ValidationMessageFor(model => model.Titulo)</span>
+        </div>
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-user"></i></span>
+            @Html.TextBoxFor(model => model.Nome, new { placeholder="Nome Completo"})
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.Nome)</span>
+        </div>
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-user"></i></span>
+            @Html.TextBoxFor(model => model.NomeUtilizador, new { placeholder="Nome de Utilizador"})
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.NomeUtilizador)</span>
+        </div>
+                
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-envelope"></i></span>
+            @Html.TextBoxFor(model => model.Email, new { placeholder="Email"})
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.Email)</span>
+        </div>
+
+        <div style="padding-bottom:15px">
+            @Html.DropDownList("DistritoID", null, new { @class="select2-container chzn-select" })
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.Distrito)</span>
+        </div>
+
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-time"></i></span>
+            @Html.TextBoxFor(model => model.DataNascimento, new { placeholder="Data de Nascimento", @class="datepicker"})
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.DataNascimento)</span>
+        </div>
+        
+        <div style="padding-bottom:15px">
+            <select class="chzn-select" name="sexo" style="padding-left:0px;width:100%">
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option></select>
+        </div>
+        <div>
+        </div>
+
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-mobile-phone"></i></span>
+            @Html.TextBoxFor(model => model.Telemovel, new { placeholder="Telemóvel"})
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.Telemovel)</span>
+        </div>
+        
+        <div class="input-prepend" style="padding-bottom:60px;">
+            @Html.TextAreaFor(model => model.Descricao, new { placeholder="Descricao do Utilizador", rows="3", style="width:100%;"})
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.Descricao)</span>
+        </div>
+        
+                                          <div class="uploader"><input type="file" name="uploadfile">
+                                          <span class="filename" style="-webkit-user-select: none;">Nenhum ficheiro seleccionado</span>
+                                          <span class="action" style="-webkit-user-select: none;">+</span></div>
+
+        
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-key"></i></span>
+            @Html.TextBoxFor(model => model.Password, new { placeholder="Password", type="password"})
+        </div>
+        <div>
+             <span class="note pull-right">  @Html.ValidationMessageFor(model => model.Password)</span>
+        </div>
+        
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-key"></i></span>
+            <input type="password" name="passconf" placeholder="Confirmação da Password">
+        </div>
+        
+        @Html.HiddenFor(model => model.ImagemCapaID)
+        @Html.HiddenFor(model => model.ImagemPerfilID)
+        
+        if( erro != null  && erro){
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Campos inválidos!</strong> Verifique se preencheu todos os campos devidamente e volte a submeter.
+            </div>
+        }
+        
+        <button type="submit" value="Registo" class="btn btn-blue btn-block">
+                Registar
+            </button>
+        }
+
+        <div>
+          <a href="login.html">
+              Já se registou no Arqueodb? Faça Login aqui <strong></strong>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>

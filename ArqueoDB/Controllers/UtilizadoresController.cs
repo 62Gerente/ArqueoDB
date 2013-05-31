@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using ArqueoDB.Models;
 using ArqueoDB.DAL;
+using System.IO;
 
 namespace ArqueoDB.Controllers
 {
@@ -422,6 +423,84 @@ namespace ArqueoDB.Controllers
             Session["Login"] = null;
             return RedirectToAction("Index", "Home");
 
+        }
+
+        public ActionResult Registo() {
+            ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome");
+            ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Registo(HttpPostedFileBase uploadfile,Utilizador utilizador)
+        {
+            HttpPostedFileBase file = uploadfile;
+
+            ViewBag.Erro = null;
+            string sexo = Request["sexo"];
+            string passconf = Request["passconf"];
+
+            if (file != null && file.ContentLength > 0 && passconf!=null && passconf.Equals(utilizador.Password)) {
+
+                if (sexo != null && !sexo.Equals("")) {
+                    if (sexo.Equals("Masculino")) {
+                        utilizador.Sexo = 1;
+                    }
+                    else if (sexo.Equals("Feminino")) {
+                        utilizador.Sexo = 2;
+                    }
+                }
+
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Utilizadores/"), fileName);
+                file.SaveAs(path);
+
+                Imagem imagem = new Imagem
+                {
+                    Apagada = false,
+                    AutorID = 1,
+                    Comentarios = new List<Comentario>(),
+                    DataPublicacao = System.DateTime.Now,
+                    Descricao = "Imagem de perfil",
+                    DirectoriaID = 2,
+                    Nome = fileName,
+                    Publica = true
+                };
+                db.Imagens.Add(imagem);
+                db.SaveChanges();
+
+                utilizador.ImagemPerfil = imagem;
+                utilizador.ImagemCapa = imagem;
+
+                utilizador.Apagado = false;
+                utilizador.Banido = false;
+                
+                utilizador.DataRegisto = System.DateTime.Now;
+
+                utilizador.UtilizadoresSeguidos = new List<Utilizador>();
+                utilizador.Seguidores = new List<Utilizador>();
+                utilizador.Comentarios = new List<Comentario>();
+                utilizador.Publicacoes = new List<Publicacao>();
+                utilizador.MensagensEnviadas = new List<Mensagem>();
+                utilizador.MensagensRecebidas = new List<Mensagem>();
+
+                db.Utilizadores.Add(utilizador);
+                db.SaveChanges();
+                imagem.AutorID = utilizador.UtilizadorID;
+                db.SaveChanges();
+
+                Session["Utilizador"] = utilizador;
+                Session["Login"] = true;
+
+                return RedirectToAction("Perfil", "Utilizadores");
+                }
+
+            }
+
+            ViewBag.Erro = true;
+            ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", utilizador.DistritoID);
+            ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome", utilizador.TituloID);
+            return View(utilizador);
         }
     }
 }
