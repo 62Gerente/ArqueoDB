@@ -369,6 +369,8 @@ namespace ArqueoDB.Controllers
             return View(organizacao);
         }
 
+
+
         [HttpPost]
         public ActionResult AdicionarLocal(int idOrg)
         {
@@ -396,6 +398,81 @@ namespace ArqueoDB.Controllers
             string titulo = Request["titulo"];
             string descricao = Request["descricao"];
             string isPublico = Request["isPublico"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarArtefacto(int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult NovaMensagem(int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarDocumento(int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarComentario(int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarImagem(int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarPlanta(int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarMembro(int idOrg)
+        {
+            string nome = Request["nome"];
             Utilizador u = (Utilizador)(Session["Utilizador"]);
             //Mandar mensagem ao responsavel
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
