@@ -368,7 +368,7 @@ namespace ArqueoDB.Controllers
         {
 
             Utilizador s = db.Utilizadores.Find(id);
-            Utilizador r = db.Utilizadores.Find(id);
+            Utilizador r = db.Utilizadores.Find(recept);
             List<Utilizador> listusers = new List<Utilizador>();
             Mensagem m = new Mensagem
             {
@@ -393,7 +393,7 @@ namespace ArqueoDB.Controllers
                 listusers.Add(user);
 
             }
-
+         
             ViewBag.listausers = listusers;
 
             return View(s);
@@ -407,7 +407,7 @@ namespace ArqueoDB.Controllers
                 m.Lida = true;
             }
             db.SaveChanges();
-
+ 
             return RedirectToAction("Inbox", "Utilizadores", new { id });
         }
 
@@ -424,7 +424,6 @@ namespace ArqueoDB.Controllers
 
             }
             db.SaveChanges();
-
             return RedirectToAction("Inbox", "Utilizadores", new { id });
         }
 
@@ -442,6 +441,20 @@ namespace ArqueoDB.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Inbox", "Utilizadores", new { id });
+        }
+
+
+        public ActionResult Message(int id, int msgid){
+        
+            Utilizador user = db.Utilizadores.Find(id);
+            Mensagem m = user.MensagensRecebidas.Where(p => p.MensagemID == msgid).FirstOrDefault();
+
+
+
+
+
+
+            return View(user);
         }
 
 

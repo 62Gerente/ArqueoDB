@@ -97,7 +97,7 @@
                   <li><a href="/Utilizadores/Perfil"><i class="icon-user"></i> <span>Perfil</span></a></li>
                   <li><a href="/Utilizadores/Edit/@user.UtilizadorID"><i class="icon-cog"></i> <span>Definições</span></a></li>
 
-                  <li><a href="#"><i class="icon-envelope"></i> <span>Mensagens</span> <span class="label label-dark-red pull-right">@user.MensagensRecebidas.Where(m => m.Lida==false).Count() </span></a></li>
+                  <li><a href="~/Utilizadores/Inbox/@user.UtilizadorID"><i class="icon-envelope"></i> <span>Mensagens</span> <span class="label label-dark-red pull-right">@user.MensagensRecebidas.Where(m => m.Lida==false).Count() </span></a></li>
                   <li><a href="/Utilizadores/Logout"><i class="icon-off"></i> <span>Sair</span></a></li>
 
                 </ul>
