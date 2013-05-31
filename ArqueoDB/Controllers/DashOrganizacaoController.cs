@@ -19,6 +19,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Dashboard(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
             {

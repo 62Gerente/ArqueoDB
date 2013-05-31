@@ -19,6 +19,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Ocultar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Documento doc = db.Documentos.Find(id);
             doc.Publico = false;
             db.SaveChanges();
@@ -31,6 +37,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Publicar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Documento doc = db.Documentos.Find(id);
             doc.Publico = true;
             db.SaveChanges();
@@ -43,6 +55,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Remover(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Documento doc = db.Documentos.Find(id);
             doc.Apagado = true;
             db.SaveChanges();
@@ -55,6 +73,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Transferir(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Documento doc = db.Documentos.Find(id);
             
             return Redirect(doc.Directoria.Caminho+doc.NomeFicheiro);
@@ -88,6 +112,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             ViewBag.DirectoriaID = new SelectList(db.Directorias, "DirectoriaID", "Caminho");
             ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID");
             ViewBag.OrganizacaoID = new SelectList(db.Organizacoes, "OrganizacaoID", "Nome");
@@ -118,6 +148,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Documento documento = db.Documentos.Find(id);
             if (documento == null)
             {
@@ -152,6 +188,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Documento documento = db.Documentos.Find(id);
             if (documento == null)
             {

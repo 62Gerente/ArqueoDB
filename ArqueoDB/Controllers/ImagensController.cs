@@ -41,6 +41,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             ViewBag.DirectoriaID = new SelectList(db.Directorias, "DirectoriaID", "Caminho");
             return View();
         }
@@ -67,6 +73,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Imagem imagem = db.Imagens.Find(id);
             if (imagem == null)
             {
@@ -97,6 +109,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Imagem imagem = db.Imagens.Find(id);
             if (imagem == null)
             {
@@ -125,6 +143,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Publicar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Imagem imagem = db.Imagens.Find(id);
             imagem.Publica = true;
             db.SaveChanges();
@@ -134,6 +158,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Ocultar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Imagem imagem = db.Imagens.Find(id);
             imagem.Publica = false;
             db.SaveChanges();
@@ -143,6 +173,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Remover(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Imagem imagem = db.Imagens.Find(id);
             imagem.Apagada = true;
             db.SaveChanges();

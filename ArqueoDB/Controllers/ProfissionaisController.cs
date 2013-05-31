@@ -41,6 +41,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             ViewBag.UtilizadorID = new SelectList(db.Utilizadores, "UtilizadorID", "NomeUtilizador");
             return View();
         }
@@ -67,6 +73,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Profissional profissional = db.Profissionais.Find(id);
             if (profissional == null)
             {
@@ -97,6 +109,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Profissional profissional = db.Profissionais.Find(id);
             if (profissional == null)
             {
