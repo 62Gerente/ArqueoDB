@@ -543,7 +543,7 @@ namespace ArqueoDB.Controllers
 
 
 
-
+            ViewBag.msg = m;
             return View(user);
         }
 
