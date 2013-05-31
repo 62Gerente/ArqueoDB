@@ -26,7 +26,6 @@ namespace ArqueoDB.Controllers
             }
 
             Session["Organizacao"] = organizacao;
-            Session["Utilizador"] = organizacao.Responsavel.Utilizador;
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Dashboard";
@@ -423,7 +422,7 @@ namespace ArqueoDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult NovaMensagem()
+        public ActionResult NovaMensagem(int idOrg)
         {
             string mensagem = Request["mensagem"];
             int idDest = Convert.ToInt32(Request["recept"]);

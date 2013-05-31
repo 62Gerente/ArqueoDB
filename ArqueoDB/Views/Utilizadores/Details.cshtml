@@ -104,7 +104,10 @@
 								<span class="triangle-button red"><i class="icon-plus"></i></span>
 							</div>
 						</div>
-                        @if(Model.Seguidores.FirstOrDefault(u => u.UtilizadorID == user.UtilizadorID) == null){
+                        @if (user != null)
+                        {
+                            if (Model.Seguidores.FirstOrDefault(u => u.UtilizadorID == user.UtilizadorID) == null)
+                            {
 						<div class="row-fluid">
 							<div class="span12 action-nav-button">
 								<a href="/Utilizadores/Seguir?id=@user.UtilizadorID&seguir=@Model.UtilizadorID" title="Seguir utilizador">
@@ -113,7 +116,9 @@
 								</a>
 							</div>
 						</div>
-                        }else{
+                            }
+                            else
+                            {
 						<div class="row-fluid">
 							<div class="span12 action-nav-button">
 								<a href="/Utilizadores/DeixarSeguir?id=@user.UtilizadorID&seguir=@Model.UtilizadorID" title="Deixar de seguir utilizador">
@@ -122,6 +127,7 @@
 								</a>
 							</div>
 						</div>
+                            }
                         }
 					</div>
 				</div>
@@ -281,6 +287,7 @@
 					</div>
 				</div>
 			</div>
+            @if(user!=null){
 							<div class="row-fluid">
 								<div class="span12">
 
@@ -315,12 +322,13 @@
                                     </div>
                         				</div>
 			</div>
+            }
             </div>
-
+@if(user!=null){
 <script>
     var comment = document.getElementById('comm');
     function comentar() {
         if(comment.value !== "")
             window.location.href = "/Utilizadores/Comentar?id=@Model.UtilizadorID&user=@user.UtilizadorID&comentario=" + comment.value
     }
-</script>
+</script>}

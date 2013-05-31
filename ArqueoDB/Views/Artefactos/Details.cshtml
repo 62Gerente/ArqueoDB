@@ -194,7 +194,7 @@
 
            </div>
 
-
+            @if(user!=null){
 							<div class="row-fluid">
 
 								<div class="span3">
@@ -269,14 +269,14 @@
                         				</div>
 
 			</div>
-
+            }
 
        </div>
-
+@if(user!=null){
 <script>
     var comment = document.getElementById('comm');
     function comentar() {
         if (comment.value !== "")
             window.location.href = "/Artefactos/Comentar?id=@Model.ArtefactoID&user=@user.UtilizadorID&comentario=" + comment.value
     }
-</script>
+</script>}
