@@ -95,19 +95,39 @@ namespace ArqueoDB.Controllers
         // POST: /Utilizadores/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Utilizador utilizador)
+        public ActionResult Edit(int id, String Nome, String NomeUtilizador, String Email, String Telemovel, String Distrito, String DataNascimento, int Sexo, String Descricao, String Password, String Confirm, String Facebook, String Google, String Twitter, String Linkedin)
         {
-            if (ModelState.IsValid)
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            if (utilizador == null)
             {
-                db.Entry(utilizador).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return HttpNotFound();
             }
+
+            if (Password == Confirm)
+            {
+
+                utilizador.Nome = Nome;
+                utilizador.NomeUtilizador = NomeUtilizador;
+                utilizador.Email = Email;
+                utilizador.Telemovel = Telemovel;
+                utilizador.Sexo = Sexo;
+                utilizador.Descricao = Descricao;
+                utilizador.Password = Password;
+                utilizador.Facebook = Facebook;
+                utilizador.Google = Google;
+                utilizador.Twitter = Twitter;
+                utilizador.Linkedin = Linkedin;
+
+                db.SaveChanges();
+            }
+
+
+            
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome", utilizador.DistritoID);
             ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome", utilizador.TituloID);
             ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemPerfilID);
             ViewBag.ImagemCapaID = new SelectList(db.Imagens, "ImagemID", "Nome", utilizador.ImagemCapaID);
-            return View(utilizador);
+            return RedirectToAction("Perfil", "Utilizadores", new { id });
         }
 
         //
@@ -255,5 +275,114 @@ namespace ArqueoDB.Controllers
             return View(utilizador);
         }
 
+
+        public ActionResult DeleteOrg(int id,int idorg)
+        {
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Organizacao org = db.Organizacoes.Find(idorg);
+            if (utilizador == null)
+            {
+                return HttpNotFound();
+            }
+
+            utilizador.OrganizacoesSeguidas.Remove(org);
+            db.SaveChanges();
+
+            return RedirectToAction("Edit", "Utilizadores", new { id });
+
+
+        }
+
+        public ActionResult DeleteLoc(int id, int idloc)
+        {
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Local l = db.Locais.Find(idloc);
+            if (utilizador == null)
+            {
+                return HttpNotFound();
+            }
+
+            utilizador.LocaisSeguidos.Remove(l);
+            db.SaveChanges();
+
+            return RedirectToAction("Edit", "Utilizadores", new { id });
+
+
+        }
+
+
+        public ActionResult DeleteUser(int id, int idusr)
+        {
+            Utilizador utilizador = db.Utilizadores.Find(id);
+            Utilizador u = db.Utilizadores.Find(idusr);
+            if (utilizador == null)
+            {
+                return HttpNotFound();
+            }
+
+            utilizador.UtilizadoresSeguidos.Remove(u);
+            db.SaveChanges();
+
+            return RedirectToAction("Edit", "Utilizadores", new { id });
+
+
+        }
+
+        public ActionResult Inbox(int id) {
+
+            Utilizador u = db.Utilizadores.Find(id);
+            List<Utilizador> listusers = new List<Utilizador>();
+            if (u == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            foreach (Utilizador user in db.Utilizadores.Where(usr => !usr.Apagado))
+            {
+                listusers.Add(user);
+
+            }
+
+            ViewBag.listausers = listusers;
+            return View(u);
+        
+        }
+
+        [HttpPost]
+        public ActionResult Inbox(int id, int recept, String assunto, String corpo){
+
+            Utilizador s = db.Utilizadores.Find(id);
+            Utilizador r = db.Utilizadores.Find(id);
+            List<Utilizador> listusers = new List<Utilizador>();
+            Mensagem m = new Mensagem
+            {
+                DataEnvio = System.DateTime.Now,
+                Corpo = corpo,
+                Assunto = assunto,
+                ApagadoE = false,
+                ApagadoR = false,
+                Emissor = s,
+                EmissorID = s.UtilizadorID,
+                Lida = false,
+                Receptor = r,
+                ReceptorID = r.UtilizadorID
+            };
+
+            r.MensagensRecebidas.Add(m);
+            s.MensagensEnviadas.Add(m);
+            db.SaveChanges();
+
+            foreach (Utilizador user in db.Utilizadores.Where(usr => !usr.Apagado))
+            {
+                listusers.Add(user);
+
+            }
+
+            ViewBag.listausers = listusers;
+
+            return View(s);
+        
+        }
     }
 }

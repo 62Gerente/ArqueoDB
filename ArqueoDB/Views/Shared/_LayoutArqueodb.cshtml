@@ -74,7 +74,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <span>
                     <img class="menu-avatar" src="@(user.ImagemPerfil.Directoria.Caminho + user.ImagemPerfil.Nome)" /> <span>@user.Nome<i class="icon-caret-down"></i></span>
-                    <span class="badge badge-dark-red">5</span>
+                    @if (@user.MensagensRecebidas.Where(m => m.Lida == false).Count() == 0) { } else{<text><span class="badge badge-dark-red">@user.MensagensRecebidas.Where(m => m.Lida == false).Count()</span></text>}
                   </span>
                 </a>
 
@@ -93,7 +93,7 @@
 
                   <li><a href="/Utilizadores/Perfil/@user.UtilizadorID"><i class="icon-user"></i> <span>Perfil</span></a></li>
                   <li><a href="/Utilizadores/Edit/@user.UtilizadorID"><i class="icon-cog"></i> <span>Definições</span></a></li>
-                  <li><a href="#"><i class="icon-envelope"></i> <span>Mensagens</span> <span class="label label-dark-red pull-right">5</span></a></li>
+                  <li><a href="#"><i class="icon-envelope"></i> <span>Mensagens</span> <span class="label label-dark-red pull-right">@user.MensagensRecebidas.Where(m => m.Lida==false).Count() </span></a></li>
                   <li><a href="#"><i class="icon-off"></i> <span>Sair</span></a></li>
                 </ul>
               </li>

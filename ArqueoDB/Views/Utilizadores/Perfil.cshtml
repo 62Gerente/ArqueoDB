@@ -58,8 +58,8 @@
                                 @if (Model.LocaisSeguidos.Count == 0) { strnone = "Não está a seguir nenhum local."; } @strnone @{strnone = null;} 
                                 @foreach(Local loc in Model.LocaisSeguidos.Where(l => !l.Apagado && l.Publico)){
                                     if (num == 5) { break; }
-                                    <p><img class="menu-avatar" style="width: 20px;
-height: 20px;" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome)">@loc.Nome</p>		{ num++;}}
+                                    <p><a href="~/Locais/Details/@loc.LocalID"><img class="menu-avatar" style="width: 20px;
+height: 20px;" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome)">@loc.Nome</a></p>		{ num++;}}
 								@{num = 0;}
 						</div>
 						<div class="row-fluid" style="padding-top:20px;">
@@ -67,8 +67,8 @@ height: 20px;" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First
 							@if (Model.OrganizacoesSeguidas.Count == 0) { strnone = "Não está a seguir nenhuma organização."; } @strnone @{strnone = null;}  
                             @foreach(Organizacao org in Model.OrganizacoesSeguidas.Where(l => !l.Apagada && l.Publica)){
             if (num == 5) { break; }                    
-            <p><img class="menu-avatar" style="width: 20px;
-height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome)">@org.Nome</p>		{ num++;}}
+            <p><a href="~/Locais/Details/@org.OrganizacaoID"><img class="menu-avatar" style="width: 20px;
+height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome)">@org.Nome</a></p>		{ num++;}}
 								@{num = 0;}	
 							
 						</div>						<div class="row-fluid" style="padding-top:20px;">

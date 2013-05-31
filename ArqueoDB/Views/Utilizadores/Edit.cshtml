@@ -1,157 +1,241 @@
 ﻿@model ArqueoDB.Models.Utilizador
+@using ArqueoDB.Models
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
+    Utilizador user = ((Utilizador)(Session["Utilizador"]));
+
+
 }
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Utilizador</legend>
-
-        @Html.HiddenFor(model => model.UtilizadorID)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NomeUtilizador)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NomeUtilizador)
-            @Html.ValidationMessageFor(model => model.NomeUtilizador)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DistritoID, "Distrito")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("DistritoID", String.Empty)
-            @Html.ValidationMessageFor(model => model.DistritoID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataNascimento)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataNascimento)
-            @Html.ValidationMessageFor(model => model.DataNascimento)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Sexo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Sexo)
-            @Html.ValidationMessageFor(model => model.Sexo)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Descricao)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Descricao)
-            @Html.ValidationMessageFor(model => model.Descricao)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Telemovel)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Telemovel)
-            @Html.ValidationMessageFor(model => model.Telemovel)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Facebook)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Facebook)
-            @Html.ValidationMessageFor(model => model.Facebook)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Google)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Google)
-            @Html.ValidationMessageFor(model => model.Google)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Twitter)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Twitter)
-            @Html.ValidationMessageFor(model => model.Twitter)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Linkedin)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Linkedin)
-            @Html.ValidationMessageFor(model => model.Linkedin)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TituloID, "Titulo")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("TituloID", String.Empty)
-            @Html.ValidationMessageFor(model => model.TituloID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ImagemPerfilID, "ImagemPerfil")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("ImagemPerfilID", String.Empty)
-            @Html.ValidationMessageFor(model => model.ImagemPerfilID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ImagemCapaID, "ImagemCapa")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("ImagemCapaID", String.Empty)
-            @Html.ValidationMessageFor(model => model.ImagemCapaID)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+@section breadcrumb {
+<div class="breadcrumb-button">
+	<a href="#">
+	<span class="breadcrumb-label">
+	<i class="icon-group"></i> Utilizadores </span>
+	<span class="breadcrumb-arrow"><span></span></span>
+	</a>
 </div>
+<div class="breadcrumb-button">
+	<a href="#">
+	<span class="breadcrumb-label">
+	<i class="icon-globe"></i> Perfil </span>
+	<span class="breadcrumb-arrow"><span></span></span>
+	</a>
+</div>
+<div class="breadcrumb-button">
+	<a href="#">
+	<span class="breadcrumb-label">
+	<i class="icon-cogs"></i> Editar Perfil </span>
+	<span class="breadcrumb-arrow"><span></span></span>
+	</a>
+</div>
+ }
+<div class="row-fluid" style="padding-top:20px;">
+	<div class="row">
+		<div class="offset2 span8">
+			<div class="box">
+				<div class="box-header">
+					<span class="title">Editar perfil e preferências</span>
+				</div>
+				<div class="box-content padded">
+					 Aqui pode editar as suas preferências do perfil assim como as preferências de utilização no ArqueoDB. Pode gerir os conteúdos que está a seguir assim como outras cenas. <hr/>
+					<h4>Informações básicas</h4>
+					<form class="form-horizontal fill-up validatable" method="post">
+						 @using (Html.BeginForm()) { 
+                            @Html.ValidationSummary(true)
+                             <div class="padded">
+                                 <div class="control-group">
+                                     <label class="control-label">Nome</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.EditorFor(model => model.Nome) @Html.ValidationMessageFor(model => model.Nome)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Nome de Utilizador</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.EditorFor(model => model.NomeUtilizador) @Html.ValidationMessageFor(model => model.NomeUtilizador)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Email</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.EditorFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Telemovel</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.EditorFor(model => model.Telemovel) @Html.ValidationMessageFor(model => model.Telemovel)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Distrito</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.DropDownList("DistritoID", String.Empty) @Html.ValidationMessageFor(model => model.DistritoID)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Data de Nascimento</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.EditorFor(model => model.DataNascimento) @Html.ValidationMessageFor(model => model.DataNascimento)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Sexo</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             <select name="Sexo" id="sexo">
+                                                 <option value="0" @if(Model.Sexo == 0){ <text>selected="selected"</text> }>Nao especificado</option>
+                                                 <option value="1" @if(Model.Sexo == 1){ <text>selected="selected"</text>}>Masculino</option>
+                                                 <option value="2" @if(Model.Sexo == 2){ <text>selected="selected"</text>}>Feminino</option>
+                                             </select>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Descricao</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.TextAreaFor(model => model.Descricao) @Html.ValidationMessageFor(model => model.Descricao)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Password</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.EditorFor(model => model.Password) @Html.ValidationMessageFor(model => model.Password)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Confirmar Password</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             <input type="password" name="Confirm" value="@Model.Password">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <hr />
+                                 <h4>Social</h4>
+                                 <div class="control-group">
+                                     <label class="control-label"><i class="icon-facebook"></i>acebook</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                              @Html.EditorFor(model => model.Facebook)
+                                            @Html.ValidationMessageFor(model => model.Facebook)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label"><i class="icon-google-plus"></i>oogle</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                              @Html.EditorFor(model => model.Google)
+                                            @Html.ValidationMessageFor(model => model.Google)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label"><i class="icon-twitter"></i> Twitter</label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                              @Html.EditorFor(model => model.Twitter)
+            @Html.ValidationMessageFor(model => model.Twitter)
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="control-group">
+                                     <label class="control-label">Linked <i class="icon-linkedin"></i></label>
+                                     <div class="controls" style="padding-top: 5px;">
+                                         <div class="editor-field">
+                                             @Html.EditorFor(model => model.Linkedin)
+            @Html.ValidationMessageFor(model => model.Linkedin)
+                                         </div>
+                                     </div>
+                                 </div>
+                              
+                             </div> <hr/>
+           <h4>Interesses</h4>
+           <br/>
+           <h6>Organizacoes a seguir</h6><a name="orgs"></a>
+           <div class="action-nav-normal"> <div class="row-fluid">
+           @foreach(Organizacao org in Model.OrganizacoesSeguidas.Where(l => !l.Apagada && l.Publica))
+           { 
+            <text>            
+    <div class="span3 action-nav-button">
+      <a href="~/Utilizadores/DeleteOrg/@Model.UtilizadorID?idorg=@org.OrganizacaoID">
+        <img class="menu-avatar" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome)">
+        <span> @org.Nome </span>
+      </a>
+      <span class="triangle-button red"><i class="icon-remove"></i></span>
+    </div> </text>
+           }
+   
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+           </div></div>
+           
+           
+               <br/>
+           <h6>Locais a seguir</h6><a name="locs"></a>
+           <div class="action-nav-normal"> <div class="row-fluid">
+           @foreach(Local loc in Model.LocaisSeguidos.Where(l => !l.Apagado && l.Publico))
+           { 
+            <text>          
+    <div class="span3 action-nav-button">
+      <a href="~/Utilizadores/DeleteLoc/@Model.UtilizadorID?idloc=@loc.LocalID">
+        <img class="menu-avatar" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome)">
+        <span> @loc.Nome </span>
+      </a>
+      <span class="triangle-button red"><i class="icon-remove"></i></span>
+    </div> </text>
+           }
+   
+
+           </div></div>
+           
+           
+               <br/>
+           <h6>Utilizadores a seguir</h6><a name="users"></a>
+           <div class="action-nav-normal"> <div class="row-fluid">
+           @foreach(Utilizador u in Model.UtilizadoresSeguidos.Where(l => !l.Apagado))
+           { 
+            <text>          
+    <div class="span3 action-nav-button">
+      <a href="~/Utilizadores/DeleteUser/@Model.UtilizadorID?idusr=@u.UtilizadorID">
+        <img class="menu-avatar" src="@(u.ImagemPerfil.Directoria.Caminho + u.ImagemPerfil.Nome)">
+        <span> @u.Nome </span>
+      </a>
+      <span class="triangle-button red"><i class="icon-remove"></i></span>
+    </div> </text>
+           }
+   
+
+           </div></div>
+           
+           
+           
+           <div class="form-actions" style="text-align:center">
+            <button type="submit" class="btn btn-blue">Guardar</button>
+            <a href="Utilizadores/Perfil/@Model.UtilizadorID" class="btn btn-default">Cancel</a>
+          </div>
+						 }
+					</form> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

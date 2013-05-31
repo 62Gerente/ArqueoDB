@@ -55,13 +55,13 @@ namespace ArqueoDB.Models
         [RegularExpression(@"(\+?)[0-9]{9,}", ErrorMessage = "Formato inválido")]
         public string Telemovel { get; set; }
 
-        [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
+        [StringLength(100, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Facebook { get; set; }
-        [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
+        [StringLength(100, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Google { get; set; }
-        [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
+        [StringLength(100, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Twitter { get; set; }
-        [StringLength(50, ErrorMessage = "Número máximo de caracteres excedido")]
+        [StringLength(100, ErrorMessage = "Número máximo de caracteres excedido")]
         public string Linkedin { get; set; }
 
         [ScaffoldColumn(false)]
