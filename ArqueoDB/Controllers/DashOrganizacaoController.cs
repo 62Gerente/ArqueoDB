@@ -19,7 +19,9 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Dashboard(int id)
         {
-            if (Session["Utilizador"] == null)
+            Utilizador sess = (Utilizador)Session["Utilizador"];
+
+            if (sess == null)
             {
                 Session["ErroSessao"] = true;
                 return RedirectToAction("Login", "Utilizadores");
@@ -32,6 +34,7 @@ namespace ArqueoDB.Controllers
             }
 
             Session["Organizacao"] = organizacao;
+            Session["Utilizador"] = db.Utilizadores.Find(sess.UtilizadorID);
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Dashboard";
