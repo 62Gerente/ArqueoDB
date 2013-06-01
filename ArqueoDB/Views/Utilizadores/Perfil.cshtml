@@ -67,7 +67,7 @@ height: 20px;" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First
 							@if (Model.OrganizacoesSeguidas.Count == 0) { strnone = "Não está a seguir nenhuma organização."; } @strnone @{strnone = null;}  
                             @foreach(Organizacao org in Model.OrganizacoesSeguidas.Where(l => !l.Apagada && l.Publica)){
             if (num == 5) { break; }                    
-            <p><a href="~/Locais/Details/@org.OrganizacaoID"><img class="menu-avatar" style="width: 20px;
+            <p><a href="~/Organizacoes/Details/@org.OrganizacaoID"><img class="menu-avatar" style="width: 20px;
 height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nome)">@org.Nome</a></p>		{ num++;}}
 								@{num = 0;}	
 							
@@ -173,7 +173,7 @@ height: 20px;" src="@(org.ImagemPerfil.Directoria.Caminho + org.ImagemPerfil.Nom
 
 
 
-                ()
+               
 				</div>
 							<div class="span2">
 				<div class="box">
