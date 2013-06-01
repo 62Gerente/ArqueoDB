@@ -46,5 +46,6 @@ namespace ArqueoDB.Models
         [ScaffoldColumn(false)]
         public bool Apagado { get; set; }
 
+
     }
 }

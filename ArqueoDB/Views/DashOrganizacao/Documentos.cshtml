@@ -214,7 +214,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
 					<h3 id="myModalLabel">Novo Documento</h3>
 				</div>
-                 @using (Html.BeginForm("AdicionarDocumento", "DashOrganizacao", new { idOrg = Model.OrganizacaoID, idDest =  }, FormMethod.Post))
+                 @using (Html.BeginForm("AdicionarDocumento", "DashOrganizacao", new { idOrg = Model.OrganizacaoID  }, FormMethod.Post, new {enctype="multipart/form-data"}))
                 {
 				<div class="modal-body">
 								<fieldset>
@@ -224,7 +224,7 @@
 												<hr>
 												<label><h4>Ficheiro</h4></label>
 												<div class="uploader" id="uniform-upl"><input type="file" class="span8 fancy" name="ficheiro" id="upl" size="20" style="opacity: 0;"><span class="filename">Nenhum ficheiro selecionado</span><span class="action">Escolha um ficheiro</span></div>								
-												<hr>
+												
 
 									</div>
 
@@ -235,7 +235,7 @@
 												<textarea class="span12 input-block-level" rows="3" placeholder="Escreva uma pequena descrição" name="descricao"></textarea>
 												<hr>
 												<label class="checkbox">
-												<div class="checker" id="uniform-undefined"><span><input type="checkbox" class="fancy" style="opacity: 0;" name="isPublico"></span></div> Tornar público
+												<div class="checker" id="uniform-undefined"><span><input type="checkbox" class="fancy" style="opacity: 0;" name="isPublico" checked></span></div> Tornar público
 												</label>
 												<hr>
 												
