@@ -620,6 +620,7 @@ namespace ArqueoDB.Controllers
             return View(user);
         }
 
+
         [HttpPost]
         public ActionResult Message(int id, int msgid, int recept , String assunto, String corpo)
         {
@@ -653,6 +654,7 @@ namespace ArqueoDB.Controllers
             ViewBag.msg = m;
             return RedirectToAction("Inbox", "Utilizadores", new { id });
         }
+
 
 
         [HttpPost]

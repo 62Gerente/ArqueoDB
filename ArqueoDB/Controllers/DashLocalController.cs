@@ -397,7 +397,20 @@ namespace ArqueoDB.Controllers
             ViewData["Activo"] = "Publicações";
 
             return View(loc);
-        }        
+        }
 
+        public ActionResult Estatisticas(int id)
+        {
+            Local loc = db.Locais.Find(id);
+            if (loc == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["Dashboard"] = "Local";
+            ViewData["Activo"] = "Estatísticas";
+
+            return View(loc);
+        }
     }
 }

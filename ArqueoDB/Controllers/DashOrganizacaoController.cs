@@ -8,7 +8,8 @@ using System.Data.Entity;
 using System.Data;
 using PagedList;
 using ArqueoDB.DAL;
-
+using System.Data.Entity.Validation;
+using System.IO;
 namespace ArqueoDB.Controllers
 {
     public class DashOrganizacaoController : Controller
@@ -380,7 +381,7 @@ namespace ArqueoDB.Controllers
             }
 
             ViewData["Dashboard"] = "Organizacao";
-            ViewData["Activo"] = "Estatisticas";
+            ViewData["Activo"] = "Estatísticas";
 
             return View(organizacao);
         }
@@ -433,12 +434,52 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult NovaMensagem(int idOrg)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
             string mensagem = Request["mensagem"];
             int idDest = Convert.ToInt32(Request["recept"]);
-            Utilizador u = (Utilizador)(Session["Utilizador"]);
-            
-            //Mandar mensagem ao responsavel
-            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+            Utilizador s = db.Utilizadores.Find(((Utilizador)(Session["Utilizador"])).UtilizadorID);
+            string titulo = Request["assunto"];
+            ////
+            Utilizador r = db.Utilizadores.Find(idDest);
+            Mensagem m = new Mensagem
+            {
+                DataEnvio = System.DateTime.Now,
+                Corpo = mensagem,
+                Assunto = titulo,
+                ApagadoE = false,
+                ApagadoR = false,
+                Emissor = s,
+                EmissorID = s.UtilizadorID,
+                Lida = false,
+                Receptor = r,
+                ReceptorID = idDest 
+            };
+            //try
+            //{
+                r.MensagensRecebidas.Add(m);
+                s.MensagensEnviadas.Add(m);
+                db.SaveChanges();
+            //}
+            //catch (DbEntityValidationException e)
+            //{
+            //    foreach (var eve in e.EntityValidationErrors)
+            //    {
+            //        System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
+            //            System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+            //                ve.PropertyName, ve.ErrorMessage);
+            //        }
+            //    }
+            //    throw;
+            //}
+
+            return RedirectToAction("Membros", "DashOrganizacao", new { id = idOrg });
         }
 
         [HttpPost]
@@ -447,9 +488,30 @@ namespace ArqueoDB.Controllers
             string titulo = Request["titulo"];
             string descricao = Request["descricao"];
             string isPublico = Request["isPublico"];
+            string filename = Path.GetFileName(Request.Files[0].FileName);
+            bool publico = (isPublico.Equals("on"))?true:false;
             Utilizador u = (Utilizador)(Session["Utilizador"]);
+            Organizacao o = db.Organizacoes.Find(idOrg);
+            var path = Path.Combine(Server.MapPath("~/Documentos/"), filename);
+            HttpPostedFileBase file = Request.Files[0];
+            file.SaveAs(path);
+            
+            Documento d = new Documento
+            {
+                Apagado= false,
+                DataPublicacao = System.DateTime.Now,
+                Descricao = descricao,
+                DirectoriaID = 6,
+                NomeFicheiro = filename,
+                OrganizacaoID = idOrg,
+                Publico = publico,
+                ResponsavelID = u.UtilizadorID,
+                Titulo = titulo
+            };
+            o.Documentos.Add(d);
+            db.SaveChanges();
             //Mandar mensagem ao responsavel
-            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+            return RedirectToAction("Documentos", "DashOrganizacao", new { id = idOrg });
         }
 
         [HttpPost]
@@ -488,10 +550,18 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult AdicionarMembro(int idOrg)
         {
-            string nome = Request["nome"];
-            Utilizador u = (Utilizador)(Session["Utilizador"]);
-            //Mandar mensagem ao responsavel
-            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+            string idMembro = Request["id"];
+            Utilizador u = db.Utilizadores.Find(Convert.ToInt32(idMembro));
+            Organizacao o = db.Organizacoes.Find(idOrg);
+            o.Seguidores.Add(u);
+            u.OrganizacoesSeguidas.Add(o);
+            db.SaveChanges();
+            return RedirectToAction("Membros", "DashOrganizacao", new { id = idOrg });
         }
     }
 }
