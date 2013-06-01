@@ -53,6 +53,15 @@
                   </a>
                   <span class="triangle-button red"><i class="icon-plus"></i></span>
                 </div>
+              </div><br/><br/>
+              <div class="row-fluid padded">
+                <div class="span11 action-nav-button">
+                  <a href="~/Utilizadores/Outbox/@Model.UtilizadorID" >
+                  <i class="icon-share"></i>
+                  <span>Caixa de Saida</span>
+                  </a>
+                  <span class="triangle-button red"><i class="icon-plus"></i></span>
+                </div>
               </div>
             </div>
           </div>
@@ -89,11 +98,11 @@
               </tr>
               </thead>
               <tbody>
-                   @foreach (Mensagem m in Model.MensagensRecebidas.Where(l => !l.ApagadoR)) { 
+                   @foreach (Mensagem m in Model.MensagensRecebidas.Where(l => !l.ApagadoR).Reverse()) { 
                 <text>
               <tr>
                
-                  @if (m.Lida == false) { <td><a href="~/Utilizadores/Mensagem/@m.MensagemID"><span style="margin-right: 10px" class="label label-dark-red">nova</span> <b>@m.Assunto</b></a></td> } else{<td><a href="~/Mensagens/Details/@m.MensagemID"> @m.Assunto</a></td>}
+                  @if (m.Lida == false) { <td><a href="~/Utilizadores/Message/@Model.UtilizadorID?msgid=@m.MensagemID"><span style="margin-right: 10px" class="label label-dark-red">nova</span> <b>@m.Assunto</b></a></td> } else{<td><a href="~/Utilizadores/Message/@Model.UtilizadorID?msgid=@m.MensagemID"> @m.Assunto</a></td>}
                   <td><a href="~/Utilizadores/Details/@m.EmissorID">@m.Emissor.Nome </a></td>
                   <td>@m.DataEnvio</td>
                   <td><a href="~/Utilizadores/DeleteMsgR/@Model.UtilizadorID?msgid=@m.MensagemID" class="btn btn-mini btn-red" style="width:95%"><i class="icon-remove"></i> Apagar</a></td>

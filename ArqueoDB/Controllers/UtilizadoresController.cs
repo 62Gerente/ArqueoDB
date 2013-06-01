@@ -432,6 +432,25 @@ namespace ArqueoDB.Controllers
         
         }
 
+
+        public ActionResult Outbox(int id)
+        {
+
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+
+            return View(u);
+
+        }
+
+
+
         [HttpPost]
         public ActionResult Inbox(int id, int recept, String assunto, String corpo)
         {
@@ -512,6 +531,25 @@ namespace ArqueoDB.Controllers
             return RedirectToAction("Inbox", "Utilizadores", new { id });
         }
 
+        public ActionResult DeleteAllMsgE(int id)
+        {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+            foreach (Mensagem m in u.MensagensEnviadas)
+            {
+                m.ApagadoE = true;
+
+            }
+            db.SaveChanges();
+            return RedirectToAction("Outbox", "Utilizadores", new { id });
+        }
+
 
         public ActionResult DeleteMsgR(int id, int msgid)
         {
@@ -533,18 +571,87 @@ namespace ArqueoDB.Controllers
             return RedirectToAction("Inbox", "Utilizadores", new { id });
         }
 
+        public ActionResult DeleteMsgE(int id, int msgid)
+        {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+
+            foreach (Mensagem m in u.MensagensEnviadas.Where(p => p.MensagemID == msgid))
+            {
+                m.ApagadoE = true;
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Outbox", "Utilizadores", new { id });
+        }
+
+        public ActionResult MessageSent(int id, int msgid)
+        {
+
+            Utilizador user = db.Utilizadores.Find(id);
+            Mensagem m = user.MensagensEnviadas.Where(p => p.MensagemID == msgid).FirstOrDefault();
+
+            db.SaveChanges();
+
+
+
+            ViewBag.msg = m;
+            return View(user);
+        }
+
 
         public ActionResult Message(int id, int msgid){
         
             Utilizador user = db.Utilizadores.Find(id);
             Mensagem m = user.MensagensRecebidas.Where(p => p.MensagemID == msgid).FirstOrDefault();
 
-
+            m.Lida = true;
+            db.SaveChanges();
 
 
 
             ViewBag.msg = m;
             return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Message(int id, int msgid, int recept , String assunto, String corpo)
+        {
+
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador s = db.Utilizadores.Find(id);
+            Utilizador r = db.Utilizadores.Find(recept);
+            List<Utilizador> listusers = new List<Utilizador>();
+            Mensagem m = new Mensagem
+            {
+                DataEnvio = System.DateTime.Now,
+                Corpo = corpo,
+                Assunto = assunto,
+                ApagadoE = false,
+                ApagadoR = false,
+                Emissor = s,
+                EmissorID = s.UtilizadorID,
+                Lida = false,
+                Receptor = r,
+                ReceptorID = r.UtilizadorID
+            };
+
+            r.MensagensRecebidas.Add(m);
+            s.MensagensEnviadas.Add(m);
+            db.SaveChanges();
+            ViewBag.msg = m;
+            return RedirectToAction("Inbox", "Utilizadores", new { id });
         }
 
 
