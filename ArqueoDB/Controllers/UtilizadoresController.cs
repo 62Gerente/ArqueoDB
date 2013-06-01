@@ -48,6 +48,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome");
             ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome");
             ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome");
@@ -80,6 +86,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador utilizador = db.Utilizadores.Find(id);
             if (utilizador == null)
             {
@@ -136,6 +148,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador utilizador = db.Utilizadores.Find(id);
             if (utilizador == null)
             {
@@ -163,7 +181,11 @@ namespace ArqueoDB.Controllers
         }
 
         public ActionResult Seguir(int id, int seguir){
-
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
             Utilizador utilizador = db.Utilizadores.Find(id);
             Utilizador utilizadorSeguir = db.Utilizadores.Find(seguir);
 
@@ -176,6 +198,11 @@ namespace ArqueoDB.Controllers
 
         public ActionResult DeixarSeguir(int id, int seguir)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
 
             Utilizador utilizador = db.Utilizadores.Find(id);
             Utilizador utilizadorSeguir = db.Utilizadores.Find(seguir);
@@ -187,6 +214,12 @@ namespace ArqueoDB.Controllers
         }
 
         public ActionResult Comentar(int id, int user, string comentario) {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador utilizador = db.Utilizadores.Find(id);
 
             Comentario comm = new Comentario
@@ -204,6 +237,12 @@ namespace ArqueoDB.Controllers
         }
 
         public ActionResult Publicar(int id, string titulo, string descr) {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador user = db.Utilizadores.Find(id);
 
             Publicacao pub = new Publicacao
@@ -225,6 +264,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Perfil()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador sessao = (Utilizador) Session["Utilizador"];
 
             if (sessao == null)
@@ -292,6 +337,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult DeleteOrg(int id,int idorg)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador utilizador = db.Utilizadores.Find(id);
             Organizacao org = db.Organizacoes.Find(idorg);
             if (utilizador == null)
@@ -309,6 +360,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult DeleteLoc(int id, int idloc)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador utilizador = db.Utilizadores.Find(id);
             Local l = db.Locais.Find(idloc);
             if (utilizador == null)
@@ -327,6 +384,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult DeleteUser(int id, int idusr)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Utilizador utilizador = db.Utilizadores.Find(id);
             Utilizador u = db.Utilizadores.Find(idusr);
             if (utilizador == null)
@@ -343,6 +406,12 @@ namespace ArqueoDB.Controllers
         }
 
         public ActionResult Inbox(int id) {
+
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
 
             Utilizador u = db.Utilizadores.Find(id);
             List<Utilizador> listusers = new List<Utilizador>();
@@ -366,9 +435,14 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult Inbox(int id, int recept, String assunto, String corpo)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
 
             Utilizador s = db.Utilizadores.Find(id);
-            Utilizador r = db.Utilizadores.Find(id);
+            Utilizador r = db.Utilizadores.Find(recept);
             List<Utilizador> listusers = new List<Utilizador>();
             Mensagem m = new Mensagem
             {
@@ -393,14 +467,89 @@ namespace ArqueoDB.Controllers
                 listusers.Add(user);
 
             }
-
+         
             ViewBag.listausers = listusers;
 
             return View(s);
         }
 
+        public ActionResult MarkAllRead(int id) {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+            foreach (Mensagem m in u.MensagensRecebidas) {
+                m.Lida = true;
+            }
+            db.SaveChanges();
+ 
+            return RedirectToAction("Inbox", "Utilizadores", new { id });
+        }
+
+
+        public ActionResult DeleteAllMsgR(int id)
+        {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+            foreach (Mensagem m in u.MensagensRecebidas)
+            {
+                m.ApagadoR = true;
+                m.Lida = true;
+
+            }
+            db.SaveChanges();
+            return RedirectToAction("Inbox", "Utilizadores", new { id });
+        }
+
+
+        public ActionResult DeleteMsgR(int id, int msgid)
+        {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador u = db.Utilizadores.Find(id);
+
+
+            foreach (Mensagem m in u.MensagensRecebidas.Where(p => p.MensagemID == msgid)) {
+                m.ApagadoR = true;
+                m.Lida = true;
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Inbox", "Utilizadores", new { id });
+        }
+
+
+        public ActionResult Message(int id, int msgid){
+        
+            Utilizador user = db.Utilizadores.Find(id);
+            Mensagem m = user.MensagensRecebidas.Where(p => p.MensagemID == msgid).FirstOrDefault();
+
+
+
+
+
+            ViewBag.msg = m;
+            return View(user);
+        }
+
+
         [HttpPost]
-        public ActionResult Login()
+        public ActionResult LoginHome()
         {
             string username = Request["name"];
             string password = Request["password"];
@@ -416,6 +565,29 @@ namespace ArqueoDB.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Login()
+        {
+            ViewBag.Erro = null;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string name)
+        {
+            string password = Request["password"];
+
+            Utilizador user = db.Utilizadores.Where(u => u.NomeUtilizador.Equals(name)).FirstOrDefault();
+
+            if (user != null && user.Password.Equals(password))
+            {
+                ViewBag.Erro = null;
+                Session["Utilizador"] = user;
+                return RedirectToAction("Perfil", "Utilizadores");
+            }
+            Session["Login"] = null;
+            ViewBag.Erro = true;
+            return View();
+        }
 
         public ActionResult Logout()
         {

@@ -42,6 +42,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             ViewBag.DistritoID = new SelectList(db.Distritos, "DistritoID", "Nome");
             ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID");
             ViewBag.ImagemPerfilID = new SelectList(db.Imagens, "ImagemID", "Nome");
@@ -74,6 +80,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
             {
@@ -110,6 +122,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
             {
@@ -139,6 +157,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Publicar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             organizacao.Publica = true;
             db.SaveChanges();
@@ -148,6 +172,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Ocultar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             organizacao.Publica = false;
             db.SaveChanges();
@@ -157,6 +187,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Activar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             organizacao.Activa = true;
             db.SaveChanges();
@@ -166,6 +202,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Desactivar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             organizacao.Activa = false;
             db.SaveChanges();
@@ -176,6 +218,11 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Seguir(int id, int seguir)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
 
             Utilizador utilizador = db.Utilizadores.Find(id);
             Organizacao orgSeguir = db.Organizacoes.Find(seguir);
@@ -189,6 +236,11 @@ namespace ArqueoDB.Controllers
 
         public ActionResult DeixarSeguir(int id, int seguir)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
 
             Utilizador utilizador = db.Utilizadores.Find(id);
             Organizacao orgSeguir = db.Organizacoes.Find(seguir);

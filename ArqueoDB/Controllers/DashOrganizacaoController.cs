@@ -19,6 +19,14 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Dashboard(int id)
         {
+            Utilizador sess = (Utilizador)Session["Utilizador"];
+
+            if (sess == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Organizacao organizacao = db.Organizacoes.Find(id);
             if (organizacao == null)
             {
@@ -26,7 +34,7 @@ namespace ArqueoDB.Controllers
             }
 
             Session["Organizacao"] = organizacao;
-            Session["Utilizador"] = organizacao.Responsavel.Utilizador;
+            Session["Utilizador"] = db.Utilizadores.Find(sess.UtilizadorID);
 
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Dashboard";
@@ -159,6 +167,14 @@ namespace ArqueoDB.Controllers
             ViewBag.pageSize = pageSize;
             ViewBag.page = pageNumber;
 
+            List<Utilizador> listusers = new List<Utilizador>(); 
+            foreach (Utilizador user in db.Utilizadores.Where(usr => !usr.Apagado))
+            {
+                listusers.Add(user);
+
+            }
+            ViewBag.users = listusers;
+  
             ViewData["Dashboard"] = "Organizacao";
             ViewData["Activo"] = "Membros";
 
@@ -417,10 +433,10 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult NovaMensagem(int idOrg)
         {
-            string titulo = Request["titulo"];
-            string descricao = Request["descricao"];
-            string isPublico = Request["isPublico"];
+            string mensagem = Request["mensagem"];
+            int idDest = Convert.ToInt32(Request["recept"]);
             Utilizador u = (Utilizador)(Session["Utilizador"]);
+            
             //Mandar mensagem ao responsavel
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
         }

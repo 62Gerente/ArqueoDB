@@ -40,6 +40,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             return View();
         }
 
@@ -64,6 +70,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Publicacao publicacao = db.Publicacoes.Find(id);
             if (publicacao == null)
             {
@@ -92,6 +104,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Publicacao publicacao = db.Publicacoes.Find(id);
             if (publicacao == null)
             {
@@ -123,6 +141,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Ocultar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Publicacao pub = db.Publicacoes.Find(id);
             pub.Publico = false;
             db.SaveChanges();
@@ -135,6 +159,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Publicar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Publicacao pub = db.Publicacoes.Find(id);
             pub.Publico = true;
             db.SaveChanges();
@@ -147,6 +177,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Remover(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Publicacao pub = db.Publicacoes.Find(id);
             pub.Apagado = true;
             db.SaveChanges();

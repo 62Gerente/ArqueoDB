@@ -67,7 +67,7 @@
 										 <b>Cordenadas:</b> @Model.Coordenadas
 									</p>
 								</div>
-                                @if(Model.Organizacao.Membros.FirstOrDefault(m => m.UtilizadorID == user.UtilizadorID) != null){
+                                @if(user!=null && Model.Organizacao.Membros.FirstOrDefault(m => m.UtilizadorID == user.UtilizadorID) != null){
                                 <div class="span2" style="margin-top: 32px;">
 					                <div class="action-nav-normal rounded">
                                         <li class="action-nav-button btn-small">
@@ -95,7 +95,8 @@
 								<span class="triangle-button red"><i class="icon-plus"></i></span>
 							</div>
 						</div>
-                        @if(Model.Seguidores.FirstOrDefault(u => u.UtilizadorID == user.UtilizadorID) == null){
+                        @if(user!=null){
+                        if(Model.Seguidores.FirstOrDefault(u => u.UtilizadorID == user.UtilizadorID) == null){
 						<div class="row-fluid">
 							<div class="span12 action-nav-button">
 								<a href="/Locais/Seguir?id=@user.UtilizadorID&seguir=@Model.LocalID" title="Seguir local">
@@ -113,7 +114,7 @@
 								</a>
 							</div>
 						</div>
-                        }
+                        }}
 					</div>
 				</div>
             </div>
@@ -378,6 +379,7 @@
 					</div>
 				</div>
 			</div>
+            @if(user!=null){
 							<div class="row-fluid">
 
 
@@ -455,6 +457,7 @@
                         				</div>
 
 			</div>
+            }
             </div>
 
 		<div class="container-fluid padded">
@@ -473,14 +476,14 @@
             </div>
         </div>
 
-
+@if(user!=null){
 <script>
     var comment = document.getElementById('comm');
     function comentar() {
         if (comment.value !== "")
             window.location.href = "/Locais/Comentar?id=@Model.LocalID&user=@user.UtilizadorID&comentario=" + comment.value
     }
-</script>
+</script>}
 
     <script type="text/javascript">
         function initialize() {

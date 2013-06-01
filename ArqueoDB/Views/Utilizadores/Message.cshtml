@@ -2,7 +2,7 @@
 @using ArqueoDB.Models
 
 @{
-    ViewBag.Title = "Inbox";
+    ViewBag.Title = "Message";
     Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
     Utilizador user = ((Utilizador)(Session["Utilizador"]));
     List<Utilizador> lista = ViewBag.listausers;
@@ -14,6 +14,11 @@
         <div class="breadcrumb-button">
           <span class="breadcrumb-label">
           <i class="icon-envelope"></i> Caixa de entrada </span>
+          <span class="breadcrumb-arrow"><span></span></span>
+        </div>
+            <div class="breadcrumb-button">
+          <span class="breadcrumb-label">
+          <i class="icon-comment"></i> Damn </span>
           <span class="breadcrumb-arrow"><span></span></span>
         </div>
  }
@@ -62,47 +67,7 @@
         <div class="box">
           <div class="box-content">
             <!-- find me in partials/data_tables_custom -->
-            <div id="dataTables">
-              <table cellpadding="0" cellspacing="0" border="0" class="dTable responsive">
-              <thead>
-              <tr>
-                <th style="width: 40%;">
-                  <div>
-                    Assunto
-                  </div>
-                </th>
-                <th style="width: 20%;">
-                  <div>
-                    Enviado por
-                  </div>
-                </th>
-                <th style="width: 15%;">
-                  <div>
-                    Enviado em
-                  </div>
-                </th>
-                <th style="width: 25%;">
-                  <div>
-                    Opções
-                  </div>
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-                   @foreach (Mensagem m in Model.MensagensRecebidas.Where(l => !l.ApagadoR)) { 
-                <text>
-              <tr>
-               
-                  @if (m.Lida == false) { <td><a href="~/Utilizadores/Mensagem/@m.MensagemID"><span style="margin-right: 10px" class="label label-dark-red">nova</span> <b>@m.Assunto</b></a></td> } else{<td><a href="~/Mensagens/Details/@m.MensagemID"> @m.Assunto</a></td>}
-                  <td><a href="~/Utilizadores/Details/@m.EmissorID">@m.Emissor.Nome </a></td>
-                  <td>@m.DataEnvio</td>
-                  <td><a href="~/Utilizadores/DeleteMsgR/@Model.UtilizadorID?msgid=@m.MensagemID" class="btn btn-mini btn-red" style="width:95%"><i class="icon-remove"></i> Apagar</a></td>
-                  
-               
-              </tr></text> }
-              </tbody>
-              </table>
-            </div>
+
           </div>
         </div>
       </div>

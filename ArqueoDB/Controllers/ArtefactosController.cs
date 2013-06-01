@@ -42,6 +42,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             ViewBag.LocalID = new SelectList(db.Locais, "LocalID", "Nome");
             ViewBag.OrganizacaoID = new SelectList(db.Organizacoes, "OrganizacaoID", "Nome");
             ViewBag.ResponsavelID = new SelectList(db.Profissionais, "ProfissionalID", "ProfissionalID");
@@ -72,6 +78,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Artefacto artefacto = db.Artefactos.Find(id);
             if (artefacto == null)
             {
@@ -106,6 +118,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Artefacto artefacto = db.Artefactos.Find(id);
             if (artefacto == null)
             {
@@ -135,6 +153,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Publicar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Artefacto artefacto = db.Artefactos.Find(id);
             artefacto.Publico = true;
             db.SaveChanges();
@@ -144,6 +168,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Ocultar(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Artefacto artefacto = db.Artefactos.Find(id);
             artefacto.Publico = false;
             db.SaveChanges();
@@ -153,6 +183,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Remover(int id)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Artefacto artefacto = db.Artefactos.Find(id);
             artefacto.Apagado = true;
             db.SaveChanges();
@@ -162,6 +198,12 @@ namespace ArqueoDB.Controllers
 
         public ActionResult Comentar(int id, int user, string comentario)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             Artefacto artefacto = db.Artefactos.Find(id);
 
             Comentario comm = new Comentario
@@ -181,6 +223,12 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult AddImagem(HttpPostedFileBase file)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
             int id = Convert.ToInt32(Request["id"]);
             int user = Convert.ToInt32(Request["user"]);
             var comentario = Request["comentario"];

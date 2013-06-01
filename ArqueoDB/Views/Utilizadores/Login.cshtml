@@ -1,0 +1,89 @@
+﻿@model ArqueoDB.Models.Utilizador
+@using ArqueoDB.Models
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
+
+
+    bool erro;
+    if(ViewBag.Erro != null){
+        erro = ViewBag.Erro;
+    }else{
+        erro = false;
+    }
+}
+
+@section breadcrumb {
+
+        <div class="breadcrumb-button">
+          <span class="breadcrumb-label">
+          <i class="icon-signup"></i> Login </span>
+          <span class="breadcrumb-arrow"><span></span></span>
+        </div>
+ }
+
+<div class="span6 offset3" style="margin-bottom:-60px;">
+                  @if(Session["ErroSessao"] != null){
+                  Session["ErroSessao"] = null;
+                      <div class="alert alert-error">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Erro!</strong> Para ter acesso à página requerida necessita de ter login efectuado. Efectue Login para ter acesso a todas as funcionalidades do sistema.
+                      </div>
+                  }
+<div class="padded"></div></div>
+
+
+<div class="span4 offset4">
+
+
+  <div class="padded">
+    <div class="login box" style="margin-top: 80px;">
+
+      <div class="box-header">
+        <span class="title">Login</span>
+      </div>
+
+      <div class="box-content padded">
+       @using (Html.BeginForm("Login", "Utilizadores", FormMethod.Post, new{@class="separate-sections"}))
+          {
+          <div class="input-prepend">
+          <span class="add-on" href="#">
+            <i class="icon-user"></i>
+          </span>
+            <input type="text" name="name" placeholder="Nome de utilizador">
+          </div>
+
+          <div class="input-prepend">
+          <span class="add-on" href="#">
+            <i class="icon-key"></i>
+          </span>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+
+                  if(erro){
+                  ViewBag.Erro = null;
+                      <div class="alert alert-error">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong>Erro!</strong> Login inválido
+                      </div>
+                  }
+           
+          <div>
+            <button class="btn btn-blue btn-block" type="submit">
+                Login <i class="icon-signin"></i>
+            </button>
+          </div>
+
+        }
+
+        <div>
+          <a href="/Utilizadores/Login">
+              Ainda não está registado? <strong>Registe-se aqui!</strong>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

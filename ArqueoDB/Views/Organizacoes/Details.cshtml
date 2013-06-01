@@ -76,7 +76,7 @@
 									     <b>Fax:</b> @Model.Fax
 									</p>
 								</div>
-                                @if(Model.Membros.FirstOrDefault(m => m.UtilizadorID == user.UtilizadorID) != null){
+                                @if(user!=null && Model.Membros.FirstOrDefault(m => m.UtilizadorID == user.UtilizadorID) != null){
                                 <div class="span2" style="margin-top: 32px;">
 					                <div class="action-nav-normal rounded">
                                         <li class="action-nav-button btn-small">
@@ -103,8 +103,12 @@
 								</a>
 								<span class="triangle-button red"><i class="icon-plus"></i></span>
 							</div>
-						</div>
-                        @if(Model.Seguidores.FirstOrDefault(u => u.UtilizadorID == user.UtilizadorID) == null){
+						
+                        </div>
+                        @if (user != null)
+                        {
+                            if (Model.Seguidores.FirstOrDefault(u => u.UtilizadorID == user.UtilizadorID) == null)
+                            {
 						<div class="row-fluid">
 							<div class="span12 action-nav-button">
 								<a href="/Organizacoes/Seguir?id=@user.UtilizadorID&seguir=@Model.OrganizacaoID" title="Seguir organizacao">
@@ -113,7 +117,9 @@
 								</a>
 							</div>
 						</div>
-                        }else{
+                            }
+                            else
+                            {
 						<div class="row-fluid">
 							<div class="span12 action-nav-button">
 								<a href="/Organizacoes/DeixarSeguir?id=@user.UtilizadorID&seguir=@Model.OrganizacaoID" title="Deixar de seguir organizacão">
@@ -122,6 +128,7 @@
 								</a>
 							</div>
 						</div>
+                            }
                         }
 					</div>
 				</div>
