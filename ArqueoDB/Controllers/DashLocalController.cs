@@ -447,5 +447,30 @@ namespace ArqueoDB.Controllers
             //Mandar mensagem ao responsavel
             return RedirectToAction("Documentos", "DashLocal", new { id = id });
         }
+
+        [HttpPost]
+        public ActionResult AdicionarPublicacao(int id)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            bool publico = (isPublico == "on") ? true : false;
+            //Mandar mensagem ao responsavel
+            Publicacao p = new Publicacao
+            {
+                Apagado = false,
+                Comentarios = new List<Comentario>(),
+                DataPublicacao = System.DateTime.Now,
+                Descricao = descricao,
+                Publico = publico,
+                Titulo = titulo
+            };
+            Local l = db.Locais.Find(id);
+            Organizacao o = db.Organizacoes.Find(l.OrganizacaoID);
+            l.Publicacoes.Add(p);
+            o.Publicacoes.Add(p);
+            db.SaveChanges();
+            return RedirectToAction("Publicacoes", "DashLocal", new { id = id });
+        }
     }
 }

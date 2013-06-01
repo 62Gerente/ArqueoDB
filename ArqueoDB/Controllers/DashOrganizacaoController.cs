@@ -415,9 +415,20 @@ namespace ArqueoDB.Controllers
             string titulo = Request["titulo"];
             string descricao = Request["descricao"];
             string isPublico = Request["isPublico"];
-            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            bool publico = (isPublico =="on") ? true : false;
             //Mandar mensagem ao responsavel
-            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+            Publicacao p = new Publicacao{
+                Apagado = false,
+                Comentarios = new List<Comentario>(),
+                DataPublicacao = System.DateTime.Now,
+                Descricao = descricao,
+                Publico = publico,
+                Titulo = titulo
+            };
+            Organizacao o = db.Organizacoes.Find(idOrg);
+            o.Publicacoes.Add(p);
+            db.SaveChanges();
+            return RedirectToAction("Publicacoes", "DashOrganizacao", new { id = idOrg });
         }
 
         [HttpPost]
@@ -488,8 +499,8 @@ namespace ArqueoDB.Controllers
             string titulo = Request["titulo"];
             string descricao = Request["descricao"];
             string isPublico = Request["isPublico"];
+            bool publico = (isPublico.Equals("on")) ? true : false;
             string filename = Path.GetFileName(Request.Files[0].FileName);
-            bool publico = (isPublico.Equals("on"))?true:false;
             Utilizador u = (Utilizador)(Session["Utilizador"]);
             Organizacao o = db.Organizacoes.Find(idOrg);
             var path = Path.Combine(Server.MapPath("~/Documentos/"), filename);
