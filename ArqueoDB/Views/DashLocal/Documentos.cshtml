@@ -38,7 +38,7 @@
                @* Ícone de adicionar documento *@
             <div class="span12" style="margin-bottom:20px">                 
                 <div class="pull-right" style="" >  
-                        <a class="btn btn-inverse pull-right" href="#"><i class="micon-plus"></i>  Adicionar novo documento</a>
+                        <a class="btn btn-inverse pull-right" href="#novoDocumentoModal" data-toggle="modal"><i class="micon-plus"></i>  Adicionar novo documento</a>
                 </div>
                 
                 @*  Barra de Pesquisa *@
@@ -208,3 +208,45 @@
 
             </section>
 
+                        <div id="novoDocumentoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
+					<h3 id="myModalLabel">Novo Documento</h3>
+				</div>
+                 @using (Html.BeginForm("AdicionarDocumento", "DashLocal", new { id = Model.LocalID, idOrg = Model.OrganizacaoID }, FormMethod.Post, new {enctype="multipart/form-data"}))
+                {
+				<div class="modal-body">
+								<fieldset>
+									<div class="row-fluid">
+												<label><h4>Título</h4></label>
+												<input type="text" class="input-xlarge" name="titulo">									
+												<hr>
+												<label><h4>Ficheiro</h4></label>
+												<div class="uploader" id="uniform-upl"><input type="file" class="span8 fancy" name="ficheiro" id="upl" size="20" style="opacity: 0;"><span class="filename">Nenhum ficheiro selecionado</span><span class="action">Escolha um ficheiro</span></div>								
+												
+
+									</div>
+
+
+									<div class="row-fluid">
+												<hr>
+												<label><h4>Descrição</h4></label>
+												<textarea class="span12 input-block-level" rows="3" placeholder="Escreva uma pequena descrição" name="descricao"></textarea>
+												<hr>
+												<label class="checkbox">
+												<div class="checker" id="uniform-undefined"><span><input type="checkbox" class="fancy" style="opacity: 0;" name="isPublico" checked></span></div> Tornar público
+												</label>
+												<hr>
+												
+									</div>
+
+
+									
+								</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+					<button class="btn btn-primary" type="submit">Criar</button>
+				</div>
+                }
+			</div>

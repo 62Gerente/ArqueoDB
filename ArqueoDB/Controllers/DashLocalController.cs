@@ -1,6 +1,7 @@
 ﻿using ArqueoDB.Models;
 using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using ArqueoDB.DAL;
@@ -411,6 +412,40 @@ namespace ArqueoDB.Controllers
             ViewData["Activo"] = "Estatísticas";
 
             return View(loc);
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarDocumento(int id, int idOrg)
+        {
+            string titulo = Request["titulo"];
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
+            bool publico = (isPublico.Equals("on")) ? true : false;
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            Local l = db.Locais.Find(id);
+            Organizacao o = db.Organizacoes.Find(idOrg);
+            var path = System.IO.Path.Combine(Server.MapPath("~/Documentos/"), filename);
+            HttpPostedFileBase file = Request.Files[0];
+            file.SaveAs(path);
+
+            Documento d = new Documento
+            {
+                Apagado = false,
+                DataPublicacao = System.DateTime.Now,
+                Descricao = descricao,
+                DirectoriaID = 6,
+                NomeFicheiro = filename,
+                OrganizacaoID = idOrg,
+                Publico = publico,
+                ResponsavelID = u.UtilizadorID,
+                Titulo = titulo
+            };
+            o.Documentos.Add(d);
+            l.Documentos.Add(d);
+            db.SaveChanges();
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Documentos", "DashLocal", new { id = id });
         }
     }
 }
