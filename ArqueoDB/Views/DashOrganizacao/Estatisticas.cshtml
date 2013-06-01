@@ -15,18 +15,18 @@
                 <div class="row-fluid">
                     <div class="btn-rounded-panel large">
 						<ul class="btn-rounded">
-							<li class="success"><span><a href="#" class="bottom_tooltip" data-original-title="Locais"><i class="micon-location text-success" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Locais.Where(l => !l.Apagado).Count()</span></li>
-							<li class="info"><span><a href="#" class="bottom_tooltip" data-original-title="Utilizadores"><i class="micon-user-2 text-info" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Membros.Count()</span></li>
-							<li class="danger"><span><a href="#" class="bottom_tooltip" data-original-title="Documentos"><i class="micon-libreoffice text-error" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Documentos.Where(d => !d.Apagado).Count()</span></li>
-							<li class="warning"><span><a href="#" class="bottom_tooltip" data-original-title="Publicações"><i class="micon-newspaper text-warning" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Publicacoes.Where(d => !d.Apagado).Count()</span></li>
+							<li class="success"><span><a  class="bottom_tooltip" data-original-title="Locais"><i class="micon-location text-success" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Locais.Where(l => !l.Apagado).Count()</span></li>
+							<li class="info"><span><a  class="bottom_tooltip" data-original-title="Utilizadores"><i class="micon-user-2 text-info" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Membros.Count()</span></li>
+							<li class="danger"><span><a  class="bottom_tooltip" data-original-title="Documentos"><i class="micon-libreoffice text-error" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Documentos.Where(d => !d.Apagado).Count()</span></li>
+							<li class="warning"><span><a  class="bottom_tooltip" data-original-title="Publicações"><i class="micon-newspaper text-warning" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Publicacoes.Where(d => !d.Apagado).Count()</span></li>
                             @{
                                 int artefactos = 0;
                                 foreach(Local loc in Model.Locais.Where(l => !l.Apagado)){
                                     artefactos += loc.Artefactos.Where(a => !a.Apagado).Count();
                                 }
                             }
-							<li class="important"><span><a href="#" class="bottom_tooltip" data-original-title="Artefactos"><i class="micon-diamond text-info" style="font-size:65px"></i></a></span><span class="badge badge-important">@artefactos</span></li>
-							<li><span><a href="#" class="bottom_tooltip" data-original-title="Seguidores"><i class="micon-feed" style="color:black;font-size:65px"></i></a></span><span class="badge badge-important">@Model.Seguidores.Count()</span></li>
+							<li class="important"><span><a  class="bottom_tooltip" data-original-title="Artefactos"><i class="micon-diamond text-info" style="font-size:65px"></i></a></span><span class="badge badge-important">@artefactos</span></li>
+							<li><span><a class="bottom_tooltip" data-original-title="Seguidores"><i class="micon-feed" style="color:black;font-size:65px"></i></a></span><span class="badge badge-important">@Model.Seguidores.Count()</span></li>
 
 						</ul>
 					</div>
@@ -68,7 +68,8 @@
                    </div>
                 </div>
 
-    <script type="text/javascript">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
         google.load("visualization", "1", { packages: ["corechart"] });
         google.setOnLoadCallback(drawChart);
         function drawChart() {

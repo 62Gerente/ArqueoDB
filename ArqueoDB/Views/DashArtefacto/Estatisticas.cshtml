@@ -1,0 +1,81 @@
+﻿@model ArqueoDB.Models.Artefacto
+@using ArqueoDB.Models
+@using System.Collections.Generic
+@using ArqueoDB.DAL
+
+@{
+    ViewBag.Title = "Estatisticas";
+    ViewBag.Organizacao = Model;
+    Layout = "~/Views/Shared/_LayoutOrganizacao.cshtml";  
+    
+}   
+@section breadcrumb {
+    <li><a href="/Locais/Details/@Html.DisplayFor(model => model.LocalID)">@Html.DisplayFor(model => model.Local.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashLocal/Dashboard/@Html.DisplayFor(model => model.LocalID)">Gestão do Local</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/Artefactos/Details/@Html.DisplayFor(model => model.ArtefactoID)">@Html.DisplayFor(model => model.Nome)</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashArtefacto/Dashboard/@Html.DisplayFor(model => model.ArtefactoID)">Gestão do Artefacto</a><span class="divider"><i class="icon-caret-right"></i></span></li>
+    <li><a href="/DashArtefacto/Estatisticas/@Html.DisplayFor(model => model.ArtefactoID)">Estatísticas</a></li>
+}
+@section dashboard{
+    Estatísticas
+}
+                <div class="row-fluid">
+                    <div class="btn-rounded-panel large">
+						<ul class="btn-rounded">
+                             <li class="success"><span><a  class="bottom_tooltip" data-original-title="Imagens"><i class="micon-picture text-success" style="font-size:65px"></i></a></span><span class="badge badge-important">@Model.Imagens.Where(i => !i.Apagada).Count()</span></li>
+                             <li><span><a  class="bottom_tooltip" data-original-title="Comentários"><i class="micon-comments-2" style="color:black;font-size:65px"></i></a></span><span class="badge badge-important">@Model.Comentarios.Where(c => !c.Apagado).Count()</span></li>                            
+						</ul>
+					</div>
+                </div>
+
+      @* Registo de actividade *@
+      <div class="row-fluid">
+                    <div class="span12 ">
+						<div class="well widget">
+							<div class="widget-header">
+								<h3 class="title">Publicação de conteúdo nos últimos 6 meses</h3>
+							</div>
+                            <div id="chart_div_actividade"></div>
+					    </div>
+                   </div>
+          </div>
+      
+
+
+    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+
+        @{
+            Dictionary<int, int> comentariosMes;
+            Dictionary<int, int> imagensMes;
+
+            Util.registarActividadeArtefacto(Model, out imagensMes, out comentariosMes);            
+        }
+       
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Mês', 'Imagens', 'Comentários'],
+          @{    
+              
+              for (int i = 5; i >= 0; i--)
+              {
+               <text>['</text>@Util.determinarLabel(i)<text>', </text>@Util.getValor(comentariosMes, i)<text>, </text>@Util.getValor(imagensMes, i)<text>],</text> 
+              } 
+           }
+            ]);
+
+            var options = {
+                title: '',
+                backgroundColor: '#f5f5f5',
+                colors: ['green', 'black'],
+                chartArea: { width: "70%" /*, top: 0, width: "50%", height: "75%"*/ }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div_actividade'));
+            chart.draw(data, options);
+        }
+    </script>    

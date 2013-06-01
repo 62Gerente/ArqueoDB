@@ -134,5 +134,19 @@ namespace ArqueoDB.Controllers
 
             return View(art);
         }
+
+        public ActionResult Estatisticas(int id)
+        {
+            Artefacto art = db.Artefactos.Find(id);
+            if (art == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["Dashboard"] = "Artefacto";
+            ViewData["Activo"] = "Estatísticas";
+
+            return View(art);
+        }
     }
 }

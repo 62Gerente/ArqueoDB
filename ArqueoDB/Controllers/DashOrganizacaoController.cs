@@ -364,7 +364,7 @@ namespace ArqueoDB.Controllers
             }
 
             ViewData["Dashboard"] = "Organizacao";
-            ViewData["Activo"] = "Estatisticas";
+            ViewData["Activo"] = "Estatísticas";
 
             return View(organizacao);
         }
