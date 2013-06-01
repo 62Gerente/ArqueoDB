@@ -435,8 +435,38 @@ namespace ArqueoDB.Controllers
         {
             string mensagem = Request["mensagem"];
             int idDest = Convert.ToInt32(Request["recept"]);
-            Utilizador u = (Utilizador)(Session["Utilizador"]);
-            
+            Utilizador s = (Utilizador)(Session["Utilizador"]);
+            string titulo = Request["titulo"];
+            ////
+            Utilizador r = db.Utilizadores.Find(id);
+            List<Utilizador> listusers = new List<Utilizador>();
+            Mensagem m = new Mensagem
+            {
+                DataEnvio = System.DateTime.Now,
+                Corpo = corpo,
+                Assunto = assunto,
+                ApagadoE = false,
+                ApagadoR = false,
+                Emissor = s,
+                EmissorID = s.UtilizadorID,
+                Lida = false,
+                Receptor = r,
+                ReceptorID = r.UtilizadorID
+            };
+
+            r.MensagensRecebidas.Add(m);
+            s.MensagensEnviadas.Add(m);
+            db.SaveChanges();
+
+
+
+
+
+
+
+            ////
+
+
             //Mandar mensagem ao responsavel
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
         }
