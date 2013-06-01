@@ -8,7 +8,7 @@ using System.Data.Entity;
 using System.Data;
 using PagedList;
 using ArqueoDB.DAL;
-
+using System.Data.Entity.Validation;
 namespace ArqueoDB.Controllers
 {
     public class DashOrganizacaoController : Controller
@@ -433,42 +433,52 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult NovaMensagem(int idOrg)
         {
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
             string mensagem = Request["mensagem"];
             int idDest = Convert.ToInt32(Request["recept"]);
-            Utilizador s = (Utilizador)(Session["Utilizador"]);
-            string titulo = Request["titulo"];
+            Utilizador s = db.Utilizadores.Find(((Utilizador)(Session["Utilizador"])).UtilizadorID);
+            string titulo = Request["assunto"];
             ////
-            Utilizador r = db.Utilizadores.Find(id);
-            List<Utilizador> listusers = new List<Utilizador>();
+            Utilizador r = db.Utilizadores.Find(idDest);
             Mensagem m = new Mensagem
             {
                 DataEnvio = System.DateTime.Now,
-                Corpo = corpo,
-                Assunto = assunto,
+                Corpo = mensagem,
+                Assunto = titulo,
                 ApagadoE = false,
                 ApagadoR = false,
                 Emissor = s,
                 EmissorID = s.UtilizadorID,
                 Lida = false,
                 Receptor = r,
-                ReceptorID = r.UtilizadorID
+                ReceptorID = idDest 
             };
+            try
+            {
+                r.MensagensRecebidas.Add(m);
+                s.MensagensEnviadas.Add(m);
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
 
-            r.MensagensRecebidas.Add(m);
-            s.MensagensEnviadas.Add(m);
-            db.SaveChanges();
-
-
-
-
-
-
-
-            ////
-
-
-            //Mandar mensagem ao responsavel
-            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+            return RedirectToAction("Membros", "DashOrganizacao", new { id = idOrg });
         }
 
         [HttpPost]
@@ -518,10 +528,18 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult AdicionarMembro(int idOrg)
         {
-            string nome = Request["nome"];
-            Utilizador u = (Utilizador)(Session["Utilizador"]);
-            //Mandar mensagem ao responsavel
-            return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+            string idMembro = Request["id"];
+            Utilizador u = db.Utilizadores.Find(Convert.ToInt32(idMembro));
+            Organizacao o = db.Organizacoes.Find(idOrg);
+            o.Seguidores.Add(u);
+            u.OrganizacoesSeguidas.Add(o);
+            db.SaveChanges();
+            return RedirectToAction("Membros", "DashOrganizacao", new { id = idOrg });
         }
     }
 }

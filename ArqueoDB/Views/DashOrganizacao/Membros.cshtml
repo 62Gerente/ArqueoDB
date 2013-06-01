@@ -183,7 +183,13 @@
 								<fieldset>
 									<div class="row-fluid">
 												<label><h4>Nome</h4></label>
-												<input type="text" class="input-xlarge" style="width: 97%;" name="nome">									
+												<select class="chzn-select" name="id">
+                                            @foreach (Utilizador usr in lista) { 
+                                                if(true){
+                                                    <text><option value="@usr.UtilizadorID">@usr.Nome</option></text>
+                                                }
+                                            }
+                                        </select>									
 												<hr>
 												
 									</div>														
@@ -192,7 +198,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-					<button class="btn btn-primary" type="submit">Criar</button>
+					<button class="btn btn-primary" type="submit">Adicionar</button>
 				</div>
                 }
 			</div>
@@ -202,7 +208,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
 					<h3 id="myModalLabel">Nova Mensagem</h3>
 				</div>
-                @using (Html.BeginForm("NovaMensagem", "DashOrganizacao" , FormMethod.Post))
+                @using (Html.BeginForm("NovaMensagem", "DashOrganizacao", new { idOrg = Model.OrganizacaoID }, FormMethod.Post))
                 {
 				<div class="modal-body">
 								<fieldset>
@@ -213,8 +219,8 @@
                                             }
                                         </select>
                                         <hr>
-										<label><h4>Titulo</h4></label>
-                                            <input type="text" class="input-xlarge" style="width: 97%;" name="titulo">
+										<label><h4>Assunto</h4></label>
+                                            <input type="text" class="input-xlarge" style="width: 97%;" name="assunto">
                                         <hr>
 										<label><h4>Mensagem</h4></label>
 										    <textarea class="span12 input-block-level" rows="5" placeholder="Escreva a sua mensagem" name="mensagem"></textarea>
