@@ -51,7 +51,9 @@ namespace ArqueoDB.Controllers
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CurrentType = type;
-
+            List<Distrito> list = new List<Distrito>();
+            foreach (Distrito d in db.Distritos) { list.Add(d); }
+            ViewBag.Distritos = list;
             if (organizacao == null)
             {
                 return HttpNotFound();
@@ -391,11 +393,61 @@ namespace ArqueoDB.Controllers
         [HttpPost]
         public ActionResult AdicionarLocal(int idOrg)
         {
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
             string nome = Request["name"];
+
+            HttpPostedFileBase file = Request.Files[0];
+            string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
+            var path = System.IO.Path.Combine(Server.MapPath("~/Images/Locais/"), filename);
+            file.SaveAs(path);
+
+            Imagem i = new Imagem
+            {
+                Apagada = false,
+                AutorID = u.UtilizadorID,
+                Comentarios = new List<Comentario>(),
+                DataPublicacao = System.DateTime.Now,
+                Descricao = nome,
+                DirectoriaID = 3,
+                Nome = filename,
+                Publica = true
+            };
+            int distritoID = Convert.ToInt32(Request["distrito"]);
             string descricao = Request["descricao"];
             string isPublico = Request["isPublico"];
-            Utilizador u = (Utilizador)(Session["Utilizador"]);
-            //Mandar mensagem ao responsavel
+            string coordenadas = Request["coordenadas"];
+            bool publico = (isPublico == "on") ? true : false;
+            Local l = new Local {                                                                                
+                Artefactos = new List<Artefacto>(),
+                Coordenadas=coordenadas,
+                Apagado= false,
+                Comentarios = new List<Comentario>(),
+                DataRegisto = System.DateTime.Now,
+                Descricao = descricao,
+                DistritoID = distritoID,
+                Documentos = new List<Documento>(),
+                Feeds = new List<Feed>(),
+                Imagens = new List<Imagem>(),
+                Nome = nome,
+                OrganizacaoID = idOrg,
+                Plantas = new List<Planta>(),
+                Publicacoes = new List<Publicacao>(),
+                Publico = publico,
+                ResponsavelID = u.UtilizadorID,
+                Seguidores = new List<Utilizador>()
+                
+            };
+            db.Locais.Add(l);
+            db.SaveChanges();
+
+            Organizacao o = db.Organizacoes.Find(idOrg);
+            o.Locais.Add(db.Locais.Where(x => x.Nome == nome).FirstOrDefault());
+            db.SaveChanges();
+
+            Local aux = db.Locais.Where(local => local.Nome == nome).FirstOrDefault();
+            aux.Imagens.Add(i);
+            db.SaveChanges();
+            
             return RedirectToAction("Locais", "DashOrganizacao", new { id = idOrg });
         }
 
@@ -424,6 +476,7 @@ namespace ArqueoDB.Controllers
                 Descricao = descricao,
                 Publico = publico,
                 Titulo = titulo
+                
             };
             Organizacao o = db.Organizacoes.Find(idOrg);
             o.Publicacoes.Add(p);

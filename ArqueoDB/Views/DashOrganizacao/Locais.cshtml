@@ -216,7 +216,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
 					<h3 id="myModalLabel">Adicionar novo Local</h3>
 				</div>
-                @using (Html.BeginForm("AdicionarLocal", "DashOrganizacao", new { idOrg = Model.OrganizacaoID }, FormMethod.Post))
+                @using (Html.BeginForm("AdicionarLocal", "DashOrganizacao", new { idOrg = Model.OrganizacaoID }, FormMethod.Post, new {enctype="multipart/form-data"}))
                 {
 				<div class="modal-body">
 								<fieldset>
@@ -234,35 +234,23 @@
 										</label>
 										<hr>
 									</div>
-                                    <!--
+                                    
 									<div class="row-fluid">
-												
-                                                <div class="span6">
-												<label><h4>Organização</h4></label>
-												<select class="cselect span12 chzn-done" data-placeholder="Selecione uma organização..." id="sel8X" name="organizacao">
-											    	@foreach(Local l in Model.Locais ){
-                                                         if(!l.Apagado){
-                                                        <option> @l.Nome </option>
-                                                        }
-                                                    }
-												</select>
+                              
+                                        <label><h4>Ficheiro</h4></label>
+												<div style="margin-bottom: 15%;">
+												<div class="uploader" id="uniform-upl"><input type="file" class="span8 fancy" name="ficheiro" id="upl" size="20" style="opacity: 0;"><span class="filename">Nenhum ficheiro selecionado</span><span class="action">Escolha um ficheiro</span></div>								
+																		
 												</div>
-                                                
-												<div class="span6">
-												<label><h4>Responsável</h4></label>
-												<select class="cselect span12 chzn-done" data-placeholder="Selecione uma categoria..." id="sel8N" name="categoria">
-											    	@foreach(Local l in Model.Locais ){
-                                                         if(!l.Apagado){
-                                                        <option> @l.Nome </option>
-                                                        }
-                                                    }
-												</select>
-												</div>
-
-									</div>
-                                    -->
-									<div class="row-fluid">
 										<hr>
+                                        <label><h4>Distrito</h4></label>
+                                        <select class="cselect span12 chzn-done" data-placeholder="Selecione um distrito" id="sel8NX" name="distrito">
+								                @foreach(Distrito d in ViewBag.Distritos ){                                                    
+                                                    <option value="@d.DistritoID"> @d.Nome </option>
+                                                }
+                                    }   
+                                    </select>
+                                        <hr>
 										
 										<label><h4>Coordenadas</h4></label>
 										<input type="text" class="input-xlarge" placeholder="Insira as coordenadas" name="coordenadas">

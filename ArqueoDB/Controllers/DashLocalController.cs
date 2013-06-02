@@ -504,5 +504,57 @@ namespace ArqueoDB.Controllers
             //Mandar mensagem ao responsavel
             return RedirectToAction("Imagens", "DashLocal", new { id = id });
         }
+
+        [HttpPost]
+        public ActionResult AdicionarArtefacto(int id)
+        {
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            string nome = Request["nome"];
+
+            HttpPostedFileBase file = Request.Files[0];
+            string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
+            var path = System.IO.Path.Combine(Server.MapPath("~/Images/Artefactos/"), filename);
+            file.SaveAs(path);
+
+            Imagem i = new Imagem
+            {
+                Apagada = false,
+                AutorID = u.UtilizadorID,
+                Comentarios = new List<Comentario>(),
+                DataPublicacao = System.DateTime.Now,
+                Descricao = nome,
+                DirectoriaID = 4,
+                Nome = filename,
+                Publica = true
+            };
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            string coordenadas = Request["coordenadas"];
+            bool publico = (isPublico == "on") ? true : false;
+            string data = Request["data"];
+            Local l = db.Locais.Find(id);
+            Artefacto a = new Artefacto
+            {
+                Apagado = false,
+                Comentarios = new List<Comentario>(),
+                Cordenadas = coordenadas,
+                //DataDescoberta = DateTime.ParseExact(data, "dd-mm-yyyy", null),
+                DataDescoberta = DateTime.Now,
+                Descricao = descricao,
+                Imagens = new List<Imagem>(),
+                LocalID = id,
+                Nome = nome,
+                OrganizacaoID = l.OrganizacaoID,
+                Publico = publico,
+                ResponsavelID = u.UtilizadorID
+            };
+
+            db.Artefactos.Add(a);
+            db.SaveChanges();
+            Artefacto aux = db.Artefactos.Where(art => art.Nome == nome).FirstOrDefault();
+            aux.Imagens.Add(i);
+            db.SaveChanges();
+            return RedirectToAction("Artefactos", "DashLocal", new { id = id });
+        }
     }
 }
