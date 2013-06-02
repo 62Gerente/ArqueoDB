@@ -110,7 +110,7 @@ namespace ArqueoDB.Models
         public Boolean isProfessional()
         {
             EntidadesArqueoDB db = new EntidadesArqueoDB();
-            Profissional professional = db.Profissionais.First(p => p.UtilizadorID == UtilizadorID);
+            Profissional professional = db.Profissionais.FirstOrDefault(p => p.UtilizadorID == UtilizadorID);
 
             if (professional == null)
                 return false;

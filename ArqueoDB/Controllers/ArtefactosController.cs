@@ -238,7 +238,7 @@ namespace ArqueoDB.Controllers
                 Artefacto artefacto = db.Artefactos.Find(id);
 
                 var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/Images/Locais/"), fileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Artefactos/"), fileName);
                 file.SaveAs(path);
 
                 Imagem imagem = new Imagem
@@ -248,7 +248,7 @@ namespace ArqueoDB.Controllers
                     Comentarios = new List<Comentario>(),
                     DataPublicacao = System.DateTime.Now,
                     Descricao = comentario,
-                    DirectoriaID = 3,
+                    DirectoriaID = 4,
                     Nome = fileName,
                     Publica = true
                 };
