@@ -472,5 +472,37 @@ namespace ArqueoDB.Controllers
             db.SaveChanges();
             return RedirectToAction("Publicacoes", "DashLocal", new { id = id });
         }
+
+        [HttpPost]
+        public ActionResult AdicionarImagem(int id)
+        {
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            bool publico = (isPublico == "on") ? true : false;
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            Local l = db.Locais.Find(id);
+            Organizacao o = db.Organizacoes.Find(l.OrganizacaoID);
+
+            string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
+            var path = System.IO.Path.Combine(Server.MapPath("~/Images/Locais/"), filename);
+            HttpPostedFileBase file = Request.Files[0];
+            file.SaveAs(path);
+
+            Imagem i = new Imagem
+            {
+                Apagada=false,
+                AutorID=u.UtilizadorID,
+                Comentarios=new List<Comentario>(),
+                DataPublicacao= System.DateTime.Now,
+                Descricao= descricao,
+                DirectoriaID= 3,
+                Nome=filename,
+                Publica=publico
+            };
+            l.Imagens.Add(i);
+            db.SaveChanges();
+            //Mandar mensagem ao responsavel
+            return RedirectToAction("Imagens", "DashLocal", new { id = id });
+        }
     }
 }
