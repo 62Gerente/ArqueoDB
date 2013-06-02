@@ -8,16 +8,20 @@
 
 
 }
+
+
 @section breadcrumb {
 
-  
+        <div class="breadcrumb-button">
+          <span class="breadcrumb-label">
+          <i class="icon-envelope"></i> Caixa de Saida </span>
+          <span class="breadcrumb-arrow"><span></span></span>
+        </div>
  }
 
 
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLiesvI3QR3_ehvozby2uMrEhN5GZSb-Y&sensor=true">
-    </script>
-       <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
+ 
     <script>
         function initialize() {
             var mapOptions = {
@@ -53,6 +57,7 @@
 
             var infowindow@(loc.LocalID) = new google.maps.InfoWindow({
                 content: loc@(loc.LocalID),
+                maxWidth: 500
             });
 
             var marker@(loc.LocalID) = new google.maps.Marker({
