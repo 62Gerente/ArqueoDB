@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArqueoDB.Models;
+using ArqueoDB.DAL;
+using System.IO;
 
 namespace ArqueoDB.Controllers
 {
     public class HomeController : Controller
     {
+
+        private EntidadesArqueoDB db = new EntidadesArqueoDB();
         public ActionResult Index()
         {
-            ViewBag.Message = "A funcionar!";
+            List<Local> locs = new List<Local>();
+            foreach (Local l in db.Locais) { locs.Add(l); }
 
+            ViewBag.locals = locs;
             return View();
         }
 

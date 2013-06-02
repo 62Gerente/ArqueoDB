@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
     Utilizador user = ((Utilizador)(Session["Utilizador"]));
-
+    List<Local> locais = ViewBag.locals;
 
 
 }
@@ -14,14 +14,74 @@
  }
 
 
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLiesvI3QR3_ehvozby2uMrEhN5GZSb-Y&sensor=true">
+    </script>
+       <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    <script>
+        function initialize() {
+            var mapOptions = {
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+
+            // Try HTML5 geolocation
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                                                     position.coords.longitude);
+
+                   
+
+                    map.setCenter(pos);
+                }, function() {
+                    handleNoGeolocation(true);
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+        
+            @foreach(Local loc in locais.Where(l => !l.Apagado) ){
+            <text>
+            
+            var loc@(loc.LocalID) = '<div id="content"><div class="row-fluid"><div class="span5"><a href="~/Locais/Details/@loc.LocalID"><img class="menu-avatar" style="width: 100px;height: 100px;" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome)"></a></div><div class="span7"><a href="~/Locais/Details/@loc.LocalID"><p>@loc.Nome</p><p>@loc.Organizacao.Nome</p>@loc.Distrito.Nome<p></p></a></div></div></div>';
+
+            var infowindow@(loc.LocalID) = new google.maps.InfoWindow({
+                content: loc@(loc.LocalID),
+            });
+
+            var marker@(loc.LocalID) = new google.maps.Marker({
+                position: new google.maps.LatLng(@loc.Coordenadas),
+                map: map,
+                title: '@loc.Nome'
+            });
+            google.maps.event.addListener(marker@(loc.LocalID), 'click', function () {
+                infowindow@(loc.LocalID).open(map, marker@(loc.LocalID));
+            });
+
+            </text>
+            }
+
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+
     <div class="row-fluid" style="margin-top:30px;">
       <div class="span9">
         <div class="box">
           <div class="box-header">
-            <span class="title"><i class="icon-cog"></i> </span>
+            <span class="title"><i class="icon-map-marker"></i> Mapa de Locais ArqueoDB </span>
           </div>
           <div class="box-content">
-              <div id="map-canvas"></div>
+              <div id="map-canvas" style="min-height:700px"></div>
           </div>
         </div>
       </div>
