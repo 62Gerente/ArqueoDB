@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_LayoutArqueodb.cshtml";
     Utilizador user = ((Utilizador)(Session["Utilizador"]));
     List<Local> locais = ViewBag.locals;
+    int count = 1;
+    String link = "";
+    List<Publicacao> listapub = ViewBag.listapub;
+    Dictionary<Publicacao, String> pubdetails = ViewBag.pubdetails;
+    Dictionary<Publicacao, String> publicacoes = ViewBag.publicacoes;
 
 
 }
@@ -50,7 +55,8 @@
                 handleNoGeolocation(false);
             }
         
-            @foreach(Local loc in locais.Where(l => !l.Apagado) ){
+            @foreach (Local loc in locais.Where(l => !l.Apagado))
+            {
             <text>
             
             var loc@(loc.LocalID) = '<div id="content"><div class="row-fluid"><div class="span5"><a href="~/Locais/Details/@loc.LocalID"><img class="menu-avatar" style="width: 100px;height: 100px;" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome)"></a></div><div class="span7"><a href="~/Locais/Details/@loc.LocalID"><p>@loc.Nome</p><p>@loc.Organizacao.Nome</p>@loc.Distrito.Nome<p></p></a></div></div></div>';
@@ -86,15 +92,111 @@
             <span class="title"><i class="icon-map-marker"></i> Mapa de Locais ArqueoDB </span>
           </div>
           <div class="box-content">
-              <div id="map-canvas" style="min-height:700px"></div>
+              <div id="map-canvas" style="min-height:700px;max-width:none;"></div>
           </div>
         </div>
       </div>
       <div class="span3">
         <div class="box">
-          <div class="box-content">
- 
+            <div class="box-header">
+            <span class="title"><i class="icon-star"></i> Locais mais populares </span>
+          </div>
+          <div class="box-content padded" style="min-height:700px;">
+                <div class="action-nav-normal"> 
+                @foreach (Local loc in locais.Where(l => !l.Apagado))
+                {
+                    if (count == 8) { break; }
+                    else
+                    { 
+                     <text>   
+                    
+                        <div class="row-fluid">
+                         
+          
+                  
+    <div class="span12 action-nav-button">
+      <a href="~/Locais/Details/@loc.LocalID">
+        <img class="menu-avatar" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome)">
+        <span> @loc.Nome </span>
+      </a>
+      <span class="triangle-button red"><i class="icon-star"></i></span>
+    </div> 
+    
+   
+</div>
+          </text>
+                        
+                        
+                    
+                    }
+                } </div>
           </div>
         </div>
       </div>
     </div>
+ <div class="row-fluid">
+     
+ 
+ 
+                  @foreach(Publicacao pbl in listapub){
+				<div class="box">
+					<div class="box-content " style="height: 100%; overflow-y: auto">
+						<!-- find me in partials/news_with_icons -->
+                         @{
+                                            string auximg;
+
+                                            pubdetails.TryGetValue(pbl, out auximg);
+                                            
+                                            
+                                                }
+
+
+                    @{
+                                            string aux;
+
+                                            publicacoes.TryGetValue(pbl, out aux);
+                                            
+                                            
+                                                }
+
+
+
+						<div class="box-section news with-icons"><div class="row-fluid">
+                            @foreach (Local loc in locais ) { if (loc.Nome.Equals(aux)) { link = "/Locais/Details/" + loc.LocalID ; } }
+
+
+
+							<div class="span2" >
+								<a href="@link" class="thumbnail" style="max-width:150px;max-height:150px;">
+				                
+                                        
+                                    
+                                    
+                                    <img src="@auximg" alt="" > 
+				            </a></div>
+							
+							
+							<div class="span9" >
+								
+									<h5><a href="@link">
+                                        
+                                        @aux</a> publicou "@pbl.Titulo" 
+
+									 </h5>
+								
+								
+									 <p>@pbl.Descricao</p>
+									 <div style="color:rgb(163, 163, 163);font-size:11px;">publicado a @pbl.DataPublicacao.ToShortDateString() às @pbl.DataPublicacao.ToShortTimeString().</div>
+								</div><div class="span1" ><div class="news-time">
+								<span>@pbl.DataPublicacao.Day</span> @pbl.DataPublicacao.ToString("MMM")
+							</div></div></div>
+							</div>
+						</div>
+					</div>}
+ 
+ 
+ 
+ 
+ 
+ 
+ </div>
