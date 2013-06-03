@@ -204,13 +204,9 @@
 					<div class="box-content"  style="padding:10px; height:150px;">
 						<div class="row-fluid scrollable" style="height:150px; overflow-y:auto;">
 							 <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="div.gallery-item" style="text-align:center">
-								@if (Model.Badges.Count == 0) {
-                                    <text>Nenhuma medalha ganha até ao momento</text>
-                                }else{
-                                    foreach (Badge bad in Model.Badges) { 
-                                       <div class="gallery-item gallerypic" data-href="@(bad.Directoria.Caminho + bad.Nome)" title="@bad.Descricao" style="background-image:url(@(bad.Directoria.Caminho + bad.Nome));"></div> 
-                                    }
-                                }							</div>
+								@if (Model.Publicacoes.Count() >= 1) {<text><img src="~/images/badges/bronze.png" style ="max-height:80px;" title="Badge 1 publicacoes!">   </text> }
+                                @if (Model.Publicacoes.Count() >= 10) {<text> <img src="~/images/badges/silver.png" style ="max-height:80px;"  title="Badge 10 publicacoes!"> </text>}
+							 </div>
 						</div>
 					</div>
 				</div>
