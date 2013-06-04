@@ -781,5 +781,94 @@ namespace ArqueoDB.Controllers
             ViewBag.TituloID = new SelectList(db.Titulos, "TituloID", "Nome", utilizador.TituloID);
             return View(utilizador);
         }
+
+
+
+        public ActionResult LocaisFavoritos() {
+
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador sessao = (Utilizador)Session["Utilizador"];
+
+            if (sessao == null)
+            {
+                return HttpNotFound();
+            }
+
+            Utilizador utilizador = db.Utilizadores.Find(sessao.UtilizadorID);
+
+            if (utilizador == null)
+            {
+                return HttpNotFound();
+            }
+
+            Session["Login"] = true;
+            Session["Utilizador"] = utilizador;
+
+            return View(utilizador);
+        }
+
+        public ActionResult UtilizadoresFavoritos()
+        {
+
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador sessao = (Utilizador)Session["Utilizador"];
+
+            if (sessao == null)
+            {
+                return HttpNotFound();
+            }
+
+            Utilizador utilizador = db.Utilizadores.Find(sessao.UtilizadorID);
+
+            if (utilizador == null)
+            {
+                return HttpNotFound();
+            }
+
+            Session["Login"] = true;
+            Session["Utilizador"] = utilizador;
+
+            return View(utilizador);
+        }
+
+        public ActionResult OrganizacoesFavoritas()
+        {
+
+            if (Session["Utilizador"] == null)
+            {
+                Session["ErroSessao"] = true;
+                return RedirectToAction("Login", "Utilizadores");
+            }
+
+            Utilizador sessao = (Utilizador)Session["Utilizador"];
+
+            if (sessao == null)
+            {
+                return HttpNotFound();
+            }
+
+            Utilizador utilizador = db.Utilizadores.Find(sessao.UtilizadorID);
+
+            if (utilizador == null)
+            {
+                return HttpNotFound();
+            }
+
+            Session["Login"] = true;
+            Session["Utilizador"] = utilizador;
+
+            return View(utilizador);
+        }
+
     }
 }
