@@ -53,6 +53,7 @@
         
             @foreach (Local loc in locais.Where(l => !l.Apagado))
             {
+              
             <text>
             
             var loc@(loc.LocalID) = '<div id="content"><div class="row-fluid"><div class="span5"><a href="~/Locais/Details/@loc.LocalID"><img class="menu-avatar" style="width: 100px;height: 100px;" src="@(loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome)"></a></div><div class="span7"><a href="~/Locais/Details/@loc.LocalID"><p>@loc.Nome</p><p>@loc.Organizacao.Nome</p>@loc.Distrito.Nome<p></p></a></div></div></div>';
@@ -73,7 +74,7 @@
 
             </text>
             }
-
+            
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);

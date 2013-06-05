@@ -421,7 +421,7 @@ namespace ArqueoDB.Controllers
             string descricao = Request["descricao"];
             string isPublico = Request["isPublico"];
             string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
-            bool publico = (isPublico.Equals("on")) ? true : false;
+            bool publico = (isPublico == "on") ? true : false;
             Utilizador u = (Utilizador)(Session["Utilizador"]);
             Local l = db.Locais.Find(id);
             Organizacao o = db.Organizacoes.Find(idOrg);
@@ -531,7 +531,8 @@ namespace ArqueoDB.Controllers
             string isPublico = Request["isPublico"];
             string coordenadas = Request["coordenadas"];
             bool publico = (isPublico == "on") ? true : false;
-            string data = Request["data"];
+            string datastr = Request["data"];
+            DateTime data = DateTime.Parse(datastr);
             Local l = db.Locais.Find(id);
             Artefacto a = new Artefacto
             {
@@ -539,7 +540,7 @@ namespace ArqueoDB.Controllers
                 Comentarios = new List<Comentario>(),
                 Cordenadas = coordenadas,
                 //DataDescoberta = DateTime.ParseExact(data, "dd-mm-yyyy", null),
-                DataDescoberta = DateTime.Now,
+                DataDescoberta = data,
                 Descricao = descricao,
                 Imagens = new List<Imagem>(),
                 LocalID = id,
@@ -555,6 +556,52 @@ namespace ArqueoDB.Controllers
             aux.Imagens.Add(i);
             db.SaveChanges();
             return RedirectToAction("Artefactos", "DashLocal", new { id = id });
+        }
+
+
+        [HttpPost]
+        public ActionResult AdicionarPlanta(int id)
+        {
+            Utilizador u = (Utilizador)(Session["Utilizador"]);
+            string nome = Request["nome"];
+
+            HttpPostedFileBase file = Request.Files[0];
+            string filename = System.IO.Path.GetFileName(Request.Files[0].FileName);
+            var path = System.IO.Path.Combine(Server.MapPath("~/Images/Plantas/"), filename);
+            file.SaveAs(path);
+
+            Imagem i = new Imagem
+            {
+                Apagada = false,
+                AutorID = u.UtilizadorID,
+                Comentarios = new List<Comentario>(),
+                DataPublicacao = System.DateTime.Now,
+                Descricao = nome,
+                DirectoriaID = 5,
+                Nome = filename,
+                Publica = true
+            };
+            string descricao = Request["descricao"];
+            string isPublico = Request["isPublico"];
+            bool publico = (isPublico == "on") ? true : false;            
+            Local l = db.Locais.Find(id);
+            db.Imagens.Add(i);
+            db.SaveChanges();
+            Planta p = new Planta
+            {
+                Apagado = false,
+                DataPublicacao = DateTime.Now,
+                LocalID = id,
+                OrganizacaoID = l.OrganizacaoID,
+                Publico = publico,
+                ImagemID = i.ImagemID,
+                ResponsavelID = u.UtilizadorID
+                
+            };
+
+            db.Plantas.Add(p);
+            db.SaveChanges();
+            return RedirectToAction("Plantas", "DashLocal", new { id = id });
         }
     }
 }

@@ -15,3 +15,5 @@ ArqueoDB.sln
 *.swp
 
 .DS_Store
+
+*.jpg

@@ -17,23 +17,27 @@ namespace ArqueoDB.Controllers
         private EntidadesArqueoDB db = new EntidadesArqueoDB();
         public ActionResult Index()
         {
-            List<Local> locs = new List<Local>();
+            List<Local> locs = db.Locais.Where(l => l.Publico && !l.Apagado).ToList();
+            List<Local> locs2 = db.Locais.Where(l => l.Publico && !l.Apagado).ToList();
+
             List<Publicacao> listapub = new List<Publicacao>();
             Dictionary<Publicacao, String> pubdetails = new Dictionary<Publicacao, String>();
             Dictionary<Publicacao, String> publicacoes = new Dictionary<Publicacao, String>();
-            foreach (Local l in db.Locais.Where(l => l.Publico && !l.Apagado)) { locs.Add(l); }
-            locs.OrderByDescending(l => l.Comentarios.Count());
-            ViewBag.locals = locs;
+
+            locs2.OrderByDescending(l => l.Comentarios.Count());
+            ViewBag.locals = locs2;
 
             foreach (Local loc in locs)
             {
-                listapub.AddRange(loc.Publicacoes);
-                foreach (Publicacao pbl in loc.Publicacoes.Where(p => p.Publico && !p.Apagado))
+                if (loc != null && loc.Publicacoes != null)
                 {
-                    publicacoes.Add(pbl, loc.Nome);
-                    pubdetails.Add(pbl, loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome);
+                    listapub.AddRange(loc.Publicacoes);
+                    foreach (Publicacao pbl in loc.Publicacoes.Where(p => p.Publico && !p.Apagado))
+                    {
+                        publicacoes.Add(pbl, loc.Nome);
+                        pubdetails.Add(pbl, loc.Imagens.First().Directoria.Caminho + loc.Imagens.First().Nome);
+                    }
                 }
-
             }
             listapub = listapub.OrderByDescending(p => p.DataPublicacao.ToShortDateString()).ThenByDescending(p => p.DataPublicacao.ToShortTimeString()).ToList();
             ViewBag.publicacoes = publicacoes;
