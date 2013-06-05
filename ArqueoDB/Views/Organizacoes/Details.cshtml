@@ -97,9 +97,9 @@
 					<div class="action-nav-normal">
 						<div class="row-fluid">
 							<div class="span12 action-nav-button">
-								<a href="#" title="Enviar Email">
+								<a data-toggle="modal" href="#modal-form">
 								<i class="icon-envelope"></i>
-								<span>Enviar Email</span>
+								<span>Enviar Mensagem</span>
 								</a>
 								<span class="triangle-button red"><i class="icon-plus"></i></span>
 							</div>
@@ -324,3 +324,45 @@
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
+
+
+<div id="modal-form" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h6 id="modal-formLabel">Nova Mensagem</h6>
+  </div><form class="form-horizontal fill-up separate-sections" method="post">
+  <div class="modal-body">
+    
+  
+
+      <div class="divider"><span></span></div>
+
+      <div class="row-fluid">
+        <div class="span12">
+          <label>Enviar para:</label>
+         <select class="chzn-select" name="recept">
+                <option value="@Model.Responsavel.Utilizador.UtilizadorID">@Model.Responsavel.Utilizador.Nome </option>
+
+</select>
+               
+
+        </div>
+
+      </div>
+
+      <div class="divider"><span></span></div>
+        <label>Assunto</label><div>
+        <input type="text" name="assunto" value="[@Model.Nome]" /></div><br/>
+      <div>
+        <textarea rows="4" name="corpo" placeholder="Escreva aqui a sua  mensagem..."></textarea>
+      </div>
+
+       </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-blue">Enviar</button>
+  </div>
+    </form>
+
+ 
+</div>
